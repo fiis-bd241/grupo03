@@ -104,7 +104,16 @@ El sistema internamente hará este proceso mientras se muestra la tabla de progr
 <img src="c4.png" alt="Creación 3"  style="width: 60%; height: auto;"/>
 </div>
 <br>
----
+
+* Para la validación de datos se usará "Validar DA DVV" luego de agregar la información adicional, se visualizarán los errores encontrados y se podrá editar dichos errores con la guía del reporte; luego se hará el uso de metadata y linaje para hacer la trazabilidad de errores y registrar en detalle cada error, finalmente se actualizará el documento DA DDV y se enviará a la nube.
+ <div style="text-align: center;">
+<img src="V1.png" alt="Validación1"  style="width: 60%; height: auto;"/>
+</div>
+<br>
+<div style="text-align: center;">
+<img src="V2.png" alt="Validación2"  style="width: 60%; height: auto;"/>
+</div>
+<br>
 
 [Regresar al Entregable 3](../entregable3.md)
 
