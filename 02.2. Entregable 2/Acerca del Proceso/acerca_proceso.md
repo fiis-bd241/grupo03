@@ -68,7 +68,7 @@ Procesos para migrar datos en base a los roles:
 | 3         | Generar nuevo documento DDV | Si se quiere agregar tablas nuevas, se debe generar un nuevo documento a partir de la plantilla que el sistema te va a dar. | Data Steward |
 | 4         | Ingresar historial de versiones | En el sistema, se detallará sobre la versión del documento. Se debe especificar qué cambios se va realizar y por quien fue solicitado esos cambios.| Data Steward |
 | 6         | Actualizar lista de desplegables | Se agrega el nuevo valor al campo relacionado con la lista desplegable, en la base de datos. | Data Gobernance Expert |
-| 9       | Buscar y colocar información equivalente de las referencias | El sistema buscará automáticamente las equivalencias de la información de referencia en una base de datos interna y autocompletará los campos requeridos. | Custodio Técnico |
+| 9       | Buscar y colocar información equivalente de las referencias | El sistema buscará automáticamente las equivalencias de la información de referencia en una base de datos interna y mostrará una tabla con los resultados a la que el usuario podrá acceder. |
 
 
 [Glosario](GlosarioDatos.md)
