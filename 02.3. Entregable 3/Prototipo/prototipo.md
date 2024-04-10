@@ -7,14 +7,14 @@ Una vez registrado, le proporcionará las credenciales de inicio de sesión a lo
 Además, se encargará de tomar las configuraciones de seguridad y prevención de ataques correspondientes como la configuración de un servidor proxy o verificación de usuarios.
 
 <div style="text-align: center;">
-<img src="Creacion10.jpg" alt="Creación 1" style="width: 90%; height: auto;"/>
+<img src="Creacion9.jpg" alt="Creación 1" style="width: 90%; height: auto;"/>
 </div>
 <br>
 
 * El usuario inicia sesión con las credenciales proporcionadas por el adminsitrador del sistema.
 
 <div style="text-align: center;">
-<img src="Creacion9.jpg" alt="Creación 1" style="width: 90%; height: auto;"/>
+<img src="Creacion10.jpg" alt="Creación 1" style="width: 90%; height: auto;"/>
 </div>
 <br>
 
