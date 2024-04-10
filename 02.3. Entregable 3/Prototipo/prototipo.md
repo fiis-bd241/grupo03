@@ -1,8 +1,22 @@
 # Prototipo
 
-## Seguridad y gestión de usuarios
+## Seguridad de Gestión de usuarios
 
+* El administrador del sistema se encargará de registrar a los usuarios ingresando su nombre, correo electrónico y rol en el sistema.
+Una vez registrado, le proporcionará las credenciales de inicio de sesión a los respectivos usuarios.
+Además, se encargará de tomar las configuraciones de seguridad y prevención de ataques correspondientes como la configuración de un servidor proxy o verificación de usuarios.
 
+<div style="text-align: center;">
+<img src="Creacion9.jpg" alt="Creación 1" style="width: 90%; height: auto;"/>
+</div>
+<br>
+
+* El usuario inicia sesión con las credenciales proporcionadas por el adminsitrador del sistema.
+
+<div style="text-align: center;">
+<img src="Creacion10.jpg" alt="Creación 1" style="width: 90%; height: auto;"/>
+</div>
+<br>
 
 ## Creación o modificación del Documento de Alcance
 
@@ -65,7 +79,41 @@
 <img src="Creacion8.png" alt="Creación 3"  style="width: 60%; height: auto;"/>
 </div>
 <br>
----
+
+## Seguridad de datos
+* En esta sección, el usuario selecciona el Documento de interfaz relacionado con el porceso de migración actual, para que se pueda dar la clasificación de los datos ingresados. En este documento estarán las especificaciones brindadas por los usuarios de origen respecto a cada dato, detallando si son datos sensibles, su criticidad, el sustento de criticidad, etc.
+El sistema internamente hará este proceso mientras se muestra la tabla de progreso y finalmente la opción de ver estos datos ya clasificados, para comprobarlo por última vez.
+
+<div style="text-align: center;">
+<img src="c1.png" alt="Creación 3"  style="width: 60%; height: auto;"/>
+</div>
+<br>
+
+<div style="text-align: center;">
+<img src="c2.png" alt="Creación 3"  style="width: 60%; height: auto;"/>
+</div>
+<br>
+
+* En la parte de Información Adicional, consta de dos secciones: Información del moldelo y Definiciones técnicas. En la primera parte se tiene que ingresar el Nombre de la tabla, el código de proceso, nombre del job y la ruta de la tabla. La parte del Código del proceso será generado por el sistema ya que solo consta de la concatenación de [Nombre de la tabla]+[Código del proceso], según los lineamientos de calidad. 
+ Igualmente con la sección de Definiciones técnicas.
+ <div style="text-align: center;">
+<img src="c3.png" alt="Creación 3"  style="width: 60%; height: auto;"/>
+</div>
+<br>
+<div style="text-align: center;">
+<img src="c4.png" alt="Creación 3"  style="width: 60%; height: auto;"/>
+</div>
+<br>
+
+* Para la validación de datos se usará "Validar DA DVV" luego de agregar la información adicional, se visualizarán los errores encontrados y se podrá editar dichos errores con la guía del reporte; luego se hará el uso de metadata y linaje para hacer la trazabilidad de errores y registrar en detalle cada error, finalmente se actualizará el documento DA DDV y se enviará a la nube.
+ <div style="text-align: center;">
+<img src="V1.png" alt="Validación1"  style="width: 60%; height: auto;"/>
+</div>
+<br>
+<div style="text-align: center;">
+<img src="V2.png" alt="Validación2"  style="width: 60%; height: auto;"/>
+</div>
+<br>
 
 [Regresar al Entregable 3](../entregable3.md)
 

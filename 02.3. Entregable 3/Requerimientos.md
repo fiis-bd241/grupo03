@@ -149,16 +149,13 @@
 | Actor | <p align="center"> Data Steward |
 | Precondición | <p align="center"> Que esté completa la sección de información de referencias |
 | <p align="center">  Paso | <p align="center">  Acción </p> |
-| 1 | El usuario selecciona la condición del dato DAC (SI/NO) |
-| 2 | El usuario selecciona la criticidad del dato. |
-| 3 | El usuario selecciona el sustento de criticidad |
-| 4 | El usuario selecciona el nivel de seguridad |
-| 5 | El usuario selecciona la frecuencia de actualización |
-| 6 | El usuario selecciona el uso en reporte regulatorio |
-| 7 | El usuario selecciona la entidad regulatoria|
-| 8 | El usuario le dará click a "Actualizar Doc DDV", para poder actualizar los datos y tener una versión preliminar. |
-| 9 | El usuario le dará click a "Siguiente", para poder ingresar los datos de la siguiente sección. |
-| 10 | El caso de uso culmina. |
+| 1 | El usuario selecciona el Documento de Interfaz del proceso actual |
+| 2 | El usuario hará click en el botón Vincular Doc interfaz. |
+| 3 | El sistema relacionará los datos del Doc de interfaz con los que fueron registrados y los clasificarán |
+| 4 | El sistema mostrará la barra de progreso del proceso |
+| 5 | El usuario hará click en "Mostrar tabla" para que pueda ver los datos relacionados si desea.|
+| 6 | El usuario le dará click a "Siguiente", para poder ingresar los datos de la siguiente sección. |
+| 7 | El caso de uso culmina. |
 
 ### Caso de uso 11 : Registrar información adicional
 

@@ -11,10 +11,10 @@
 | 7  |Subdominio | Agrupamientos de información específicos a cargo de distintos equipos dentro del dominio. |
 | 8  |Usuario Origen | Cliente interno del área que requiere la migración de datos. |
 | 9  |Usuario Destino | Cliente interno del área a la que se va a migrar los datos |
-| 10  |Ingresar término | Ingresar definición |
-| 11 |Ingresar término | Ingresar definición |
-| 12 |Ingresar término | Ingresar definición |
-| 13 |Ingresar término | Ingresar definición |
+| 10 | ODS | Operational Data Store: Es un repositorio de datos que se actualiza con frecuencia y que se utiliza para dar soporte a las aplicaciones y procesos de negocio. |
+| 11 | EDS | Enterprise Data Store: Es un repositorio de datos centralizado que integra datos de diferentes fuentes dentro de una organización. |
+| 12 | BDS | Business Data Store: Es un repositorio de datos que se utiliza para dar soporte a las necesidades de análisis e inteligencia de negocio.|
+| 13 | DDV | Dimensional Data Vault: Es una metodología para el almacenamiento y gestión de datos que se basa en la estructura de bóveda. |
 
 
 ---
