@@ -1,8 +1,22 @@
 # Prototipo
 
-## Seguridad y gestión de usuarios
+## Seguridad de Gestión de usuarios
 
+* El administrador del sistema se encargará de registrar a los usuarios ingresando su nombre, correo electrónico y rol en el sistema.
+Una vez registrado, le proporcionará las credenciales de inicio de sesión a los respectivos usuarios.
+Además, se encargará de tomar las configuraciones de seguridad y prevención de ataques correspondientes como la configuración de un servidor proxy o verificación de usuarios.
 
+<div style="text-align: center;">
+<img src="Creacion10.jpeg" alt="Creación 1" style="width: 90%; height: auto;"/>
+</div>
+<br>
+
+* El usuario inicia sesión con las credenciales proporcionadas por el adminsitrador del sistema.
+
+<div style="text-align: center;">
+<img src="Creacion9.jpeg" alt="Creación 1" style="width: 90%; height: auto;"/>
+</div>
+<br>
 
 ## Creación o modificación del Documento de Alcance
 
