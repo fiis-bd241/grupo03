@@ -80,6 +80,26 @@ Además, se encargará de tomar las configuraciones de seguridad y prevención d
 </div>
 <br>
 
+## Reglas de precarga y carga
+* Se muestra un lector de código SQL, PySpark o Bloc de notas en caso se use pseudocódigo, en el se pueden crear bloques de codigo en el que se detalla el paso a paso de los joins hechos en la regla de carga.
+* Se puede entrar a ver la definición del universo que se usa para hacer los joins así como un boton para enviar en caso se haya culminado.
+
+<div style="text-align: center;">
+<img src="Vista Carga.png" alt="Vista Carga"  style="width: 60%; height: auto;"/>
+</div>
+<br>
+
+* Se muestra las reglas ya usadas, se irá actualizando conforme se hagan nuevas, además el detalle de cada una de ellas (descripción y que evalúa).
+
+* Se da la opción de elegir si aplicar o no aplicar las reglas de precarga opcionales, en los detalles se especifican los casos en los que se debe usar.
+
+* En la opción ver registro, se puede ver quién estuvo manejando la aplicación de las reglas de precarga usadas.
+
+<div style="text-align: center;">
+<img src="Vista PreCarga.png" alt="Vista PreCarga"  style="width: 60%; height: auto;"/>
+</div>
+<br>
+
 ## Seguridad de datos
 * En esta sección, el usuario selecciona el Documento de interfaz relacionado con el porceso de migración actual, para que se pueda dar la clasificación de los datos ingresados. En este documento estarán las especificaciones brindadas por los usuarios de origen respecto a cada dato, detallando si son datos sensibles, su criticidad, el sustento de criticidad, etc.
 El sistema internamente hará este proceso mientras se muestra la tabla de progreso y finalmente la opción de ver estos datos ya clasificados, para comprobarlo por última vez.
