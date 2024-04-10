@@ -106,7 +106,7 @@
 | 6 | El usuario selecciona el "Nombre del elemento de dato" e inserta el dato pedido. |
 |  7| El usuario selecciona el "Definición del campo" e inserta la información pedida. |
 | 8 | El usuario selecciona el "Definición de la tabla" e inserta la información pedida. |
-| 9 | El usuario le dará click a "Siguiente". |
+| 9 | El usuario le dará click a "Guardar". |
 | 10 | El caso de uso culmina. |
 
 ### Caso de uso 8 : Ingresar información del modelo DDV
@@ -138,9 +138,8 @@
 | <p align="center">  Paso | <p align="center">  Acción </p> |
 | 1 | El sistema recorré cada campo de referencia completado anteriormente.|
 | 2 | El sistema busca la equivalencia de cada campo en una base de datos interna.|
-| 3 | El sistema asigna a cada campo su respectiva equivalencia. |
-| 4 | El sistema autocompleta los campos requeridos con las equivalencias asignadas en el documento DDV.|
-| 5 | El caso de uso culmina |
+| 3 | El sistema asigna a cada campo su respectiva equivalencia y crea una tabla que se podra ver desde la vista principal. |
+| 4 | El caso de uso culmina |
 
 ### Caso de uso 10 : Registrar la Seguridad de datos
 

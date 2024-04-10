@@ -1,6 +1,8 @@
 # Prototipo
 
-## -
+## Seguridad y gestión de usuarios
+
+
 
 ## Creación o modificación del Documento de Alcance
 
@@ -17,6 +19,8 @@
 <img src="Creacion2.jpeg" alt="Creación 2"  style="width: 60%; height: auto;"/>
 </div>
 <br>
+
+## Ingresar información del documento de alcance y búsqueda de equivalencias
 
 * Después de darle click a "Aceptar", se mostrará una ventana incial dónde se verá el progreso de llenado del documento de alcance por cada sección, con opciones de abrir cada una de ellas mediante un botón de enlace.
 
