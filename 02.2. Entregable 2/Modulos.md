@@ -110,7 +110,13 @@ registrar los errores.
 
 
 # Diagrama UML
+
 [DiagramaUML](https://lucid.app/lucidchart/ca94a4af-ce07-40c8-b99d-e0010a8ef1df/edit?beaconFlowId=D353CD2FED807B85&invitationId=inv_a5ba4607-1d4e-42e2-bff5-ce6a936fa2a3&page=0_0#)
+
+<div style="text-align: center;">
+<img src="DiagramaUML.jpg" alt="Creación 1" style="width: 90%; height: auto;"/>
+</div>
+<br>
 
 ---
 
