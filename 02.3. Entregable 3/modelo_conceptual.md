@@ -2,7 +2,7 @@
 
 Definición de las relaciones de las diferentes entidades involucradas en el proceso de negocio con sus respectivos atributos.
 
-<img src="ModeloConceptual.png" alt="Creación 1" style="width: 100%; height: auto;"/>
+<img src=".\resources\modelo conceptual\ModeloConceptual.png" alt="Creación 1" style="width: 100%; height: auto;"/>
 <br>
 
 ---
