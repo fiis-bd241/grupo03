@@ -67,10 +67,10 @@
 | Precondición | <p align="center"> El usuario debió iniciar sesión con sus credenciales y haber inicializado el documento de alcance que completará. |
 | <p align="center">  Paso | <p align="center">  Acción </p> |
 | 1 | El sistema muestra la sección de información general con los campos a rellenar. |
-| 2 | El usuario selecciona el campo "tecnología" y le da click a una de las opciones dependiendo del caso.|
-| 3 | El usuario selecciona el campo "producto owner" y le da click a una de las opciones dependiendo del caso. |
-| 4 | El usuario selecciona el campo "squad" y le da click a una de las opciones dependiendo del caso. |
-| 5 | El usuario selecciona el campo "responsable" y le da click a una de las opciones dependiendo del caso. |
+| 2 | El usuario selecciona "Product Owner" y le da click a una de las opciones que aparecerán dependiendo del caso.|
+| 3 | El usuario selecciona "Squad" y le da click a una de las opciones dependiendo del caso. |
+| 4 | El usuario selecciona el campo "Data Governance/Data Steward" y le da click a una de las opciones dependiendo del caso. |
+| 5 | El usuario selecciona el campo "Tecnología" y le da click a una de las opciones dependiendo del caso. |
 | 6 | El usuario le dará click a "Siguiente", para poder ingresar los datos de la siguiente sección. |
 | 7 | El caso de uso culmina. |
 
@@ -80,7 +80,7 @@
 |:----------:|-------------------|
 | Descripción | Proceso por el cual el usuario podrá seleccionar datos o insertarlos, dependiendo del caso, en cada campo requerido. |
 | Actor | <p align="center"> Data Steward |
-| Precondición | <p align="center"> Haber llenado la seccion de información general. |
+| Precondición | <p align="center"> Haber llenado la sección de información general o haber seleccionado el botón de enlace desde la vista principal.|
 | <p align="center">  Paso | <p align="center">  Acción </p> |
 | 1 | El sistema muestra la sección de información de referencia con los campos a rellenar. |
 | 2 | El usuario selecciona el campo "tipo de referencia" y le da click a una de las opciones dependiendo del caso. |
@@ -95,17 +95,16 @@
 |:----------:|-------------------|
 | Descripción | Proceso por el cual el usuario podrá seleccionar datos o insertarlos, dependiendo del caso, en cada campo requerido. |
 | Actor | <p align="center"> Data Steward |
-| Precondición | <p align="center"> Haber llenado la sección de información de referencia e información general. |
+| Precondición | <p align="center"> Haber llenado la sección de información general y de referencia o haber seleccionado el botón de enlace de "Conceptos de Negocio" desde la vista principal. |
 | <p align="center">  Paso | <p align="center">  Acción </p> |
 | 1 | El sistema muestra la sección de conceptos de negocio con los campos a rellenar. |
 | 2 | El usuario selecciona el campo "dominio" y le da click a una de las opciones dependiendo del caso. |
 | 3 | El usuario selecciona el campo "subdominio" e inserta el dato pedido. |
 | 4 | El usuario selecciona el campo "producto de datos" e inserta el dato pedido.  |
-| 5 | El usuario selecciona el "historia" y selecciona la fecha. |
-| 6 | El usuario selecciona el "Nombre del elemento de dato" e inserta el dato pedido. |
-| 6 | El usuario selecciona el "Nombre del elemento de dato" e inserta el dato pedido. |
-|  7| El usuario selecciona el "Definición del campo" e inserta la información pedida. |
-| 8 | El usuario selecciona el "Definición de la tabla" e inserta la información pedida. |
+| 5 | El usuario selecciona "fecha historia" y selecciona la fecha en un calendario que se abrirá automáticamente. |
+| 6 | El usuario selecciona "Nombre del dato" e inserta el dato pedido. |
+|  7| El usuario selecciona "Definición del campo" e inserta la información pedida. |
+| 8 | El usuario selecciona "Definición de la tabla" e inserta la información pedida. |
 | 9 | El usuario le dará click a "Guardar". |
 | 10 | El caso de uso culmina. |
 
@@ -115,7 +114,7 @@
 |:----------:|-------------------|
 | Descripción | Proceso por el cual el usuario podrá seleccionar datos o insertarlos, dependiendo del caso, en cada campo requerido. |
 | Actor | <p align="center"> Data Modeler |
-| Precondición | <p align="center"> Haber llenado la información de conceptos de negocio, referencia e información general. |
+| Precondición | <p align="center"> Haber dado click al botón de enlace de "Información del modelo DDV" desde la vista principal. |
 | <p align="center">  Paso | <p align="center">  Acción </p> |
 | 1 | El sistema muestra la sección de información del modelo DDV con los campos a rellenar. |
 | 2 | El usuario selecciona el campo "Esquema DDV" e inserta el dato pedido. |
@@ -123,22 +122,21 @@
 | 4 | El usuario selecciona el campo "Tabla DDV" e inserta el dato pedido.  |
 | 5 | El usuario selecciona el campo "Campo DDV" e inserta el dato pedido. |
 | 6 | El usuario selecciona el campo "Llave entidad DDV" y selecciona la opción "Si" o "No", dependiendo del caso. |
-| 7 | El usuario selecciona el campo "Descartado" y selecciona la opción "Si" o "No", dependiendo del caso. |
-| 9 | El usuario selecciona el campo "Comentarios Descarte/Otros" e inserta el comentario solicitado en caso se requiera. |
-| 10 | El usuario le dará click a "Guardar". |
-| 11 | El caso de uso culmina. |
+| 7 | El usuario selecciona el campo "Descarte" y selecciona la opción "Si" o "No", dependiendo del caso. |
+| 8 | El usuario le dará click a "Finalizar y Guardar". |
+| 9| El caso de uso culmina. |
 
 ### Caso de uso 9 : Buscar y colocar equivalencias
 
-| Objetivo | Buscar las equivalencias de los campos de referencia en una base de datos y autocompletarlas en los campos requeridos.|
+| Objetivo | Buscar las equivalencias de la información de referencia dada y mostrarla en una tabla.|
 |:----------:|-------------------|
-| Descripción | Proceso por el cual el sistema podrá autocompletar las equivalencias de los campos de referencia en el DLK para que se logre la migración de datos. |
+| Descripción | Proceso por el cual el sistema mostrará las equivalencias de la información de referencia en el modelo DDV. |
 | Actor | <p align="center"> Sistema |
 | Precondición | <p align="center"> Haber llenado la sección de información de referencia. |
 | <p align="center">  Paso | <p align="center">  Acción </p> |
 | 1 | El sistema recorré cada campo de referencia completado anteriormente.|
 | 2 | El sistema busca la equivalencia de cada campo en una base de datos interna.|
-| 3 | El sistema asigna a cada campo su respectiva equivalencia y crea una tabla que se podra ver desde la vista principal. |
+| 3 | El sistema asigna a cada campo su respectiva equivalencia y crea una tabla que se podra ver desde la vista principal al dar click a "ir a tabla de equivalencias". |
 | 4 | El caso de uso culmina |
 
 ### Caso de uso 10 : Registrar la Seguridad de datos
