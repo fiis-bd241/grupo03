@@ -19,18 +19,25 @@ Este módulo se integra estrechamente con todos los demás módulos del sistema 
 * Mantener el software y los sistemas del sistema actualizados con los últimos parches de seguridad para evitar vulnerabilidades conocidas.
 
 
-## Módulo de Inicialización de Documento
+## Módulo de Administración de Documento
 
-Este módulo es el responsable de dar comienzo a la elaboración del documento de Alcance DDV a pedido del usuario de origen para garantizar la migración de datos y a la cual se debe entregar al usuario destino.
+Este módulo es responsable de iniciar la elaboración del Documento de Alcance DDV a pedido del usuario de origen, para garantizar la migración de datos y entregarla al usuario destino. Además, este módulo también se encarga de administrar los diferentes documentos DDV existentes y de gestionar las versiones de cada uno de ellos.
 
 #### Interracción con otros módulos: 
+
+Módulo de Seguridad
+
 Módulo de Ingreso de Información y Equivalencias
+
 
 #### Responsabilidades
 
 * Crear nuevo Documento de Alcance a partir de una platilla ya establecida.
 * Modificar Documento de Alcance.
 * Actualizar la versión  del Documento de Alcance.
+* Controlar y gestionar los diferentes Documento de Alcance existentes.
+* Controlar las versiones de cada uno de los Documento de Alcance.
+* Visualizar y controlar los cambios en la estructura de los  Documento de Alcance.
 
 
 ## Módulo de Ingreso de Información y Equivalencias
