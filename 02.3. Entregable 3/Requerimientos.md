@@ -55,7 +55,7 @@
 | Precondición | <p align="center"> El usuario debió iniciar sesión con sus credenciales. |
 | <p align="center">  Paso | <p align="center">  Acción </p> |
 | 1 | El usuario una vez registrado, estará en la página principal del sistema el cual mostrará los distintos documentos de Alcance y una opción “Crear Nuevo Documento de Alcance”.|
-| 2 | El usuario puede elegir uno de los documentos y acceder a su historial de versiones.Allí aparecerá una opción “Modificar nuevo Documento de Alcance”. |
+| 2 | El usuario puede elegir uno de los documentos y acceder a su historial de versiones. Allí aparecerá una opción “Modificar Documento de Alcance”. |
 | 3 | Luego, saldrá una ventana emergente para detallar la versión del documento. Los campos que tendrá serán para especificar qué cambios se va realizar y por quien fue solicitado esos cambios. |
 
 ### Caso de uso 5 : Visualizar las versiones del Documento de Alcance
