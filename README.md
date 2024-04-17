@@ -15,3 +15,9 @@ Bienvenidos al repositorio del Proyecto del Curso del Grupo 3. Aquí encontrará
     * [Entregable 3](02.3.%20Entregable%203/entregable3.md)
 
 3. [Entrevistas](03.%20Entrevistas/Entrevistas.md)
+
+
+4. Prácticas calificadas
+
+* [PC 1](04.%20PC1/Indice.md)
+
