@@ -18,7 +18,7 @@ Por último, se entrega la información estructurada. Por información nos refir
 
 **3. Data modeler:** Modelar los objetos (esquemas, tablas, base de datos, etc).
 
-**4. Data engieneer:** Recibe la info del data governance y en base al modelamiento de datos crea las tablas con sus respectivos esquemas dentro de DB.
+**4. Data engneer:** Recibe la info del data governance y en base al modelamiento de datos crea las tablas con sus respectivos esquemas dentro de DB.
 
 **5.Data quality:** Responsable de verificar que lo que hizo el data engieneer en base a lo proporcionado por el data governance es correcto.
 
