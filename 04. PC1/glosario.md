@@ -22,8 +22,19 @@
 | 18 | EDV |Son los sandbox administrados, se crean por un tiempo determinado para que puedan probar la validez de una determinada hipótesis en base a datos y luego esta zona se elimina.
 | 19 | Datamart |Subconjunto de un almacén de datos centrado en una línea de negocio (información específica)
 | 20 | Data PipeLine | Datos de un sistema a otro, aplicando reglas y procesamiento de datos, transforma Raw Data en Data lista para hacer análisis, machine learning etc.
+| 21 | Mapeo de datos| Es el proceso de integración de datos de diferentes bases de datos, osea, encontrar campos homólogos en ambas bases.
+| 22 | Score | Conjunto de datos que están relacionados para un fin.
+| 23 | Esquema | Plano de cómo está organizada una tabla.
+| 24 | Broad | Documento raíz .CSV
+| 25 | Campos llave | Campo principal de la tabla, sin el cual la tabla no podría existir (primary key)
+| 26 | DAC | Dato de alta criticidad, son datos identificados por la organización que deben recibir un tratamiento especial sin restricción
+| 27 | Dato Básico | Datos constituidos por los datos no considerados sensibles
+| 28 | Dato Sensible | Datos constituidos por los datos biométricos que por sí mismos pueden identificar al titular
+| 29 | Tabla Look Up | Tabla de búsqueda, atributos de una dimensión
+| 30 | Tabla FACT | En un esquema dimensional de un DataWarehouse, contiene los valores de las medidas de negocio o dicho de otra forma los indicadores de negocio
+| 31 | FACT Eventual | Fact que se carga a solicitud del usuario. No es una carga programada
+| 32 | Relacionales | Se utilizan para eliminar relaciones de muchos a muchos entre dos tablas
 
----
 
 [Regresar al Entregable 2](../entregable2.md)
 
