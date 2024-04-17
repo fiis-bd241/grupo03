@@ -14,7 +14,7 @@
 
 6. [Modelo Conceptual](6.ModeloConceptual.md)
 
-7. [Modelo Relacional](7.ModeloRelacional)
+7. [Modelo Relacional](7.ModeloRelacional.md)
 
 8. [Entrevistas](8.Entrevistas.md)
 
