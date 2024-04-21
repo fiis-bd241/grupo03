@@ -36,6 +36,6 @@
 | 32 | Relacionales | Se utilizan para eliminar relaciones de muchos a muchos entre dos tablas
 
 
-[Regresar al Entregable 2](../entregable2.md)
+[Regresar a Descripción del Proceso](2.DescripcionProceso.md)
 
-[Regresar al índice](../../README.md)
+[Regresar al índice](Indice.md)
