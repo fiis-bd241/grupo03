@@ -20,4 +20,4 @@ Bienvenidos al repositorio del Proyecto del Curso del Grupo 3. Aquí encontrará
 4. Prácticas calificadas
 
     * [PC 1](04.%20PC1/Indice.md)
-
+    * [PC 2](05.%20PC2/Indice.md)
