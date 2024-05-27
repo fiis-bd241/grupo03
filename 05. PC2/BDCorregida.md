@@ -76,6 +76,8 @@ CREATE TABLE IF NOT EXISTS public."Empleado"
     correo character varying(50),
     "contraseña" character varying(50),
     nivel_acceso character varying(50),
+    telefono character varying(20),
+    dni character varying(8),
     PRIMARY KEY (id_empleado)
 );
 
