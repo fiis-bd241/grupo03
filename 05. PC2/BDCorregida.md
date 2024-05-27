@@ -234,7 +234,7 @@ CREATE TABLE IF NOT EXISTS public."Campo"
     "ID_Modelo" serial NOT NULL,
     "id_TipodeDato" serial NOT NULL,
     valor character varying(100),
-    propiedades character varying(50),
+    propiedades character varying(250),
     "id_AlgoritmoEnc" serial NOT NULL,
     "id_AlgoritmoEnm" serial NOT NULL,
     PRIMARY KEY (id_campo)
