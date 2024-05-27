@@ -724,6 +724,7 @@ ALTER TABLE public."Algoritmo" ALTER COLUMN tipo TYPE character varying(200);
 ALTER TABLE public."DefinicionesTecnicas" ALTER COLUMN "EquivalenciaId" DROP NOT NULL;
 ALTER TABLE public."PreCarga" ALTER COLUMN "Detalle_Precarga" TYPE character varying (200);
 ALTER TABLE public."PreCarga" ALTER COLUMN "Nombre_Regla" TYPE character varying (200);
+ALTER TABLE public."RegistroErrores" ALTER COLUMN "Id_Empleado" DROP NOT NULL;
 
 END;
 ```
