@@ -83,22 +83,21 @@ Posibilitar la comprensión del usuario de negocio de las reglas de carga, expli
 
 
 
-## Módulo de Registro de Seguridad del Dato
+## Módulo de Gestión de Reuniones
 
 
-Este módulo se encarga de registrar los datos sensibles así como la criticidad de cada uno de estos. Para ello, se basan de documentos de interfaz (mayormente) proporcionados por los usuaros, que son quienes definen la sensibilidad y criticidad.
+El módulo permite programar, coordinar y supervisar reuniones relacionadas con el proceso de migración de datos. Facilita la creación y gestión de reuniones, el registro de agendas y acuerdos, y la notificación de eventos pendientes.
 
 ### Interacción 
+Interactúa con el módulo de Pedidos para coordinar las reuniones según las necesidades de cada solicitud.
 
-Este módulo interactúa con el Módulo de Ingreso de Información e Equivalencias.
 ### Responsabilidades
-* Registrar dichos datos en la sección DAC .
-* Registrar la criticidad del dato.
-* Registrar el sustento de la criticidad del dato si es que es considerado crítico.
-* Registrar el Nivel de seguridad de dicho dato.
-* Registrar la frecuencia de actualización del dato en la fuente.
-* Llenar la información adicional de acuerdo a los lineamientos.
-* Actulizar el Documento de alcance DDV preliminar
+* Programar reuniones de entrada y salida relacionadas con los pedidos de migración de datos.
+* Registrar participantes, agendas, acuerdos y documentos asociados a cada reunión.
+* Enviar recordatorios automáticos a los participantes antes de las reuniones pendientes.
+* Seguimiento del estado de las reuniones y registro de conclusiones o acuerdos alcanzados.
+* Generación de reportes de conformidad para verificar el cumplimiento de los objetivos de las reuniones.
+
 ## Módulo de  Reporte y Registro de errores
 
 
