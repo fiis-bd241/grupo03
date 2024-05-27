@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS public."Migracion"
     "Entorno" character varying(50),
     "Fecha_migracion" date,
     "Valido" boolean,
+    "Ultimo" boolean,
     PRIMARY KEY ("Migracion_Id")
 );
 
