@@ -69,17 +69,25 @@ CREATE TABLE IF NOT EXISTS public."Notificacion"
     PRIMARY KEY ("Notificacion_Id")
 );
 
-CREATE TABLE IF NOT EXISTS public."Empleado"
-(
+CREATE TABLE IF NOT EXISTS public."Roles" (
+    id_rol serial NOT NULL,
+    nombre_rol character varying(50),
+    nivel_acceso character varying(50),
+    PRIMARY KEY (id_rol)
+);
+
+CREATE TABLE IF NOT EXISTS public."Empleado" (
     id_empleado serial NOT NULL,
     nombre character varying(50),
     correo character varying(50),
     "contraseña" character varying(50),
-    nivel_acceso character varying(50),
     telefono character varying(20),
     dni character varying(8),
-    PRIMARY KEY (id_empleado)
+    rol_id integer,
+    PRIMARY KEY (id_empleado),
+    FOREIGN KEY (rol_id) REFERENCES public."Roles" (id_rol)
 );
+
 
 CREATE TABLE IF NOT EXISTS public."Cargo"
 (
@@ -350,6 +358,13 @@ CREATE TABLE IF NOT EXISTS public."Reunion_Reporte_Conformidad"
     "Reunion_Id" serial NOT NULL,
     PRIMARY KEY ("Id_Reu_Rep")
 );
+
+ALTER TABLE IF EXISTS public."Empleado"
+    ADD FOREIGN KEY (rol_id)
+    REFERENCES public."Roles" (id_rol) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
 
 ALTER TABLE IF EXISTS public."Pedido"
     ADD FOREIGN KEY ("Area_Id")
