@@ -62,7 +62,23 @@
 | 6 | para garantizar que se puedan restaurar en caso de un ataque exitoso de phishing o cualquier otro incidente de seguridad. |
 | 7 | El caso de uso termina. |
 
-### Caso de uso 5 : Creación o modificación del Documento de Alcance
+### Caso de uso 5 : Monitoreo de actividades
+
+| Objetivo | Proteger al sistema y a los usuarios contra ataques de phishing. |
+|:----------:|-------------------|
+| Descripción | El administrador supervisa las actividades de los usuarios en el sistema para asegurar el cumplimiento de políticas de seguridad. |
+| Actor | <p align="center"> Administrador del sistema |
+| Precondición | <p align="center">El sistema debe tener implementadas medidas de seguridad adecuadas y actualizadas para proteger contra ataques de phishing. |
+| <p align="center">  Paso | <p align="center">  Acción </p> |
+| 1 | Acceso a herramientas de monitoreo y auditoría. |
+| 2 | Revisión de logs de actividad de los usuarios.|
+| 3 | Identificación de comportamientos inusuales o sospechosos. |
+| 4 | Generación de reportes de actividad. |
+| 5 | Aplicación de medidas correctivas según sea necesario. |
+| 7 | El caso de uso termina. |
+
+
+### Caso de uso 6 : Creación o modificación del Documento de Alcance
 
 | Objetivo | Dar inicio al proceso. |
 |:----------:|-------------------|
@@ -74,7 +90,7 @@
 | 2 | El usuario puede elegir uno de los documentos y acceder a su historial de versiones. Allí aparecerá una opción “Modificar Documento de Alcance”. |
 | 3 | Luego, saldrá una ventana emergente para detallar la versión del documento. Los campos que tendrá serán para especificar qué cambios se va realizar y por quien fue solicitado esos cambios. |
 
-### Caso de uso 6 : Visualizar las versiones del Documento de Alcance
+### Caso de uso 7 : Visualizar las versiones del Documento de Alcance
 
 | Objetivo | Gestionar y visualizar las versiones del Documento de Alcance. |
 |:----------:|-------------------|
@@ -86,7 +102,7 @@
 | 2 | El sistema muestra el historial de versiones del documento seleccionado.|
 | 3 | El usuario podrá visualizar los cambios a detalle que ha tenido cada versiones. |
 
-### Caso de uso 7 : Visualizar y controlar los cambios en la estructura de los documentos
+### Caso de uso 8 : Visualizar y controlar los cambios en la estructura de los documentos
 
 | Objetivo | Visión y control de los cambios realizados en la estructura de los documentos de Alcance. |
 |:----------:|-------------------|
@@ -98,7 +114,7 @@
 | 2 | Si el usuario desea agregar una nueva modificación, puede hacerlo utilizando el botón "Agregar una nueva modificación".|
 | 3 | El sistema deberá actualizar la información de los documentos de Alcance, donde indicará que el documento no esta en el formato actual. |
 
-### Caso de uso 8 : Ingreso información general
+### Caso de uso 9 : Ingreso información general
 
 | Objetivo | Completar la sección de información general con lo datos requeridos en su totalidad. |
 |:----------:|-------------------|
@@ -114,7 +130,7 @@
 | 6 | El usuario le dará click a "Siguiente", para poder ingresar los datos de la siguiente sección. |
 | 7 | El caso de uso culmina. |
 
-### Caso de uso 9 : Ingreso información de referencia
+### Caso de uso 10 : Ingreso información de referencia
 
 | Objetivo | Completar los campos de información de referencia. |
 |:----------:|-------------------|
@@ -130,7 +146,7 @@
 | 6 | El usuario le dará click a "Siguiente". |
 | 7 | El caso de uso culmina. |
 
-### Caso de uso 10 : Ingreso conceptos de negocio
+### Caso de uso 11 : Ingreso conceptos de negocio
 | Objetivo | Completar los campos respectivos de los conceptos de negocio. |
 |:----------:|-------------------|
 | Descripción | Proceso por el cual el usuario podrá seleccionar datos o insertarlos, dependiendo del caso, en cada campo requerido. |
@@ -148,7 +164,7 @@
 | 9 | El usuario le dará click a "Guardar". |
 | 10 | El caso de uso culmina. |
 
-### Caso de uso 11 : Ingresar información del modelo DDV
+### Caso de uso 12 : Ingresar información del modelo DDV
 
 | Objetivo | Completar los campos de información del modelo DDV |
 |:----------:|-------------------|
@@ -166,7 +182,7 @@
 | 8 | El usuario le dará click a "Finalizar y Guardar". |
 | 9| El caso de uso culmina. |
 
-### Caso de uso 12 : Buscar y colocar equivalencias
+### Caso de uso 13 : Buscar y colocar equivalencias
 
 | Objetivo | Buscar las equivalencias de la información de referencia dada y mostrarla en una tabla.|
 |:----------:|-------------------|
@@ -179,7 +195,7 @@
 | 3 | El sistema asigna a cada campo su respectiva equivalencia y crea una tabla que se podra ver desde la vista principal al dar click a "ir a tabla de equivalencias". |
 | 4 | El caso de uso culmina |
 
-### Caso de uso 13 : Registrar la Seguridad de datos
+### Caso de uso 14 : Registrar la Seguridad de datos
 
 | Objetivo | Completar la información de seguridad de datos  |
 |:----------:|-------------------|
@@ -195,7 +211,7 @@
 | 6 | El usuario le dará click a "Siguiente", para poder ingresar los datos de la siguiente sección. |
 | 7 | El caso de uso culmina. |
 
-### Caso de uso 14 : Registrar información adicional
+### Caso de uso 15 : Registrar información adicional
 
 | Objetivo | Ingresar los datos de la información adicioanal  |
 |:----------:|-------------------|
@@ -213,7 +229,7 @@
 | 8 | El usuario le dará click a "Siguiente", para poder ingresar los datos de la siguiente sección. |
 | 9 | El caso de uso culmina. |
 
-### Caso de uso 15 : Definir Reglas funcionales de precarga y carga
+### Caso de uso 16 : Definir Reglas funcionales de precarga y carga
 
 
 | Objetivo | Enlazar el Universo y la tabla de equivalencias mediante llaves, usar las reglas de precarga preestablecidas para validar los datos|
@@ -228,7 +244,7 @@
 | 4 | De ser determinado necesario se aplican las reglas de precarga opcionales|
 | 5 | El caso de uso culmina |
 
-### Caso de uso 16: Definir Reglas técnicas de carga
+### Caso de uso 17: Definir Reglas técnicas de carga
 
 
 | Objetivo | Formalizar las reglas de carga para que puedan ser ejecutadas y realizar un query a la base de datos|
@@ -240,7 +256,7 @@
 | 1 | El Custodio Técnico se encarga de llevar el codigo hecho por el Data Steward a uno ejecutable|
 | 2 | El caso de uso culmina |
 
-### Caso de uso 17: Complementar definiciones técnicas
+### Caso de uso 18: Complementar definiciones técnicas
 
 
 | Objetivo | Comprobar el buen funcionamiento de las reglas de carga formalizadas que se tienen en el Caso de uso 11|
@@ -255,7 +271,7 @@
 | 4 | El ciclo continua hasta que el query haga lo que debería hacer|
 | 5 | El caso de uso culmina|
 
-### Caso de uso 18 : Corregir errores de modelamiento
+### Caso de uso 19 : Corregir errores de modelamiento
 
 | Objetivo | Corregir los errores de modelamiento encontrados durante el proceso anterior  |
 |:----------:|-------------------|
@@ -273,7 +289,7 @@
 | 8 | El usuario guardará el documento |
 | 9 | El caso de uso culmina. |
 
-### Caso de uso 19 : Corregir otros errores
+### Caso de uso 20 : Corregir otros errores
 
 | Objetivo | Corregir los otros errore encontrados luego de corregir los errores de modelamiento  |
 |:----------:|-------------------|
@@ -291,7 +307,7 @@
 | 8 | El usuario guardará el documento |
 | 9 | El caso de uso culmina. |
 
-### Caso de uso 20 : Generar metadata y linaje
+### Caso de uso 21 : Generar metadata y linaje
 
 | Objetivo | Tener guardado el registro de errores encontrados y corregidos durante todos los cambios realizados anterioremente  |
 |:----------:|-------------------|
@@ -309,7 +325,7 @@
 | 8 | El usuario guardará el documento de Alcance DDV|
 | 9 | El caso de uso culmina. |
 
-### Caso de uso 21 : Actualizar Governance Catalog
+### Caso de uso 22 : Actualizar Governance Catalog
 
 | Objetivo | Tener el archivo actualizado en  el Governance Catalog para una mejor seguridad |
 |:----------:|-------------------|
