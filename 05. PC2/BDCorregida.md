@@ -733,7 +733,7 @@ ALTER TABLE IF EXISTS public."Reunion_Reporte_Conformidad"
     ON DELETE NO ACTION
     NOT VALID;
 
----Estos son correcciones que hize despues de creadas las tablas, mas que todo en el tipo de variable.
+---Estos son correcciones que hice despues de creadas las tablas, mas que todo en el tipo de variable.
 	
 ALTER TABLE public."Algoritmo" ALTER COLUMN descripcion TYPE text;
 ALTER TABLE public."Algoritmo" ALTER COLUMN nombre_algoritmo TYPE character varying(200);
@@ -744,5 +744,16 @@ ALTER TABLE public."PreCarga" ALTER COLUMN "Detalle_Precarga" TYPE character var
 ALTER TABLE public."PreCarga" ALTER COLUMN "Nombre_Regla" TYPE character varying (200);
 ALTER TABLE public."RegistroErrores" ALTER COLUMN "Id_Empleado" DROP NOT NULL;
 
+-- AGREGUÉ COLUMNAS ADICIONALES A LA TABLA
 END;
+BEGIN;
+
+ALTER TABLE public."Reunion"
+ADD COLUMN "HoraProgramacion" time with time zone;
+
+ALTER TABLE public."Reunion"
+ADD COLUMN "FechaProgramacion" date;
+
+END;
+
 ```
