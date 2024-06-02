@@ -21,3 +21,4 @@ Bienvenidos al repositorio del Proyecto del Curso del Grupo 3. Aquí encontrará
 
     * [PC 1](04.%20PC1/Indice.md)
     * [PC 2](05.%20PC2/Indice.md)
+    * [PC 3](06.%20PC3/Indice.md)
