@@ -1,6 +1,46 @@
 ```sql
 BEGIN;
 
+DROP TABLE IF EXISTS public."Algoritmo" CASCADE;
+DROP TABLE IF EXISTS public."Ambiente" CASCADE;
+DROP TABLE IF EXISTS public."Area" CASCADE;
+DROP TABLE IF EXISTS public."Campo" CASCADE;
+DROP TABLE IF EXISTS public."CampoAsegurado" CASCADE;
+DROP TABLE IF EXISTS public."CargaPreCarga" CASCADE;
+DROP TABLE IF EXISTS public."Cargo" CASCADE;
+DROP TABLE IF EXISTS public."ConceptosNegocio" CASCADE;
+DROP TABLE IF EXISTS public."DefinicionesTecnicas" CASCADE;
+DROP TABLE IF EXISTS public."Dominio" CASCADE;
+DROP TABLE IF EXISTS public."Empleado" CASCADE;
+DROP TABLE IF EXISTS public."Esquema" CASCADE;
+DROP TABLE IF EXISTS public."Estado" CASCADE;
+DROP TABLE IF EXISTS public."Migracion" CASCADE;
+DROP TABLE IF EXISTS public."Modelado" CASCADE;
+DROP TABLE IF EXISTS public."Notificacion" CASCADE;
+DROP TABLE IF EXISTS public."Participa_en" CASCADE;
+DROP TABLE IF EXISTS public."Participante" CASCADE;
+DROP TABLE IF EXISTS public."Pedido" CASCADE;
+DROP TABLE IF EXISTS public."Pertenece" CASCADE;
+DROP TABLE IF EXISTS public."PreCarga" CASCADE;
+DROP TABLE IF EXISTS public."Prioridad" CASCADE;
+DROP TABLE IF EXISTS public."Programacion" CASCADE;
+DROP TABLE IF EXISTS public."Recordatorio" CASCADE;
+DROP TABLE IF EXISTS public."Recordatorio_Enviado" CASCADE;
+DROP TABLE IF EXISTS public."RegistroErrores" CASCADE;
+DROP TABLE IF EXISTS public."ReglasDeCarga" CASCADE;
+DROP TABLE IF EXISTS public."Reporte" CASCADE;
+DROP TABLE IF EXISTS public."Reporte_Conformidad" CASCADE;
+DROP TABLE IF EXISTS public."Reunion" CASCADE;
+DROP TABLE IF EXISTS public."Reunion_Reporte_Conformidad" CASCADE;
+DROP TABLE IF EXISTS public."Roles" CASCADE;
+DROP TABLE IF EXISTS public."Squad" CASCADE;
+DROP TABLE IF EXISTS public."Tecnologia" CASCADE;
+DROP TABLE IF EXISTS public."TipoDato" CASCADE;
+DROP TABLE IF EXISTS public."TipoError" CASCADE;
+DROP TABLE IF EXISTS public."Tipo_Recordatorio" CASCADE;
+DROP TABLE IF EXISTS public."Tipo_Reunion" CASCADE;
+DROP TABLE IF EXISTS public."Tarea" CASCADE;
+DROP TABLE IF EXISTS public."RendimientoEmpleado" CASCADE;
 
 CREATE TABLE IF NOT EXISTS public."Algoritmo"
 (
@@ -104,6 +144,31 @@ CREATE TABLE IF NOT EXISTS public."Empleado"
     rol_id integer,
     CONSTRAINT "Empleado_pkey" PRIMARY KEY (id_empleado)
 );
+
+CREATE TABLE IF NOT EXISTS public."Tarea"
+(
+    id_tarea serial NOT NULL,
+    id_empleado integer NOT NULL,
+    descripcion text COLLATE pg_catalog."default",
+    fecha_inicio date,
+    fecha_fin date,
+    estado character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT "Tarea_pkey" PRIMARY KEY (id_tarea)
+);
+
+CREATE TABLE IF NOT EXISTS public."RendimientoEmpleado"
+(
+    id_rendimiento serial NOT NULL,
+    id_empleado integer NOT NULL,
+    tareas_completadas integer,
+    tiempo_promedio_tareas interval,
+    calidad_trabajo integer,
+    participacion_reuniones integer,
+    documentos_generados integer,
+    fecha date DEFAULT CURRENT_DATE,
+    CONSTRAINT "RendimientoEmpleado_pkey" PRIMARY KEY (id_rendimiento)
+);
+
 
 CREATE TABLE IF NOT EXISTS public."Esquema"
 (
@@ -489,6 +554,17 @@ ALTER TABLE IF EXISTS public."Empleado"
     ON DELETE NO ACTION
     NOT VALID;
 
+ALTER TABLE IF EXISTS public."Tarea"
+    ADD CONSTRAINT "Tarea_id_empleado_fkey" FOREIGN KEY (id_empleado)
+    REFERENCES public."Empleado" (id_empleado) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+ALTER TABLE IF EXISTS public."RendimientoEmpleado"
+    ADD CONSTRAINT "RendimientoEmpleado_id_empleado_fkey" FOREIGN KEY (id_empleado)
+    REFERENCES public."Empleado" (id_empleado) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
 
 ALTER TABLE IF EXISTS public."Esquema"
     ADD CONSTRAINT "Esquema_AmbienteId_fkey" FOREIGN KEY ("AmbienteId")
