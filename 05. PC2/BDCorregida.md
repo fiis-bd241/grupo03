@@ -88,13 +88,7 @@ CREATE TABLE IF NOT EXISTS public."CampoAsegurado"
     CONSTRAINT "CampoAsegurado_pkey" PRIMARY KEY ("id_CampoAsegurado")
 );
 
-CREATE TABLE IF NOT EXISTS public."CargaPreCarga"
-(
-    "ID_CargaPrecarga" serial NOT NULL,
-    "ID_ReglaCarga" serial NOT NULL,
-    "ID_Precarga" serial NOT NULL,
-    CONSTRAINT "CargaPreCarga_pkey" PRIMARY KEY ("ID_CargaPrecarga")
-);
+
 
 CREATE TABLE IF NOT EXISTS public."Cargo"
 (
@@ -261,10 +255,40 @@ CREATE TABLE IF NOT EXISTS public."Pertenece"
 
 CREATE TABLE IF NOT EXISTS public."PreCarga"
 (
-    "ID_Precarga" serial NOT NULL,
-    "Nombre_Regla" character varying(200) COLLATE pg_catalog."default",
-    "Detalle_Precarga" character varying(200) COLLATE pg_catalog."default",
+    "ID_Precarga" integer NOT NULL,
+    "Nombre_Regla" character varying(100) COLLATE pg_catalog."default",
+    "Descripcion" character varying(200) COLLATE pg_catalog."default",
+    "Obligatorio" boolean,
     CONSTRAINT "PreCarga_pkey" PRIMARY KEY ("ID_Precarga")
+);
+
+CREATE TABLE IF NOT EXISTS public."CargaPreCarga"
+(
+    "ID_CargaPrecarga" serial NOT NULL,
+    "ID_ReglaCarga" serial NOT NULL,
+    "ID_Precarga" Integer NOT NULL,
+    CONSTRAINT "CargaPreCarga_pkey" PRIMARY KEY ("ID_CargaPrecarga")
+);
+
+CREATE TABLE IF NOT EXISTS public."ReglaDeCargaFuncional"
+(
+    "ID_ReglaCargaFunc" serial NOT NULL,
+    "id_migracion" serial NOT NULL,
+    "id_tecnologia" serial NOT NULL,
+    "Logica" text COLLATE pg_catalog."default",
+    "Fecha" DATE,
+    CONSTRAINT "ReglaDeCargaFuncionales_pkey" PRIMARY KEY ("ID_ReglaCargaFunc")
+);
+
+CREATE TABLE IF NOT EXISTS public."ReglaDeCargaTecnica"
+(
+    "ID_ReglaCargaTecn" serial NOT NULL,
+    "regla_funcional" serial NOT NULL,
+    "Codigo" text COLLATE pg_catalog."default",
+    "Finalizado" boolean,
+    "Comentario" text,
+    "Fecha" DATE,
+    CONSTRAINT "ReglaDeCargaTecnica_pkey" PRIMARY KEY ("ID_ReglaCargaTecn")
 );
 
 CREATE TABLE IF NOT EXISTS public."Prioridad"
@@ -316,14 +340,6 @@ CREATE TABLE IF NOT EXISTS public."RegistroErrores"
     CONSTRAINT "RegistroErrores_pkey" PRIMARY KEY ("Id_registro_errores")
 );
 
-CREATE TABLE IF NOT EXISTS public."ReglasDeCarga"
-(
-    "ID_ReglaCarga" serial NOT NULL,
-    id_campo serial NOT NULL,
-    id_tecnologia serial NOT NULL,
-    detalle_carga text COLLATE pg_catalog."default",
-    CONSTRAINT "ReglasDeCarga_pkey" PRIMARY KEY ("ID_ReglaCarga")
-);
 
 CREATE TABLE IF NOT EXISTS public."Reporte"
 (
@@ -485,8 +501,8 @@ ALTER TABLE IF EXISTS public."CargaPreCarga"
 
 
 ALTER TABLE IF EXISTS public."CargaPreCarga"
-    ADD CONSTRAINT "CargaPreCarga_ID_ReglaCarga_fkey" FOREIGN KEY ("ID_ReglaCarga")
-    REFERENCES public."ReglasDeCarga" ("ID_ReglaCarga") MATCH SIMPLE
+    ADD CONSTRAINT "CargaPreCarga_ID_ReglaDeCargaTecnica_fkey" FOREIGN KEY ("ID_ReglaCarga")
+    REFERENCES public."ReglaDeCargaTecnica" ("ID_ReglaCargaTecn") MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
@@ -750,16 +766,23 @@ ALTER TABLE IF EXISTS public."RegistroErrores"
     NOT VALID;
 
 
-ALTER TABLE IF EXISTS public."ReglasDeCarga"
-    ADD CONSTRAINT "ReglasDeCarga_id_campo_fkey" FOREIGN KEY (id_campo)
-    REFERENCES public."Campo" (id_campo) MATCH SIMPLE
+ALTER TABLE IF EXISTS public."ReglaDeCargaTecnica"
+    ADD CONSTRAINT "ReglaDeCargaTecnica_id_ReglaDeCargaFuncional_fkey" FOREIGN KEY (regla_funcional)
+    REFERENCES public."ReglaDeCargaFuncional" ("ID_ReglaCargaFunc") MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
 
 
-ALTER TABLE IF EXISTS public."ReglasDeCarga"
-    ADD CONSTRAINT "ReglasDeCarga_id_tecnologia_fkey" FOREIGN KEY (id_tecnologia)
+ALTER TABLE IF EXISTS public."ReglaDeCargaFuncional"
+    ADD CONSTRAINT "ReglaDeCargaFuncional_id_migracion_fkey" FOREIGN KEY (id_migracion)
+    REFERENCES public."Migracion" ("Migracion_Id") MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+ALTER TABLE IF EXISTS public."ReglaDeCargaFuncional"
+    ADD CONSTRAINT "ReglaDeCargaFuncional_id_tecnologia_fkey" FOREIGN KEY (id_tecnologia)
     REFERENCES public."Tecnologia" (id_tecnologia) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
