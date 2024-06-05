@@ -158,6 +158,7 @@ CREATE TABLE IF NOT EXISTS public."Tarea"
     descripcion text COLLATE pg_catalog."default",
     fecha_inicio date,
     fecha_fin date,
+    calidad integer,
     estado character varying(50) COLLATE pg_catalog."default",
     CONSTRAINT "Tarea_pkey" PRIMARY KEY (id_tarea)
 );
