@@ -42,6 +42,14 @@ DROP TABLE IF EXISTS public."Tipo_Reunion" CASCADE;
 DROP TABLE IF EXISTS public."Tarea" CASCADE;
 DROP TABLE IF EXISTS public."RendimientoEmpleado" CASCADE;
 
+
+CREATE TABLE IF NOT EXISTS public."Subdominio"
+(
+   id_subdominio serial,
+   nombre_subdominio varchar(100),
+   id_dominio	integer
+);
+
 CREATE TABLE IF NOT EXISTS public."Algoritmo"
 (
     id_algoritmo serial NOT NULL,
@@ -516,6 +524,12 @@ ALTER TABLE IF EXISTS public."CargaPreCarga"
     ON DELETE NO ACTION
     NOT VALID;
 
+ALTER TABLE IF EXISTS public."Subdominio"
+    ADD FOREIGN KEY ("id_dominio")
+    REFERENCES public."Dominio" ("id_dominio") MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
 
 ALTER TABLE IF EXISTS public."ConceptosNegocio"
     ADD CONSTRAINT "ConceptosNegocio_PedidoId_fkey" FOREIGN KEY ("PedidoId")
@@ -540,6 +554,14 @@ ALTER TABLE IF EXISTS public."ConceptosNegocio"
     ON DELETE NO ACTION
     NOT VALID;
 
+ALTER TABLE "Modelado" ADD COLUMN "id_referencia" serial;
+
+ALTER TABLE IF EXISTS public."Modelado"
+    ADD CONSTRAINT "Modelado_id_referencia_fkey" FOREIGN KEY (id_referencia)
+    REFERENCES public."DefinicionesTecnicas" ("id_DT") MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
 
 ALTER TABLE IF EXISTS public."DefinicionesTecnicas"
     ADD CONSTRAINT "DefinicionesTecnicas_EquivalenciaId_fkey" FOREIGN KEY ("EquivalenciaId")
@@ -865,6 +887,7 @@ ALTER TABLE IF EXISTS public."Reunion_Reporte_Conformidad"
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
+
 
 END;
 
