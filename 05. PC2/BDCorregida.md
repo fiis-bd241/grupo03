@@ -111,14 +111,12 @@ CREATE TABLE IF NOT EXISTS public."Cargo"
 
 CREATE TABLE IF NOT EXISTS public."ConceptosNegocio"
 (
-    "id_CN" serial NOT NULL,
-    id_dominio serial NOT NULL,
-    subdominio character varying(100) COLLATE pg_catalog."default",
-    id_referencia serial NOT NULL,
-    "DefinicionTabla" text COLLATE pg_catalog."default",
-    "DefinicionCampo" text COLLATE pg_catalog."default",
-    "PedidoId" serial NOT NULL,
-    CONSTRAINT "ConceptosNegocio_pkey" PRIMARY KEY ("id_CN")
+   "id_CN" serial PRIMARY KEY,
+   "id_subdominio" integer,
+   "id_referencia" integer,
+   "DefinicionCampo" text,
+   "DefinicionTabla" text,
+   "PedidoId" integer
 );
 
 CREATE TABLE IF NOT EXISTS public."DefinicionesTecnicas"
@@ -538,16 +536,8 @@ ALTER TABLE IF EXISTS public."Subdominio"
     NOT VALID;
 
 ALTER TABLE IF EXISTS public."ConceptosNegocio"
-    ADD CONSTRAINT "ConceptosNegocio_PedidoId_fkey" FOREIGN KEY ("PedidoId")
-    REFERENCES public."Pedido" ("Pedido_Id") MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
-
-ALTER TABLE IF EXISTS public."ConceptosNegocio"
-    ADD CONSTRAINT "ConceptosNegocio_id_dominio_fkey" FOREIGN KEY (id_dominio)
-    REFERENCES public."Dominio" (id_dominio) MATCH SIMPLE
+    ADD CONSTRAINT "ConceptosNegocio_id_subdominio_fkey" FOREIGN KEY (id_subdominio)
+    REFERENCES public."Subdominio" (id_subdominio) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
@@ -556,6 +546,14 @@ ALTER TABLE IF EXISTS public."ConceptosNegocio"
 ALTER TABLE IF EXISTS public."ConceptosNegocio"
     ADD CONSTRAINT "ConceptosNegocio_id_referencia_fkey" FOREIGN KEY (id_referencia)
     REFERENCES public."DefinicionesTecnicas" ("id_DT") MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public."ConceptosNegocio"
+    ADD CONSTRAINT "ConceptosNegocio_PedidoId_fkey" FOREIGN KEY ("PedidoId")
+    REFERENCES public."Pedido" ("Pedido_Id") MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
