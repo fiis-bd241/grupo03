@@ -41,6 +41,10 @@ DROP TABLE IF EXISTS public."Tipo_Recordatorio" CASCADE;
 DROP TABLE IF EXISTS public."Tipo_Reunion" CASCADE;
 DROP TABLE IF EXISTS public."Tarea" CASCADE;
 DROP TABLE IF EXISTS public."RendimientoEmpleado" CASCADE;
+DROP TABLE IF EXISTS public."ReglaDeCargaFuncional" CASCADE;
+DROP TABLE IF EXISTS public."ReglaDeCargaTecnica" CASCADE;
+DROP TABLE IF EXISTS public."Subdominio" CASCADE;
+DROP TABLE IF EXISTS public."Universo" CASCADE;
 
 
 CREATE TABLE IF NOT EXISTS public."Subdominio"
