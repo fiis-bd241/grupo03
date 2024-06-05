@@ -127,6 +127,7 @@ CREATE TABLE IF NOT EXISTS public."DefinicionesTecnicas"
     "Campo" character varying(100) COLLATE pg_catalog."default",
     CONSTRAINT "DefinicionesTecnicas_pkey" PRIMARY KEY ("id_DT")
 );
+ALTER TABLE "DefinicionesTecnicas" ALTER COLUMN "EquivalenciaId" DROP NOT NULL;
 
 CREATE TABLE IF NOT EXISTS public."Dominio"
 (
@@ -555,13 +556,6 @@ ALTER TABLE IF EXISTS public."ConceptosNegocio"
     NOT VALID;
 
 ALTER TABLE "Modelado" ADD COLUMN "id_referencia" serial;
-
-ALTER TABLE IF EXISTS public."Modelado"
-    ADD CONSTRAINT "Modelado_id_referencia_fkey" FOREIGN KEY (id_referencia)
-    REFERENCES public."DefinicionesTecnicas" ("id_DT") MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
 
 ALTER TABLE IF EXISTS public."DefinicionesTecnicas"
     ADD CONSTRAINT "DefinicionesTecnicas_EquivalenciaId_fkey" FOREIGN KEY ("EquivalenciaId")
