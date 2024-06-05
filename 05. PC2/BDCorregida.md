@@ -253,6 +253,15 @@ CREATE TABLE IF NOT EXISTS public."Pertenece"
     CONSTRAINT "Pertenece_pkey" PRIMARY KEY (id_pertenece)
 );
 
+CREATE TABLE IF NOT EXISTS public."Universo"
+(
+    "ID_Universo" serial NOT NULL,
+    "Pedido_Id" serial,
+    "Codigo" text,
+    "Fecha_Creacion" DATE,
+    CONSTRAINT "Universo_pkey" PRIMARY KEY ("ID_Universo")
+);
+
 CREATE TABLE IF NOT EXISTS public."PreCarga"
 (
     "ID_Precarga" integer NOT NULL,
@@ -765,6 +774,12 @@ ALTER TABLE IF EXISTS public."RegistroErrores"
     ON DELETE NO ACTION
     NOT VALID;
 
+ALTER TABLE IF EXISTS public."Universo"
+    ADD CONSTRAINT "Universo_Pedido_fk" FOREIGN KEY ("Pedido_Id")
+    REFERENCES public."Pedido" ("Pedido_Id") MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
 
 ALTER TABLE IF EXISTS public."ReglaDeCargaTecnica"
     ADD CONSTRAINT "ReglaDeCargaTecnica_id_ReglaDeCargaFuncional_fkey" FOREIGN KEY (regla_funcional)
