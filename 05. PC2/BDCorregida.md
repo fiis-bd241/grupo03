@@ -571,7 +571,6 @@ ALTER TABLE IF EXISTS public."DefinicionesTecnicas"
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
-ALTER TABLE "DefinicionesTecnicas" DROP COLUMN "ModeloId";
 
 
 ALTER TABLE IF EXISTS public."DefinicionesTecnicas"
@@ -589,6 +588,7 @@ ALTER TABLE IF EXISTS public."DefinicionesTecnicas"
     ON DELETE NO ACTION
     NOT VALID;
 
+ALTER TABLE "DefinicionesTecnicas" DROP COLUMN "ModeloId";
 
 ALTER TABLE IF EXISTS public."Empleado"
     ADD CONSTRAINT "Empleado_rol_id_fkey" FOREIGN KEY (rol_id)
