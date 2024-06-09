@@ -124,10 +124,14 @@ CREATE TABLE IF NOT EXISTS public."ConceptosNegocio"
     id_referencia integer NOT NULL,
     "DefinicionTabla" text COLLATE pg_catalog."default",
     "DefinicionCampo" text COLLATE pg_catalog."default",
-    "PedidoId" integer NOT NULL,
+    "MigracionId" integer NOT NULL,
     CONSTRAINT "ConceptosNegocio_pkey" PRIMARY KEY ("id_CN"),
     CONSTRAINT "FK_Subdominio_ConceptosNegocio" FOREIGN KEY ("id_subdominio")
         REFERENCES public."Subdominio" (id_subdominio) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+	CONSTRAINT "FK_Migracion_ConceptosNegocio" FOREIGN KEY ("MigracionId")
+        REFERENCES public."Migracion" ("Migracion_Id") MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 );
@@ -552,14 +556,6 @@ ALTER TABLE IF EXISTS public."CargaPreCarga"
 ALTER TABLE IF EXISTS public."CargaPreCarga"
     ADD CONSTRAINT "CargaPreCarga_ID_ReglaDeCargaTecnica_fkey" FOREIGN KEY ("ID_ReglaCarga")
     REFERENCES public."ReglaDeCargaTecnica" ("ID_ReglaCargaTecn") MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
-
-ALTER TABLE IF EXISTS public."ConceptosNegocio"
-    ADD CONSTRAINT "ConceptosNegocio_PedidoId_fkey" FOREIGN KEY ("PedidoId")
-    REFERENCES public."Pedido" ("Pedido_Id") MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
@@ -1626,7 +1622,7 @@ VALUES
 
 -- Insertar datos en la tabla ConceptosNegocio
 INSERT INTO public."ConceptosNegocio"(
-   "id_subdominio", "id_referencia", "DefinicionCampo", "DefinicionTabla", "PedidoId")
+   "id_subdominio", "id_referencia", "DefinicionCampo", "DefinicionTabla", "MigracionId")
 VALUES
     (1, 1, 'Dirección del cliente', 'Tabla que contiene la información de clientes que solicitan su prestamo tarjetero', 1),
     (1, 3, 'Código del Departamento. De acuerdo a INEI, el Departamento corresponde al ámbito de mayor nivel de las circunscripciones territoriales de la República (división de primer orden) y se constituye sobre la base del sistema geo-económico y político administrativo conformado por provincias y distritos.', 'Tabla que contiene la información de clientes que solicitan su prestamo tarjetero', 1),
