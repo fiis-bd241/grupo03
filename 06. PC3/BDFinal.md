@@ -37,6 +37,7 @@ DROP TABLE IF EXISTS public."Reunion" CASCADE;
 DROP TABLE IF EXISTS public."Reunion_Reporte_Conformidad" CASCADE;
 DROP TABLE IF EXISTS public."Roles" CASCADE;
 DROP TABLE IF EXISTS public."Squad" CASCADE;
+DROP TABLE IF EXISTS public."Tarea" CASCADE;
 DROP TABLE IF EXISTS public."Tecnologia" CASCADE;
 DROP TABLE IF EXISTS public."TipoDato" CASCADE;
 DROP TABLE IF EXISTS public."TipoError" CASCADE;
@@ -179,6 +180,22 @@ CREATE TABLE IF NOT EXISTS public."Migracion"
     "Valido" boolean,
     "Ultimo" boolean,
     CONSTRAINT "Migracion_pkey" PRIMARY KEY ("Migracion_Id")
+);
+
+CREATE TABLE IF NOT EXISTS public."Tarea"
+(
+    id_tarea serial NOT NULL,
+    id_empleado integer NOT NULL,
+	id_migracion integer NOT NULL,
+    descripcion text COLLATE pg_catalog."default",
+    fecha_fin date,
+    fecha_inicio date,
+	fecha_fin_real date,
+    calidad integer,
+    estadoId integer,
+    CONSTRAINT "Tarea_pkey" PRIMARY KEY (id_tarea),
+	CONSTRAINT "FK_Tarea_Migracion" FOREIGN KEY (id_migracion) REFERENCES public."Migracion" ("Migracion_Id"),
+	CONSTRAINT "FK_Tarea_Estado" FOREIGN KEY (estadoId) REFERENCES public."Estado" ("Estado_Id")
 );
 
 CREATE TABLE IF NOT EXISTS public."Modelado"
@@ -591,6 +608,11 @@ ALTER TABLE IF EXISTS public."Esquema"
     ON DELETE NO ACTION
     NOT VALID;
 
+ALTER TABLE IF EXISTS public."Tarea"
+    ADD CONSTRAINT "Tarea_id_empleado_fkey" FOREIGN KEY (id_empleado)
+    REFERENCES public."Empleado" (id_empleado) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
 
 ALTER TABLE IF EXISTS public."Migracion"
     ADD CONSTRAINT "Migracion_Id_Squad_fkey" FOREIGN KEY ("Id_Squad")
@@ -1229,6 +1251,34 @@ INSERT INTO public."Migracion"(
 	(34, 8, 1, 'SandBox', '2024-11-25', false, false),
 	(34, 9, 1, 'SAS', '2024-11-30', true, false),
 	(35, 2, 1, 'DWH', '2024-12-05', true, true);
+
+--Insertar datos en la tabla Tarea
+INSERT INTO public."Tarea" ("id_empleado", "id_migracion", "descripcion", "fecha_inicio", "fecha_fin", "fecha_fin_real", "calidad", estadoId) VALUES
+(4, 1, 'Agregar Concepto de Negocio', '2024-06-01', '2024-06-10', '2024-06-04', 90, 3),
+(4, 1, 'Agregar Equivalencia', '2024-06-01', '2024-06-02', '2024-06-11', 90, 3),
+(8, 1, 'Insertar Modelo DDV', '2024-06-01', '2024-06-02', NULL, 90, 1),
+(2, 1, 'Formalizar las reglas de carga', '2024-06-01', '2024-06-02', '2024-06-02', 90, 1),
+(3, 1, 'Verificación de la gobernanza de datos', '2024-06-02', '2024-06-03', '2024-06-03', 85, 1),
+(6, 1, 'Implementación de control de acceso', '2024-06-01', '2024-06-04', NULL, 88, 2),
+(7, 1, 'Programar reuniones con stakeholders', '2024-06-03', '2024-06-05', NULL, 92, 2),
+(8, 1, 'Modelado de datos para el nuevo proyecto', '2024-06-01', '2024-06-02', '2024-06-02', 87, 1),
+(9, 1, 'Desarrollo de scripts de automatización', '2024-06-02', '2024-06-03', '2024-06-03', 89, 1),
+(10, 1, 'Revisión y actualización de políticas de seguridad', '2024-06-01', '2024-06-02', '2024-06-02', 90, 1),
+(11, 1, 'Evaluación de calidad de datos', '2024-06-03', '2024-06-05', NULL, 85, 2),
+(12, 1, 'Desarrollo de nuevas reglas de carga', '2024-06-01', '2024-06-03', '2024-06-03', 86, 1),
+(13, 1, 'Configuración avanzada de la base de datos', '2024-06-02', '2024-06-04', '2024-06-04', 88, 1),
+(14, 1, 'Soporte técnico avanzado a usuarios', '2024-06-01', '2024-06-02', '2024-06-02', 90, 1),
+(15, 1, 'Documentación de las políticas de datos', '2024-06-03', '2024-06-05', NULL, 84, 2),
+(16, 1, 'Optimización del rendimiento del sistema', '2024-06-01', '2024-06-02', '2024-06-02', 89, 1),
+(17, 1, 'Análisis de calidad de datos', '2024-06-02', '2024-06-03', '2024-06-03', 87, 1),
+(18, 1, 'Soporte en la implementación de nuevas políticas', '2024-06-01', '2024-06-04', NULL, 85, 2),
+(19, 1, 'Revisión de la estructura de datos', '2024-06-03', '2024-06-05', NULL, 88, 2),
+(20, 1, 'Desarrollo de pruebas de integración', '2024-06-01', '2024-06-02', '2024-06-02', 90, 1),
+(21, 1, 'Implementación de mejoras en la seguridad de datos', '2024-06-02', '2024-06-04', '2024-06-04', 86, 1),
+(22, 1, 'Actualización de la documentación del sistema', '2024-06-01', '2024-06-02', '2024-06-02', 88, 1),
+(23, 1, 'Desarrollo de nuevos módulos de seguridad', '2024-06-03', '2024-06-05', NULL, 89, 2),
+(24, 1, 'Evaluación y reporte de cumplimiento de políticas', '2024-06-01', '2024-06-02', '2024-06-02', 90, 1),
+(25, 1, 'Implementación de scripts de mantenimiento', '2024-06-02', '2024-06-04', '2024-06-04', 87, 1);
 
 -- Insertar datos en la tabla Dominio
 INSERT INTO public."Dominio"(
