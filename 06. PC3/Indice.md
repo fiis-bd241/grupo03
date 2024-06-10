@@ -11,3 +11,4 @@
 7. [Funcionalidad Primaria Elegida](7.FuncionalidadPrimaria.md)
 8. [Stack Tecnológico Elegido](8.StackTecnologico.md)
 9. [Presentaciones Individuales](9.PresentacionesIndividuales.md)
+10. [Avance de la Aplicacion](10.Avance.md)
