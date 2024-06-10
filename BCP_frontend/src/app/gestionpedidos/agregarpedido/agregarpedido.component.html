@@ -1,0 +1,39 @@
+<h1 class="titulo1">PEDIDOS</h1>
+<p></p>
+<div class="formularioRegistro">
+  <h2>Crear pedido</h2>
+  <form [formGroup]="pedidoForm" (ngSubmit)="guardar()">
+    <div class="form-group">
+      <label>Area</label>
+      <select id="area" formControlName="areaId" class="form-control">
+        <option *ngFor="let item of areas" [value]="item[0]">{{ item[1] }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Prioridad</label>
+      <select id="prioridad" formControlName="prioridadId" class="form-control">
+        <option *ngFor="let item of prioridades" [value]="item[0]">{{ item[1] }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Estado</label>
+      <select id="estado" formControlName="estadoId" class="form-control">
+        <option *ngFor="let item of estados" [value]="item[0]">{{ item[1] }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Fecha Límite</label>
+      <input type="date" formControlName="pedidoFechaLimite" class="form-control">
+    </div>
+    <p> </p>
+    <button type="submit" class="btn btn-primary btn.g">Guardar</button>
+  </form>
+</div>
+
+<div class="derecha2">
+  <p><a routerLink="/principal" routerLinkActive="active">Regresar</a></p>
+</div>
+
+
+<router-outlet></router-outlet>
+

@@ -1,0 +1,34 @@
+<h1 class="titulo1">PEDIDOS</h1>
+<p></p>
+<div class="formularioRegistro">
+  <h2>Crear migración</h2>
+  <form [formGroup]="migracionForm" (ngSubmit)="guardar()">
+    <div class="form-group">
+      <label>Pedido</label>
+      <select id="pedido" formControlName="pedidoId" class="form-control">
+        <option *ngFor="let item of pedidos" [value]="item[0]">{{ item[0] }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Squad Encargado</label>
+      <select id="squad" formControlName="squadId" class="form-control">
+        <option *ngFor="let item of squads" [value]="item[0]">{{ item[1] }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Tecnología Usada</label>
+      <select id="tecnologia" formControlName="tecnologiaId" class="form-control">
+        <option *ngFor="let item of tecnologias" [value]="item[0]">{{ item[1] }}</option>
+      </select>
+    </div>
+    <p> </p>
+    <button type="submit" class="btn btn-primary btn.g">Guardar</button>
+  </form>
+</div>
+
+<div class="derecha2">
+  <p><a routerLink="/principal" routerLinkActive="active">Regresar</a></p>
+</div>
+
+
+<router-outlet></router-outlet>

@@ -1,0 +1,83 @@
+<h1 class="titulo1">PEDIDOS</h1>
+<p></p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>Últimos Pedidos</h2>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Pedido</th>
+            <th scope="col">Área Solicitante</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Prioridad</th>
+            <th scope="col">Fecha del Pedido</th>
+            <th scope="col">Fecha Límite</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let pedido of pedidos">
+            <td>{{ pedido[0] }}</td>
+            <td>{{ pedido[1] }}</td>
+            <td>{{ pedido[2] }}</td>
+            <td>{{ pedido[3] }}</td>
+            <td>{{ pedido[4] }}</td>
+            <td>{{ pedido[5] }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="pedidos.length === 0" class="alert alert-warning" role="alert">
+          No hay pedidos disponibles.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="derecha">
+    <p><a routerLink="/ver-pedidos" routerLinkActive="active">Ver más</a></p>
+  </div>
+<p></p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>Últimas Migraciones</h2>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Migración</th>
+            <th scope="col">Pedido</th>
+            <th scope="col">Squad Encargado</th>
+            <th scope="col">Tecnología Usada</th>
+            <th scope="col">Fecha</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let migracion of migraciones">
+            <td>{{ migracion[0] }}</td>
+            <td>{{ migracion[1] }}</td>
+            <td>{{ migracion[2] }}</td>
+            <td>{{ migracion[3] }}</td>
+            <td>{{ migracion[4] }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="migraciones.length === 0" class="alert alert-warning" role="alert">
+          No hay migraciones disponibles.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <button class="btn btn-primary btn-g mx-2" routerLink="/crear-pedido" routerLinkActive="active">Crear Pedido</button>
+      <button class="btn btn-primary btn-g mx-2" routerLink="/crear-migracion" routerLinkActive="active">Crear Migración</button>
+
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

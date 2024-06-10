@@ -1,0 +1,47 @@
+.formularioRegistro{
+  padding-left: 30%;
+  padding-right: 30%;
+  margin-top: 1.5%;
+}
+
+table {
+  width: 100%;
+}
+
+.example-button-row {
+  display: table-cell;
+  width: 490px;
+}
+
+.titulo1 {
+  margin-top: 22px;
+  padding: 20px;
+  background-color: #004A8E;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 2.2rem;
+}
+
+.btn-g{
+  background-color: #004A8E;
+}
+
+.table {
+  font-size: 0.9rem;
+}
+
+.table th, .table td {
+  padding: 0.3rem;
+}
+
+.derecha {
+  text-align: right;
+  color: #004A8E;
+}
+
+.derecha2 {
+  text-align: right;
+  color: #004A8E;
+  padding-right: 30%;
+}
