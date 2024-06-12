@@ -1,8 +1,8 @@
 
 ```sql
-BD FINAL
 BEGIN;
 
+DROP TABLE IF EXISTS public."PreCarga" CASCADE;
 DROP TABLE IF EXISTS public."Campo" CASCADE;
 DROP TABLE IF EXISTS public."CampoAsegurado" CASCADE;
 DROP TABLE IF EXISTS public."Algoritmo" CASCADE;
@@ -17,20 +17,18 @@ DROP TABLE IF EXISTS public."Subdominio" CASCADE;
 DROP TABLE IF EXISTS public."Empleado" CASCADE;
 DROP TABLE IF EXISTS public."Esquema" CASCADE;
 DROP TABLE IF EXISTS public."Estado" CASCADE;
-DROP TABLE IF EXISTS public."Migracion" CASCADE;
+DROP TABLE IF EXISTS public."on" CASCADE;
 DROP TABLE IF EXISTS public."Modelado" CASCADE;
 DROP TABLE IF EXISTS public."Notificacion" CASCADE;
 DROP TABLE IF EXISTS public."Participa_en" CASCADE;
 DROP TABLE IF EXISTS public."Participante" CASCADE;
 DROP TABLE IF EXISTS public."Pedido" CASCADE;
 DROP TABLE IF EXISTS public."Pertenece" CASCADE;
-DROP TABLE IF EXISTS public."PreCarga" CASCADE;
 DROP TABLE IF EXISTS public."Prioridad" CASCADE;
 DROP TABLE IF EXISTS public."Programacion" CASCADE;
 DROP TABLE IF EXISTS public."Recordatorio" CASCADE;
 DROP TABLE IF EXISTS public."Recordatorio_Enviado" CASCADE;
 DROP TABLE IF EXISTS public."RegistroErrores" CASCADE;
-DROP TABLE IF EXISTS public."ReglasDeCarga" CASCADE;
 DROP TABLE IF EXISTS public."Reporte" CASCADE;
 DROP TABLE IF EXISTS public."Reporte_Conformidad" CASCADE;
 DROP TABLE IF EXISTS public."Reunion" CASCADE;
@@ -117,6 +115,18 @@ CREATE TABLE IF NOT EXISTS public."Subdominio"
         ON DELETE NO ACTION
 );
 
+CREATE TABLE IF NOT EXISTS public."Migracion"
+(
+    "Migracion_Id" serial NOT NULL,
+    "Pedido_Id" serial NOT NULL,
+    "Id_Squad" serial NOT NULL,
+    "Id_Tecnologia" serial NOT NULL,
+    "Entorno" character varying(50) COLLATE pg_catalog."default",
+    "Fecha_migracion" date,
+    "Valido" boolean,
+    "Ultimo" boolean,
+    CONSTRAINT "Migracion_pkey" PRIMARY KEY ("Migracion_Id")
+);
 CREATE TABLE IF NOT EXISTS public."ConceptosNegocio"
 (
     "id_CN" serial NOT NULL,
@@ -173,18 +183,7 @@ CREATE TABLE IF NOT EXISTS public."Estado"
     CONSTRAINT "Estado_pkey" PRIMARY KEY ("Estado_Id")
 );
 
-CREATE TABLE IF NOT EXISTS public."Migracion"
-(
-    "Migracion_Id" serial NOT NULL,
-    "Pedido_Id" serial NOT NULL,
-    "Id_Squad" serial NOT NULL,
-    "Id_Tecnologia" serial NOT NULL,
-    "Entorno" character varying(50) COLLATE pg_catalog."default",
-    "Fecha_migracion" date,
-    "Valido" boolean,
-    "Ultimo" boolean,
-    CONSTRAINT "Migracion_pkey" PRIMARY KEY ("Migracion_Id")
-);
+
 
 CREATE TABLE IF NOT EXISTS public."Tarea"
 (
@@ -1015,15 +1014,16 @@ VALUES
 (3, 3, 4, '2024-11-20', '2024-12-30');
 
 -- Insertar datos en la tabla Tecnologia
-INSERT INTO public."Tecnologia"("id_tecnologia", "nombre_tecnologia")
-VALUES
-    (1, 'Pyspark'),
-    (2, 'Bashsrc'),
-    (3, 'Hsqldb'),
-    (4, 'Kafka'),
-    (5, 'MFRM'),
-    (6, 'Spkscal');
-
+INSERT INTO public."Tecnologia" (id_tecnologia, nombre_tecnologia)
+VALUES (1, 'Pyspark'),
+       (2, 'Bashsrc'),
+       (3, 'Hsqldb'),
+       (4, 'Kafka'),
+       (5, 'MFRM'),
+       (6, 'Spkscal'),
+       (7, 'pl/SQL'),
+       (8, 'Pseudocodigo');
+	   
 INSERT INTO public."Roles" (id_rol,nombre_rol, nivel_acceso) VALUES
 (1,'Data Modeler', 'medio'),
 (2,'Data Engineer', 'alto'),
@@ -1677,7 +1677,7 @@ VALUES
 
 -- Insertar datos en la tabla PreCarga
 INSERT INTO public."PreCarga"(
-    "ID_Precarga", "Nombre_Regla", "Detalle_Precarga")
+    "ID_Precarga", "Nombre_Regla", "Descripcion")
 VALUES
     (200001, 'Validacion Unicidad', 'Validacion registros duplicados'),
     (200002, 'Validacion Integridad Universal', 'Clave Foranea coincide con la principal'),
@@ -1820,33 +1820,210 @@ VALUES
     (1, 29),
     (1, 30);
 
--- Insertar datos en la tabla ReglasDeCarga
-INSERT INTO public."ReglasDeCarga"(
-    "ID_ReglaCarga", id_campo, id_tecnologia, detalle_carga)
-VALUES
-    (100001, 1, 1, 'SELECT A.TIPROLCLI FROM catalog_lhcl_prod_bcp.bcp_udv_int.m_cuentafinanciera A INNER JOIN UNIVERSO_OUTSOURCING_CLI B ON A.CODCLAVEPARTYCLI = B.CODCLAVEPARTYCLI WHERE B.flgregeliminadofuente = ''N'''),
-    (100002, 2, 1, 'SELECT B.DESUBIGEO FROM UNIVERSO_OUTSOURCING_CLI A LEFT JOIN catalog_lhcl_prod_bcp.bcp_ddv_dyadata_dataenrichment.md_direccioncontacto B ON A.codclavepartycli = B.codclavepartycli WHERE A.flgregeliminado = ''N'' AND B.flgregeliminadofuente = ''N'''),
-    (100003, 3, 1, 'SELECT B.CODINTERNOCOMPUTACIONAL FROM UNIVERSO_OUTSOURCING_CLI A LEFT JOIN catalog_lhcl_prod_bcp.bcp_udv_int.M_CLIENTE B ON A.codclavepartycli = B.codclavepartycli WHERE B.flgregeliminadofuente = ''N'''),
-    (100004, 4, 1, 'SELECT B.CODCLAVEDESDIRESTANDARIZADO FROM UNIVERSO_OUTSOURCING_CLI A LEFT JOIN catalog_lhcl_prod_bcp.bcp_ddv_dyadata_dataenrichment.MD_DIRECCIONCONTACTO B ON A.codclavepartycli = B.codclavepartycli WHERE B.flgregeliminado = ''N'''),
-    (100005, 5, 1, 'SELECT B.CODDEPARTAMENTO FROM UNIVERSO_OUTSOURCING_CLI A LEFT JOIN catalog_lhcl_prod_bcp.bcp_ddv_dyadata_dataenrichment.md_direccioncontacto B ON A.codclavepartycli = B.codclavepartycli WHERE B.flgregeliminado = ''N'''),
-    (100006, 6, 1, 'CREATE TABLE TMP_DESDEPARTAMENTO (Ejemplo TEXT); SELECT A.codclavepartycli, B.desdepartamento FROM catalog_lhcl_prod_bcp.bcp_ddv_dyadata_dataenrichment.md_direccioncontacto A LEFT JOIN catalog_lhcl_prod_bcp.bcp_udv_int.m_departamento B ON TRIM(A.coddepartamento) = TRIM(B.coddepartamento) WHERE A.flgregeliminado = ''N'' AND B.flgregeliminadofuente = ''N''; SELECT B.desdepartamento FROM UNIVERSO_OUTSOURCING_CLI A LEFT JOIN TMP_DESDEPARTAMENTO B ON A.codclavepartycli = B.codclavepartycli'),
-    (100007, 7, 1, 'SELECT B.codprovincia FROM UNIVERSO_OUTSOURCING_CLI A LEFT JOIN catalog_lhcl_prod_bcp.bcp_ddv_dyadata_dataenrichment.md_direccioncontacto B ON A.codclavepartycli = B.codclavepartycli WHERE A.flgregeliminado = ''N'' AND B.flgregeliminadofuente = ''N'''),
-    (100008, 8, 1, 'CREATE TABLE TMP_DESPROVINCIA (Ejemplo TEXT); SELECT A.codclavepartycli, B.desprovincia FROM catalog_lhcl_prod_bcp.bcp_ddv_dyadata_dataenrichment.md_direccioncontacto A LEFT JOIN catalog_lhcl_prod_bcp.bcp_udv_int.m_provincia B ON TRIM(A.CODPROVINCIA) = TRIM(B.CODPROVINCIA) WHERE A.flgregeliminado = ''N'' AND B.flgregeliminadofuente = ''N''; SELECT B.desprovincia FROM UNIVERSO_OUTSOURCING_CLI A LEFT JOIN TMP_DESPROVINCIA B ON A.codclavepartycli = B.codclavepartycli'),
-    (100009, 9, 1, 'SELECT B.coddistrito FROM UNIVERSO_OUTSOURCING_CLI A LEFT JOIN catalog_lhcl_prod_bcp.bcp_ddv_dyadata_dataenrichment.md_direccioncontacto B ON A.codclavepartycli = B.codclavepartycli WHERE A.flgregeliminado = ''N'' AND B.flgregeliminadofuente = ''N'''),
-    (100010, 10, 1, 'CREATE TABLE TMP_DESDISTRITO (Ejemplo TEXT); SELECT A.codclavepartycli, B.desdistrito FROM catalog_lhcl_prod_bcp.bcp_ddv_dyadata_dataenrichment.md_direccioncontacto A LEFT JOIN catalog_lhcl_prod_bcp.bcp_udv_int.m_distrito B ON TRIM(A.coddistrito) = TRIM(B.coddistrito) WHERE A.flgregeliminado = ''N'' AND B.flgregeliminadofuente = ''N''; SELECT B.desdistrito FROM UNIVERSO_OUTSOURCING_CLI A LEFT JOIN TMP_DESDISTRITO B ON A.codclavepartycli = B.codclavepartycli');
+-- Insertar datos en la tabla ReglaDeCargaFuncional
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (1, 1, 8, null, '03/04/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (2, 2, 1, null, '05/01/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (3, 3, 8, null, '31/03/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (4, 4, 1, null, '22/07/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (5, 5, 1, null, '07/09/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (6, 6, 8, null, '23/05/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (7, 7, 7, null, '23/04/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (8, 8, 8, null, '19/02/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (9, 9, 8, null, '27/04/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (10, 10, 7, null, '10/10/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (11, 11, 8, null, '01/03/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (12, 12, 8, null, '24/07/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (13, 13, 8, null, '25/04/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (14, 14, 7, null, '20/01/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (15, 15, 8, null, '22/03/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (16, 16, 8, null, '01/10/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (17, 17, 8, null, '31/01/2024');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (18, 18, 8, null, '19/08/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (19, 19, 8, null, '13/04/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (20, 20, 7, null, '05/09/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (21, 21, 8, null, '13/08/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (22, 22, 8, null, '23/04/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (23, 23, 1, null, '08/04/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (24, 24, 7, null, '01/12/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (25, 25, 8, null, '29/04/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (26, 26, 8, null, '09/02/2024');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (27, 27, 8, null, '03/03/2024');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (28, 28, 7, null, '20/09/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (29, 29, 8, null, '04/07/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (30, 30, 8, null, '13/12/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (31, 31, 7, null, '04/05/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (32, 32, 8, null, '27/04/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (33, 33, 8, null, '12/05/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (34, 34, 1, null, '19/09/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (35, 35, 7, null, '16/02/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (36, 36, 8, null, '01/03/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (37, 37, 8, null, '15/06/2024');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (38, 38, 8, null, '20/03/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (39, 39, 8, null, '06/02/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (40, 40, 7, null, '29/10/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (41, 41, 8, null, '07/04/2024');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (42, 42, 8, null, '17/01/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (43, 43, 8, null, '10/12/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (44, 44, 7, null, '31/05/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (45, 45, 7, null, '10/01/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (46, 46, 8, null, '15/06/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (47, 47, 7, null, '31/01/2024');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (48, 48, 8, null, '11/11/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (49, 49, 7, null, '22/01/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (50, 50, 8, null, '05/10/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (51, 51, 7, null, '03/04/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (52, 52, 8, null, '21/09/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (53, 53, 8, null, '01/08/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (54, 54, 7, null, '12/03/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (55, 55, 8, null, '02/02/2024');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (56, 56, 7, null, '26/04/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (57, 57, 8, null, '08/05/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (58, 58, 8, null, '09/06/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (59, 59, 8, null, '15/09/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (60, 60, 8, null, '19/09/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (61, 61, 8, null, '25/09/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (62, 62, 7, null, '27/05/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (63, 63, 8, null, '07/04/2024');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (64, 64, 7, null, '26/05/2024');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (65, 65, 8, null, '08/05/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (66, 66, 8, null, '30/12/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (67, 67, 7, null, '12/03/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (68, 68, 8, null, '07/07/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (69, 69, 8, null, '19/12/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (70, 70, 8, null, '19/03/2024');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (71, 71, 8, null, '26/02/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (72, 72, 8, null, '16/12/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (73, 73, 1, null, '04/11/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (74, 74, 7, null, '25/10/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (75, 75, 8, null, '09/03/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (76, 76, 8, null, '31/05/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (77, 77, 8, null, '03/03/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (78, 78, 8, null, '14/11/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (79, 79, 7, null, '05/01/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (80, 80, 8, null, '19/01/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (81, 81, 1, null, '10/02/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (82, 82, 1, null, '19/03/2024');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (83, 83, 7, null, '07/12/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (84, 84, 8, null, '28/04/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (85, 85, 8, null, '05/08/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (86, 86, 7, null, '06/11/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (87, 87, 8, null, '12/03/2024');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (88, 88, 8, null, '03/03/2023');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (89, 89, 7, null, '19/06/2024');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (90, 90, 7, null, '03/02/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (91, 91, 8, null, '13/06/2024');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (92, 92, 8, null, '08/07/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (93, 93, 8, null, '08/08/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (94, 94, 8, null, '21/09/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (95, 95, 7, null, '29/12/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (96, 96, 8, null, '25/06/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (97, 97, 7, null, '01/05/2024');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (98, 98, 7, null, '09/03/2022');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (99, 99, 8, null, '07/05/2024');
+insert into "ReglaDeCargaFuncional" ("ID_ReglaCargaFunc", id_migracion, id_tecnologia, "Logica", "Fecha") values (100, 100, 7, null, '27/11/2023');
 
--- Insertar datos en la tabla CargaPreCarga
-INSERT INTO public."CargaPreCarga"(
-    "ID_CargaPrecarga", "ID_ReglaCarga", "ID_Precarga")
-VALUES
-    (1, 100001, 200001),
-    (2, 100001, 200002),
-    (3, 100002, 200002),
-    (4, 100003, 200006),
-    (5, 100003, 200008),
-    (6, 100004, 200002),
-    (7, 100004, 200001),
-    (8, 100004, 200006);
+-- Insertar datos en la tabla ReglaDeCargaTecnica
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (1, 1, null, false, 'Simplify the WHERE clause for better readability', '26/08/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (2, 2, null, false, 'Add comments to explain complex logic', '18/03/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (3, 3, null, false, 'Add comments to explain complex logic', '30/06/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (4, 4, null, true, 'Use indexes to improve query performance', '23/10/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (5, 5, null, true, 'Simplify the WHERE clause for better readability', '04/01/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (6, 6, null, true, 'Simplify the WHERE clause for better readability', '20/05/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (7, 7, null, false, 'Add comments to explain complex logic', '02/04/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (8, 8, null, true, 'Consider optimizing the JOIN operation', '08/08/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (9, 9, null, false, 'Consider optimizing the JOIN operation', '25/02/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (10, 10, null, true, 'Consider optimizing the JOIN operation', '30/10/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (11, 11, null, false, 'Simplify the WHERE clause for better readability', '29/09/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (12, 12, null, false, 'Use indexes to improve query performance', '23/06/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (13, 13, null, false, 'Use indexes to improve query performance', '23/02/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (14, 14, null, false, 'Consider optimizing the JOIN operation', '13/11/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (15, 15, null, true, 'Consider optimizing the JOIN operation', '11/03/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (16, 16, null, false, 'Use indexes to improve query performance', '08/03/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (17, 17, null, true, 'Add comments to explain complex logic', '31/10/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (18, 18, null, false, 'Simplify the WHERE clause for better readability', '21/06/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (19, 19, null, false, 'Use indexes to improve query performance', '11/03/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (20, 20, null, true, 'Simplify the WHERE clause for better readability', '14/08/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (21, 21, null, false, 'Simplify the WHERE clause for better readability', '29/03/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (22, 22, null, true, 'Add comments to explain complex logic', '31/03/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (23, 23, null, false, 'Consider optimizing the JOIN operation', '07/04/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (24, 24, null, true, 'Simplify the WHERE clause for better readability', '05/06/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (25, 25, null, true, 'Add comments to explain complex logic', '12/04/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (26, 26, null, false, 'Use indexes to improve query performance', '27/12/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (27, 27, null, true, 'Use indexes to improve query performance', '21/05/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (28, 28, null, true, 'Simplify the WHERE clause for better readability', '18/11/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (29, 29, null, true, 'Consider optimizing the JOIN operation', '07/03/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (30, 30, null, false, 'Simplify the WHERE clause for better readability', '26/06/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (31, 31, null, false, 'Consider optimizing the JOIN operation', '20/07/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (32, 32, null, false, 'Use indexes to improve query performance', '30/06/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (33, 33, null, false, 'Use indexes to improve query performance', '09/09/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (34, 34, null, true, 'Simplify the WHERE clause for better readability', '19/04/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (35, 35, null, false, 'Add comments to explain complex logic', '21/08/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (36, 36, null, false, 'Consider optimizing the JOIN operation', '04/03/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (37, 37, null, true, 'Consider optimizing the JOIN operation', '28/11/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (38, 38, null, false, 'Consider optimizing the JOIN operation', '05/02/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (39, 39, null, false, 'Use indexes to improve query performance', '12/02/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (40, 40, null, true, 'Consider optimizing the JOIN operation', '15/03/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (41, 41, null, true, 'Consider optimizing the JOIN operation', '04/06/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (42, 42, null, false, 'Consider optimizing the JOIN operation', '15/06/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (43, 43, null, true, 'Use indexes to improve query performance', '16/06/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (44, 44, null, false, 'Simplify the WHERE clause for better readability', '19/02/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (45, 45, null, false, 'Consider optimizing the JOIN operation', '08/05/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (46, 46, null, false, 'Add comments to explain complex logic', '17/02/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (47, 47, null, true, 'Simplify the WHERE clause for better readability', '28/03/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (48, 48, null, true, 'Add comments to explain complex logic', '05/03/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (49, 49, null, false, 'Use indexes to improve query performance', '06/06/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (50, 50, null, true, 'Use indexes to improve query performance', '24/07/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (51, 51, null, false, 'Use indexes to improve query performance', '10/02/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (52, 52, null, true, 'Consider optimizing the JOIN operation', '29/06/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (53, 53, null, true, 'Simplify the WHERE clause for better readability', '18/09/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (54, 54, null, true, 'Add comments to explain complex logic', '12/09/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (55, 55, null, false, 'Simplify the WHERE clause for better readability', '26/11/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (56, 56, null, false, 'Use indexes to improve query performance', '27/04/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (57, 57, null, false, 'Simplify the WHERE clause for better readability', '01/11/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (58, 58, null, true, 'Add comments to explain complex logic', '14/06/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (59, 59, null, true, 'Use indexes to improve query performance', '08/05/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (60, 60, null, false, 'Consider optimizing the JOIN operation', '14/01/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (61, 61, null, true, 'Consider optimizing the JOIN operation', '07/03/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (62, 62, null, true, 'Use indexes to improve query performance', '02/12/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (63, 63, null, true, 'Simplify the WHERE clause for better readability', '07/12/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (64, 64, null, false, 'Consider optimizing the JOIN operation', '20/04/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (65, 65, null, false, 'Add comments to explain complex logic', '20/12/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (66, 66, null, true, 'Use indexes to improve query performance', '01/06/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (67, 67, null, true, 'Simplify the WHERE clause for better readability', '06/09/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (68, 68, null, false, 'Add comments to explain complex logic', '06/11/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (69, 69, null, true, 'Add comments to explain complex logic', '08/08/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (70, 70, null, false, 'Consider optimizing the JOIN operation', '02/06/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (71, 71, null, true, 'Consider optimizing the JOIN operation', '19/11/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (72, 72, null, false, 'Consider optimizing the JOIN operation', '26/09/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (73, 73, null, false, 'Use indexes to improve query performance', '30/04/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (74, 74, null, true, 'Simplify the WHERE clause for better readability', '22/09/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (75, 75, null, true, 'Use indexes to improve query performance', '21/12/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (76, 76, null, true, 'Use indexes to improve query performance', '16/03/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (77, 77, null, true, 'Add comments to explain complex logic', '03/05/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (78, 78, null, false, 'Use indexes to improve query performance', '01/02/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (79, 79, null, false, 'Simplify the WHERE clause for better readability', '12/10/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (80, 80, null, false, 'Add comments to explain complex logic', '22/09/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (81, 81, null, true, 'Consider optimizing the JOIN operation', '25/05/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (82, 82, null, false, 'Use indexes to improve query performance', '30/09/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (83, 83, null, true, 'Consider optimizing the JOIN operation', '06/03/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (84, 84, null, true, 'Use indexes to improve query performance', '04/02/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (85, 85, null, true, 'Add comments to explain complex logic', '22/10/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (86, 86, null, true, 'Add comments to explain complex logic', '27/04/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (87, 87, null, false, 'Use indexes to improve query performance', '20/10/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (88, 88, null, false, 'Consider optimizing the JOIN operation', '25/04/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (89, 89, null, true, 'Consider optimizing the JOIN operation', '22/08/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (90, 90, null, true, 'Use indexes to improve query performance', '11/04/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (91, 91, null, true, 'Use indexes to improve query performance', '23/10/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (92, 92, null, true, 'Consider optimizing the JOIN operation', '19/03/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (93, 93, null, false, 'Consider optimizing the JOIN operation', '13/05/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (94, 94, null, false, 'Simplify the WHERE clause for better readability', '25/07/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (95, 95, null, true, 'Add comments to explain complex logic', '23/12/2023');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (96, 96, null, false, 'Add comments to explain complex logic', '25/01/2024');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (97, 97, null, false, 'Add comments to explain complex logic', '29/09/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (98, 98, null, true, 'Add comments to explain complex logic', '03/03/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (99, 99, null, false, 'Simplify the WHERE clause for better readability', '25/10/2022');
+insert into "ReglaDeCargaTecnica" ("ID_ReglaCargaTecn", regla_funcional, "Codigo", "Finalizado", "Comentario", "Fecha") values (100, 100, null, true, 'Simplify the WHERE clause for better readability', '05/01/2023');
+
 
 -- Insertar datos en la tabla RegistroErrores
 INSERT INTO public."RegistroErrores"(
@@ -1917,7 +2094,7 @@ INSERT INTO public."Reunion" ("Reunion_Id", "Id_Empleado", "Pedido_Id", "TipoReu
 
 (9, 7, 3, 2, '14:00:00-05:00', '14:40:00-05:00', 'Slack', '2022-04-23', 'completada', 'Ratificar información entre la tabla de salida y la tabla en el repositorio.', '1. Ratificar información. 2. Revisar tabla en el repositorio.', '09:00:00-05:00', '2022-04-23'),
 (10, 7, 3, 2, '09:00:00-05:00', '09:50:00-05:00', 'Zoom', '2022-04-24', 'completada', 'Reunirse con el usuario destino para brindar información detallada del diccionario de datos.', '1. Brindar información detallada del diccionario de datos.', '15:00:00-05:00', '2022-04-23'),
-(11, 7, 3, 2, '15:00:00-05:00', '16:00:00-05:00', 'Zoom', '2022-04-24', 'completada', 'Enviar correo de conformidad al usuario destino.', '1. Enviar correo de conformidad.', '10:00:00-05:00', '2022-04-24');
+(11, 7, 3, 2, '15:00:00-05:00', '16:00:00-05:00', 'Zoom', '2022-04-24', 'completada', 'Enviar correo de conformidad al usuario destino.', '1. Enviar correo de conformidad.', '10:00:00-05:00', '2022-04-24'),
 
 (12, 7, 11, 1, '09:00:00-05:00', '12:30:00-05:00', 'Slack', '2022-04-20', 'completada', 'Reunirse con el usuario origen para brindar información detallada del diccionario de datos.', '1. Brindar información detallada del diccionario de datos.', '22:00:00-05:00', '2022-04-19'),
 (13, 7, 11, 2, '10:00:00-05:00', '14:10:00-05:00', 'Slack', '2022-05-29', 'completada', 'Ratificar información entre la tabla de salida y la tabla en el repositorio.', '1. Ratificar información. 2. Revisar tabla en el repositorio.', '19:00:00-05:00', '2024-06-28'),
@@ -2755,7 +2932,6 @@ INSERT INTO public."Reunion_Reporte_Conformidad"("Id_Reu_Rep", "Reporte_Id", "Re
 (46, 36, 46),
 (47, 37, 47),
 (49, 39, 48);
-
 
 END;
 ```
