@@ -18,4 +18,8 @@ public class PedidoService {
     public List<Object[]> getTop3Pedidos() {
         return pedidoRepository.getTop3Pedidos();
     }
+
+    public List<Object[]> todosPedidosId() {
+        return pedidoRepository.todosPedidosId();
+    }
 }

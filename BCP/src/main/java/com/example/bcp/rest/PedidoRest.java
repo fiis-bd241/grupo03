@@ -26,4 +26,9 @@ public class PedidoRest {
     public List<Object[]> todosPedidos() {
         return pedidoService.todosPedidos();
     }
+
+    @GetMapping("/todo-id")
+    public List<Object[]> todosPedidosId() {
+        return pedidoService.todosPedidosId();
+    }
 }

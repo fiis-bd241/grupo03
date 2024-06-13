@@ -39,5 +39,9 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long>{
             nativeQuery = true)
     List<Object[]> getTop3Pedidos();
 
+    @Query(value = "SELECT \"Pedido_Id\" FROM public.\"Pedido\"",
+            nativeQuery = true)
+    List<Object[]> todosPedidosId();
+
 
 }

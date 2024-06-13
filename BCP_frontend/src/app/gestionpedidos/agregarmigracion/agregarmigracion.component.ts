@@ -57,7 +57,7 @@ export class AgregarmigracionComponent implements OnInit {
         console.error(error)
       }
     );
-    this.pedidosService.todosPedidos().subscribe(resp => {
+    this.pedidosService.todosPedidosId().subscribe(resp => {
         this.pedidos = resp;
       },
       error => {
