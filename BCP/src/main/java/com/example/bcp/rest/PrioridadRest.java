@@ -17,11 +17,6 @@ public class PrioridadRest {
     @Autowired
     private PrioridadService prioridadService;
 
-    @GetMapping
-    private ResponseEntity<List<Prioridad>> getAllPrioridades() {
-        return ResponseEntity.ok(prioridadService.findAll());
-    }
-
     @GetMapping("/todo")
     public List<Object[]> todoPrioridades() {
         return prioridadService.todoPrioridades();
