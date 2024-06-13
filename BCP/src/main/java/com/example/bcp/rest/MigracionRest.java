@@ -17,11 +17,6 @@ public class MigracionRest {
     @Autowired
     private MigracionService migracionService;
 
-    @GetMapping
-    private ResponseEntity<List<Migracion>> getAllMigraciones() {
-        return ResponseEntity.ok(migracionService.findAll());
-    }
-
     @GetMapping("/top3")
     public List<Object[]> getTop3Migraciones() {
         return migracionService.getTop3Migraciones();
