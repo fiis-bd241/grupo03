@@ -17,11 +17,6 @@ public class EstadoRest {
     @Autowired
     private EstadoService estadoService;
 
-    @GetMapping
-    private ResponseEntity<List<Estado>> getAllEstados() {
-        return ResponseEntity.ok(estadoService.findAll());
-    }
-
     @GetMapping("/todo")
     public List<Object[]> todoEstados() {
         return estadoService.todoEstados();
