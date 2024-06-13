@@ -2,8 +2,10 @@ package com.example.bcp.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.bcp.model.Migracion;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 import java.util.List;
 
+@Repository
 public interface MigracionRepository extends JpaRepository<Migracion, Long> {
 
     @Query(value = "SELECT " +

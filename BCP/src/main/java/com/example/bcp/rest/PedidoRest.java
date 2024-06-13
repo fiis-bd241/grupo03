@@ -17,22 +17,6 @@ public class PedidoRest {
     @Autowired
     private PedidoService pedidoService;
 
-    @GetMapping
-    private ResponseEntity<List<Pedido>> getAllPedidos() {
-        return ResponseEntity.ok(pedidoService.findAll());
-    }
-
-    @PostMapping
-    private ResponseEntity<Pedido> savePedido(@RequestBody Pedido pedido) {
-        try {
-            Pedido pedidoGuardado = pedidoService.save(pedido);
-            return ResponseEntity.created(new URI("/pedido/" + pedidoGuardado.getPedidoId()))
-                    .body(pedidoGuardado);
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
-    }
-
     @GetMapping("/top3")
     public List<Object[]> getTop3Pedidos() {
         return pedidoService.getTop3Pedidos();
