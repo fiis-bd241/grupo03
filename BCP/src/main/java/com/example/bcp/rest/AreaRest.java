@@ -17,11 +17,6 @@ public class AreaRest {
     @Autowired
     private AreaService areaService;
 
-    @GetMapping
-    private ResponseEntity<List<Area>> getAllAreas(){
-        return ResponseEntity.ok(areaService.findAll());
-    };
-
     @GetMapping("/todo")
     public List<Object[]> todoAreas() {
         return areaService.todoAreas();
