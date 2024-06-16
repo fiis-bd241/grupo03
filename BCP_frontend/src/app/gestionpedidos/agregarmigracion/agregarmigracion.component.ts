@@ -72,7 +72,6 @@ export class AgregarmigracionComponent implements OnInit {
       },
       error => {
         console.error('Error al crear la migración', error);
-        console.log(migracionData);
       }
     );
   }
