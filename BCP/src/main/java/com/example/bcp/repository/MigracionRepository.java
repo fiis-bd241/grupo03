@@ -1,7 +1,10 @@
 package com.example.bcp.repository;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.bcp.model.Migracion;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -21,4 +24,11 @@ public interface MigracionRepository extends JpaRepository<Migracion, Long> {
             "LIMIT 3",
             nativeQuery = true)
     List<Object[]> getTop3Migraciones();
+
+    @Modifying
+    @Transactional
+    @Query(value = "INSERT INTO public.\"Migracion\"(\"Pedido_Id\", \"Id_Squad\", \"Id_Tecnologia\", \"Entorno\", \"Fecha_migracion\", \"Valido\", \"Ultimo\") " +
+            "VALUES (:pedidoId, :squadId, :tecnologiaId, :entorno, CURRENT_DATE, 1, 1)", nativeQuery = true)
+    void crearMigracion(@Param("pedidoId") int pedidoId, @Param("squadId") int squadId,
+                         @Param("tecnologiaId") int tecnologiaId, @Param("entorno") String entorno);
 }
