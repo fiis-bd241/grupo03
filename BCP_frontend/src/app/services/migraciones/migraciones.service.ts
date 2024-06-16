@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 })
 export class MigracionesService {
   private apiUrl1 = "http://localhost:8080/migracion/top3";
-  private apiUrl2 = "http://localhost:8080/pedido/crear-migracion";
+  private apiUrl2 = "http://localhost:8080/migracion/crear-migracion";
 
   constructor(private httpClient: HttpClient) { }
 

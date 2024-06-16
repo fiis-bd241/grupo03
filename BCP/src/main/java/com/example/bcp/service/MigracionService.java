@@ -20,9 +20,10 @@ public class MigracionService {
     }
 
     public void crearMigracion(Migracion migracion) {
+
         int pedidoId = migracion.getPedidoId().getPedidoId();
-        int squadId = migracion.getIdSquad().getIdSquad();
-        int tecnologiaId = migracion.getIdTecnologia().getIdTecnologia();
+        int squadId = migracion.getSquadId().getSquadId();
+        int tecnologiaId = migracion.getTecnologiaId().getTecnologiaId();
         String entorno = migracion.getEntorno();
 
         migracionRepository.crearMigracion(pedidoId, squadId, tecnologiaId, entorno);

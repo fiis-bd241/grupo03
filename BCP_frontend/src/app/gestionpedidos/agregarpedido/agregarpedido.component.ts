@@ -31,7 +31,8 @@ export class AgregarpedidoComponent implements OnInit {
     public prioridadesService: PrioridadesService,
     public estadosService: EstadosService,
     public pedidosService: PedidosService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.pedidoForm = this.fb.group({
