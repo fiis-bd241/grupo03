@@ -1,8 +1,10 @@
 package com.example.bcp.service;
 
+import com.example.bcp.model.Pedido;
 import com.example.bcp.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,5 +23,14 @@ public class PedidoService {
 
     public List<Object[]> todosPedidosId() {
         return pedidoRepository.todosPedidosId();
+    }
+
+    public void crearPedido(Pedido pedido) {
+        int areaId = pedido.getAreaId().getAreaId();
+        int prioridadId = pedido.getPrioridadId().getPrioridadId();
+        int estadoId = pedido.getEstadoId().getEstadoId();
+        Date pedidoFechaLimite = pedido.getPedidoFechaLimite();
+
+        pedidoRepository.crearPedido(areaId, prioridadId, estadoId, pedidoFechaLimite);
     }
 }

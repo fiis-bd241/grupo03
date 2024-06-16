@@ -3,6 +3,9 @@ import com.example.bcp.model.Pedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
@@ -43,5 +46,11 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long>{
             nativeQuery = true)
     List<Object[]> todosPedidosId();
 
-
+    @Modifying
+    @Transactional
+    @Query(value = "INSERT INTO public.\"Pedido\"(\"Area_Id\", \"Prioridad_Id\", \"Estado_Id\", \"Pedido_Fecha\", \"Pedido_FechaLimite\") " +
+            "VALUES (:areaId, :prioridadId, :estadoId, CURRENT_DATE, :pedidoFechaLimite)", nativeQuery = true)
+    void crearPedido(@Param("areaId") int areaId, @Param("prioridadId") int prioridadId,
+                     @Param("estadoId") int estadoId,
+                     @Param("pedidoFechaLimite") java.util.Date pedidoFechaLimite);
 }

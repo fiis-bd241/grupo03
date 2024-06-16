@@ -1,5 +1,4 @@
 package com.example.bcp.model;
-
 import jakarta.persistence.*;
 
 @Entity

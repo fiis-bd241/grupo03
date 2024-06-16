@@ -5,28 +5,40 @@
   <form [formGroup]="pedidoForm" (ngSubmit)="guardar()">
     <div class="form-group">
       <label>Area</label>
-      <select id="area" formControlName="areaId" class="form-control">
-        <option *ngFor="let item of areas" [value]="item[0]">{{ item[1] }}</option>
+      <select id="area" formControlName="areaId" class="form-control" required>
+        <option *ngFor="let area of areas" [value]="area[0]">{{ area[1] }}</option>
       </select>
+      <div *ngIf="pedidoForm.get('areaId').invalid && pedidoForm.get('areaId').touched" class="text-danger">
+        Área es requerida.
+      </div>
     </div>
     <div class="form-group">
       <label>Prioridad</label>
-      <select id="prioridad" formControlName="prioridadId" class="form-control">
-        <option *ngFor="let item of prioridades" [value]="item[0]">{{ item[1] }}</option>
+      <select id="prioridad" formControlName="prioridadId" class="form-control" required>
+        <option *ngFor="let prioridad of prioridades" [value]="prioridad[0]">{{ prioridad[1] }}</option>
       </select>
+      <div *ngIf="pedidoForm.get('prioridadId').invalid && pedidoForm.get('prioridadId').touched" class="text-danger">
+        Prioridad es requerida.
+      </div>
     </div>
     <div class="form-group">
       <label>Estado</label>
-      <select id="estado" formControlName="estadoId" class="form-control">
-        <option *ngFor="let item of estados" [value]="item[0]">{{ item[1] }}</option>
+      <select id="estado" formControlName="estadoId" class="form-control" required>
+        <option *ngFor="let estado of estados" [value]="estado[0]">{{ estado[1] }}</option>
       </select>
+      <div *ngIf="pedidoForm.get('estadoId').invalid && pedidoForm.get('estadoId').touched" class="text-danger">
+        Estado es requerido.
+      </div>
     </div>
     <div class="form-group">
       <label>Fecha Límite</label>
-      <input type="date" formControlName="pedidoFechaLimite" class="form-control">
+      <input type="date" formControlName="pedidoFechaLimite" class="form-control" required>
+      <div *ngIf="pedidoForm.get('pedidoFechaLimite').invalid && pedidoForm.get('pedidoFechaLimite').touched" class="text-danger">
+        Fecha Límite es requerida.
+      </div>
     </div>
     <p> </p>
-    <button type="submit" class="btn btn-primary btn.g">Guardar</button>
+    <button type="submit" class="btn btn-primary">Guardar</button>
   </form>
 </div>
 
@@ -34,6 +46,4 @@
   <p><a routerLink="/principal" routerLinkActive="active">Regresar</a></p>
 </div>
 
-
 <router-outlet></router-outlet>
-

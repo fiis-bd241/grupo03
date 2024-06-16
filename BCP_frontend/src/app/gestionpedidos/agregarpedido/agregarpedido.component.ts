@@ -7,10 +7,8 @@ import {PrioridadesService} from "../../services/prioridades/prioridades.service
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {CommonModule} from '@angular/common';
 
-
-
 @Component({
-  selector: 'app-root',
+  selector: 'app-agregarpedido',
   standalone: true,
   imports: [
     RouterOutlet,
@@ -33,8 +31,7 @@ export class AgregarpedidoComponent implements OnInit {
     public prioridadesService: PrioridadesService,
     public estadosService: EstadosService,
     public pedidosService: PedidosService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.pedidoForm = this.fb.group({
@@ -44,31 +41,35 @@ export class AgregarpedidoComponent implements OnInit {
       pedidoFechaLimite: ['', Validators.required]
     });
 
-    this.areasService.todoAreas().subscribe(resp => {
-        this.areas = resp;
-      },
-      error => {
-        console.error(error)
-      }
-    );
-    this.estadosService.todoEstados().subscribe(resp => {
-        this.estados = resp;
-      },
-      error => {
-        console.error(error)
-      }
-    );
-    this.prioridadesService.todoPrioridades().subscribe(resp => {
-        this.prioridades = resp;
-      },
-      error => {
-        console.error(error)
-      }
-    )
+    this.areasService.todoAreas().subscribe(data => {
+        this.areas = data;
+      });
+
+    this.estadosService.todoEstados().subscribe(data => {
+        this.estados = data;
+      });
+
+    this.prioridadesService.todoPrioridades().subscribe(data => {
+        this.prioridades = data;
+      });
   }
 
   guardar(): void {
+    const pedidoData = {
+      areaId: { areaId: this.pedidoForm.value.areaId },
+      prioridadId: { prioridadId: this.pedidoForm.value.prioridadId },
+      estadoId: { estadoId: this.pedidoForm.value.estadoId },
+      pedidoFechaLimite: this.pedidoForm.value.pedidoFechaLimite
+    };
+
+    this.pedidosService.crearPedido(pedidoData).subscribe(
+
+      response => {
+        console.log('Pedido creado', response);
+      },
+      error => {
+        console.error('Error al crear el pedido', error);
+      }
+    );
   }
 }
-
-

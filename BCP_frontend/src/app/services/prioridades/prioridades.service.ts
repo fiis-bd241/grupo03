@@ -6,7 +6,6 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class PrioridadesService {
-  private API_SERVER = "http://localhost:8080/prioridad/";
   private apiUrl = "http://localhost:8080/prioridad/todo";
 
   constructor(
