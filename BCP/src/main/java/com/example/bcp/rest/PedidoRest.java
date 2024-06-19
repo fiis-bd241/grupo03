@@ -1,13 +1,8 @@
 package com.example.bcp.rest;
-
 import com.example.bcp.model.Pedido;
 import com.example.bcp.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -30,5 +25,10 @@ public class PedidoRest {
     @GetMapping("/todo-id")
     public List<Object[]> todosPedidosId() {
         return pedidoService.todosPedidosId();
+    }
+
+    @PostMapping("/crear-pedido")
+    public void crearPedido(@RequestBody Pedido pedido) {
+        pedidoService.crearPedido(pedido);
     }
 }

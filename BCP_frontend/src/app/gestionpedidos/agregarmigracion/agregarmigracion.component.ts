@@ -40,32 +40,39 @@ export class AgregarmigracionComponent implements OnInit {
     this.migracionForm = this.fb.group({
       pedidoId: ['', Validators.required],
       squadId: ['', Validators.required],
-      tecnologiaId: ['', Validators.required]
+      tecnologiaId: ['', Validators.required],
+      entorno: ['', Validators.required]
     });
 
-    this.squadService.todoSquads().subscribe(resp => {
-        this.squads = resp;
-      },
-      error => {
-        console.error(error)
-      }
-    );
-    this.tecnologiaService.todoTecnologias().subscribe(resp => {
-        this.tecnologias = resp;
-      },
-      error => {
-        console.error(error)
-      }
-    );
-    this.pedidosService.todosPedidosId().subscribe(resp => {
-        this.pedidos = resp;
-      },
-      error => {
-        console.error(error)
-      }
-    )
+    this.squadService.todoSquads().subscribe(data => {
+        this.squads = data;
+      });
+
+    this.tecnologiaService.todoTecnologias().subscribe(data => {
+        this.tecnologias = data;
+      });
+
+    this.pedidosService.todosPedidosId().subscribe(data => {
+        this.pedidos = data;
+      })
   }
 
   guardar(): void {
+    const migracionData = {
+      pedidoId: { pedidoId: this.migracionForm.value.pedidoId },
+      squadId: { squadId: this.migracionForm.value.squadId },
+      tecnologiaId: { tecnologiaId: this.migracionForm.value.tecnologiaId },
+      entorno: this.migracionForm.value.entorno
+    };
+
+    this.migracionService.crearMigracion(migracionData).subscribe(
+
+      response => {
+        console.log('Migración creado', response);
+      },
+      error => {
+        console.error('Error al crear la migración', error);
+      }
+    );
   }
 }

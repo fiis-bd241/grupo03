@@ -16,5 +16,4 @@ public interface EmpleadoRepository extends JpaRepository <Empleado,Integer>{
             nativeQuery = true)
     List<String> todosProductOwner();
 
-
 }

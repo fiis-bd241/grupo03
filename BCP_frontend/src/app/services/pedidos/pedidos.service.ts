@@ -6,10 +6,10 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class PedidosService {
-  private API_SERVER = "http://localhost:8080/pedido/";
   private apiUrl1 = "http://localhost:8080/pedido/top3";
   private apiUrl2 = "http://localhost:8080/pedido/todo";
   private apiUrl3 = "http://localhost:8080/pedido/todo-id";
+  private apiUrl4 = "http://localhost:8080/pedido/crear-pedido";
 
   constructor(private httpClient: HttpClient) {}
 
@@ -23,5 +23,10 @@ export class PedidosService {
 
   public todosPedidosId(): Observable<any> {
     return this.httpClient.get<any>(this.apiUrl3);
+  }
+
+  public crearPedido(pedido: any): Observable<any> {
+
+    return this.httpClient.post(this.apiUrl4, pedido);
   }
 }

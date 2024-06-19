@@ -1,34 +1,49 @@
-<h1 class="titulo1">PEDIDOS</h1>
+<h1 class="titulo1">MIGRACIONES</h1>
 <p></p>
 <div class="formularioRegistro">
   <h2>Crear migración</h2>
   <form [formGroup]="migracionForm" (ngSubmit)="guardar()">
     <div class="form-group">
       <label>Pedido</label>
-      <select id="pedido" formControlName="pedidoId" class="form-control">
-        <option *ngFor="let item of pedidos" [value]="item[0]">{{ item[0] }}</option>
+      <select id="pedido" formControlName="pedidoId" class="form-control" required>
+        <option *ngFor="let pedido of pedidos" [value]="pedido">{{ pedido }}</option>
       </select>
+      <div *ngIf="migracionForm.get('pedidoId').invalid && migracionForm.get('pedidoId').touched" class="text-danger">
+        Pedido es requerido.
+      </div>
     </div>
     <div class="form-group">
       <label>Squad Encargado</label>
-      <select id="squad" formControlName="squadId" class="form-control">
-        <option *ngFor="let item of squads" [value]="item[0]">{{ item[1] }}</option>
+      <select id="squad" formControlName="squadId" class="form-control" required>
+        <option *ngFor="let squad of squads" [value]="squad[0]">{{ squad[1] }}</option>
       </select>
+      <div *ngIf="migracionForm.get('squadId').invalid && migracionForm.get('squadId').touched" class="text-danger">
+        Squad es requerido.
+      </div>
     </div>
     <div class="form-group">
       <label>Tecnología Usada</label>
-      <select id="tecnologia" formControlName="tecnologiaId" class="form-control">
-        <option *ngFor="let item of tecnologias" [value]="item[0]">{{ item[1] }}</option>
+      <select id="tecnologia" formControlName="tecnologiaId" class="form-control" required>
+        <option *ngFor="let tecno of tecnologias" [value]="tecno[0]">{{ tecno[1] }}</option>
       </select>
+      <div *ngIf="migracionForm.get('tecnologiaId').invalid && migracionForm.get('tecnologiaId').touched" class="text-danger">
+        Tecnología es requerido.
+      </div>
     </div>
-    <p> </p>
-    <button type="submit" class="btn btn-primary btn.g">Guardar</button>
+    <div class="form-group">
+      <label>Entorno</label>
+      <input type="text" formControlName="entorno" class="form-control" required>
+      <div *ngIf="migracionForm.get('entorno').invalid && migracionForm.get('entorno').touched" class="text-danger">
+        Entorno es requerida.
+      </div>
+    </div>
+    <p></p>
+    <button type="submit" class="btn btn-primary">Guardar</button>
   </form>
 </div>
 
 <div class="derecha2">
   <p><a routerLink="/principal" routerLinkActive="active">Regresar</a></p>
 </div>
-
 
 <router-outlet></router-outlet>

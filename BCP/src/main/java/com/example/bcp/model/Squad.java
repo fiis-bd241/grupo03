@@ -9,18 +9,18 @@ public class Squad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "\"id_squad\"")
-    private Integer idSquad;
+    private Integer SquadId;
 
     @Column(name = "\"nombre_squad\"", length = 50)
     private String nombreSquad;
 
     // Getters and Setters
-    public Integer getIdSquad() {
-        return idSquad;
+    public Integer getSquadId() {
+        return SquadId;
     }
 
-    public void setIdSquad(Integer idSquad) {
-        this.idSquad = idSquad;
+    public void setSquadId(Integer idSquad) {
+        this.SquadId = idSquad;
     }
 
     public String getNombreSquad() {

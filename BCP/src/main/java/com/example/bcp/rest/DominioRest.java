@@ -1,6 +1,6 @@
 package com.example.bcp.rest;
 
-import com.example.bcp.service.EmpleadoService;
+import com.example.bcp.service.DominioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/empleado/")
-public class EmpleadoRest {
+@RequestMapping("/dominio/")
+public class DominioRest {
 
     @Autowired
-    private EmpleadoService empleadoService;
+    private DominioService dominioService;
 
-    @GetMapping("/PO")
-    public List<String> todosProductOwner() {
-        return empleadoService.todosProductOwner();
+    @GetMapping("/todo")
+    public List<Object[]> todoDominio() {
+        return dominioService.todoDominios();
     }
 }

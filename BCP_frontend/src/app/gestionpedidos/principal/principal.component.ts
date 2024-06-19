@@ -22,7 +22,6 @@ export class PrincipalComponent implements OnInit {
   migraciones: any[] = [];
 
   constructor(
-    private fb: FormBuilder,
     public pedidosService: PedidosService,
     public migracionesService: MigracionesService
   ) {}

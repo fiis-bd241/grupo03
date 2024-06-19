@@ -9,6 +9,8 @@ DROP TABLE IF EXISTS public."Algoritmo" CASCADE;
 DROP TABLE IF EXISTS public."Ambiente" CASCADE;
 DROP TABLE IF EXISTS public."Area" CASCADE;
 DROP TABLE IF EXISTS public."CargaPreCarga" CASCADE;
+DROP TABLE IF EXISTS public."ReglaDeCargaFuncional" CASCADE;
+DROP TABLE IF EXISTS public."ReglaDeCargaTecnica" CASCADE;
 DROP TABLE IF EXISTS public."Cargo" CASCADE;
 DROP TABLE IF EXISTS public."ConceptosNegocio" CASCADE;
 DROP TABLE IF EXISTS public."DefinicionesTecnicas" CASCADE;

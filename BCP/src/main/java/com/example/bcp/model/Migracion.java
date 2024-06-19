@@ -18,11 +18,11 @@ public class Migracion {
 
     @ManyToOne
     @JoinColumn(name = "\"Id_Squad\"", nullable = false)
-    private Squad idSquad;
+    private Squad SquadId;
 
     @ManyToOne
-    @JoinColumn(name = "\"Id_tecnologia\"", nullable = false)
-    private Tecnologia idTecnologia;
+    @JoinColumn(name = "\"Id_Tecnologia\"", nullable = false)
+    private Tecnologia TecnologiaId;
 
     @Column(name = "\"Entorno\"", length = 50)
     private String entorno;
@@ -33,6 +33,13 @@ public class Migracion {
 
     @Column(name = "\"Valido\"")
     private Boolean valido;
+
+    @Column(name = "\"Ultimo\"")
+    private Boolean ultimo;
+
+    public Migracion() {
+
+    }
 
     // Getters and Setters
 
@@ -52,20 +59,20 @@ public class Migracion {
         this.pedidoId = pedidoId;
     }
 
-    public Squad getIdSquad() {
-        return idSquad;
+    public Squad getSquadId() {
+        return SquadId;
     }
 
-    public void setIdSquad(Squad idSquad) {
-        this.idSquad = idSquad;
+    public void setSquadId(Squad SquadId) {
+        this.SquadId = SquadId;
     }
 
-    public Tecnologia getIdTecnologia() {
-        return idTecnologia;
+    public Tecnologia getTecnologiaId() {
+        return TecnologiaId;
     }
 
-    public void setIdTecnologia(Tecnologia idTecnologia) {
-        this.idTecnologia = idTecnologia;
+    public void setTecnologiaId(Tecnologia TecnologiaId) {
+        this.TecnologiaId = TecnologiaId;
     }
 
     public String getEntorno() {
@@ -92,16 +99,26 @@ public class Migracion {
         this.valido = valido;
     }
 
-    public Migracion() {
-        // Constructor por defecto
+    public Boolean getUltimo() {
+        return ultimo;
     }
 
-    public Migracion(Pedido pedidoId, Squad idSquad, Tecnologia idTecnologia, String entorno, Date fechaMigracion, Boolean valido) {
+    public void setUltimo(Boolean ultimo) {
+        this.ultimo = ultimo;
+    }
+
+    public Migracion(Boolean ultimo) {
+        // Constructor por defecto
+        this.ultimo = ultimo;
+    }
+
+    public Migracion(Pedido pedidoId, Squad idSquad, Tecnologia idTecnologia, String entorno, Date fechaMigracion, Boolean valido, Boolean ultimo) {
         this.pedidoId = pedidoId;
-        this.idSquad = idSquad;
-        this.idTecnologia = idTecnologia;
+        this.SquadId = idSquad;
+        this.TecnologiaId = idTecnologia;
         this.entorno = entorno;
         this.fechaMigracion = fechaMigracion;
         this.valido = valido;
+        this.ultimo = ultimo;
     }
 }
