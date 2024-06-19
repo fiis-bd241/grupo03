@@ -18,13 +18,37 @@ public class Empleado {
     private String correo;
 
     @Column(name = "\"contraseña\"")
-    private String contrasena;
+    private String contraseña;
 
     @Column(name = "\"telefono\"")
     private String telefono;
 
     @Column(name = "\"dni\"")
     private String dni;
+
+    @Column(name = "\"rol_id\"")
+    private Integer rolId;
+
+
+    // Constructor
+
+    public Empleado(Integer idEmpleado
+
+            , String nombre, String correo, String contraseña, String telefono, String dni,
+                    Integer rolId) {
+        super();
+        this.idEmpleado = idEmpleado;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.contraseña = contraseña;
+        this.telefono = telefono;
+        this.dni = dni;
+        this.rolId = rolId;
+    }
+
+    public Empleado() {
+        super();
+    }
 
     public Integer getIdEmpleado() {
         return idEmpleado;
@@ -50,12 +74,12 @@ public class Empleado {
         this.correo = correo;
     }
 
-    public String getContrasena() {
-        return contrasena;
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     public String getTelefono() {
@@ -72,5 +96,13 @@ public class Empleado {
 
     public void setDni(String dni) {
         this.dni = dni;
+    }
+
+    public Integer getRolId() {
+        return rolId;
+    }
+
+    public void setRolId(Integer rolId) {
+        this.rolId = rolId;
     }
 }
