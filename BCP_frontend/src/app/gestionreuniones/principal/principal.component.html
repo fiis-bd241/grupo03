@@ -11,20 +11,22 @@
           <thead>
           <tr>
             <th scope="col">ID Reunión</th>
+            <th scope="col">Tipo</th>
             <th scope="col">Fecha</th>
-            <th scope="col">Hora</th>
-            <th scope="col">Lugar</th>
-            <th scope="col">Estado</th>
+            <th scope="col">Hora Inicio</th>
+            <th scope="col">Hora Fin</th>
+            <th scope="col">Pedido ID</th>
           </tr>
           </thead>
           <tbody>
           <!-- Aquí se deben iterar las reuniones completadas -->
           <tr *ngFor="let reunion of reunionesCompletadas">
-            <td>{{ reunion.id }}</td>
-            <td>{{ reunion.fecha }}</td>
-            <td>{{ reunion.hora }}</td>
-            <td>{{ reunion.lugar }}</td>
-            <td>{{ reunion.estado }}</td>
+            <td>{{ reunion[0] }}</td>
+            <td>{{ reunion[1] }}</td>
+            <td>{{ reunion[2] }}</td>
+            <td>{{ reunion[3] }}</td>
+            <td>{{ reunion[4] }}</td>
+            <td>{{ reunion[5] }}</td>
           </tr>
           </tbody>
         </table>
@@ -46,20 +48,22 @@
           <thead>
           <tr>
             <th scope="col">ID Reunión</th>
+            <th scope="col">Tipo</th>
             <th scope="col">Fecha</th>
-            <th scope="col">Hora</th>
-            <th scope="col">Lugar</th>
-            <th scope="col">Estado</th>
+            <th scope="col">Hora Inicio</th>
+            <th scope="col">Hora Fin</th>
+            <th scope="col">Pedido ID</th>
           </tr>
           </thead>
           <tbody>
           <!-- Aquí se deben iterar las reuniones pendientes -->
           <tr *ngFor="let reunion of reunionesPendientes">
-            <td>{{ reunion.id }}</td>
-            <td>{{ reunion.fecha }}</td>
-            <td>{{ reunion.hora }}</td>
-            <td>{{ reunion.lugar }}</td>
-            <td>{{ reunion.estado }}</td>
+            <td>{{ reunion[0] }}</td>
+            <td>{{ reunion[1] }}</td>
+            <td>{{ reunion[2] }}</td>
+            <td>{{ reunion[3] }}</td>
+            <td>{{ reunion[4] }}</td>
+            <td>{{ reunion[5] }}</td>
           </tr>
           </tbody>
         </table>

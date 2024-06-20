@@ -1,73 +1,76 @@
 import { Component, OnInit } from '@angular/core';
-import { PedidosService } from '../../services/pedidos/pedidos.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReunionesService } from '../../services/reuniones/reuniones.service';
-import { ParticipantesService } from '../../services/participantes/participantes.service';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'
-import {ParticipantesComponent} from "../participantes/participantes.component";
+import {PedidosService} from "../../services/pedidos/pedidos.service";
+import {EmpleadosService} from "../../services/empleados/empleados.service";
+import {TiposreunionService} from "../../services/tiposreunion/tiposreunion.service";
 
 @Component({
-  selector: 'app-crearreunion',
-  templateUrl: './crearreunion.component.html',
+  selector: 'app-crear-reunion',
+  templateUrl: './crear-reunion.component.html',
   standalone: true,
-  styleUrls: ['./crearreunion.component.css'],
-  imports: [CommonModule, FormsModule, ParticipantesComponent]
+  styleUrls: ['./crear-reunion.component.css']
 })
 export class CrearReunionComponent implements OnInit {
-  pedidos: any[] = []; // Array para almacenar los pedidos disponibles
-  pedidoId: number; // ID del pedido seleccionado
-  fecha: string; // Fecha de la reunión
-  horaInicio: string; // Hora de inicio de la reunión
-  horaFin: string; // Hora de fin de la reunión
-  plataforma: string; // Plataforma de la reunión
-  participantesSeleccionados: number[] = []; // Array para almacenar los IDs de los participantes seleccionados
-  agenda: string; // Agenda de la reunión
+  formularioReunion: FormGroup;
+  tiposReunion: string[] = [];
+  pedidos: any[] = [];
+  empleados: string[] = [];
+  participantes: number[] = [];
 
   constructor(
-    private pedidosService: PedidosService,
+    private formBuilder: FormBuilder,
     private reunionesService: ReunionesService,
-    private participantesService: ParticipantesService
+    private pedidosService: PedidosService,
+    private empleadosService: EmpleadosService,
+    private tiposReunionService: TiposreunionService
   ) { }
 
   ngOnInit(): void {
-    // Llamar al servicio para obtener los pedidos disponibles
-    this.pedidosService.todosPedidosId().subscribe(
-      data => {
-        this.pedidos = data;
-      },
-      error => {
-        console.error('Error al obtener los pedidos:', error);
-      }
-    );
+    this.formularioReunion = this.formBuilder.group({
+      pedidoId: ['', Validators.required],
+      empleadoId: ['', Validators.required],
+      fecha: ['', Validators.required],
+      horaInicio: ['', Validators.required],
+      horaFin: ['', Validators.required],
+      plataforma: ['', Validators.required],
+      agenda: [''],
+      tipoReunion: ['', Validators.required],
+      participantes: [[]]
+    });
+
+    this.tiposReunionService.todosTiposReunionNombres().subscribe(data => {
+      this.tiposReunion = data;
+    });
+
+    this.pedidosService.todosPedidosId().subscribe(data => {
+      this.pedidos = data;
+    });
+
+    this.empleadosService.todosProductOwner().subscribe(data => {
+      this.empleados = data;
+    });
   }
 
-  onParticipantesSeleccionados(participantesIds: number[]): void {
-    // Manejar los IDs de los participantes seleccionados
-    this.participantesSeleccionados = participantesIds;
+  onSubmit(): void {
+    if (this.formularioReunion.valid) {
+      const nuevaReunion = {
+        pedidoId: this.formularioReunion.value.pedidoId,
+        empleadoId: this.formularioReunion.value.empleadoId,
+        fecha: this.formularioReunion.value.fecha,
+        horaInicio: this.formularioReunion.value.horaInicio,
+        horaFin: this.formularioReunion.value.horaFin,
+        plataforma: this.formularioReunion.value.plataforma,
+        agenda: this.formularioReunion.value.agenda,
+        tipoReunion: this.formularioReunion.value.tipoReunion,
+        participanteIds: this.formularioReunion.value.participantes
+      };
+
+     // this.reunionesService.crearReunionConParticipantes(nuevaReunion).subscribe(response => {
+      //  console.log('Reunión creada:', response);
+        //this.formularioReunion.reset();
+     // });
+    }
   }
 
-  guardarReunion(): void {
-    // Crear objeto de reunión a guardar
-    const nuevaReunion = {
-      pedidoId: this.pedidoId,
-      fecha: this.fecha,
-      horaInicio: this.horaInicio,
-      horaFin: this.horaFin,
-      plataforma: this.plataforma,
-      participantes: this.participantesSeleccionados,
-      agenda: this.agenda,
-      estado: 'pendiente' // Estado por defecto
-    };
-
-    // Llamar al servicio para guardar la reunión
-    this.reunionesService.crearReunion(nuevaReunion).subscribe(
-      response => {
-        console.log('Reunión creada correctamente:', response);
-        // Aquí puedes redirigir o hacer otras acciones después de guardar la reunión
-      },
-      error => {
-        console.error('Error al crear la reunión:', error);
-      }
-    );
-  }
 }

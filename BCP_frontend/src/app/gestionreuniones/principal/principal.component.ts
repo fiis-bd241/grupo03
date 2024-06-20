@@ -15,20 +15,24 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./principal.component.css']
 })
 export class PrincipalReunionesComponent implements OnInit {
-  reunionesCompletadas: any[] = [];
-  reunionesPendientes: any[] = [];
 
-  constructor(private reunionesService: ReunionesService) {}
+  pedidos: any[] = [];
+  reunionesPendientes: any[] = [];
+  reunionesCompletadas: any[] = [];
+
+  constructor(
+    private reunionesService: ReunionesService
+  ) {}
 
   ngOnInit(): void {
-    this.reunionesService.obtenerReunionesCompletadas().subscribe(data => {
-      console.log('Reuniones Completadas:', data);
-      this.reunionesCompletadas = data;
-    });
 
     this.reunionesService.obtenerReunionesPendientes().subscribe(data => {
-      console.log('Reuniones Pendientes:', data);
       this.reunionesPendientes = data;
     });
+
+    this.reunionesService.obtenerReunionesCompletadas().subscribe(data => {
+      this.reunionesCompletadas = data;
+    });
   }
+
 }
