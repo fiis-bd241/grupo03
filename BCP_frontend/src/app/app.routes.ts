@@ -7,6 +7,8 @@ import { VerpedidosComponent } from "./gestionpedidos/verpedidos/verpedidos.comp
 import { VermigracionesComponent } from "./gestionpedidos/vermigraciones/vermigraciones.component";
 import { PrincipalReunionesComponent } from "./gestionreuniones/principal/principal.component";
 import { CrearReunionComponent } from "./gestionreuniones/crearreunion/crearreunion.component";
+import {VerprogresoComponent} from "./equivalenciasymodelo/verprogreso/verprogreso.component";
+import {VerReporteTareasComponent} from "./equivalenciasymodelo/verreportetareas/verreportetareas.component";
 
 export const routes: Routes = [
   {
@@ -42,6 +44,17 @@ export const routes: Routes = [
     redirectTo: '/principal',
     pathMatch: 'full'
   },
+
+  {
+    path: 'ver-progreso',
+    component: VerprogresoComponent
+  },
+
+  {
+    path: 'ver-reporteTareas',
+    component: VerReporteTareasComponent
+  },
+
 ];
 
 @NgModule({

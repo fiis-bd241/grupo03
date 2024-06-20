@@ -7,9 +7,9 @@ import {TiposreunionService} from "../../services/tiposreunion/tiposreunion.serv
 
 @Component({
   selector: 'app-crear-reunion',
-  templateUrl: './crear-reunion.component.html',
+  templateUrl: './crearreunion.component.html',
   standalone: true,
-  styleUrls: ['./crear-reunion.component.css']
+  styleUrls: ['./crearreunion.component.css']
 })
 export class CrearReunionComponent implements OnInit {
   formularioReunion: FormGroup;
