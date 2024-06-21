@@ -326,7 +326,6 @@ CREATE TABLE IF NOT EXISTS public."Universo"
     "Fecha_Creacion" DATE,
     CONSTRAINT "Universo_pkey" PRIMARY KEY ("ID_Universo")
 );
-ALTER TABLE "Universo" ADD COLUMN pasos text[];
 
 CREATE TABLE IF NOT EXISTS public."PreCarga"
 (
@@ -354,7 +353,6 @@ CREATE TABLE IF NOT EXISTS public."ReglaDeCargaFuncional"
     "Fecha" DATE,
     CONSTRAINT "ReglaDeCargaFuncionales_pkey" PRIMARY KEY ("ID_ReglaCargaFunc")
 );
-ALTER TABLE "ReglaDeCargaFuncional" ADD COLUMN pasos text[];
 
 
 CREATE TABLE IF NOT EXISTS public."ReglaDeCargaTecnica"
@@ -367,7 +365,6 @@ CREATE TABLE IF NOT EXISTS public."ReglaDeCargaTecnica"
     "Fecha" DATE,
     CONSTRAINT "ReglaDeCargaTecnica_pkey" PRIMARY KEY ("ID_ReglaCargaTecn")
 );
-ALTER TABLE "ReglaDeCargaTecnica" ADD COLUMN pasos text[];
 
 CREATE TABLE IF NOT EXISTS public."Reporte"
 (
