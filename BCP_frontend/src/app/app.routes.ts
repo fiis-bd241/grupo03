@@ -9,6 +9,9 @@ import { PrincipalReunionesComponent } from "./gestionreuniones/principal/princi
 import { CrearReunionComponent } from "./gestionreuniones/crearreunion/crearreunion.component";
 import {VerprogresoComponent} from "./equivalenciasymodelo/verprogreso/verprogreso.component";
 import {VerReporteTareasComponent} from "./equivalenciasymodelo/verreportetareas/verreportetareas.component";
+import {VerconceptosnegocioComponent} from "./equivalenciasymodelo/verconceptosnegocio/verconceptosnegocio.component";
+import {VerequivalenciasComponent} from "./equivalenciasymodelo/verequivalencias/verequivalencias.component";
+import {VermodeloDDVComponent} from "./equivalenciasymodelo/vermodelo-ddv/vermodelo-ddv.component";
 
 export const routes: Routes = [
   {
@@ -53,6 +56,21 @@ export const routes: Routes = [
   {
     path: 'ver-reporteTareas',
     component: VerReporteTareasComponent
+  },
+
+  {
+    path: 'ver-conceptosNegocio',
+    component: VerconceptosnegocioComponent
+  },
+
+  {
+    path: 'buscar-equivalencias',
+    component: VerequivalenciasComponent
+  },
+
+  {
+    path: 'buscar-modelo',
+    component: VermodeloDDVComponent
   },
 
 ];

@@ -5,6 +5,7 @@ import { EstadosService } from "../../services/estados/estados.service";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from "@angular/forms";
 import {RouterLink} from "@angular/router";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -21,12 +22,12 @@ import {RouterLink} from "@angular/router";
 export class VerprogresoComponent implements OnInit {
   progreso: any[] = [];
   estados: any[] = [];
-  estadosSeleccionado: any;
 
   constructor(
     private fb: FormBuilder,
     public tareasService: TareasService,
-    public estadosService: EstadosService
+    public estadosService: EstadosService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -51,5 +52,21 @@ export class VerprogresoComponent implements OnInit {
         this.cargarTareas();
       }
     );
+  }
+
+  redirigirSegunSeccion(seccion: string): void {
+    switch (seccion){
+      case 'Agregar Concepto de Negocio':
+        this.router.navigate(['/ver-conceptosNegocio']);
+        break;
+      case 'Agregar Equivalencia':
+        this.router.navigate(['/buscar-equivalencias']);
+        break;
+      case 'Insertar Modelo DDV':
+        this.router.navigate(['/buscar-modelo']);
+        break;
+      default:
+      break;
+    }
   }
 }

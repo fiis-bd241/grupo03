@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 export class MigracionesService {
   private apiUrl1 = "http://localhost:8080/migracion/top3";
   private apiUrl2 = "http://localhost:8080/migracion/crear-migracion";
+  private apiUrl3 = "http://localhost:8080/migracion/todo";
 
   constructor(private httpClient: HttpClient) { }
 
@@ -17,5 +18,9 @@ export class MigracionesService {
 
   public crearMigracion(migracion: any): Observable<any> {
     return this.httpClient.post(this.apiUrl2, migracion);
+  }
+
+  public buscarMigracionesPorPedidoId(pedidoId: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.apiUrl3}/${pedidoId}`);
   }
 }

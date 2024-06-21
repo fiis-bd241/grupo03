@@ -31,4 +31,17 @@ public interface MigracionRepository extends JpaRepository<Migracion, Long> {
             "VALUES (:pedidoId, :squadId, :tecnologiaId, :entorno, CURRENT_DATE, true, true)", nativeQuery = true)
     void crearMigracion(@Param("pedidoId") int pedidoId, @Param("squadId") int squadId,
                          @Param("tecnologiaId") int tecnologiaId, @Param("entorno") String entorno);
+
+    @Query(value = "SELECT m.\"Pedido_Id\" AS \"Pedido\", " +
+            "m.\"Migracion_Id\" AS \"Migración\", "+
+            "s.nombre_squad AS \"Squad Encargado\", " +
+            "t.nombre_tecnologia AS \"Tecnología Usada\", " +
+            "m.\"Fecha_migracion\" AS \"Fecha\" " +
+            "FROM public.\"Migracion\" m " +
+            "INNER JOIN public.\"Squad\" s ON s.id_squad = m.\"Id_Squad\" " +
+            "INNER JOIN public.\"Tecnologia\" t ON t.id_tecnologia = m.\"Id_Tecnologia\" " +
+            "WHERE m.\"Pedido_Id\" = :pedidoId " +
+            "ORDER BY m.\"Fecha_migracion\"",
+            nativeQuery = true)
+    List<Object[]> buscarMigracionesPorPedidoId(@Param("pedidoId") int pedidoId);
 }

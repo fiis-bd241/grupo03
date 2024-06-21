@@ -33,7 +33,7 @@ public class TareaRest {
     @PutMapping("/actualizar-estado-tarea")
     public void actualizarEstadoTarea(
             @RequestParam("estado") String estado,
-            @RequestParam("tarea") String tarea) {
-        tareaService.actualizarEstadoTareas(estado, tarea);
+            @RequestParam("tareaId") int tareaId) {
+        tareaService.actualizarEstadoTareas(estado, tareaId);
     }
 }

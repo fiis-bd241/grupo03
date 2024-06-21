@@ -14,9 +14,12 @@
           </thead>
           <tbody>
           <tr *ngFor="let tarea of progreso">
-            <td>{{ tarea[0] }}</td>
             <td>
-              <select id="estado" formControlName="estadoId" class="form-control" required>
+              <!-- Llama al método redirigirASegunSeccion() al hacer clic en el nombre de la sección -->
+              <a (click)="redirigirSegunSeccion(tarea[0])">{{ tarea[0] }}</a>
+            </td>
+            <td>
+              <select [(ngModel)]="tarea[1]" class="form-control" required (change)="actualizarEstadoTarea(tarea[3], tarea[1])">
                 <option *ngFor="let estado of estados" [value]="estado[0]">{{ estado[1] }}</option>
               </select>
             </td>
@@ -32,8 +35,12 @@
   </div>
 </div>
 
-<p><a routerLink="/ver-progreso"> </a> </p>
+<p><a routerLink="/ver-progreso"> </a></p>
 
 <div class="derecha2">
   <p><a routerLink="/ver-reporteTareas" routerLinkActive="active">Ver Reporte</a></p>
 </div>
+
+
+
+

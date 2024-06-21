@@ -28,4 +28,8 @@ public class MigracionService {
 
         migracionRepository.crearMigracion(pedidoId, squadId, tecnologiaId, entorno);
     }
+
+    public List<Object[]> buscarMigracionesPorPedidoId(int pedidoId) {
+        return migracionRepository.buscarMigracionesPorPedidoId(pedidoId);
+    }
 }
