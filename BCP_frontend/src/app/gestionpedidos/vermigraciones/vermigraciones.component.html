@@ -1,50 +1,63 @@
 <h1 class="titulo1">PEDIDOS</h1>
+<h2>Migraciones</h2>
 <p></p>
-<form [formGroup]="migracionForm" (ngSubmit)="buscar()">
-  <div class="form-group">
-    <label>Pedido ID</label>
-    <select id="pedido" formControlName="pedidoId" class="form-control" required>
-      <option *ngFor="let pedido of pedidos" [value]="pedido[0]">{{ pedido[0] }}</option>
-    </select>
-    <div *ngIf="migracionForm.get('pedidoId').invalid && migracionForm.get('pedidoId').touched" class="text-danger">
-      El ID del Pedido es requerido.
-    </div>
+<div class="d-flex justify-content-end">
+  <div class="col-md-4">
+    <form [formGroup]="migracionForm" (ngSubmit)="buscar()">
+      <div class="form-group row">
+        <label for="pedidoId" class="col-auto col-form-label">Filtrar por Pedido:</label>
+        <div class="col-3">
+          <select id="pedidoId" formControlName="pedidoId" class="form-control" required>
+            <option *ngFor="let pedido of pedidos" [value]="pedido[0]">{{ pedido[0] }}</option>
+          </select>
+          <div *ngIf="migracionForm.get('pedidoId').invalid && migracionForm.get('pedidoId').touched" class="text-danger">
+            El ID del Pedido es requerido.
+          </div>
+        </div>
+        <div class="col-2">
+          <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+      </div>
+    </form>
   </div>
-  <button type="submit" class="btn btn-primary">Buscar</button>
-</form>
-
-<div *ngIf="migraciones.length > 0">
-  <h3>Resultados de Migraciones</h3>
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>Pedido</th>
-      <th>Migración</th>
-      <th>Squad Encargado</th>
-      <th>Tecnología Usada</th>
-      <th>Fecha</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let migracion of migraciones">
-      <td>{{migracion[0]}}</td>
-      <td>{{migracion[1]}}</td>
-      <td>{{migracion[2]}}</td>
-      <td>{{migracion[3]}}</td>
-      <td>{{migracion[4]}}</td>
-    </tr>
-    </tbody>
-  </table>
 </div>
 
-<div *ngIf="migraciones.length === 0" class="alert alert-warning" role="alert">
-  Todavía no se ha realizado ninguna migración para este pedido.
-</div>
+<p> </p>
 
 <div class="container">
   <div class="row">
-    <div class="col text-center">
-      <button class="btn btn-primary btn-g mx-2" routerLink="/crear-migracion" routerLinkActive="active">Crear Migración</button>
+    <div class="col">
+      <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Pedido</th>
+          <th>Migración</th>
+          <th>Squad Encargado</th>
+          <th>Tecnología Usada</th>
+          <th>Fecha</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let migracion of migraciones">
+          <td>{{migracion[0]}}</td>
+          <td>{{migracion[1]}}</td>
+          <td>{{migracion[2]}}</td>
+          <td>{{migracion[3]}}</td>
+          <td>{{migracion[4]}}</td>
+        </tr>
+        </tbody>
+      </table>
+        <div *ngIf="migraciones.length === 0 && migracionForm.get('pedidoId').touched" class="alert alert-warning" role="alert">
+          Todavía no se ha realizado ninguna migración para este pedido.
+        </div>
+      </div>
     </div>
   </div>
+</div>
+
+
+
+<div class="derecha1">
+  <p><a routerLink="/principal" routerLinkActive="active">Regresar</a></p>
 </div>
