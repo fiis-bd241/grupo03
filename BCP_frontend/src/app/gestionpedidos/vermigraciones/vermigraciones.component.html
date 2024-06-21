@@ -1,2 +1,38 @@
 <h1 class="titulo1">PEDIDOS</h1>
 <p></p>
+<form [formGroup]="migracionForm" (ngSubmit)="buscar()">
+  <div class="form-group">
+    <label for="pedidoId">Pedido ID</label>
+    <select id="pedido" formControlName="pedidoId" class="form-control" required>
+      <option *ngFor="let pedido of pedidos" [value]="pedido">{{ pedido }}</option>
+    </select>
+    <div *ngIf="migracionForm.get('pedidoId').invalid && migracionForm.get('pedidoId').touched" class="text-danger">
+      El ID del Pedido es requerido.
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
+<div *ngIf="migraciones.length > 0">
+  <h3>Resultados de Migraciones</h3>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Pedido</th>
+      <th>Migración</th>
+      <th>Squad Encargado</th>
+      <th>Tecnología Usada</th>
+      <th>Fecha</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let migracion of migraciones">
+      <td>{{migracion[0]}}</td>
+      <td>{{migracion[1]}}</td>
+      <td>{{migracion[2]}}</td>
+      <td>{{migracion[3]}}</td>
+      <td>{{migracion[4]}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
