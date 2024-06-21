@@ -1,1 +1,52 @@
-<p>vermodelo-ddv works!</p>
+<h1 class="titulo1">MODELO DDV</h1>
+<p></p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="tablaSelect">Seleccione una Campo:</label>
+        <select id="tablaSelect" class="form-control" [(ngModel)]="campoSeleccionado">
+          <option *ngFor="let campo of campos" [value]="campo">{{ campo }}</option>
+        </select>
+        <button class="btn btn-primary mt-3" (click)="buscar()">Buscar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="modelo">
+    <div class="col">
+      <h2>Esquemas</h2>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Esquema Campo</th>
+            <th scope="col">Esquema EsquemaDDV</th>
+            <th scope="col">Esquema TablaDDV</th>
+            <th scope="col">Esquema CampoDDV</th>
+            <th scope="col">Esquema CampoLlave</th>
+            <th scope="col">Esquema Campo Descartado</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let modelo of modelo">
+            <td>{{ modelo[0] }}</td>
+            <td>{{ modelo[1] }}</td>
+            <td>{{ modelo[2] }}</td>
+            <td>{{ modelo[3] }}</td>
+            <td>{{ modelo[4] }}</td>
+            <td>{{ modelo[5] }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="modelo.length === 0" class="alert alert-warning" role="alert">
+          No hay modelo disponible.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="derecha2">
+  <p><a routerLink="/ver-progreso" routerLinkActive="active">Volver a vista de progreso</a></p>
+</div>

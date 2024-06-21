@@ -24,7 +24,7 @@ public class TareaService {
         return tareaRepository.getEvaluacionTareasbyMigracionId(migracionId);
     }
 
-    public void actualizarEstadoTareas(String estado, String tarea){
-        tareaRepository.actualizarEstadoTarea(estado, tarea);
+    public void actualizarEstadoTareas(String estado, int tareaId){
+        tareaRepository.actualizarEstadoTarea(estado, tareaId);
     }
 }

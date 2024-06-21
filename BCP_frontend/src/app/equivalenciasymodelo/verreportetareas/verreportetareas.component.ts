@@ -34,5 +34,4 @@ export class VerReporteTareasComponent implements OnInit{
       this.reportes = data;
     });
   }
-
 }
