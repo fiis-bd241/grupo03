@@ -4,7 +4,7 @@
   <div class="form-group">
     <label for="pedidoId">Pedido ID</label>
     <select id="pedido" formControlName="pedidoId" class="form-control" required>
-      <option *ngFor="let pedido of pedidos" [value]="pedido">{{ pedido }}</option>
+      <option *ngFor="let pedido of pedidos" [value]="pedido[0]">{{ pedido[0] }}</option>
     </select>
     <div *ngIf="migracionForm.get('pedidoId').invalid && migracionForm.get('pedidoId').touched" class="text-danger">
       El ID del Pedido es requerido.
@@ -27,8 +27,8 @@
     </thead>
     <tbody>
     <tr *ngFor="let migracion of migraciones">
-      <td>{{migracion[0]}}</td>
       <td>{{migracion[1]}}</td>
+      <td>{{migracion[0]}}</td>
       <td>{{migracion[2]}}</td>
       <td>{{migracion[3]}}</td>
       <td>{{migracion[4]}}</td>

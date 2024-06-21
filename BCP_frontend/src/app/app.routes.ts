@@ -31,7 +31,7 @@ export const routes: Routes = [
     component: VerpedidosComponent
   },
   {
-    path: 'ver-migraciones',
+    path: 'ver-migraciones/:pedidoId',
     component: VermigracionesComponent
   },
   {
