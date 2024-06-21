@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import { MigracionesService } from '../../services/migraciones/migraciones.service';
 import {NgForOf, NgIf} from '@angular/common';
 import {PedidosService} from "../../services/pedidos/pedidos.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-vermigraciones',
@@ -11,7 +11,8 @@ import {ActivatedRoute} from "@angular/router";
   imports: [
     ReactiveFormsModule,
     NgForOf,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './vermigraciones.component.html',
   styleUrl: './vermigraciones.component.css'

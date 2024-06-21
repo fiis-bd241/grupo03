@@ -36,3 +36,15 @@
     </tbody>
   </table>
 </div>
+
+<div *ngIf="migraciones.length === 0" class="alert alert-warning" role="alert">
+  Todavía no se ha realizado ninguna migración para este pedido.
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <button class="btn btn-primary btn-g mx-2" routerLink="/crear-migracion" routerLinkActive="active">Crear Migración</button>
+    </div>
+  </div>
+</div>
