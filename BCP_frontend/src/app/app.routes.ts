@@ -7,22 +7,20 @@ import { VerpedidosComponent } from "./gestionpedidos/verpedidos/verpedidos.comp
 import { VermigracionesComponent } from "./gestionpedidos/vermigraciones/vermigraciones.component";
 import { PrincipalReunionesComponent } from "./gestionreuniones/principal/principal.component";
 import { CrearReunionComponent } from "./gestionreuniones/crearreunion/crearreunion.component";
-import {VerprogresoComponent} from "./equivalenciasymodelo/verprogreso/verprogreso.component";
-import {VerReporteTareasComponent} from "./equivalenciasymodelo/verreportetareas/verreportetareas.component";
-import {VerconceptosnegocioComponent} from "./equivalenciasymodelo/verconceptosnegocio/verconceptosnegocio.component";
-import {VerequivalenciasComponent} from "./equivalenciasymodelo/verequivalencias/verequivalencias.component";
-import {VermodeloDDVComponent} from "./equivalenciasymodelo/vermodelo-ddv/vermodelo-ddv.component";
+import { VerprogresoComponent } from "./equivalenciasymodelo/verprogreso/verprogreso.component";
+import { VerReporteTareasComponent } from "./equivalenciasymodelo/verreportetareas/verreportetareas.component";
+import { VerconceptosnegocioComponent } from "./equivalenciasymodelo/verconceptosnegocio/verconceptosnegocio.component";
+import { VerequivalenciasComponent } from "./equivalenciasymodelo/verequivalencias/verequivalencias.component";
+import { VermodeloDDVComponent } from "./equivalenciasymodelo/vermodelo-ddv/vermodelo-ddv.component";
 import { LoginComponent } from './login/login.component';
-
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-
   {
     path: '',
     redirectTo: '/login',
     pathMatch: 'full'
   },
-  
   {
     path: 'login',
     component: LoginComponent
@@ -30,65 +28,68 @@ export const routes: Routes = [
   {
     path: 'principal',
     component: PrincipalComponent,
-    //canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'crear-pedido',
-    component: AgregarpedidoComponent
+    component: AgregarpedidoComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'crear-migracion',
-    component: AgregarmigracionComponent
+    component: AgregarmigracionComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'ver-pedidos',
-    component: VerpedidosComponent
+    component: VerpedidosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'ver-migraciones/:pedidoId',
-    component: VermigracionesComponent
+    component: VermigracionesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'reuniones',
-    component: PrincipalReunionesComponent
+    component: PrincipalReunionesComponent,
+    canActivate: [AuthGuard]
   },
   {
-    path: 'crear-reunion', // Añade esta ruta
-    component: CrearReunionComponent
+    path: 'crear-reunion',
+    component: CrearReunionComponent,
+    canActivate: [AuthGuard]
   },
-
   {
     path: 'ver-progreso',
-    component: VerprogresoComponent
+    component: VerprogresoComponent,
+    canActivate: [AuthGuard]
   },
-
   {
     path: 'ver-reporteTareas',
-    component: VerReporteTareasComponent
+    component: VerReporteTareasComponent,
+    canActivate: [AuthGuard]
   },
-
   {
     path: 'ver-conceptosNegocio',
-    component: VerconceptosnegocioComponent
+    component: VerconceptosnegocioComponent,
+    canActivate: [AuthGuard]
   },
-
   {
     path: 'buscar-equivalencias',
-    component: VerequivalenciasComponent
+    component: VerequivalenciasComponent,
+    canActivate: [AuthGuard]
   },
-
   {
     path: 'buscar-modelo',
-    component: VermodeloDDVComponent
+    component: VermodeloDDVComponent,
+    canActivate: [AuthGuard]
   },
-
   {
     path: '**',
     redirectTo: '/login',
     pathMatch: 'full'
-  },
-
-
+  }
 ];
 
 @NgModule({
