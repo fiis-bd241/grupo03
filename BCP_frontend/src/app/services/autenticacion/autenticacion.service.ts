@@ -15,4 +15,12 @@ export class AutenticacionService {
     const params = { dni, contrasena };
     return this.http.post(this.loginUrl, null, { params });
   }
+
+  isLoggedIn(): boolean {
+    return localStorage.getItem('isLoggedIn') === 'true';
+  }
+
+  logout() {
+    localStorage.removeItem('isLoggedIn');
+  }
 }

@@ -12,11 +12,25 @@ import {VerReporteTareasComponent} from "./equivalenciasymodelo/verreportetareas
 import {VerconceptosnegocioComponent} from "./equivalenciasymodelo/verconceptosnegocio/verconceptosnegocio.component";
 import {VerequivalenciasComponent} from "./equivalenciasymodelo/verequivalencias/verequivalencias.component";
 import {VermodeloDDVComponent} from "./equivalenciasymodelo/vermodelo-ddv/vermodelo-ddv.component";
+import { LoginComponent } from './login/login.component';
+
 
 export const routes: Routes = [
+
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
+  
+  {
+    path: 'login',
+    component: LoginComponent
+  },
   {
     path: 'principal',
-    component: PrincipalComponent
+    component: PrincipalComponent,
+    //canActivate: [AuthGuard]
   },
   {
     path: 'crear-pedido',
@@ -41,11 +55,6 @@ export const routes: Routes = [
   {
     path: 'crear-reunion', // Añade esta ruta
     component: CrearReunionComponent
-  },
-  {
-    path: '',
-    redirectTo: '/principal',
-    pathMatch: 'full'
   },
 
   {
@@ -72,6 +81,13 @@ export const routes: Routes = [
     path: 'buscar-modelo',
     component: VermodeloDDVComponent
   },
+
+  {
+    path: '**',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
+
 
 ];
 
