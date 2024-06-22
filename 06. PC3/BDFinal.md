@@ -1680,14 +1680,14 @@ VALUES
 
 -- Insertar datos en la tabla PreCarga
 INSERT INTO public."PreCarga"(
-    "ID_Precarga", "Nombre_Regla", "Descripcion")
+    "ID_Precarga", "Nombre_Regla", "Descripcion", "Obligatorio")
 VALUES
-    (200001, 'Validacion Unicidad', 'Validacion no hay registros duplicados'),
-    (200002, 'Validacion Integridad Universal', 'Clave Foranea coincide con la principal en la tabla que está referenciando en todo momento'),
-    (200003, 'Validacion de Estructura o Expresion Regular', 'Formato de los campos correspondiente a lo que espera el negocio'),
-    (200004, 'Validacion Nulidad', 'No debe haber ningún campo obligatorio para el negocio en blanco'),
-    (200005, 'Regla de Limpieza y Estadarización', 'Identificar datos incorrectos'),
-    (200006, 'Regla de Enriquecimiento', 'Aumento de datos para mejorar la información existente');
+    (200001, 'Validacion Unicidad', 'Validacion no hay registros duplicados',true),
+    (200002, 'Validacion Integridad Universal', 'Clave Foranea coincide con la principal en la tabla que está referenciando en todo momento',false),
+    (200003, 'Validacion de Estructura o Expresion Regular', 'Formato de los campos correspondiente a lo que espera el negocio',false),
+    (200004, 'Validacion Nulidad', 'No debe haber ningún campo obligatorio para el negocio en blanco',false),
+    (200005, 'Regla de Limpieza y Estadarización', 'Identificar datos incorrectos',false),
+    (200006, 'Regla de Enriquecimiento', 'Aumento de datos para mejorar la información existente',false);
 
 -- Insertar datos en la tabla Algoritmo
 INSERT INTO public."Algoritmo"(
