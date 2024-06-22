@@ -1,0 +1,27 @@
+<div class="login-container">
+    <div class="login-image">
+      <img src="assets/login-image.png" alt="Login Image">
+    </div>
+    <div class="login-form">
+      <h2>Iniciar sesión</h2>
+      <h3>Especialista de migración de datos</h3>
+      <form (ngSubmit)="onSubmit()">
+        <div>
+          <input type="radio" id="numero" name="loginType" [(ngModel)]="loginType" value="numero">
+          <label for="numero">Número de Acceso</label>
+          <input type="radio" id="alias" name="loginType" [(ngModel)]="loginType" value="alias">
+          <label for="alias">Alias</label>
+        </div>
+        <div>
+          <input type="text" placeholder="Número de Acceso" [(ngModel)]="accessNumber" name="accessNumber" *ngIf="loginType === 'numero'">
+          <input type="text" placeholder="Alias" [(ngModel)]="alias" name="alias" *ngIf="loginType === 'alias'">
+        </div>
+        <div>
+          <input type="password" placeholder="Contraseña" [(ngModel)]="password" name="password">
+        </div>
+        <button type="submit">INGRESAR</button>
+        <a href="#">OLVIDÉ MI CONTRASEÑA</a>
+      </form>
+    </div>
+  </div>
+  
