@@ -1,39 +1,74 @@
-<!-- crearreunion.component.html -->
-<div>
-  <label for="pedido">Selecciona un pedido:</label>
-  <select id="pedido" class="form-control" [(ngModel)]="pedidoId">
-    <option *ngFor="let pedido of pedidos" [value]="pedido.id">{{ pedido.nombre }}</option>
-  </select>
+<h1 class="titulo1">REUNIONES</h1>
+<p></p>
+<div class="formularioRegistro">
+  <h2>Crear reunión</h2>
+  <form [formGroup]="formularioReunion" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Pedido</label>
+      <select id="pedido" formControlName="pedidoId" class="form-control" required>
+        <option *ngFor="let pedido of pedidos" [value]="pedido">{{ pedido }}</option>
+      </select>
+      <div *ngIf="formularioReunion.get('pedidoId').invalid && formularioReunion.get('pedidoId').touched" class="text-danger">
+        Pedido es requerido.
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Empleado</label>
+      <select id="empleado" formControlName="empleadoId" class="form-control" required>
+        <option *ngFor="let empleado of empleados" [value]="empleado[0]">{{ empleado[1] }}</option>
+      </select>
+      <div *ngIf="formularioReunion.get('empleadoId').invalid && formularioReunion.get('empleadoId').touched" class="text-danger">
+        Empleado es requerido.
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Tipo de Reunión</label>
+      <select id="tipoReunion" formControlName="tipoReunion" class="form-control" required>
+        <option *ngFor="let tipo of tiposReunion" [value]="tipo[0]">{{ tipo[1] }}</option>
+      </select>
+      <div *ngIf="formularioReunion.get('tipoReunion').invalid && formularioReunion.get('tipoReunion').touched" class="text-danger">
+        Tipo de reunión es requerido.
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Fecha</label>
+      <input type="date" formControlName="fecha" class="form-control" required>
+      <div *ngIf="formularioReunion.get('fecha').invalid && formularioReunion.get('fecha').touched" class="text-danger">
+        Fecha es requerida.
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Hora de Inicio</label>
+      <input type="time" formControlName="horaInicio" class="form-control" required>
+      <div *ngIf="formularioReunion.get('horaInicio').invalid && formularioReunion.get('horaInicio').touched" class="text-danger">
+        Hora de inicio es requerida.
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Hora de Fin</label>
+      <input type="time" formControlName="horaFin" class="form-control" required>
+      <div *ngIf="formularioReunion.get('horaFin').invalid && formularioReunion.get('horaFin').touched" class="text-danger">
+        Hora de fin es requerida.
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Plataforma</label>
+      <input type="text" formControlName="plataforma" class="form-control" required>
+      <div *ngIf="formularioReunion.get('plataforma').invalid && formularioReunion.get('plataforma').touched" class="text-danger">
+        Plataforma es requerida.
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Agenda</label>
+      <textarea formControlName="agenda" class="form-control"></textarea>
+    </div>
+    <p> </p>
+    <button type="submit" class="btn btn-primary">Siguiente</button>
+  </form>
 </div>
 
-<div>
-  <label for="fecha">Agregar fecha:</label>
-  <input id="fecha" type="date" class="form-control" [(ngModel)]="fecha" required>
+<div class="derecha2">
+  <p><a routerLink="/reuniones" routerLinkActive="active">Regresar</a></p>
 </div>
 
-<div>
-  <label for="horaInicio">Agregar hora de inicio:</label>
-  <input id="horaInicio" type="time" class="form-control" [(ngModel)]="horaInicio" required>
-</div>
-
-<div>
-  <label for="horaFin">Agregar hora de fin:</label>
-  <input id="horaFin" type="time" class="form-control" [(ngModel)]="horaFin" required>
-</div>
-
-<div>
-  <label for="plataforma">Agregar plataforma:</label>
-  <input id="plataforma" type="text" class="form-control" [(ngModel)]="plataforma" required>
-</div>
-
-<div>
-  <label for="agenda">Agregar agenda:</label>
-  <textarea id="agenda" class="form-control" rows="5" [(ngModel)]="agenda" required></textarea>
-</div>
-
-<div>
-  <!-- Aquí se incluye el componente de participantes -->
-  <app-participantes [pedidoId]="pedidoId" (participantesSeleccionados)="onParticipantesSeleccionados($event)"></app-participantes>
-</div>
-
-<button (click)="guardarReunion()">Guardar Reunión</button>
+<router-outlet></router-outlet>

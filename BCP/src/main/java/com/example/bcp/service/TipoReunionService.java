@@ -14,7 +14,8 @@ public class TipoReunionService  {
     @Autowired
     private TipoReunionRepository tipoReunionRepository;
 
-    public List<String> todosTiposReunionNombres() {
+    public List<Object[]> todosTiposReunionNombres() {
         return tipoReunionRepository.todosTiposReunionNombres();
     }
+
 }

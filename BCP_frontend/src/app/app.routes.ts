@@ -7,6 +7,8 @@ import { VerpedidosComponent } from "./gestionpedidos/verpedidos/verpedidos.comp
 import { VermigracionesComponent } from "./gestionpedidos/vermigraciones/vermigraciones.component";
 import { PrincipalReunionesComponent } from "./gestionreuniones/principal/principal.component";
 import { CrearReunionComponent } from "./gestionreuniones/crearreunion/crearreunion.component";
+import { SeleccionarParticipantesComponent } from "./gestionreuniones/seleccionarparticipantes/seleccionarparticipantes.component"; // Asegúrate de importar el componente SeleccionarParticipantesComponent
+
 
 export const routes: Routes = [
   {
@@ -36,6 +38,14 @@ export const routes: Routes = [
   {
     path: 'crear-reunion', // Añade esta ruta
     component: CrearReunionComponent
+  },
+  {
+    path: 'paso1',
+    component: CrearReunionComponent // Reutiliza CrearReunionComponent para el paso 1
+  },
+  {
+    path: 'paso2',
+    component: SeleccionarParticipantesComponent // Usa SeleccionarParticipantesComponent para el paso 2
   },
   {
     path: '',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, tap} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +9,16 @@ export class EmpleadosService {
 
   private baseUrl = 'http://localhost:8080/empleado/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
   todosProductOwner(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.baseUrl}PO`);
+    return this.httpClient.get<string[]>(`${this.baseUrl}PO`);
   }
+
+  obtenerIdPorNombreEmpleado(nombreCompleto: string): Observable<number> {
+    return this.httpClient.get<number>(`${this.baseUrl}id?nombreCompleto=${nombreCompleto}`).pipe(
+      tap(id => console.log('ID del empleado obtenido:', id))
+    );
+  }
+
 }

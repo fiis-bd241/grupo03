@@ -40,22 +40,14 @@ public class ReunionRest {
         return reunionService.obtenerReunionesPorEstadoOrdenadas(estadoReunion, orden);
     }
 
-    @PostMapping("/crear")
-    public ResponseEntity<Void> crearReunion(@RequestBody Reunion reunion) {
+    @PostMapping("/crear-reunion")
+    public void crearReunion(@RequestBody Reunion reunion) {
         reunionService.crearReunion(reunion);
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PostMapping("/crear-con-participantes")
-    public ResponseEntity<?> crearReunionConParticipantes(@RequestBody Reunion reunion, @RequestParam List<Integer> participanteIds) {
-        // Lógica para crear la reunión
-
-        // Después de crear la reunión, asociar los participantes
-        for (Integer participanteId : participanteIds) {
-            participaEnService.asociarParticipanteAReunion(reunion.getReunionId(), participanteId);
-        }
-
-        return ResponseEntity.ok().build();
+    @PostMapping("/asociar-participantes")
+    public void asociarParticipantesAReunion(@RequestParam Integer reunionId, @RequestParam List<Integer> participanteIds) {
+        reunionService.asociarParticipantesAReunion(reunionId, participanteIds);
     }
 
     @GetMapping("/detalles-pendiente/{reunionId}")
@@ -76,9 +68,8 @@ public class ReunionRest {
     }
 
     @PostMapping("/{reunionId}/participante/{participanteId}")
-    public ResponseEntity<?> agregarParticipanteAReunion(@PathVariable Integer reunionId, @PathVariable Integer participanteId) {
+    public void agregarParticipanteAReunion(@PathVariable Integer reunionId, @PathVariable Integer participanteId) {
         participaEnService.agregarParticipante(reunionId, participanteId);
-        return ResponseEntity.ok("Participante agregado a la reunión");
     }
 
     @DeleteMapping("/{reunionId}/participante/{participanteId}")

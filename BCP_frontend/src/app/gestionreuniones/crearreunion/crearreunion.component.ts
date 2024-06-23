@@ -1,29 +1,37 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ReunionesService } from '../../services/reuniones/reuniones.service';
-import {PedidosService} from "../../services/pedidos/pedidos.service";
-import {EmpleadosService} from "../../services/empleados/empleados.service";
-import {TiposreunionService} from "../../services/tiposreunion/tiposreunion.service";
+import { PedidosService } from '../../services/pedidos/pedidos.service';
+import { EmpleadosService } from '../../services/empleados/empleados.service';
+import { TiposreunionService } from '../../services/tiposreunion/tiposreunion.service';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { CommonModule } from "@angular/common";
 
 @Component({
-  selector: 'app-crear-reunion',
-  templateUrl: './crear-reunion.component.html',
+  selector: 'app-crearreunion',
+  templateUrl: './crearreunion.component.html',
   standalone: true,
-  styleUrls: ['./crear-reunion.component.css']
+  imports: [
+    RouterOutlet,
+    ReactiveFormsModule,
+    CommonModule,
+    RouterLink,
+  ],
+  styleUrls: ['./crearreunion.component.css']
 })
 export class CrearReunionComponent implements OnInit {
   formularioReunion: FormGroup;
-  tiposReunion: string[] = [];
+  tiposReunion: any[] = [];
   pedidos: any[] = [];
-  empleados: string[] = [];
-  participantes: number[] = [];
+  empleados: any[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private reunionesService: ReunionesService,
     private pedidosService: PedidosService,
     private empleadosService: EmpleadosService,
-    private tiposReunionService: TiposreunionService
+    private tiposreunionService: TiposreunionService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -35,11 +43,10 @@ export class CrearReunionComponent implements OnInit {
       horaFin: ['', Validators.required],
       plataforma: ['', Validators.required],
       agenda: [''],
-      tipoReunion: ['', Validators.required],
-      participantes: [[]]
+      tipoReunion: ['', Validators.required]
     });
 
-    this.tiposReunionService.todosTiposReunionNombres().subscribe(data => {
+    this.tiposreunionService.todosTiposReunionNombres().subscribe(data => {
       this.tiposReunion = data;
     });
 
@@ -54,23 +61,13 @@ export class CrearReunionComponent implements OnInit {
 
   onSubmit(): void {
     if (this.formularioReunion.valid) {
-      const nuevaReunion = {
-        pedidoId: this.formularioReunion.value.pedidoId,
-        empleadoId: this.formularioReunion.value.empleadoId,
-        fecha: this.formularioReunion.value.fecha,
-        horaInicio: this.formularioReunion.value.horaInicio,
-        horaFin: this.formularioReunion.value.horaFin,
-        plataforma: this.formularioReunion.value.plataforma,
-        agenda: this.formularioReunion.value.agenda,
-        tipoReunion: this.formularioReunion.value.tipoReunion,
-        participanteIds: this.formularioReunion.value.participantes
-      };
-
-     // this.reunionesService.crearReunionConParticipantes(nuevaReunion).subscribe(response => {
-      //  console.log('Reunión creada:', response);
-        //this.formularioReunion.reset();
-     // });
+      const reunionParcial = this.formularioReunion.value;
+      this.siguientePaso(reunionParcial);
     }
   }
 
+  siguientePaso(reunionParcial: any): void {
+    sessionStorage.setItem('reunionParcial', JSON.stringify(reunionParcial));
+    this.router.navigate(['/paso2']);
+  }
 }

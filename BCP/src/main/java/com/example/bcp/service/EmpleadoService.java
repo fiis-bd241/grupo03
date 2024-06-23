@@ -14,10 +14,9 @@ public class EmpleadoService  {
     @Autowired
     private EmpleadoRepository empleadoRepository;
 
-    public List<String> todosProductOwner() {
+    public List<Object[]> todosProductOwner() {
         return empleadoRepository.todosProductOwner();
     }
-
 
 }
 
