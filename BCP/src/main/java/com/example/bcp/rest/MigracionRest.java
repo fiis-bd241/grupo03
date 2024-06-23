@@ -24,4 +24,9 @@ public class MigracionRest {
     public void crearMigracion(@RequestBody Migracion migracion) {
         migracionService.crearMigracion(migracion);
     }
+
+    @GetMapping("/todo/{pedidoId}")
+    public List<Object[]> buscarMigracionesPorPedidoId(@PathVariable int pedidoId) {
+        return migracionService.buscarMigracionesPorPedidoId(pedidoId);
+    }
 }

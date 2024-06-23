@@ -26,7 +26,7 @@ public class ModeladoRest {
         modeladoService.insertarModelo(campoDDV,campoLlave,campoDescarta,campo);
     }
 
-    @PutMapping("/actulizar-esquema-tabla")
+    @PutMapping("/actualizar-esquema-tabla")
     public void actualizarEsquemaTabla(
             @RequestParam("esquemaDDV") String esquemaDDV,
             @RequestParam("tablaDDV") String tablaDDV,

@@ -7,51 +7,107 @@ import { VerpedidosComponent } from "./gestionpedidos/verpedidos/verpedidos.comp
 import { VermigracionesComponent } from "./gestionpedidos/vermigraciones/vermigraciones.component";
 import { PrincipalReunionesComponent } from "./gestionreuniones/principal/principal.component";
 import { CrearReunionComponent } from "./gestionreuniones/crearreunion/crearreunion.component";
-import { SeleccionarParticipantesComponent } from "./gestionreuniones/seleccionarparticipantes/seleccionarparticipantes.component"; // Asegúrate de importar el componente SeleccionarParticipantesComponent
+import { VerprogresoComponent } from "./equivalenciasymodelo/verprogreso/verprogreso.component";
+import { VerReporteTareasComponent } from "./equivalenciasymodelo/verreportetareas/verreportetareas.component";
+import { VerconceptosnegocioComponent } from "./equivalenciasymodelo/verconceptosnegocio/verconceptosnegocio.component";
+import { VerequivalenciasComponent } from "./equivalenciasymodelo/verequivalencias/verequivalencias.component";
+import { VermodeloDDVComponent } from "./equivalenciasymodelo/vermodelo-ddv/vermodelo-ddv.component";
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './guards/auth.guard';
+import { ListaUsuariosComponent } from './gestionusuarios/listausuarios/listausuarios.component';
+import { SeleccionarParticipantesComponent } from "./gestionreuniones/seleccionarparticipantes/seleccionarparticipantes.component";
 
 
 export const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  { path: 'gestion/usuarios',
+    component: ListaUsuariosComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'principal',
-    component: PrincipalComponent
+    component: PrincipalComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'crear-pedido',
-    component: AgregarpedidoComponent
+    component: AgregarpedidoComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'crear-migracion',
-    component: AgregarmigracionComponent
+    component: AgregarmigracionComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'ver-pedidos',
-    component: VerpedidosComponent
+    component: VerpedidosComponent,
+    canActivate: [AuthGuard]
   },
   {
-    path: 'ver-migraciones',
-    component: VermigracionesComponent
+    path: 'ver-migraciones/:pedidoId',
+    component: VermigracionesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'reuniones',
-    component: PrincipalReunionesComponent
+    component: PrincipalReunionesComponent,
+    canActivate: [AuthGuard]
   },
   {
-    path: 'crear-reunion', // Añade esta ruta
-    component: CrearReunionComponent
+    path: 'crear-reunion',
+    component: CrearReunionComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'ver-progreso',
+    component: VerprogresoComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'ver-reporteTareas',
+    component: VerReporteTareasComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'ver-conceptosNegocio',
+    component: VerconceptosnegocioComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'buscar-equivalencias',
+    component: VerequivalenciasComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'buscar-modelo',
+    component: VermodeloDDVComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'paso1',
-    component: CrearReunionComponent // Reutiliza CrearReunionComponent para el paso 1
+    component: CrearReunionComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'paso2',
-    component: SeleccionarParticipantesComponent // Usa SeleccionarParticipantesComponent para el paso 2
+    component: SeleccionarParticipantesComponent,
+    canActivate: [AuthGuard]
   },
   {
-    path: '',
-    redirectTo: '/principal',
+    path: '**',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
+
 ];
 
 @NgModule({

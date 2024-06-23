@@ -18,4 +18,19 @@ public interface EmpleadoRepository extends JpaRepository <Empleado,Integer>{
     List<Object[]> todosProductOwner();
 
 
+    @Query(value = "SELECT e.id_empleado AS ID, " +
+        "e.dni AS \"N° de acceso (DNI)\", " +
+        "e.nombre AS \"nombre\", " +
+        "r.nombre_rol AS \"rol\", " +
+        "e.contraseña AS \"contraseña\", " +
+        "e.correo AS \"Correo\", " +
+        "e.telefono AS \"Teléfono\" " +
+        "FROM public.\"Empleado\" e " +
+        "JOIN public.\"Roles\" r ON e.rol_id = r.id_rol",
+        nativeQuery = true)
+    List<Object[]> obtenerTodosLosEmpleados();
+    
+    @Query(value = "SELECT e FROM Empleado e WHERE e.dni = :dni AND e.contraseña = :contrasena")
+    Empleado findByDniAndContrasena(@Param("dni") String dni, @Param("contrasena") String contrasena);
+
 }

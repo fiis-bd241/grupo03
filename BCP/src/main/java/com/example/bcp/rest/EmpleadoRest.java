@@ -1,5 +1,6 @@
 package com.example.bcp.rest;
 
+import com.example.bcp.model.Empleado;
 import com.example.bcp.service.EmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,11 @@ public class EmpleadoRest {
     @GetMapping("/PO")
     public List<Object[]> todosProductOwner() {
         return empleadoService.todosProductOwner();
+    }
+
+    @GetMapping("/todos")
+    public List<Empleado> obtenerTodosLosEmpleados() {
+        return empleadoService.obtenerTodosLosEmpleados();
     }
 
 }

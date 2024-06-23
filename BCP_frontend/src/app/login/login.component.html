@@ -1,0 +1,30 @@
+<div class="login-container">
+    <div class="login-image">
+      <img src="assets/login-image.png" alt="Login Image">
+    </div>
+    <div class="login-form">
+      <h2>Iniciar sesión</h2>
+      <h3>Especialista de migración de datos</h3>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="login-options">
+          <input type="radio" id="numero" formControlName="loginType" value="numero">
+          <label for="numero">Número de Acceso</label>
+          <input type="radio" id="alias" formControlName="loginType" value="alias">
+          <label for="alias">Alias</label>
+        </div>
+        <div *ngIf="loginForm.get('loginType').value === 'numero'">
+          <input type="text" placeholder="Número de Acceso" formControlName="dni">
+        </div>
+        <div *ngIf="loginForm.get('loginType').value === 'alias'">
+          <input type="text" placeholder="Alias" formControlName="alias">
+        </div>
+        <div>
+          <input type="password" placeholder="Contraseña" formControlName="contrasena">
+        </div>
+        <button type="submit" class="login-button">INGRESAR</button>
+        <a href="#" class="forgot-password">OLVIDÉ MI CONTRASEÑA</a>
+      </form>
+      <img src="assets/bcp-logo.png" alt="BCP Logo" class="bcp-logo">
+    </div>
+  </div>
+  

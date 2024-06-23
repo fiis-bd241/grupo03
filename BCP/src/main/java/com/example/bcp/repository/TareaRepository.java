@@ -51,12 +51,12 @@ public interface TareaRepository extends JpaRepository<Tarea, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE public.\"Tarea\"" +
-            "SET estadoId = (" +
-            "SELECT \"Estado_Id\"" +
-            "FROM public.\"Estado\"" +
-            "WHERE \"Estado_Tipo\" = :estado)" +
-            "WHERE id_tarea = :tarea",
+    @Query(value = "UPDATE public.\"Tarea\" " +
+            "SET estadoid = ( " +
+            "SELECT \"Estado_Id\" " +
+            "FROM public.\"Estado\" " +
+            "WHERE \"Estado_Tipo\" = :estado) " +
+            "WHERE id_tarea = :tareaId ",
     nativeQuery = true)
-    void actualizarEstadoTarea(@Param("estado") String estado, @Param("tarea") String tarea);
+    void actualizarEstadoTarea(@Param("estado") String estado, @Param("tareaId") int tareaId);
 }

@@ -1,1 +1,46 @@
-<p>verprogreso works!</p>
+<h1 class="titulo1">Vista de progreso</h1>
+<p></p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Sección</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Responsable</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let tarea of progreso">
+            <td>
+              <!-- Llama al método redirigirASegunSeccion() al hacer clic en el nombre de la sección -->
+              <a (click)="redirigirSegunSeccion(tarea[0])">{{ tarea[0] }}</a>
+            </td>
+            <td>
+              <select [(ngModel)]="tarea[1]" class="form-control" required (change)="actualizarEstadoTarea(tarea[3], tarea[1])">
+                <option *ngFor="let estado of estados" [value]="estado[0]">{{ estado[1] }}</option>
+              </select>
+            </td>
+            <td>{{ tarea[2] }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="progreso.length === 0" class="alert alert-warning" role="alert">
+          No hay tareas disponibles.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p><a routerLink="/ver-progreso"> </a></p>
+
+<div class="derecha2">
+  <p><a routerLink="/ver-reporteTareas" routerLinkActive="active">Ver Reporte</a></p>
+</div>
+
+
+
+

@@ -1,1 +1,69 @@
-<p>verreportetareas works!</p>
+<h1 class="titulo1">REPORTE DE TAREAS</h1>
+<p></p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>Reporte</h2>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Tarea</th>
+            <th scope="col">Fecha Asignada</th>
+            <th scope="col">Fecha inicio</th>
+            <th scope="col">Fecha Fin</th>
+            <th scope="col">Tiempo</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let reporte of reportes">
+            <td>{{ reporte[0] }}</td>
+            <td>{{ reporte[1] }}</td>
+            <td>{{ reporte[2] }}</td>
+            <td>{{ reporte[3] }}</td>
+            <td>{{ reporte[4].days }} días</td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="reportes.length === 0" class="alert alert-warning" role="alert">
+          No hay reportes disponibles.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p></p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>Evaluación</h2>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Tarea</th>
+            <th scope="col">Evaluación</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let evaluacion of evaluaciones">
+            <td>{{ evaluacion[0] }}</td>
+            <td>{{ evaluacion[1] }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="evaluaciones.length === 0" class="alert alert-warning" role="alert">
+          No hay evaluaciones disponibles.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="izquierda2">
+  <p><a routerLink="/ver-progreso" routerLinkActive="active">Regresar</a></p>
+</div>
+
+
+<router-outlet></router-outlet>

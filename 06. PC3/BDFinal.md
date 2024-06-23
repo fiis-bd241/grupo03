@@ -354,6 +354,7 @@ CREATE TABLE IF NOT EXISTS public."ReglaDeCargaFuncional"
     CONSTRAINT "ReglaDeCargaFuncionales_pkey" PRIMARY KEY ("ID_ReglaCargaFunc")
 );
 
+
 CREATE TABLE IF NOT EXISTS public."ReglaDeCargaTecnica"
 (
     "ID_ReglaCargaTecn" serial NOT NULL,
@@ -1679,16 +1680,14 @@ VALUES
 
 -- Insertar datos en la tabla PreCarga
 INSERT INTO public."PreCarga"(
-    "ID_Precarga", "Nombre_Regla", "Descripcion")
+    "ID_Precarga", "Nombre_Regla", "Descripcion", "Obligatorio")
 VALUES
-    (200001, 'Validacion Unicidad', 'Validacion registros duplicados'),
-    (200002, 'Validacion Integridad Universal', 'Clave Foranea coincide con la principal'),
-    (200003, 'Validacion de Registro', 'Validar Integridad en tablas especiales'),
-    (200004, 'Validacion Dominio de Valores', 'Verificar dominio de valores'),
-    (200005, 'Validacion de Estructura o Expresion Regular', 'Formato correspondiente'),
-    (200006, 'Validacion Nulidad', 'Campo Obligatorio en Blanco'),
-    (200007, 'Regla de Limpieza y Estadarización', 'Datos no estadarizados'),
-    (200008, 'Regla de Enriquecimiento', 'Nuevos datos para mejorar los existentes');
+    (200001, 'Validacion Unicidad', 'Validacion no hay registros duplicados',true),
+    (200002, 'Validacion Integridad Universal', 'Clave Foranea coincide con la principal en la tabla que está referenciando en todo momento',false),
+    (200003, 'Validacion de Estructura o Expresion Regular', 'Formato de los campos correspondiente a lo que espera el negocio',false),
+    (200004, 'Validacion Nulidad', 'No debe haber ningún campo obligatorio para el negocio en blanco',false),
+    (200005, 'Regla de Limpieza y Estadarización', 'Identificar datos incorrectos',false),
+    (200006, 'Regla de Enriquecimiento', 'Aumento de datos para mejorar la información existente',false);
 
 -- Insertar datos en la tabla Algoritmo
 INSERT INTO public."Algoritmo"(
