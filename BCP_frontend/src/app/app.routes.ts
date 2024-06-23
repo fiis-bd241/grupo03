@@ -86,11 +86,6 @@ export const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'buscar-modelo',
-    component: VermodeloDDVComponent,
-    canActivate: [AuthGuard]
-  },
-  {
     path: '**',
     redirectTo: '/login',
     pathMatch: 'full'

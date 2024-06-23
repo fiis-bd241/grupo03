@@ -1,1 +1,38 @@
-<p>agregarmodelo-ddv works!</p>
+<div class="container">
+  <h1>Modelo DDV</h1>
+  <form [formGroup]="modeloForm" (ngSubmit)="guardarModelo()">
+    <div>
+      <label for="campo">Seleccionar Campo</label>
+      <select id="campo" formControlName="campo">
+        <option *ngFor="let campo of campos" [value]="campo">{{ campo }}</option>
+      </select>
+    </div>
+    <div>
+      <label for="campoDDV">Campo DDV</label>
+      <input id="campoDDV" type="text" formControlName="campoDDV">
+    </div>
+    <div>
+      <label>¿Campo Llave?</label>
+      <input type="radio" formControlName="campoLlave" value="true"> Sí
+      <input type="radio" formControlName="campoLlave" value="false"> No
+    </div>
+    <div>
+      <label>¿Campo Descartado?</label>
+      <input type="radio" formControlName="campoDescartado" value="true"> Sí
+      <input type="radio" formControlName="campoDescartado" value="false"> No
+    </div>
+    <button type="submit">Guardar</button>
+  </form>
+
+  <form [formGroup]="modeloForm" (ngSubmit)="asociarEsquemaTabla()">
+    <div>
+      <label for="esquemaDDV">Esquema DDV</label>
+      <input id="esquemaDDV" type="text" formControlName="esquemaDDV">
+    </div>
+    <div>
+      <label for="tablaDDV">Tabla DDV</label>
+      <input id="tablaDDV" type="text" formControlName="tablaDDV">
+    </div>
+    <button type="submit">Asociar</button>
+  </form>
+</div>
