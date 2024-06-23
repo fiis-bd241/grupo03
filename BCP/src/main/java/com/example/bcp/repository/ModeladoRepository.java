@@ -21,9 +21,9 @@ public interface ModeladoRepository extends JpaRepository<Modelado, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO public.\"Modelado\" (id_referencia, \"EsquemaDDV\",\"TablaDDV\",\"CampoDDV\",\"CampoLlave\",\"Campo_Descarta\")" +
+    @Query(value = "INSERT INTO public.\"Modelado\" (id_referencia, \"EsquemaDDV\",\"TablaDDV\",\"CampoDDV\",\"CampoLlave\",\"Campo_Descarta\") " +
             "SELECT \"id_DT\", NULL, NULL, :campoDDV, :campoLlave, :campoDescarta " +
-            "FROM public.\"DefinicionesTecnicas\"" +
+            "FROM public.\"DefinicionesTecnicas\" " +
             "WHERE \"Campo\" = :campo ",
     nativeQuery = true)
     void insertarModelo(@Param("campoDDV") String campoDDV,

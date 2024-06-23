@@ -12,6 +12,7 @@ import {VerReporteTareasComponent} from "./equivalenciasymodelo/verreportetareas
 import {VerconceptosnegocioComponent} from "./equivalenciasymodelo/verconceptosnegocio/verconceptosnegocio.component";
 import {VerequivalenciasComponent} from "./equivalenciasymodelo/verequivalencias/verequivalencias.component";
 import {VermodeloDDVComponent} from "./equivalenciasymodelo/vermodelo-ddv/vermodelo-ddv.component";
+import {AgregarmodeloDdvComponent} from "./equivalenciasymodelo/agregarmodelo-ddv/agregarmodelo-ddv.component";
 
 export const routes: Routes = [
   {
@@ -71,6 +72,11 @@ export const routes: Routes = [
   {
     path: 'buscar-modelo',
     component: VermodeloDDVComponent
+  },
+
+  {
+    path: 'agregar-modelo',
+    component: AgregarmodeloDdvComponent
   },
 
 ];
