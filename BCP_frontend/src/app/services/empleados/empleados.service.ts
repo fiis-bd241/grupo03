@@ -14,4 +14,8 @@ export class EmpleadosService {
   todosProductOwner(): Observable<string[]> {
     return this.http.get<string[]>(`${this.baseUrl}PO`);
   }
+
+  public obtenerTodosLosUsuarios(): Observable<string[]> {
+    return this.http.get<string[]>(this.baseUrl + 'todos');
+  }
 }
