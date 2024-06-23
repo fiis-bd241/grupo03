@@ -1,11 +1,11 @@
 package com.example.bcp.rest;
 
+import com.example.bcp.model.Empleado;
 import com.example.bcp.service.EmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 @RestController
@@ -18,5 +18,10 @@ public class EmpleadoRest {
     @GetMapping("/PO")
     public List<String> todosProductOwner() {
         return empleadoService.todosProductOwner();
+    }
+
+    @GetMapping("/todos")
+    public List<Empleado> obtenerTodosLosEmpleados() {
+        return empleadoService.obtenerTodosLosEmpleados();
     }
 }

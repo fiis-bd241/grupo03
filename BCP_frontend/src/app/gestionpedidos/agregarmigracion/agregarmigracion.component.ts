@@ -8,7 +8,6 @@ import {SquadsService} from "../../services/squads/squads.service";
 import {TecnologiasService} from "../../services/tecnologias/tecnologias.service";
 
 
-
 @Component({
   selector: 'app-root',
   standalone: true,

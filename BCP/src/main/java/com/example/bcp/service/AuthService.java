@@ -4,20 +4,14 @@ import com.example.bcp.model.Empleado;
 import com.example.bcp.repository.EmpleadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
-public class EmpleadoService {
+public class AuthService {
 
     @Autowired
     private EmpleadoRepository empleadoRepository;
 
-    public List<String> todosProductOwner() {
-        return empleadoRepository.todosProductOwner();
-    }
-
-    public List<Empleado> obtenerTodosLosEmpleados() {
-        return empleadoRepository.findAll();
+    public Empleado login(String dni, String contrasena) {
+        return empleadoRepository.findByDniAndContrasena(dni, contrasena);
     }
 }
-
