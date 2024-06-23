@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ListaUsuariosService } from '../../services/gestion/listausuarios.service';
+import { EmpleadosService } from '../../services/empleados/empleados.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink, RouterOutlet } from '@angular/router';
@@ -18,18 +18,29 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class ListaUsuariosComponent implements OnInit {
   usuarios: any[] = [];
-  now: Date = new Date(); // Definir la propiedad now
+  usuarioLogeado: string;
+  now: Date = new Date();
 
-  constructor(private listaUsuariosService: ListaUsuariosService) {}
+  constructor(private empleadosService: EmpleadosService) { }
 
   ngOnInit(): void {
-    this.listaUsuariosService.obtenerTodosLosUsuarios().subscribe(data => {
+    this.empleadosService.obtenerTodosLosUsuarios().subscribe(data => {
       this.usuarios = data;
+      this.setUsuarioLogeado();
     });
     
-    // Actualizar la hora actual cada segundo
     setInterval(() => {
       this.now = new Date();
     }, 1000);
+  }
+
+  setUsuarioLogeado(): void {
+    // Suponiendo que el usuario logeado se almacena en localStorage
+    const usuario = localStorage.getItem('usuarioLogeado');
+    if (usuario) {
+      this.usuarioLogeado = usuario;
+    } else {
+      this.usuarioLogeado = 'Usuario no identificado';
+    }
   }
 }

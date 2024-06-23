@@ -1,10 +1,11 @@
 package com.example.bcp.service;
 
-import com.example.bcp.model.Empleado;
-import com.example.bcp.repository.EmpleadoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import java.util.List;
+    import com.example.bcp.dto.EmpleadoConRolDTO;
+    import com.example.bcp.model.Empleado;
+    import com.example.bcp.repository.EmpleadoRepository;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.stereotype.Service;
+    import java.util.List;
 
 @Service
 public class EmpleadoService {
@@ -16,8 +17,8 @@ public class EmpleadoService {
         return empleadoRepository.todosProductOwner();
     }
 
-    public List<Empleado> obtenerTodosLosEmpleados() {
-        return empleadoRepository.findAll();
+        public List<EmpleadoConRolDTO> obtenerTodosLosEmpleados() {
+            return empleadoRepository.obtenerTodosLosEmpleados();
+        }
     }
-}
 
