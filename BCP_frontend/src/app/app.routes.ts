@@ -14,6 +14,7 @@ import { VerequivalenciasComponent } from "./equivalenciasymodelo/verequivalenci
 import { VermodeloDDVComponent } from "./equivalenciasymodelo/vermodelo-ddv/vermodelo-ddv.component";
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ListaUsuariosComponent } from './gestionusuarios/listausuarios/listausuarios.component';
 
 export const routes: Routes = [
   {
@@ -24,6 +25,10 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  { path: 'gestion/usuarios',
+    component: ListaUsuariosComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'principal',

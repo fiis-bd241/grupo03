@@ -19,4 +19,5 @@ public class EstadoRest {
     public List<Object[]> todoEstados() {
         return estadoService.todoEstados();
     }
+    
 }
