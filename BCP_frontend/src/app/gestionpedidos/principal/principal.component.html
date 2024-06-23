@@ -18,7 +18,7 @@
           </thead>
           <tbody>
           <tr *ngFor="let pedido of pedidos">
-            <td>{{ pedido[0] }}</td>
+            <td><a [routerLink]="['/ver-migraciones', pedido[0]]">{{ pedido[0] }}</a></td>
             <td>{{ pedido[1] }}</td>
             <td>{{ pedido[2] }}</td>
             <td>{{ pedido[3] }}</td>
@@ -37,7 +37,9 @@
     <p><a routerLink="/ver-pedidos" routerLinkActive="active">Ver más</a></p>
   </div>
 </div>
+
 <p></p>
+
 <div class="container">
   <div class="row">
     <div class="col">
