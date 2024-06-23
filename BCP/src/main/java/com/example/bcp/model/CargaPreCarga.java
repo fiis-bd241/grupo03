@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "\"CargaPreCarga\"")
 public class CargaPreCarga {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "\"ID_CargaPrecarga\"")
     private Integer cargaprecargaId;
     @ManyToOne
