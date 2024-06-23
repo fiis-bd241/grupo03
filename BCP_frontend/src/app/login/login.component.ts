@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
       contrasena: ['', Validators.required]
     });
 
-    // Subscribe to changes in loginType to toggle between dni and alias
     this.loginForm.get('loginType').valueChanges.subscribe(value => {
       const dniControl = this.loginForm.get('dni');
       const aliasControl = this.loginForm.get('alias');

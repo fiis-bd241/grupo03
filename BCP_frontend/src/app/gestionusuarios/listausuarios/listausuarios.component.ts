@@ -43,4 +43,6 @@ export class ListaUsuariosComponent implements OnInit {
       this.usuarioLogeado = 'Usuario no identificado';
     }
   }
+
+  
 }

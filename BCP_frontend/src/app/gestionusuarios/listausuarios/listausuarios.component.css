@@ -118,5 +118,5 @@ body {
   top: 0;
   width: 5px;
   height: 100%;
-  cursor: col-resize;
+  cursor: col-resize; 
 }

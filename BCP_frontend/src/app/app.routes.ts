@@ -16,7 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ListaUsuariosComponent } from './gestionusuarios/listausuarios/listausuarios.component';
 import { SeleccionarParticipantesComponent } from "./gestionreuniones/seleccionarparticipantes/seleccionarparticipantes.component";
-
+import { AgregarUsuarioComponent } from './gestionusuarios/agregarusuario/agregarusuario.component';
 
 export const routes: Routes = [
   {
@@ -32,6 +32,13 @@ export const routes: Routes = [
     component: ListaUsuariosComponent,
     canActivate: [AuthGuard]
   },
+
+  {
+    path: 'gestion/agregar-usuario',
+    component: AgregarUsuarioComponent,
+    canActivate: [AuthGuard]
+  },
+
   {
     path: 'principal',
     component: PrincipalComponent,
