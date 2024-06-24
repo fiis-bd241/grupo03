@@ -14,4 +14,12 @@ export class EmpleadosService {
   todosProductOwner(): Observable<string[]> {
     return this.http.get<string[]>(`${this.baseUrl}PO`);
   }
+
+  public obtenerTodosLosUsuarios(): Observable<string[]> {
+    return this.http.get<string[]>(this.baseUrl + 'todos');
+  }
+
+  public agregarUsuario(empleado: any): Observable<any> {
+    return this.http.post(this.baseUrl + 'agregar', empleado);
+  }
 }

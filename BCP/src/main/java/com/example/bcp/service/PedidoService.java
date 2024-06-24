@@ -27,10 +27,11 @@ public class PedidoService {
 
     public void crearPedido(Pedido pedido) {
         int areaId = pedido.getAreaId().getAreaId();
+        int squadId = pedido.getSquadId().getSquadId();
         int prioridadId = pedido.getPrioridadId().getPrioridadId();
         int estadoId = pedido.getEstadoId().getEstadoId();
         Date pedidoFechaLimite = pedido.getPedidoFechaLimite();
 
-        pedidoRepository.crearPedido(areaId, prioridadId, estadoId, pedidoFechaLimite);
+        pedidoRepository.crearPedido(areaId, squadId, prioridadId, estadoId, pedidoFechaLimite);
     }
 }

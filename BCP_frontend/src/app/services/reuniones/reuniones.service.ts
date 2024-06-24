@@ -9,50 +9,50 @@ import { Observable } from 'rxjs';
 export class ReunionesService {
   private baseUrl = 'http://localhost:8080/reunion/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   obtenerReunionesPendientes(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}pendientes`);
+    return this.httpClient.get<any>(`${this.baseUrl}pendientes`);
   }
 
   obtenerReunionesCompletadas(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}completadas`);
+    return this.httpClient.get<any>(`${this.baseUrl}completadas`);
   }
 
   buscarReunionesPorTexto(texto: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}buscar`, { params: { texto } });
+    return this.httpClient.get<any>(`${this.baseUrl}buscar`, { params: { texto } });
   }
 
   obtenerReunionesPorEstadoOrdenadas(estadoReunion: string, orden: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}estado`, { params: { estadoReunion, orden } });
+    return this.httpClient.get<any>(`${this.baseUrl}estado`, { params: { estadoReunion, orden } });
   }
 
   crearReunion(reunion: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}crear`, reunion);
+    return this.httpClient.post(`${this.baseUrl}crear-reunion`, reunion);
   }
 
-  crearReunionConParticipantes(reunion: any, participanteIds: number[]): Observable<any> {
-    const url = `${this.baseUrl}crear-con-participantes`;
-    return this.http.post<any>(url, { ...reunion, participanteIds });
+  asociarParticipantes(reunionId: number, participanteIds: number[]): Observable<any> {
+    const url = `${this.baseUrl}asociar-participantes?reunionId=${reunionId}&participanteIds=${participanteIds.join(',')}`;
+    return this.httpClient.post<any>(url, {});
   }
 
   obtenerDetallesReunionPendiente(reunionId: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}detalles-pendiente/${reunionId}`);
+    return this.httpClient.get<any>(`${this.baseUrl}detalles-pendiente/${reunionId}`);
   }
 
   marcarReunionComoCompletada(reunionId: number): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}marcar-completada/${reunionId}`, {});
+    return this.httpClient.put<any>(`${this.baseUrl}marcar-completada/${reunionId}`, {});
   }
 
   editarReunion(reunionId: number, reunion: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}${reunionId}`, reunion);
+    return this.httpClient.put<any>(`${this.baseUrl}${reunionId}`, reunion);
   }
 
   agregarParticipanteAReunion(reunionId: number, participanteId: number): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}${reunionId}/participante/${participanteId}`, {});
+    return this.httpClient.post<any>(`${this.baseUrl}${reunionId}/participante/${participanteId}`, {});
   }
 
   eliminarParticipanteDeReunion(reunionId: number, participanteId: number): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}${reunionId}/participante/${participanteId}`);
+    return this.httpClient.delete<any>(`${this.baseUrl}${reunionId}/participante/${participanteId}`);
   }
 }

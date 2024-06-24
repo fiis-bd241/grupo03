@@ -1,0 +1,29 @@
+<div class="container">
+  <h1 class="titulo1">Seleccionar Participantes</h1>
+  <div class="formularioRegistro">
+    <h2>Detalles de la Reunión</h2>
+    <div class="detalleReunion">
+      <p><strong>Pedido:</strong> {{ reunionParcial.pedidoId }}</p>
+      <p><strong>Empleado:</strong> {{ reunionParcial.idEmpleado }}</p>
+      <p><strong>Fecha:</strong> {{ reunionParcial.fecha }}</p>
+      <p><strong>Hora de Inicio:</strong> {{ reunionParcial.horaInicio }}</p>
+      <p><strong>Hora de Fin:</strong> {{ reunionParcial.horaFin }}</p>
+      <p><strong>Plataforma:</strong> {{ reunionParcial.plataforma }}</p>
+      <p><strong>Agenda:</strong> {{ reunionParcial.agenda }}</p>
+      <p><strong>Tipo de Reunión:</strong> {{ reunionParcial.tipoReunionId }}</p>
+    </div>
+
+    <h2>Asociar Participantes a la Reunión</h2>
+    <form [formGroup]="formularioParticipantes" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="participantes">Participantes:</label>
+        <div *ngFor="let participante of participantes">
+          <input type="checkbox" [value]="participante.id" (change)="onCheckboxChange($event)">
+          {{ participante.nombreCompleto }}
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Confirmar Reunión</button>
+      <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+    </form>
+  </div>
+</div>

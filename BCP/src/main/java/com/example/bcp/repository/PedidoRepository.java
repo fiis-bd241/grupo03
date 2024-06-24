@@ -14,6 +14,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long>{
     @Query(value = "SELECT " +
             "p.\"Pedido_Id\" AS \"Pedido\", " +
             "a.\"Area_Nombre\" AS \"Área Solicitante\", " +
+            "s.nombre_squad AS \"Squad Encargado\", " +
             "e.\"Estado_Tipo\" AS \"Estado\", " +
             "pr.\"Prioridad_Tipo\" AS \"Prioridad\", " +
             "p.\"Pedido_Fecha\" AS \"Fecha del Pedido\", " +
@@ -29,6 +30,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long>{
     @Query(value = "SELECT " +
             "p.\"Pedido_Id\" AS \"Pedido\", " +
             "a.\"Area_Nombre\" AS \"Área Solicitante\", " +
+            "s.nombre_squad AS \"Squad Encargado\", " +
             "e.\"Estado_Tipo\" AS \"Estado\", " +
             "pr.\"Prioridad_Tipo\" AS \"Prioridad\", " +
             "p.\"Pedido_Fecha\" AS \"Fecha del Pedido\", " +
@@ -48,9 +50,11 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long>{
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO public.\"Pedido\"(\"Area_Id\", \"Prioridad_Id\", \"Estado_Id\", \"Pedido_Fecha\", \"Pedido_FechaLimite\") " +
-            "VALUES (:areaId, :prioridadId, :estadoId, CURRENT_DATE, :pedidoFechaLimite)", nativeQuery = true)
-    void crearPedido(@Param("areaId") int areaId, @Param("prioridadId") int prioridadId,
+    @Query(value = "INSERT INTO public.\"Pedido\"(\"Area_Id\", \"Id_Squad\", \"Prioridad_Id\", \"Estado_Id\", \"Pedido_Fecha\", \"Pedido_FechaLimite\") " +
+            "VALUES (:areaId, :squadId, :prioridadId, :estadoId, CURRENT_DATE, :pedidoFechaLimite)", nativeQuery = true)
+    void crearPedido(@Param("areaId") int areaId,
+                     @Param("squadId") int squadId,
+                     @Param("prioridadId") int prioridadId,
                      @Param("estadoId") int estadoId,
                      @Param("pedidoFechaLimite") java.util.Date pedidoFechaLimite);
 }
