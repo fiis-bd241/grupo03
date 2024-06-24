@@ -23,7 +23,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long>{
             "INNER JOIN public.\"Area\" a ON a.\"Area_Id\" = p.\"Area_Id\" " +
             "INNER JOIN public.\"Squad\" s ON s.\"id_squad\" = p.\"Id_Squad\" " +
             "INNER JOIN public.\"Estado\" e ON e.\"Estado_Id\" = p.\"Estado_Id\" " +
-            "INNER JOIN public.\"Prioridad\" pr ON p.\"Prioridad_Id\" = p.\"Prioridad_Id\" " +
+            "INNER JOIN public.\"Prioridad\" pr ON pr.\"Prioridad_Id\" = p.\"Prioridad_Id\" " +
             "ORDER BY p.\"Pedido_FechaLimite\" DESC",
             nativeQuery = true)
     List<Object[]> todosPedidos();
@@ -40,7 +40,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long>{
             "INNER JOIN public.\"Area\" a ON a.\"Area_Id\" = p.\"Area_Id\" " +
             "INNER JOIN public.\"Squad\" s ON s.\"id_squad\" = p.\"Id_Squad\" " +
             "INNER JOIN public.\"Estado\" e ON e.\"Estado_Id\" = p.\"Estado_Id\" " +
-            "INNER JOIN public.\"Prioridad\" pr ON p.\"Prioridad_Id\" = p.\"Prioridad_Id\" " +
+            "INNER JOIN public.\"Prioridad\" pr ON pr.\"Prioridad_Id\" = p.\"Prioridad_Id\" " +
             "ORDER BY p.\"Pedido_FechaLimite\" DESC " +
             "LIMIT 3",
             nativeQuery = true)
