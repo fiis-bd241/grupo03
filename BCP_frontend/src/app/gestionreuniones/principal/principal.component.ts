@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReunionesService } from '../../services/reuniones/reuniones.service';
+import { Router } from '@angular/router';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -21,11 +22,11 @@ export class PrincipalReunionesComponent implements OnInit {
   reunionesCompletadas: any[] = [];
 
   constructor(
-    private reunionesService: ReunionesService
+    private reunionesService: ReunionesService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-
     this.reunionesService.obtenerReunionesPendientes().subscribe(data => {
       this.reunionesPendientes = data;
     });
@@ -35,4 +36,11 @@ export class PrincipalReunionesComponent implements OnInit {
     });
   }
 
+  verDetallesPendiente(id: number) {
+    this.router.navigate(['/reunion-pendiente', id]);
+  }
+
+  verDetallesCompletada(id: number) {
+    this.router.navigate(['/reunion-completada', id]);
+  }
 }

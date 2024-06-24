@@ -34,7 +34,7 @@ export class AgregarUsuarioComponent implements OnInit {
     this.usuarioForm = this.fb.group({
       nombre: ['', Validators.required],
       rol: ['', Validators.required],
-      correo: ['', [Validators.required, Validators.email]],
+      correo: ['', [Validators.required]],
       telefono: ['', Validators.required],
       dni: ['', Validators.required]
     });
@@ -48,17 +48,30 @@ export class AgregarUsuarioComponent implements OnInit {
 
   onSubmit() {
     if (this.usuarioForm.valid) {
-      const nuevoUsuario = this.usuarioForm.value;
-      console.log('Usuario agregado:', nuevoUsuario);
-      // Aquí puedes llamar al servicio para guardar el usuario
-      // this.empleadosService.agregarUsuario(nuevoUsuario).subscribe(response => {
-      //   console.log('Usuario guardado:', response);
-      //   this.router.navigate(['/gestion/usuarios']);
-      // });
+      const nuevoUsuario = {
+        nombre: this.usuarioForm.value.nombre,
+        rol: { nombreRol: this.usuarioForm.value.rol },
+        correo: this.usuarioForm.value.correo,
+        telefono: this.usuarioForm.value.telefono,
+        dni: this.usuarioForm.value.dni
+      };
+  
+      console.log('Usuario agregado:', nuevoUsuario.nombre);
+      this.empleadosService.agregarUsuario(nuevoUsuario).subscribe({
+        next: response => {
+          console.log('Usuario guardado:', response);
+          this.router.navigate(['/gestion/usuarios']);
+        },
+        error: error => {
+          console.error('Error al agregar usuario:', error);
+          alert('Error al agregar usuario. Verifique los datos e intente nuevamente.');
+        }
+      });
     } else {
       console.error('Formulario no válido');
     }
   }
+  
 
   setUsuarioLogeado(): void {
     const usuario = localStorage.getItem('usuarioLogeado');

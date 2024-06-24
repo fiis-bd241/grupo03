@@ -39,6 +39,9 @@ export class ReunionesService {
   obtenerDetallesReunionPendiente(reunionId: number): Observable<any> {
     return this.httpClient.get<any>(`${this.baseUrl}detalles-pendiente/${reunionId}`);
   }
+  obtenerDetallesReunionCompletada(reunionId: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.baseUrl}detalles-completada/${reunionId}`);
+  }
 
   marcarReunionComoCompletada(reunionId: number): Observable<any> {
     return this.httpClient.put<any>(`${this.baseUrl}marcar-completada/${reunionId}`, {});

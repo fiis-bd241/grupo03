@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface ReunionRepository extends JpaRepository<Reunion, Integer> {
 
-    @Query(value = "SELECT 'R'|| r.\"Reunion_Id\" as \"Reunión\", " +
+    @Query(value = "SELECT r.\"Reunion_Id\" , " +
             "tr.\"Nombre\" as \"Tipo\", r.\"Fecha\", " +
             "r.\"HoraInicio\" as \"Inicio\", " +
             "r.\"HoraFin\" as \"Fin\", " +
@@ -25,7 +25,7 @@ public interface ReunionRepository extends JpaRepository<Reunion, Integer> {
             "ORDER BY \"Fecha\" DESC, \"HoraInicio\" DESC", nativeQuery = true)
     List<Object[]> obtenerReunionesCompletadas();
 
-    @Query(value = "SELECT 'R'|| r.\"Reunion_Id\" as \"Reunión\", " +
+    @Query(value = "SELECT r.\"Reunion_Id\" , " +
             "tr.\"Nombre\" as \"Tipo\", r.\"Fecha\", " +
             "r.\"HoraInicio\" as \"Inicio\", " +
             "r.\"HoraFin\" as \"Fin\", " +
@@ -40,13 +40,13 @@ public interface ReunionRepository extends JpaRepository<Reunion, Integer> {
             "\"TipoReunion_Id\", " +
             "\"Fecha\", " +
             "\"HoraInicio\", " +
-            "\"Horafin\", " +
+            "\"HoraFin\", " +
             "\"Pedido_Id\" " +
             "FROM public.\"Reunion\" " +
             "WHERE \"Reunion_Id\" LIKE %:textoBusqueda% OR " +
             "\"TipoReunion_Id\" LIKE %:textoBusqueda% OR " +
             "TO_CHAR(\"HoraInicio\"::time, 'HH24') LIKE %:textoBusqueda% OR " +
-            "TO_CHAR(\"Horafin\"::time,'HH24') LIKE %:textoBusqueda% OR " +
+            "TO_CHAR(\"HoraFin\"::time,'HH24') LIKE %:textoBusqueda% OR " +
             "TO_CHAR(\"Fecha\", 'YYYY-MM-DD') LIKE %:textoBusqueda% OR " +
             "\"Pedido_Id\" LIKE %:textoBusqueda%", nativeQuery = true)
     List<Object[]> buscarReunionesPorTexto(String textoBusqueda);
@@ -86,13 +86,28 @@ public interface ReunionRepository extends JpaRepository<Reunion, Integer> {
             "r.\"Fecha\", " +
             "r.\"HoraInicio\" as \"Inicio\", " +
             "r.\"HoraFin\" as \"Fin\", " +
-            "(\"Horafin\"::time - \"HoraInicio\"::time) AS \"Duración\", " +
+            "(\"HoraFin\"::time - \"HoraInicio\"::time) AS \"Duración\", " +
             "r.\"Plataforma\", " +
             "r.\"Agenda\" " +
             "FROM public.\"Reunion\" r " +
             "INNER JOIN public.\"Tipo_Reunion\" tr ON r.\"TipoReunion_Id\" = tr.\"TipoReunion_Id\" " +
             "WHERE \"Reunion_Id\" = :reunionId AND \"Estado\" = 'pendiente'", nativeQuery = true)
     List<Object[]> obtenerDetallesReunionPendiente(@Param("reunionId") Integer reunionId);
+
+    @Query(value = "SELECT 'R'|| r.\"Reunion_Id\" as \"Reunión\", " +
+            "tr.\"Nombre\" as \"Tipo\", " +
+            "r.\"Fecha\", " +
+            "r.\"HoraInicio\" as \"Inicio\", " +
+            "r.\"HoraFin\" as \"Fin\", " +
+            "(\"HoraFin\"::time - \"HoraInicio\"::time) AS \"Duración\", " +
+            "r.\"Plataforma\", " +
+            "r.\"Agenda\", " +
+            "r.\"Acuerdos\" " +
+            "FROM public.\"Reunion\" r " +
+            "INNER JOIN public.\"Tipo_Reunion\" tr ON r.\"TipoReunion_Id\" = tr.\"TipoReunion_Id\" " +
+            "WHERE r.\"Reunion_Id\" = :reunionId AND r.\"Estado\" = 'completada'", nativeQuery = true)
+    List<Object[]> obtenerDetallesReunionCompletada(@Param("reunionId") Integer reunionId);
+
 
     @Modifying
     @Transactional

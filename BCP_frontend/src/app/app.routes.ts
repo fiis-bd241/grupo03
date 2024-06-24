@@ -18,6 +18,9 @@ import { AuthGuard } from './guards/auth.guard';
 import { ListaUsuariosComponent } from './gestionusuarios/listausuarios/listausuarios.component';
 import { SeleccionarParticipantesComponent } from "./gestionreuniones/seleccionarparticipantes/seleccionarparticipantes.component";
 import { AgregarUsuarioComponent } from './gestionusuarios/agregarusuario/agregarusuario.component';
+import { VerreunionpendienteComponent} from "./gestionreuniones/verreunionpendiente/verreunionpendiente.component";
+import { VerreunioncompletadaComponent} from "./gestionreuniones/verreunioncompletada/verreunioncompletada.component";
+import {VerreporteconformidadComponent} from "./gestionreuniones/verreporteconformidad/verreporteconformidad.component";
 
 export const routes: Routes = [
   {
@@ -118,6 +121,21 @@ export const routes: Routes = [
     component: SeleccionarParticipantesComponent,
     canActivate: [AuthGuard]
   },
+  {
+    path: 'reunion-pendiente/:id',
+    component: VerreunionpendienteComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'reunion-completada/:id',
+    component: VerreunioncompletadaComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: 'reporte-conformidad/:id',
+    component: VerreporteconformidadComponent,
+    canActivate: [AuthGuard]
+  },
+
   {
     path: '**',
     redirectTo: '/login',

@@ -4,8 +4,9 @@ import com.example.bcp.dto.EmpleadoConRolDTO;
 import com.example.bcp.model.Empleado;
 import com.example.bcp.service.EmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,4 +30,12 @@ public class EmpleadoRest {
         return empleadoService.obtenerTodosLosEmpleados();
     }
 
+    @PostMapping("/agregar-empleado")
+    public void agregarEmpleado(@RequestBody Empleado empleado) {
+    empleadoService.agregarEmpleado(
+        empleado
+    );
 }
+}
+
+

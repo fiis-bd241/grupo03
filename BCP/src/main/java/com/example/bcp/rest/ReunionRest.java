@@ -54,6 +54,10 @@ public class ReunionRest {
     public List<Object[]> obtenerDetallesReunionPendiente(@PathVariable Integer reunionId) {
         return reunionService.obtenerDetallesReunionPendiente(reunionId);
     }
+    @GetMapping("/detalles-completada/{reunionId}")
+    public List<Object[]> obtenerDetallesReunionCompletada(@PathVariable Integer reunionId) {
+        return reunionService.obtenerDetallesReunionCompletada(reunionId);
+    }
 
     @PutMapping("/marcar-completada/{reunionId}")
     public ResponseEntity<?> marcarReunionComoCompletada(@PathVariable Integer reunionId) {

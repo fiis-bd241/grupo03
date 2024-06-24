@@ -1,1 +1,42 @@
-<p>verreporteconformidad works!</p>
+<h1 class="titulo1">Reporte de Conformidad</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>Pedido ID: {{ pedidoId }}</h2>
+      <h3>Reuniones Asociadas</h3>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">ID Reunión</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Hora Inicio</th>
+            <th scope="col">Hora Fin</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let reunion of reuniones">
+            <td>{{ reunion.id }}</td>
+            <td>{{ reunion.tipo }}</td>
+            <td>{{ reunion.fecha }}</td>
+            <td>{{ reunion.horaInicio }}</td>
+            <td>{{ reunion.horaFin }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Acuerdos</h3>
+      <ul>
+        <li *ngFor="let acuerdo of acuerdos">{{ acuerdo }}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-4">
+    <div class="col text-center">
+      <button class="btn btn-secondary mx-2" (click)="cancelar()">Cancelar</button>
+      <button class="btn btn-primary mx-2" (click)="confirmar()">Confirmar</button>
+    </div>
+  </div>
+</div>
