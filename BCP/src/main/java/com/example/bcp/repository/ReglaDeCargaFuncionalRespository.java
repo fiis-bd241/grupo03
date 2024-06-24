@@ -21,7 +21,7 @@ public interface ReglaDeCargaFuncionalRespository extends JpaRepository<ReglaDeC
     void crearRegladeCargaFuncional(@Param("migracionId") int migracionId,
                                     @Param("tecnologiaId") int tecnologiaId,
                                     @Param("logica") String logica);
-    @Query(value = " SELECT \"Logica\" FROM \"ReglaDeCargaFuncional\" rfun\n" +
+    @Query(value = "SELECT \"Logica\" FROM \"ReglaDeCargaFuncional\" rfun\n" +
             "WHERE rfun.\"id_migracion\"=:migracionId", nativeQuery = true)
     List<Object[]> buscarReglaFuncPorMigracion(@Param("migracionId") Integer migracionId);
 }
