@@ -1,65 +1,64 @@
 <!-- Pantalla de gestión de usuarios -->
 <div class="sidebar">
-    <img src="assets/bcp-logo.png" alt="BCP Logo" class="logo">
-    <ul>
-      <li><a href="/gestion/usuarios">Gestión de usuarios</a></li>
-      <li><a href="#">Ajustes de seguridad</a></li>
-      <li><a href="#">Mantenimiento de base de datos</a></li>
-      <li><a href="#">Rendimiento de usuarios</a></li>
-    </ul>
+  <img src="assets/bcp-logo.png" alt="BCP Logo" class="logo">
+  <ul>
+    <li><a href="/gestion/usuarios">Gestión de usuarios</a></li>
+    <li><a href="#">Ajustes de seguridad</a></li>
+    <li><a href="#">Mantenimiento de base de datos</a></li>
+    <li><a href="#">Rendimiento de usuarios</a></li>
+  </ul>
+</div>
+
+<!-- Contenido principal -->
+<div class="main-content">
+<div class="header">
+  <div class="header-left">
+    <h5>Hora actual: {{ now | date: 'HH:mm:ss' }}</h5>
   </div>
-  
-  <!-- Contenido principal -->
-  <div class="main-content">
-    <div class="header">
-      <div class="header-left">
-        <h5>Hora actual: {{ now | date: 'HH:mm:ss' }}</h5>
-      </div>
-      <div class="header-right">
-        <h5>{{ usuarioLogeado }}</h5>
-      </div>
-    </div>
-    
-    <h1>Agregar Usuario</h1>
-    <div class="card">
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link" href="/gestion/usuarios">Usuarios</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/gestion/agregar-usuario">Agregar usuario</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Modificar Usuario</a>
-        </li>
-      </ul>
-      <div class="form-container">
-        <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" formControlName="nombre">
-          </div>
-          <div class="form-group">
-            <label for="rol">Rol</label>
-            <select id="rol" formControlName="rol">
-              <option *ngFor="let rol of roles" [value]="rol">{{ rol }}</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="correo">Correo</label>
-            <input type="email" id="correo" formControlName="correo">
-          </div>
-          <div class="form-group">
-            <label for="telefono">Teléfono</label>
-            <input type="text" id="telefono" formControlName="telefono">
-          </div>
-          <div class="form-group">
-            <label for="dni">DNI</label>
-            <input type="text" id="dni" formControlName="dni">
-          </div>
-          <button type="submit" class="btn-submit">Generar credenciales</button>
-        </form>
-      </div>
-    </div>
+  <div class="header-right">
+    <h5>{{ usuarioLogeado }}</h5>
   </div>
-  
+</div>
+
+<h1>Agregar Usuario</h1>
+<div class="card">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" href="/gestion/usuarios">Usuarios</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/gestion/agregar-usuario">Agregar usuario</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Modificar Usuario</a>
+    </li>
+  </ul>
+  <div class="form-container">
+    <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" formControlName="nombre">
+      </div>
+      <div class="form-group">
+        <label for="rol">Rol</label>
+        <select id="rol" formControlName="rol">
+          <option *ngFor="let rol of roles" [value]="rol">{{ rol }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="correo">Correo</label>
+        <input type="email" id="correo" formControlName="correo">
+      </div>
+      <div class="form-group">
+        <label for="telefono">Teléfono</label>
+        <input type="text" id="telefono" formControlName="telefono">
+      </div>
+      <div class="form-group">
+        <label for="dni">DNI</label>
+        <input type="text" id="dni" formControlName="dni">
+      </div>
+      <button type="submit" class="btn-submit">Generar credenciales</button>
+    </form>
+  </div>
+</div>
+</div>

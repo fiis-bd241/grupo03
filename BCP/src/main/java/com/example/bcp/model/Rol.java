@@ -24,6 +24,10 @@ public class Rol {
         this.nivelAcceso = nivelAcceso;
     }
 
+    public Rol(String nombreRol) {
+        this.nombreRol = nombreRol;
+    }
+
     public Rol() {
         super();
     }

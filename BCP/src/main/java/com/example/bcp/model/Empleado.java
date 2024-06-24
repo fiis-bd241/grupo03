@@ -45,6 +45,14 @@ public class Empleado {
         this.rol = rol;
     }
 
+    public Empleado(String nombre, Rol rol, String correo, String telefono, String dni) {
+        this.nombre = nombre;
+        this.rol = rol;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.dni = dni;
+    }
+
     public Empleado() {}
 
     // Getters and Setters
