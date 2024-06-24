@@ -1,7 +1,6 @@
 package com.example.bcp.rest;
 
 import com.example.bcp.service.ReglaDeCargaTecnicaService;
-import com.example.bcp.service.UniversoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,19 +12,25 @@ import org.springframework.web.bind.annotation.RestController;
 public class ReglaDeCargaTecnicaRest {
     @Autowired
     private ReglaDeCargaTecnicaService reglaDeCargaTecnicaService;
+
     @PutMapping("/enviarRCT")
     public void enviarReglaParaRevision(
             @RequestParam("migracionId") Integer migracionId,
             @RequestParam("codigo") String codigo) {
-        reglaDeCargaTecnicaService.enviarReglaParaRevision(migracionId,codigo);}
+        reglaDeCargaTecnicaService.enviarReglaParaRevision(migracionId, codigo);
+    }
+
     @PutMapping("/finalizarRCT")
     public void finalizarReglaDeCarga(
             @RequestParam("migracionId") Integer migracionId,
             @RequestParam("comentario") String comentario) {
-        reglaDeCargaTecnicaService.finalizarReglaDeCarga(migracionId,comentario);}
-    @PutMapping("/finalizarRCT")
+        reglaDeCargaTecnicaService.finalizarReglaDeCarga(migracionId, comentario);
+    }
+
+    @PutMapping("/corregirRCT")
     public void corregirReglaeDeCarga(
             @RequestParam("migracionId") Integer migracionId,
             @RequestParam("comentario") String comentario) {
-        reglaDeCargaTecnicaService.corregirReglaeDeCarga(migracionId,comentario);}
+        reglaDeCargaTecnicaService.corregirReglaeDeCarga(migracionId, comentario);
+    }
 }

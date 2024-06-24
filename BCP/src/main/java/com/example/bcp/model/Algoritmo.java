@@ -11,12 +11,16 @@ public class Algoritmo {
     @Id
     @Column(name = "\"id_algoritmo\"")
     private Integer algoritmoId;
+
     @Column(name = "\"nombre_algoritmo\"", length = 200)
     private String nombreAlgoritmo;
+
     @Column(name = "\"descripcion\"")
     private String descripcion;
+
     @Column(name = "\"longClave\"", length = 200)
     private String longClave;
+
     @Column(name = "\"tipo\"", length = 200)
     private String tipo;
 
