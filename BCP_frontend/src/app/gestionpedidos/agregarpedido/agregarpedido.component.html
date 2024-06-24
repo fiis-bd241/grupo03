@@ -13,21 +13,21 @@
       </div>
     </div>
     <div class="form-group">
+      <label>Squad Encargado</label>
+      <select id="squad" formControlName="squadId" class="form-control" required>
+        <option *ngFor="let squad of squads" [value]="squad[0]">{{ squad[1] }}</option>
+      </select>
+      <div *ngIf="pedidoForm.get('squadId').invalid && pedidoForm.get('squadId').touched" class="text-danger">
+        El Squad es requerido.
+      </div>
+    </div>
+    <div class="form-group">
       <label>Prioridad</label>
       <select id="prioridad" formControlName="prioridadId" class="form-control" required>
         <option *ngFor="let prioridad of prioridades" [value]="prioridad[0]">{{ prioridad[1] }}</option>
       </select>
       <div *ngIf="pedidoForm.get('prioridadId').invalid && pedidoForm.get('prioridadId').touched" class="text-danger">
         Prioridad es requerida.
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Estado</label>
-      <select id="estado" formControlName="estadoId" class="form-control" required>
-        <option *ngFor="let estado of estados" [value]="estado[0]">{{ estado[1] }}</option>
-      </select>
-      <div *ngIf="pedidoForm.get('estadoId').invalid && pedidoForm.get('estadoId').touched" class="text-danger">
-        Estado es requerido.
       </div>
     </div>
     <div class="form-group">

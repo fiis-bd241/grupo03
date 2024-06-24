@@ -58,8 +58,8 @@ public class Pedido {
         return squadId;
     }
 
-    public void setSquadId(Area squadId) {
-        squadId = squadId;
+    public void setSquadId(Squad squadId) {
+        this.squadId = squadId;
     }
 
     public Prioridad getPrioridadId() {
