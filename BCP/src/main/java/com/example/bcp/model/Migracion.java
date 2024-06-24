@@ -17,15 +17,12 @@ public class Migracion {
     private Pedido pedidoId;
 
     @ManyToOne
-    @JoinColumn(name = "\"Id_Squad\"", nullable = false)
-    private Squad SquadId;
-
-    @ManyToOne
     @JoinColumn(name = "\"Id_Tecnologia\"", nullable = false)
     private Tecnologia TecnologiaId;
 
-    @Column(name = "\"Entorno\"", length = 50)
-    private String entorno;
+    @ManyToOne
+    @JoinColumn(name = "\"AmbienteId\"", nullable = false)
+    private Ambiente AmbienteId;
 
     @Column(name = "\"Fecha_migracion\"")
     @Temporal(TemporalType.DATE)
@@ -59,14 +56,6 @@ public class Migracion {
         this.pedidoId = pedidoId;
     }
 
-    public Squad getSquadId() {
-        return SquadId;
-    }
-
-    public void setSquadId(Squad SquadId) {
-        this.SquadId = SquadId;
-    }
-
     public Tecnologia getTecnologiaId() {
         return TecnologiaId;
     }
@@ -75,12 +64,12 @@ public class Migracion {
         this.TecnologiaId = TecnologiaId;
     }
 
-    public String getEntorno() {
-        return entorno;
+    public Ambiente getAmbienteId() {
+        return AmbienteId;
     }
 
-    public void setEntorno(String entorno) {
-        this.entorno = entorno;
+    public void setAmbienteId(Ambiente ambienteId) {
+        AmbienteId = ambienteId;
     }
 
     public Date getFechaMigracion() {
@@ -112,11 +101,10 @@ public class Migracion {
         this.ultimo = ultimo;
     }
 
-    public Migracion(Pedido pedidoId, Squad idSquad, Tecnologia idTecnologia, String entorno, Date fechaMigracion, Boolean valido, Boolean ultimo) {
+    public Migracion(Pedido pedidoId, Tecnologia TecnologiaId, Ambiente AmbienteId, Date fechaMigracion, Boolean valido, Boolean ultimo) {
         this.pedidoId = pedidoId;
-        this.SquadId = idSquad;
-        this.TecnologiaId = idTecnologia;
-        this.entorno = entorno;
+        this.TecnologiaId = TecnologiaId;
+        this.AmbienteId = AmbienteId;
         this.fechaMigracion = fechaMigracion;
         this.valido = valido;
         this.ultimo = ultimo;

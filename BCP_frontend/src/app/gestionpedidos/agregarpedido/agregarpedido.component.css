@@ -1,0 +1,9 @@
+.btn-prioridad {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.btn-prioridad .btn-radio {
+  margin-left: 10px;
+}

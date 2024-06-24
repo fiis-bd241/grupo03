@@ -1,6 +1,7 @@
 package com.example.bcp.service;
 
 import com.example.bcp.model.Reunion;
+import com.example.bcp.repository.ParticipaEnRepository;
 import com.example.bcp.repository.ReunionRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class ReunionService  {
 
     @Autowired
     private ReunionRepository reunionRepository;
+
+    @Autowired
+    private ParticipaEnRepository participaEnRepository;
 
     public List<Object[]> obtenerReunionesCompletadas() {
         return reunionRepository.obtenerReunionesCompletadas();
@@ -44,7 +48,12 @@ public class ReunionService  {
 
         reunionRepository.crearReunion(idEmpleado, pedidoId, tipoReunionId, horaInicio, horaFin, plataforma, fecha, agenda);
     }
-
+    @Transactional
+    public void asociarParticipantesAReunion(Integer reunionId, List<Integer> participanteIds) {
+        for (Integer participanteId : participanteIds) {
+            participaEnRepository.asociarParticipanteAReunion(reunionId, participanteId);
+        }
+    }
 
     public List<Object[]> obtenerDetallesReunionPendiente(Integer reunionId) {
         return reunionRepository.obtenerDetallesReunionPendiente(reunionId);

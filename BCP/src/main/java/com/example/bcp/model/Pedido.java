@@ -17,6 +17,10 @@ public class Pedido {
     private Area areaId;
 
     @ManyToOne
+    @JoinColumn(name = "\"Id_Squad\"", nullable = false)
+    private Squad squadId;
+
+    @ManyToOne
     @JoinColumn(name = "\"Prioridad_Id\"", nullable = false)
     private Prioridad prioridadId;
 
@@ -48,6 +52,14 @@ public class Pedido {
 
     public void setAreaId(Area areaId) {
         this.areaId = areaId;
+    }
+
+    public Squad getSquadId() {
+        return squadId;
+    }
+
+    public void setSquadId(Squad squadId) {
+        this.squadId = squadId;
     }
 
     public Prioridad getPrioridadId() {
@@ -86,8 +98,9 @@ public class Pedido {
         // Constructor por defecto
     }
 
-    public Pedido(Area areaId, Prioridad prioridadId, Estado estadoId, Date pedidoFecha, Date pedidoFechaLimite) {
+    public Pedido(Area areaId, Squad squadId, Prioridad prioridadId, Estado estadoId, Date pedidoFecha, Date pedidoFechaLimite) {
         this.areaId = areaId;
+        this.squadId = squadId;
         this.prioridadId = prioridadId;
         this.estadoId = estadoId;
         this.pedidoFecha = pedidoFecha;

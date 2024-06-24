@@ -26,17 +26,15 @@ public class Empleado {
     @Column(name = "\"dni\"")
     private String dni;
 
-    @Column(name = "\"rol_id\"")
-    private Integer rolId;
+    @Column(name = "\"rol_id\"", insertable = false, updatable = false) // para permitir que el campo este para consultas nativas
+    private Integer rolId; 
 
+    @ManyToOne
+    @JoinColumn(name = "\"rol_id\"", insertable = false, updatable = false)
+    private Rol rol;
 
     // Constructor
-
-    public Empleado(Integer idEmpleado
-
-            , String nombre, String correo, String contraseña, String telefono, String dni,
-                    Integer rolId) {
-        super();
+    public Empleado(Integer idEmpleado, String nombre, String correo, String contraseña, String telefono, String dni, Integer rolId, Rol rol) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;
         this.correo = correo;
@@ -44,12 +42,12 @@ public class Empleado {
         this.telefono = telefono;
         this.dni = dni;
         this.rolId = rolId;
+        this.rol = rol;
     }
 
-    public Empleado() {
-        super();
-    }
+    public Empleado() {}
 
+    // Getters and Setters
     public Integer getIdEmpleado() {
         return idEmpleado;
     }
@@ -104,5 +102,13 @@ public class Empleado {
 
     public void setRolId(Integer rolId) {
         this.rolId = rolId;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 }

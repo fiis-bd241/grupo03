@@ -16,6 +16,7 @@ public interface ParticipaEnRepository extends JpaRepository<ParticipaEn, Intege
     @Query(value = "INSERT INTO public.\"Participa_en\" (\"Reunion_Id\", \"Participante_Id\") VALUES (:reunionId, :participanteId)",
             nativeQuery = true)
     void asociarParticipanteAReunion(@Param("reunionId") Integer reunionId, @Param("participanteId") Integer participanteId);
+
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO public.\"Participa_en\"(\"Reunion_Id\", \"Participante_Id\") VALUES (:reunionId, :participanteId)", nativeQuery = true)

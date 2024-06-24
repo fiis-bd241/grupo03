@@ -4,7 +4,7 @@ import {PedidosService} from "../../services/pedidos/pedidos.service";
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {MigracionesService} from "../../services/migraciones/migraciones.service";
-import {SquadsService} from "../../services/squads/squads.service";
+import {AmbientesService} from "../../services/ambientes/ambientes.service";
 import {TecnologiasService} from "../../services/tecnologias/tecnologias.service";
 
 
@@ -22,14 +22,14 @@ import {TecnologiasService} from "../../services/tecnologias/tecnologias.service
 })
 export class AgregarmigracionComponent implements OnInit {
   migracionForm: FormGroup;
-  squads: any;
+  ambientes: any;
   tecnologias: any;
   pedidos: any;
 
   constructor(
     private fb: FormBuilder,
     public migracionService: MigracionesService,
-    public squadService: SquadsService,
+    public ambientesService: AmbientesService,
     public tecnologiaService: TecnologiasService,
     public pedidosService: PedidosService
   ) {
@@ -38,13 +38,12 @@ export class AgregarmigracionComponent implements OnInit {
   ngOnInit(): void {
     this.migracionForm = this.fb.group({
       pedidoId: ['', Validators.required],
-      squadId: ['', Validators.required],
-      tecnologiaId: ['', Validators.required],
-      entorno: ['', Validators.required]
+      ambienteId: ['', Validators.required],
+      tecnologiaId: ['', Validators.required]
     });
 
-    this.squadService.todoSquads().subscribe(data => {
-        this.squads = data;
+    this.ambientesService.todoAmbientes().subscribe(data => {
+        this.ambientes = data;
       });
 
     this.tecnologiaService.todoTecnologias().subscribe(data => {
@@ -59,9 +58,8 @@ export class AgregarmigracionComponent implements OnInit {
   guardar(): void {
     const migracionData = {
       pedidoId: { pedidoId: this.migracionForm.value.pedidoId },
-      squadId: { squadId: this.migracionForm.value.squadId },
-      tecnologiaId: { tecnologiaId: this.migracionForm.value.tecnologiaId },
-      entorno: this.migracionForm.value.entorno
+      ambienteId: { ambienteId: this.migracionForm.value.ambienteId },
+      tecnologiaId: { tecnologiaId: this.migracionForm.value.tecnologiaId }
     };
 
     this.migracionService.crearMigracion(migracionData).subscribe(

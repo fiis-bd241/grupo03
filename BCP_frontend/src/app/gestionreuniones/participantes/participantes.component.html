@@ -1,8 +1,0 @@
-<ul>
-  <li *ngFor="let participante of participantes">
-    <label>
-      <input type="checkbox" (change)="onParticipanteSeleccionado($event, participante.id)">
-      {{ participante.nombre }}
-    </label>
-  </li>
-</ul>

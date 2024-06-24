@@ -1,21 +1,122 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
 .sidebar {
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding-top: 20px;
-  }
-  
-  .table-responsive {
-    margin-top: 20px;
-  }
-  
-  .nav-tabs .nav-link.active {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .nav-link {
-    color: #007bff;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100vh;
+  background-color: #333;
+  padding: 20px;
+  color: #fff;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+.sidebar a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+  background-color: #444;
+}
+
+.main-content {
+  margin-left: 220px;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #007bff;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.nav-tabs .nav-link {
+  border: 1px solid #ddd;
+  border-radius: 5px 5px 0 0;
+  margin-right: 5px;
+  background-color: #f0f0f0;
+  padding: 10px;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff #007bff #ddd;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.table-users {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table-users th,
+.table-users td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.table-users th {
+  background-color: #007bff;
+  color: white;
+}
+
+.table-users th, .table-users td {
+  min-width: 120px;
+  white-space: nowrap;
+}
+
+.table-users td {
+  vertical-align: middle;
+}
+
+.table-users th.resizeable {
+  position: relative;
+}
+
+.table-users th.resizeable::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  cursor: col-resize; 
+}

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VerreportetareasComponent } from './verreportetareas.component';
+import { VerReporteTareasComponent } from './verreportetareas.component';
 
 describe('VerreportetareasComponent', () => {
-  let component: VerreportetareasComponent;
-  let fixture: ComponentFixture<VerreportetareasComponent>;
+  let component: VerReporteTareasComponent;
+  let fixture: ComponentFixture<VerReporteTareasComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VerreportetareasComponent]
+      imports: [VerReporteTareasComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(VerreportetareasComponent);
+
+    fixture = TestBed.createComponent(VerReporteTareasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

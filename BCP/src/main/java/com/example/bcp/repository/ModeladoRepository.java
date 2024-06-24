@@ -41,15 +41,15 @@ public interface ModeladoRepository extends JpaRepository<Modelado, Long> {
     List<Object[]> deftecnicaPorPedido(@Param("pedidoId") Integer pedidoId);
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO public.\"Modelado\" (id_referencia, \"EsquemaDDV\",\"TablaDDV\",\"CampoDDV\",\"CampoLlave\",\"Campo_Descarta\")" +
-            "SELECT \"id_DT\", NULL, NULL, :campoDDV, :campoLlave, :campoDescarta " +
-            "FROM public.\"DefinicionesTecnicas\"" +
-            "WHERE \"Campo\" = :campo ",
-    nativeQuery = true)
-    void insertarModelo(@Param("campoDDV") String campoDDV,
+    @Query(value = " INSERT INTO public.\"Modelado\" (id_referencia, \"EsquemaDDV\",\"TablaDDV\",\"CampoDDV\",\"CampoLlave\",\"Campo_Descarta\") " +
+            " SELECT \"id_DT\", NULL, NULL, :campoDDV, :campoLlave , :campoDescarta " +
+            " FROM public.\"DefinicionesTecnicas\" " +
+            " WHERE \"Campo\" = :campo ",
+            nativeQuery = true)
+    void insertarModelo(@Param("campo") String campo,
+                        @Param("campoDDV") String campoDDV,
                         @Param("campoLlave") boolean campoLlave,
-                        @Param("campoDescarta") boolean campoDescarta,
-                        @Param("campo") String campo);
+                        @Param("campoDescarta") boolean campoDescarta);
 
     @Modifying
     @Transactional

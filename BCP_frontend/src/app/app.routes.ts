@@ -12,9 +12,12 @@ import { VerReporteTareasComponent } from "./equivalenciasymodelo/verreportetare
 import { VerconceptosnegocioComponent } from "./equivalenciasymodelo/verconceptosnegocio/verconceptosnegocio.component";
 import { VerequivalenciasComponent } from "./equivalenciasymodelo/verequivalencias/verequivalencias.component";
 import { VermodeloDDVComponent } from "./equivalenciasymodelo/vermodelo-ddv/vermodelo-ddv.component";
+import {AgregarmodeloDdvComponent} from "./equivalenciasymodelo/agregarmodelo-ddv/agregarmodelo-ddv.component";
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ListaUsuariosComponent } from './gestionusuarios/listausuarios/listausuarios.component';
+import { SeleccionarParticipantesComponent } from "./gestionreuniones/seleccionarparticipantes/seleccionarparticipantes.component";
+import { AgregarUsuarioComponent } from './gestionusuarios/agregarusuario/agregarusuario.component';
 
 export const routes: Routes = [
   {
@@ -30,6 +33,13 @@ export const routes: Routes = [
     component: ListaUsuariosComponent,
     canActivate: [AuthGuard]
   },
+
+  {
+    path: 'gestion/agregar-usuario',
+    component: AgregarUsuarioComponent,
+    canActivate: [AuthGuard]
+  },
+
   {
     path: 'principal',
     component: PrincipalComponent,
@@ -90,11 +100,30 @@ export const routes: Routes = [
     component: VermodeloDDVComponent,
     canActivate: [AuthGuard]
   },
+
+  {
+    path: 'agregar-modelo',
+    component: AgregarmodeloDdvComponent,
+    canActivate: [AuthGuard]
+  },
+
+
+  {
+    path: 'paso1',
+    component: CrearReunionComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'paso2',
+    component: SeleccionarParticipantesComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: '**',
     redirectTo: '/login',
     pathMatch: 'full'
-  }
+  },
+
 ];
 
 @NgModule({
