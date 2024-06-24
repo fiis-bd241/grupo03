@@ -2,10 +2,7 @@ package com.example.bcp.rest;
 
 import com.example.bcp.service.ReglaDeCargaTecnicaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/RCT/")
@@ -13,7 +10,7 @@ public class ReglaDeCargaTecnicaRest {
     @Autowired
     private ReglaDeCargaTecnicaService reglaDeCargaTecnicaService;
 
-    @PutMapping("/enviarRCT")
+    @PostMapping("/enviarRCT")
     public void enviarReglaParaRevision(
             @RequestParam("migracionId") Integer migracionId,
             @RequestParam("codigo") String codigo) {

@@ -19,7 +19,7 @@ public class ReglaDeCargaFuncionalRest {
     public List<Object[]> buscarReglaFuncPorMigracion(@RequestBody Migracion migracion) {
         return reglaDeCargaFuncionalService.buscarReglaFuncPorMigracion(migracion);
     }
-    @PutMapping("/crearRCF")
+    @PostMapping("/crearRCF")
     public void crearRegladeCargaFuncional(@RequestBody ReglaDeCargaFuncional reglaDeCargaFuncional){
         reglaDeCargaFuncionalService.crearRegladeCargaFuncional(reglaDeCargaFuncional);}
 

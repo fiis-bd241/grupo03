@@ -19,7 +19,7 @@ public class RegistroDeErroresRest {
     public List<Object[]> todoCausasYCorreciones(@RequestBody Pedido pedido) {
         return registroDeErroresService.todoCausasYCorreciones(pedido);
     }
-    @PutMapping("/registrar")
+    @PostMapping("/registrar")
     public void registrarError(@RequestBody RegistroDeErrores registroDeErrores){
         registroDeErroresService.registrarError(registroDeErrores);}
 }
