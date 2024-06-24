@@ -16,8 +16,8 @@ public class ModeladoService {
         return modeladoRepository.findTodosModelos(campo);
     }
 
-    public void insertarModelo(String campoDDV, boolean campoLlave, boolean campoDescarta, String campo){
-        modeladoRepository.insertarModelo(campoDDV, campoLlave,campoDescarta,campo);
+    public void insertarModelo(String campo, String campoDDV, boolean campoLlave, boolean campoDescarta){
+        modeladoRepository.insertarModelo(campo, campoDDV, campoLlave,campoDescarta);
     }
 
     public void actualizarEsquemaTablas(String esquemaDDV, String tablaDDV, String campo){

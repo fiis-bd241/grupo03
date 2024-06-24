@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,6 @@ export class ModeladoService {
   private apiUrl2 = "http://localhost:8080/modelado/crear-modelo";
   private apiUrl3 = "http://localhost:8080/modelado/actualizar-esquema-tabla";
 
-
-
-
   constructor(private httpClient: HttpClient) { }
 
   public getModelo(campo: string): Observable<any> {
@@ -20,13 +17,22 @@ export class ModeladoService {
     return this.httpClient.get<any>(url);
   }
 
-  public crearModelo(campoDDV: string, campoLlave: boolean, campoDescarta: boolean, campo: string): Observable<any> {
-    const body = { campoDDV, campoLlave, campoDescarta, campo };
-    return this.httpClient.post<any>(this.apiUrl2, body);
+  public crearModelo(campo: string, campoDDV: string, campoLlave: boolean, campoDescarta: boolean): Observable<any> {
+    const params = new HttpParams()
+      .set('campo', campo)
+      .set('campoDDV', campoDDV)
+      .set('campoLlave', campoLlave.toString())
+      .set('campoDescarta', campoDescarta.toString());
+    return this.httpClient.post(this.apiUrl2, null, { params });
   }
 
-  public actualizarEsquemaTabla(esquemaDDV: string, tablaDDV: string, campo: string): Observable<any> {
-    const body = { esquemaDDV, tablaDDV, campo };
-    return this.httpClient.put<any>(this.apiUrl3, body);
+  public actualizarEsquemaTabla(campo: string, esquemaDDV: string, tablaDDV: string): Observable<any> {
+    const params = new HttpParams()
+      .set('esquemaDDV', esquemaDDV)
+      .set('tablaDDV', tablaDDV);
+    const url = `${this.apiUrl3}/${campo}`;
+    return this.httpClient.put(url, null, { params });
   }
 }
+
+
