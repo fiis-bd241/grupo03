@@ -16,10 +16,10 @@
             <th scope="col">Hora Inicio</th>
             <th scope="col">Hora Fin</th>
             <th scope="col">Pedido ID</th>
+            <th scope="col">Acciones</th>
           </tr>
           </thead>
           <tbody>
-          <!-- Aquí se deben iterar las reuniones completadas -->
           <tr *ngFor="let reunion of reunionesCompletadas">
             <td>{{ reunion[0] }}</td>
             <td>{{ reunion[1] }}</td>
@@ -27,6 +27,9 @@
             <td>{{ reunion[3] }}</td>
             <td>{{ reunion[4] }}</td>
             <td>{{ reunion[5] }}</td>
+            <td>
+              <a [routerLink]="['/reunion-completada', reunion[0]]">Ver Detalles</a>
+            </td>
           </tr>
           </tbody>
         </table>
@@ -53,10 +56,10 @@
             <th scope="col">Hora Inicio</th>
             <th scope="col">Hora Fin</th>
             <th scope="col">Pedido ID</th>
+            <th scope="col">Acciones</th>
           </tr>
           </thead>
           <tbody>
-          <!-- Aquí se deben iterar las reuniones pendientes -->
           <tr *ngFor="let reunion of reunionesPendientes">
             <td>{{ reunion[0] }}</td>
             <td>{{ reunion[1] }}</td>
@@ -64,6 +67,9 @@
             <td>{{ reunion[3] }}</td>
             <td>{{ reunion[4] }}</td>
             <td>{{ reunion[5] }}</td>
+            <td>
+              <a [routerLink]="['/reunion-pendiente', reunion[0]]">Ver Detalles</a>
+            </td>
           </tr>
           </tbody>
         </table>

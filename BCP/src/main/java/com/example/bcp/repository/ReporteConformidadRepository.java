@@ -31,18 +31,22 @@ public interface ReporteConformidadRepository extends JpaRepository<ReporteConfo
             "WHERE \"Reunion_Id\" = :reunionId)", nativeQuery = true)
     void actualizarEstadoReporteConformidad(@Param("reunionId") Integer reunionId);
 
-    @Query(value = "SELECT r.\"Reunion_Id\", rrc.\"Reporte_Id\", r.\"HoraInicio\", r.\"HoraFin\", r.\"Agenda\", r.\"Acuerdos\" " +
+    @Query(value = "SELECT r.\"Reunion_Id\", rc.\"Tipo_Reporte\", r.\"Fecha\", r.\"HoraInicio\", r.\"HoraFin\", r.\"Acuerdos\" ,rc.\"Pedido_Id\"" +
             "FROM public.\"Reunion_Reporte_Conformidad\" rrc " +
             "JOIN public.\"Reunion\" r ON rrc.\"Reunion_Id\" = r.\"Reunion_Id\" " +
             "JOIN public.\"Reporte_Conformidad\" rc ON rrc.\"Reporte_Id\" = rc.\"Reporte_Id\" " +
-            "WHERE r.\"Pedido_Id\" = (SELECT \"Pedido_Id\" FROM public.\"Reunion\" WHERE \"Reunion_Id\" = :reunionId) " +
-            "AND r.\"TipoReunion_Id\" = (SELECT tr.\"TipoReunion_Id\" " +
-            "FROM public.\"Reunion\" r " +
-            "INNER JOIN public.\"Tipo_Reunion\" tr ON r.\"TipoReunion_Id\" = tr.\"TipoReunion_Id\" " +
-            "WHERE r.\"Reunion_Id\" = :reunionId) " +
+            "WHERE r.\"Pedido_Id\" = ( " +
+            "    SELECT \"Pedido_Id\" " +
+            "    FROM public.\"Reunion\" " +
+            "    WHERE \"Reunion_Id\" = :reunionId " +
+            ") " +
+            "AND r.\"TipoReunion_Id\" = ( " +
+            "    SELECT tr.\"TipoReunion_Id\" " +
+            "    FROM public.\"Reunion\" r " +
+            "    INNER JOIN public.\"Tipo_Reunion\" tr ON r.\"TipoReunion_Id\" = tr.\"TipoReunion_Id\" " +
+            "    WHERE r.\"Reunion_Id\" = :reunionId " +
+            ") " +
             "AND rc.\"Estado\" = 'completado'", nativeQuery = true)
     List<Object[]> generarVistaPreviaReporte(@Param("reunionId") Integer reunionId);
-
-
 
 }

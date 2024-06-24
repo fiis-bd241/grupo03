@@ -58,6 +58,9 @@ public class ReunionService  {
     public List<Object[]> obtenerDetallesReunionPendiente(Integer reunionId) {
         return reunionRepository.obtenerDetallesReunionPendiente(reunionId);
     }
+    public List<Object[]> obtenerDetallesReunionCompletada(Integer reunionId) {
+        return reunionRepository.obtenerDetallesReunionCompletada(reunionId);
+    }
 
     @Transactional
     public void marcarReunionComoCompletada(Integer reunionId) {
