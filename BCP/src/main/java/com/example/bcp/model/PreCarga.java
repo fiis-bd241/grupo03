@@ -28,4 +28,36 @@ public class PreCarga {
 
     public PreCarga() {
     }
+
+    public Integer getPrecargaId() {
+        return precargaId;
+    }
+
+    public void setPrecargaId(Integer precargaId) {
+        this.precargaId = precargaId;
+    }
+
+    public String getNombreRegla() {
+        return nombreRegla;
+    }
+
+    public void setNombreRegla(String nombreRegla) {
+        this.nombreRegla = nombreRegla;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Boolean getObligatorio() {
+        return obligatorio;
+    }
+
+    public void setObligatorio(Boolean obligatorio) {
+        this.obligatorio = obligatorio;
+    }
 }

@@ -81,7 +81,10 @@ CREATE TABLE IF NOT EXISTS public."Campo"
     "id_AlgoritmoEnm" serial NOT NULL,
     CONSTRAINT "Campo_pkey" PRIMARY KEY (id_campo)
 );
-
+ALTER TABLE "Campo"
+ALTER COLUMN "id_AlgoritmoEnc" DROP NOT NULL;
+ALTER TABLE "Campo"
+ALTER COLUMN "id_AlgoritmoEnm" DROP NOT NULL;
 CREATE TABLE IF NOT EXISTS public."CampoAsegurado"
 (
     "id_CampoAsegurado" serial NOT NULL,

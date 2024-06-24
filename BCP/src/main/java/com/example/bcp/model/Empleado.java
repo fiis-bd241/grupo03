@@ -20,7 +20,7 @@ public class Empleado {
     @Column(name = "\"contraseña\"")
     private String contraseña;
 
-    @Column(name = "\"telefono\"")
+    @Column(name = "\"telefono\"") 
     private String telefono;
 
     @Column(name = "\"dni\"")
@@ -43,6 +43,14 @@ public class Empleado {
         this.dni = dni;
         this.rolId = rolId;
         this.rol = rol;
+    }
+
+    public Empleado(String nombre, Rol rol, String correo, String telefono, String dni) {
+        this.nombre = nombre;
+        this.rol = rol;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.dni = dni;
     }
 
     public Empleado() {}

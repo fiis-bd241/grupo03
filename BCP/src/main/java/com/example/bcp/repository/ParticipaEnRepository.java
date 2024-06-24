@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ParticipaEnRepository extends JpaRepository<ParticipaEn, Integer> {
 
@@ -26,5 +28,11 @@ public interface ParticipaEnRepository extends JpaRepository<ParticipaEn, Intege
     @Transactional
     @Query(value = "DELETE FROM public.\"Participa_en\" WHERE \"Reunion_Id\" = :reunionId AND \"Participante_Id\" = :participanteId", nativeQuery = true)
     void eliminarParticipante(@Param("reunionId") Integer reunionId, @Param("participanteId") Integer participanteId);
+
+    @Query(value = "SELECT pe.\"Id_Participa_en\", p.\"Nombre\" || ' ' || p.\"Apellido\" AS nombreCompleto " +
+            "FROM \"Participa_en\" pe " +
+            "INNER JOIN \"Participante\" p ON pe.\"Participante_Id\" = p.\"Participante_Id\" " +
+            "WHERE pe.\"Reunion_Id\" = :reunionId", nativeQuery = true)
+    List<Object[]> obtenerParticipantesPorReunionId(@Param("reunionId") Integer reunionId);
 
 }

@@ -10,11 +10,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ParticipaEnService  {
 
     @Autowired
     private ParticipaEnRepository participaEnRepository;
+
 
     @Transactional
     public void asociarParticipanteAReunion(Integer reunionId,Integer participanteId) {
@@ -28,6 +31,9 @@ public class ParticipaEnService  {
     @Transactional
     public void eliminarParticipante(Integer reunionId, Integer participanteId) {
         participaEnRepository.eliminarParticipante(reunionId, participanteId);
+    }
+    public List<Object[]> obtenerParticipantesPorReunionId(Integer reunionId) {
+        return participaEnRepository.obtenerParticipantesPorReunionId(reunionId);
     }
 
 }
