@@ -9,19 +9,19 @@ public class Ambiente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "\"id_ambiente\"")
-    private Integer idAmbiente;
+    private Integer ambienteId;
 
     @Column(name = "\"nombre_ambiente\"")
     private String nombreAmbiente;
 
     //Getters and Setters
 
-    public Integer getIdAmbiente() {
-        return idAmbiente;
+    public Integer getAmbienteId() {
+        return ambienteId;
     }
 
-    public void setIdAmbiente(Integer idAmbiente) {
-        this.idAmbiente = idAmbiente;
+    public void setIdAmbiente(Integer ambienteId) {
+        this.ambienteId = ambienteId;
     }
 
     public String getNombreAmbiente() {
