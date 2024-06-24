@@ -53,10 +53,9 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long>{
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO public.\"Pedido\"(\"Area_Id\", \"Id_Squad\", \"Prioridad_Id\", \"Estado_Id\", \"Pedido_Fecha\", \"Pedido_FechaLimite\") " +
-            "VALUES (:areaId, :squadId, :prioridadId, :estadoId, CURRENT_DATE, :pedidoFechaLimite)", nativeQuery = true)
+            "VALUES (:areaId, :squadId, :prioridadId, 1, CURRENT_DATE, :pedidoFechaLimite)", nativeQuery = true)
     void crearPedido(@Param("areaId") int areaId,
                      @Param("squadId") int squadId,
                      @Param("prioridadId") int prioridadId,
-                     @Param("estadoId") int estadoId,
                      @Param("pedidoFechaLimite") java.util.Date pedidoFechaLimite);
 }
