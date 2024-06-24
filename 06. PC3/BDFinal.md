@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS public."Campo" CASCADE;
 DROP TABLE IF EXISTS public."CampoAsegurado" CASCADE;
 DROP TABLE IF EXISTS public."Algoritmo" CASCADE;
 DROP TABLE IF EXISTS public."Ambiente" CASCADE;
+DROP TABLE IF EXISTS public."Migracion" CASCADE;
 DROP TABLE IF EXISTS public."Area" CASCADE;
 DROP TABLE IF EXISTS public."CargaPreCarga" CASCADE;
 DROP TABLE IF EXISTS public."ReglaDeCargaFuncional" CASCADE;
