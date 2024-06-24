@@ -22,7 +22,7 @@ public class MigracionService {
     public void crearMigracion(Migracion migracion) {
 
         int pedidoId = migracion.getPedidoId().getPedidoId();
-        int ambienteId = migracion.getAmbienteId().getIdAmbiente();
+        int ambienteId = migracion.getAmbienteId().getAmbienteId();
         int tecnologiaId = migracion.getTecnologiaId().getTecnologiaId();
 
         migracionRepository.crearMigracion(pedidoId, ambienteId, tecnologiaId);
