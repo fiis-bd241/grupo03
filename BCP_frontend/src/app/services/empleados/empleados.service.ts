@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +17,9 @@ export class EmpleadosService {
 
   public obtenerTodosLosUsuarios(): Observable<string[]> {
     return this.http.get<string[]>(this.baseUrl + 'todos');
+  }
+
+  public agregarUsuario(empleado: any): Observable<any> {
+    return this.http.post(this.baseUrl + 'agregar-empleado', empleado);
   }
 }

@@ -22,11 +22,10 @@ public class MigracionService {
     public void crearMigracion(Migracion migracion) {
 
         int pedidoId = migracion.getPedidoId().getPedidoId();
-        int squadId = migracion.getSquadId().getSquadId();
+        int ambienteId = migracion.getAmbienteId().getAmbienteId();
         int tecnologiaId = migracion.getTecnologiaId().getTecnologiaId();
-        String entorno = migracion.getEntorno();
 
-        migracionRepository.crearMigracion(pedidoId, squadId, tecnologiaId, entorno);
+        migracionRepository.crearMigracion(pedidoId, ambienteId, tecnologiaId);
     }
 
     public List<Object[]> buscarMigracionesPorPedidoId(int pedidoId) {
