@@ -1,1 +1,56 @@
+<h1 class="titulo1">CONCEPTOS DE NEGOCIO Y EQUIVALENCIAS</h1>
+<div class="formularioRegistro">
+  <h2>Crear Conceptos de Negocio</h2>
+  <form [formGroup]="insertForm" (ngSubmit)="guardar()">
+    <div class="form-group">
+      <label>Dominio</label>
+      <select id = "dominio" formControlName="dominio" class="form-control" (change)="cargarSubdominios($event)">
+        <option *ngFor="let dominio of dominios" [value]="dominio[0]">{{ dominio[1] }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Subdominio</label>
+      <select id="subdominio" formControlName="subdominio" class="form-control">
+        <option *ngFor="let subdominio of subdominios" [value]="subdominio[0]">{{ subdominio[1] }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Ambiente</label>
+      <select id="ambiente" formControlName="ambiente" class="form-control" (change)="cargarEsquemas($event)">
+        <option *ngFor="let ambiente of ambientes" [value]="ambiente[0]">{{ ambiente[1] }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Esquema</label>
+      <select id="esquema" formControlName="esquema" class="form-control">
+        <option *ngFor="let esquema of esquemas" [value]="esquema[0]">{{ esquema[1] }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Campo</label>
+      <input formControlName="campo" type="text" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Definición</label>
+      <textarea formControlName="definicion" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Campo Equivalente</label>
+      <input formControlName="campoEquivalente" type="text" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Esquema Equivalente</label>
+      <select id= "esquemaEquivalente" formControlName="esquemaEquivalente" class="form-control">
+        <option *ngFor="let esquemaEquivalente of esquemas" [value]="esquemaEquivalente[0]">{{ esquemaEquivalente[1] }}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button type="button" class="btn btn-secondary" (click)="agregarOtraInsercion()">+</button>
+  </form>
+</div>
 
+<div class="derecha2">
+  <p><a routerLink="/ver-conceptosNegocio" routerLinkActive="active">Regresar</a></p>
+</div>
+
+<router-outlet></router-outlet>

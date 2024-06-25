@@ -21,6 +21,8 @@ import { AgregarUsuarioComponent } from './gestionusuarios/agregarusuario/agrega
 import {VerreunionpendienteComponent} from "./gestionreuniones/verreunionpendiente/verreunionpendiente.component";
 import {VerreunioncompletadaComponent} from "./gestionreuniones/verreunioncompletada/verreunioncompletada.component";
 import {VerreporteconformidadComponent} from "./gestionreuniones/verreporteconformidad/verreporteconformidad.component";
+import {AgregarconceptonegocioComponent} from "./equivalenciasymodelo/agregarconceptonegocio/agregarconceptonegocio.component";
+import {AsociartablasComponent} from "./equivalenciasymodelo/asociartablas/asociartablas.component";
 
 export const routes: Routes = [
   {
@@ -132,6 +134,16 @@ export const routes: Routes = [
   },
   { path: 'reporte-conformidad/:id',
     component: VerreporteconformidadComponent,
+    canActivate: [AuthGuard]
+  },
+
+  { path: 'agregar-cn',
+    component: AgregarconceptonegocioComponent,
+    canActivate: [AuthGuard]
+  },
+
+  { path: 'asociar-tablas',
+    component: AsociartablasComponent,
     canActivate: [AuthGuard]
   },
 
