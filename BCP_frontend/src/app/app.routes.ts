@@ -21,6 +21,7 @@ import { AgregarUsuarioComponent } from './gestionusuarios/agregarusuario/agrega
 import { VerreunionpendienteComponent} from "./gestionreuniones/verreunionpendiente/verreunionpendiente.component";
 import { VerreunioncompletadaComponent} from "./gestionreuniones/verreunioncompletada/verreunioncompletada.component";
 import {VerreporteconformidadComponent} from "./gestionreuniones/verreporteconformidad/verreporteconformidad.component";
+import {ModificarusuarioComponent} from "./gestionusuarios/modificarusuario/modificarusuario.component";
 
 export const routes: Routes = [
   {
@@ -40,6 +41,12 @@ export const routes: Routes = [
   {
     path: 'gestion/agregar-usuario',
     component: AgregarUsuarioComponent,
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'gestion/modificar-usuario',
+    component: ModificarusuarioComponent,
     canActivate: [AuthGuard]
   },
 

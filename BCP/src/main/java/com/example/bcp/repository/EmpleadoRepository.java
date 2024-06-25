@@ -14,15 +14,15 @@ import java.util.List;
 
 @Repository
 public interface EmpleadoRepository extends JpaRepository<Empleado, Integer> {
-    
+
        @Query(value = "SELECT e.\"id_empleado\", e.\"nombre\" " +
-                     "FROM \"Empleado\" e " +
-                     "INNER JOIN \"Roles\" r ON e.\"rol_id\" = r.\"id_rol\" " +
-                     "WHERE r.\"nombre_rol\" = 'Product Owner'", nativeQuery = true)
+               "FROM \"Empleado\" e " +
+               "INNER JOIN \"Roles\" r ON e.\"rol_id\" = r.\"id_rol\" " +
+               "WHERE r.\"nombre_rol\" = 'Product Owner'", nativeQuery = true)
        List<Object[]> todosProductOwner();
 
        @Query("SELECT new com.example.bcp.dto.EmpleadoConRolDTO(e.idEmpleado, e.dni, e.nombre, r.nombreRol, e.contraseña, e.correo, e.telefono) " +
-              "FROM Empleado e JOIN e.rol r")
+               "FROM Empleado e JOIN e.rol r")
        List<EmpleadoConRolDTO> obtenerTodosLosEmpleados();
 
        @Query(value = "SELECT e FROM Empleado e WHERE e.dni = :dni AND e.contraseña = :contrasena")
@@ -30,9 +30,22 @@ public interface EmpleadoRepository extends JpaRepository<Empleado, Integer> {
 
        @Modifying
        @Transactional
-       @Query(value = "INSERT INTO \"Empleado\"(\"dni\", \"nombre\", \"rol_id\", \"contraseña\", \"correo\", \"telefono\") " +
-               "VALUES (:dni, :nombre, :rolId, :contraseña, :correo, :telefono)", nativeQuery = true)
-       void agregarEmpleado(@Param("dni") String dni, @Param("nombre") String nombre, @Param("rolId") Integer rolId,
-                            @Param("contraseña") String contraseña, @Param("correo") String correo, @Param("telefono") String telefono);
+       @Query(value = "INSERT INTO \"Empleado\"(dni, nombre, rol_id, \"contraseña\", correo, telefono) " +
+               "VALUES (:dni, :nombre, " +
+               "(SELECT id_rol FROM \"Roles\" WHERE nombre_rol = :rol), :contrasena, :correo, :telefono)", nativeQuery = true)
+       void agregarEmpleado(@Param("dni") String dni,
+                            @Param("nombre") String nombre,
+                            @Param("rol") String rol,
+                            @Param("contrasena") String contrasena,
+                            @Param("correo") String correo,
+                            @Param("telefono") String telefono);
 
+       @Modifying
+       @Transactional
+       @Query(value = "UPDATE public.\"Empleado\" SET \"contraseña\" = :contrasena WHERE \"id_empleado\" = :id", nativeQuery = true)
+       void actualizarContrasena(@Param("id") Integer id, @Param("contrasena") String contrasena);
+
+
+       @Query("SELECT e FROM Empleado e WHERE e.nombre = :nombre")
+       Empleado findByNombre(@Param("nombre") String nombre);
 }
