@@ -28,13 +28,14 @@ export class ReunionesService {
   }
 
   crearReunion(reunion: any): Observable<any> {
-    return this.httpClient.post(`${this.baseUrl}crear-reunion`, reunion);
+    return this.httpClient.post(`${this.baseUrl}crear`, reunion);
   }
 
-  asociarParticipantes(reunionId: number, participanteIds: number[]): Observable<any> {
-    const url = `${this.baseUrl}asociar-participantes?reunionId=${reunionId}&participanteIds=${participanteIds.join(',')}`;
-    return this.httpClient.post<any>(url, {});
+  asociarParticipantes(reunionId: number, participantes: number[]): Observable<any> {
+    return this.httpClient.post<any>(`${this.baseUrl}${reunionId}/participantes`, participantes);
   }
+
+
 
   obtenerDetallesReunionPendiente(reunionId: number): Observable<any> {
     return this.httpClient.get<any>(`${this.baseUrl}detalles-pendiente/${reunionId}`);
@@ -52,10 +53,17 @@ export class ReunionesService {
   }
 
   agregarParticipanteAReunion(reunionId: number, participanteId: number): Observable<any> {
-    return this.httpClient.post<any>(`${this.baseUrl}${reunionId}/participante/${participanteId}`, {});
+    return this.httpClient.post<any>(`${this.baseUrl}${reunionId}participante/${participanteId}`, {});
   }
 
   eliminarParticipanteDeReunion(reunionId: number, participanteId: number): Observable<any> {
-    return this.httpClient.delete<any>(`${this.baseUrl}${reunionId}/participante/${participanteId}`);
+    return this.httpClient.delete<any>(`${this.baseUrl}${reunionId}participante/${participanteId}`);
   }
+  getMaxReunionId(): Observable<number> {
+    return this.httpClient.get<number>(`${this.baseUrl}maxid`);
+  }
+  cancelarReunion(reunionId: number): Observable<any> {
+    return this.httpClient.delete(`${this.baseUrl}cancelar/${reunionId}`);
+  }
+
 }

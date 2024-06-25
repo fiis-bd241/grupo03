@@ -11,9 +11,13 @@ import java.util.List;
 
 public interface DefinicionesTecnicasRepository extends JpaRepository<DefinicionesTecnicas, Long> {
 
-    @Query(value = "SELECT \"Campo\" FROM public.\"DefinicionesTecnicas\" WHERE \"EquivalenciaId\" IS NULL",
+    @Query(value = "SELECT \"Campo\" FROM public.\"DefinicionesTecnicas\" WHERE \"EquivalenciaId\" IS NULL AND \"Tabla\" IS NULL ",
     nativeQuery = true)
     List<Object[]> getCamposReferenciafromDT();
+
+    @Query(value = "SELECT \"Campo\" FROM public.\"DefinicionesTecnicas\" WHERE \"EquivalenciaId\" IS NOT NULL AND \"Tabla\" IS NULL ",
+    nativeQuery = true)
+    List<Object[]> getCamposEquivalentesSinTabla();
 
     @Query(value = "SELECT DISTINCT \"Tabla\" FROM public.\"DefinicionesTecnicas\" WHERE \"EquivalenciaId\" IS NULL",
     nativeQuery = true)
@@ -42,7 +46,7 @@ public interface DefinicionesTecnicasRepository extends JpaRepository<Definicion
     nativeQuery = true)
     List<Object[]> findCamposOR(@Param("tabla") String tabla);
 
-    @Query(value = "SELECT \"Campo\" FROM public.\"DefinicionesTecnicas\" WHERE \"EquivalenciaId\" IS NOT NULL ",
+    @Query(value = "SELECT \"Campo\" FROM public.\"DefinicionesTecnicas\" WHERE \"EquivalenciaId\" IS NOT NULL",
     nativeQuery = true)
     List<String> findCamposEquivalentes();
 
@@ -50,9 +54,16 @@ public interface DefinicionesTecnicasRepository extends JpaRepository<Definicion
     @Transactional
     @Query(value = "UPDATE public.\"DefinicionesTecnicas\" " +
             "SET \"Tabla\" = :tabla " +
-            "WHERE \"EquivalenciaId\" = (SELECT \"id_DT\" " +
-            "FROM public.\"DefinicionesTecnicas\"" +
-            "WHERE \"Campo\" = :campo) ",
+            "WHERE \"Campo\" IN :camposSeleccionados ",
     nativeQuery = true)
-    void actualizarTablaEquivalente(@Param("tabla") String tabla, @Param("campo") String campo);
+    void actualizarTabla(@Param("tabla") String tabla, @Param("camposSeleccionados") List<String> camposSeleccionados);
+
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE public.\"DefinicionesTecnicas\" " +
+            "SET \"Tabla\" = :tabla " +
+            "WHERE \"Campo\" IN :camposSeleccionados ",
+    nativeQuery = true)
+    void actualizarTablaEquivalente(@Param("tabla") String tabla, @Param("camposSeleccionados") List<String> camposSeleccionados);
 }

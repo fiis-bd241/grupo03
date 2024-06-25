@@ -46,13 +46,23 @@ public interface ConceptosNegocioRepository extends JpaRepository<ConceptosNegoc
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE \"ConceptosNegocio\" cn " +
-            "SET cn.definicionTabla = :definicion " +
-            "WHERE cn.idReferencia = ( " +
-            "SELECT dt.idDT" +
-            "FROM \"DefinicionesTecnicas\" dt" +
-            "WHERE dt.equivalenciaId IS NULL" +
-            "AND dt.campo = :campo ",
+    @Query(value = "UPDATE \"ConceptosNegocio\"  " +
+            "SET \"DefinicionTabla\" = :definicion " +
+            "WHERE \"id_referencia\" IN " +
+            "(SELECT \"id_DT\"" +
+            "FROM \"DefinicionesTecnicas\" " +
+            "WHERE \"EquivalenciaId\" IS NULL " +
+            "AND \"Campo\" IN :camposSeleccionados) ",
     nativeQuery = true)
-    void actualizarDefinicionTabla(@Param("definicion") String definicion, @Param("campo") String campo);
+    void actualizarDefinicionTabla(@Param("definicion") String definicion, @Param("camposSeleccionados") List<String> camposSeleccionados);
+
+    @Query(value = "SELECT insertar_datos(:esquemaId1, :campo1, :esquemaId2, :campo2, :subdominioId, :definicionCampo)", nativeQuery = true)
+    void insertarDatos(
+            @Param("esquemaId1") Integer esquemaId1,
+            @Param("campo1") String campo1,
+            @Param("esquemaId2") Integer esquemaId2,
+            @Param("campo2") String campo2,
+            @Param("subdominioId") Integer subdominioId,
+            @Param("definicionCampo") String definicionCampo
+    );
 }

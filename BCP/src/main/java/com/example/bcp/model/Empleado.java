@@ -20,14 +20,14 @@ public class Empleado {
     @Column(name = "\"contraseña\"")
     private String contraseña;
 
-    @Column(name = "\"telefono\"") 
+    @Column(name = "\"telefono\"")
     private String telefono;
 
     @Column(name = "\"dni\"")
     private String dni;
 
     @Column(name = "\"rol_id\"", insertable = false, updatable = false) // para permitir que el campo este para consultas nativas
-    private Integer rolId; 
+    private Integer rolId;
 
     @ManyToOne
     @JoinColumn(name = "\"rol_id\"", insertable = false, updatable = false)

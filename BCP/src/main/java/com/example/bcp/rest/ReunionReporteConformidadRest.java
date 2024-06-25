@@ -3,10 +3,8 @@ package com.example.bcp.rest;
 
 import com.example.bcp.service.ReunionReporteConformidadService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/reunion-reporte-conformidad/")
@@ -16,12 +14,14 @@ public class ReunionReporteConformidadRest {
     private ReunionReporteConformidadService reunionReporteConformidadService;
 
     @PostMapping("/asociar-entrada")
-    public void asociarReunionAReporteEntrada(@RequestBody Integer reunionId) {
+    public ResponseEntity<Void> asociarReunionEntrada(@RequestParam Integer reunionId) {
         reunionReporteConformidadService.asociarReunionAReporteEntrada(reunionId);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/asociar-salida")
-    public void asociarReunionAReporteSalida(@RequestBody Integer reunionId) {
+    public ResponseEntity<Void> asociarReunionSalida(@RequestParam Integer reunionId) {
         reunionReporteConformidadService.asociarReunionAReporteSalida(reunionId);
+        return ResponseEntity.ok().build();
     }
 }

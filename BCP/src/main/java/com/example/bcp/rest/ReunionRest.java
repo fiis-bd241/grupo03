@@ -40,14 +40,17 @@ public class ReunionRest {
         return reunionService.obtenerReunionesPorEstadoOrdenadas(estadoReunion, orden);
     }
 
-    @PostMapping("/crear-reunion")
-    public void crearReunion(@RequestBody Reunion reunion) {
+    @PostMapping("/crear")
+    public ResponseEntity<?> crearReunion(@RequestBody Reunion reunion) {
         reunionService.crearReunion(reunion);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+
     }
 
-    @PostMapping("/asociar-participantes")
-    public void asociarParticipantesAReunion(@RequestParam Integer reunionId, @RequestParam List<Integer> participanteIds) {
-        reunionService.asociarParticipantesAReunion(reunionId, participanteIds);
+        @PostMapping("/{reunionId}/participantes")
+    public ResponseEntity<Void> asociarParticipantes(@PathVariable Integer reunionId, @RequestBody List<Integer> participantesIds) {
+        reunionService.asociarParticipantesAReunion(reunionId, participantesIds);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/detalles-pendiente/{reunionId}")
@@ -80,6 +83,15 @@ public class ReunionRest {
     public ResponseEntity<?> eliminarParticipanteDeReunion(@PathVariable Integer reunionId, @PathVariable Integer participanteId) {
         participaEnService.eliminarParticipante(reunionId, participanteId);
         return ResponseEntity.ok("Participante eliminado de la reunión");
+    }
+    @GetMapping("/maxid")
+    public Integer MaxReunionId() {
+        return reunionService.MaxReunionId();
+    }
+    @DeleteMapping("/cancelar/{reunionId}")
+    public ResponseEntity<?> cancelarReunion(@PathVariable Integer reunionId) {
+        reunionService.cancelarReunion(reunionId);
+        return ResponseEntity.ok("Reunión cancelada");
     }
 
 }

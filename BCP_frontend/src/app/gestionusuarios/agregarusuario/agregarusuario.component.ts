@@ -40,7 +40,7 @@ export class AgregarUsuarioComponent implements OnInit {
     });
 
     this.setUsuarioLogeado();
-    
+
     setInterval(() => {
       this.now = new Date();
     }, 1000);
@@ -55,7 +55,7 @@ export class AgregarUsuarioComponent implements OnInit {
         telefono: this.usuarioForm.value.telefono,
         dni: this.usuarioForm.value.dni
       };
-  
+
       console.log('Usuario agregado:', nuevoUsuario.nombre);
       this.empleadosService.agregarUsuario(nuevoUsuario).subscribe({
         next: response => {
@@ -71,7 +71,7 @@ export class AgregarUsuarioComponent implements OnInit {
       console.error('Formulario no válido');
     }
   }
-  
+
 
   setUsuarioLogeado(): void {
     const usuario = localStorage.getItem('usuarioLogeado');

@@ -1,5 +1,8 @@
 package com.example.bcp.model;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.OffsetTime;
 import java.util.Date;
 import java.util.List;
 
@@ -27,19 +30,16 @@ public class Reunion {
     private TipoReunion tipoReunionId;
 
     @Column(name = "\"HoraInicio\"")
-    @Temporal(TemporalType.TIME)
-    private Date horaInicio;
+    private LocalTime horaInicio;
 
     @Column(name = "\"HoraFin\"")
-    @Temporal(TemporalType.TIME)
-    private Date horaFin;
+    private LocalTime horaFin;
 
     @Column(name = "\"Plataforma\"")
     private String plataforma;
 
     @Column(name = "\"Fecha\"")
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
+    private LocalDate fecha;
 
     @Column(name = "\"Estado\"")
     private String estado;
@@ -51,12 +51,10 @@ public class Reunion {
     private String acuerdos;
 
     @Column(name = "\"HoraProgramacion\"")
-    @Temporal(TemporalType.TIME)
-    private Date horaProgramacion;
+    private LocalTime horaProgramacion;
 
     @Column(name = "\"FechaProgramacion\"")
-    @Temporal(TemporalType.DATE)
-    private Date fechaProgramacion;
+    private LocalDate fechaProgramacion;
 
 
     @OneToMany(mappedBy = "reunionId")
@@ -71,7 +69,7 @@ public class Reunion {
     public Reunion() {
     }
 
-    public Reunion(Integer reunionId, Empleado idEmpleado, Pedido pedidoId, TipoReunion tipoReunionId, Date horaInicio, Date horaFin, String plataforma, Date fecha, String estado, String agenda, String acuerdos, Date horaProgramacion, Date fechaProgramacion, List<ParticipaEn> participantes, List<Recordatorio> recordatorios, List<ReunionReporteConformidad> reportes) {
+    public Reunion(Integer reunionId, Empleado idEmpleado, Pedido pedidoId, TipoReunion tipoReunionId, LocalTime horaInicio, LocalTime horaFin, String plataforma, LocalDate fecha, String estado, String agenda, String acuerdos, LocalTime horaProgramacion, LocalDate fechaProgramacion, List<ParticipaEn> participantes, List<Recordatorio> recordatorios, List<ReunionReporteConformidad> reportes) {
         this.reunionId = reunionId;
         this.idEmpleado = idEmpleado;
         this.pedidoId = pedidoId;
@@ -122,19 +120,19 @@ public class Reunion {
         this.tipoReunionId = tipoReunionId;
     }
 
-    public Date getHoraInicio() {
+    public LocalTime getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(Date horaInicio) {
+    public void setHoraInicio(LocalTime horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public Date getHoraFin() {
+    public LocalTime getHoraFin() {
         return horaFin;
     }
 
-    public void setHoraFin(Date horaFin) {
+    public void setHoraFin(LocalTime horaFin) {
         this.horaFin = horaFin;
     }
 
@@ -146,11 +144,11 @@ public class Reunion {
         this.plataforma = plataforma;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
@@ -178,19 +176,19 @@ public class Reunion {
         this.acuerdos = acuerdos;
     }
 
-    public Date getHoraProgramacion() {
+    public LocalTime getHoraProgramacion() {
         return horaProgramacion;
     }
 
-    public void setHoraProgramacion(Date horaProgramacion) {
+    public void setHoraProgramacion(LocalTime horaProgramacion) {
         this.horaProgramacion = horaProgramacion;
     }
 
-    public Date getFechaProgramacion() {
+    public LocalDate getFechaProgramacion() {
         return fechaProgramacion;
     }
 
-    public void setFechaProgramacion(Date fechaProgramacion) {
+    public void setFechaProgramacion(LocalDate fechaProgramacion) {
         this.fechaProgramacion = fechaProgramacion;
     }
 

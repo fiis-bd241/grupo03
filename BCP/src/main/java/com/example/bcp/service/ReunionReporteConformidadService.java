@@ -14,12 +14,12 @@ public class ReunionReporteConformidadService {
 
     @Transactional
     public void asociarReunionAReporteEntrada(Integer reunionId) {
-        reunionReporteConformidadRepository.asociarReunionAReporteEntrada(reunionId);
+        reunionReporteConformidadRepository.asociarReunionEntrada(reunionId);
     }
 
     @Transactional
     public void asociarReunionAReporteSalida(Integer reunionId) {
-        reunionReporteConformidadRepository.asociarReunionAReporteSalida(reunionId);
+        reunionReporteConformidadRepository.asociarReunionSalida(reunionId);
     }
 }
 

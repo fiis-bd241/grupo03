@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {PrincipalmainComponent} from './principal/principalmain/principalmain.component'
+import {VerpedidosmainComponent} from './principal/verpedidosmain/verpedidosmain.component'
+import {VermigracionesmainComponent} from './principal/vermigracionesmain/vermigracionesmain.component'
 import { PrincipalComponent } from "./gestionpedidos/principal/principal.component";
 import { AgregarpedidoComponent } from "./gestionpedidos/agregarpedido/agregarpedido.component";
 import { AgregarmigracionComponent } from "./gestionpedidos/agregarmigracion/agregarmigracion.component";
@@ -25,6 +28,10 @@ import { DatosadicionalesComponent} from "./validacionyreportes/datosadicionales
 import {DesignarcampoComponent} from "./validacionyreportes/designarcampo/designarcampo.component";
 import {RegistrodeerroresComponent} from "./validacionyreportes/registrodeerrores/registrodeerrores.component";
 import {VererroresComponent} from "./validacionyreportes/vererrores/vererrores.component";
+import {ModificarusuarioComponent} from "./gestionusuarios/modificarusuario/modificarusuario.component";
+import {AgregarconceptonegocioComponent} from "./equivalenciasymodelo/agregarconceptonegocio/agregarconceptonegocio.component";
+import {AsociartablasComponent} from "./equivalenciasymodelo/asociartablas/asociartablas.component";
+
 export const routes: Routes = [
   {
     path: '',
@@ -43,6 +50,28 @@ export const routes: Routes = [
   {
     path: 'gestion/agregar-usuario',
     component: AgregarUsuarioComponent,
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'gestion/modificar-usuario',
+    component: ModificarusuarioComponent,
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'main',
+    component: PrincipalmainComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'main/ver-pedidos',
+    component: VerpedidosmainComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'main/ver-migraciones/:pedidoId',
+    component: VermigracionesmainComponent,
     canActivate: [AuthGuard]
   },
 
@@ -157,6 +186,17 @@ export const routes: Routes = [
     component: VererroresComponent,
     canActivate: [AuthGuard]
   },
+
+  { path: 'agregar-cn',
+    component: AgregarconceptonegocioComponent,
+    canActivate: [AuthGuard]
+  },
+
+  { path: 'asociar-tablas',
+    component: AsociartablasComponent,
+    canActivate: [AuthGuard]
+  },
+
   {
     path: '**',
     redirectTo: '/login',

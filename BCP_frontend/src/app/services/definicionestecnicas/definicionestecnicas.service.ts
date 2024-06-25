@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 
 
 @Injectable({
@@ -14,11 +14,16 @@ export class DefinicionestecnicasService {
   private apiUrl5 = "http://localhost:8080/definicionestecnicas/camposOR";
   private apiUrl6 = "http://localhost:8080/definicionestecnicas/camposEquivalentes";
   private apiUrl7 = "http://localhost:8080/definicionestecnicas/actualizar-tabla-equivalente";
+  private apiUrl8 = "http://localhost:8080/definicionestecnicas/camposEquivalentesSinTabla"
 
   constructor(private httpClient: HttpClient) { }
 
   public getCamposReferencia(): Observable<any> {
     return this.httpClient.get<any>(this.apiUrl1);
+  }
+
+  public getCamposEquivalentesSinTabla() : Observable<any>{
+    return this.httpClient.get<any>(this.apiUrl8);
   }
 
   public getTablasReferencia(): Observable<any> {
@@ -44,7 +49,12 @@ export class DefinicionestecnicasService {
     return this.httpClient.get<any>(this.apiUrl6);
   }
 
-  public actualizarTablaEquivalente(data: any): Observable<any> {
-    return this.httpClient.post<any>(this.apiUrl7, data);
+  public actualizarTablaEquivalente(tabla:string, camposSeleccionados: string []): Observable<void> {
+    let params = new HttpParams()
+      .set('tabla',tabla)
+      camposSeleccionados.forEach( campo => {
+        params = params.append('camposSeleccionados', campo);
+      });
+    return this.httpClient.put<void>(this.apiUrl7,null,{params});
   }
 }

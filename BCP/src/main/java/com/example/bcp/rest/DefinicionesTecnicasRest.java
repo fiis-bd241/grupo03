@@ -18,6 +18,9 @@ public class DefinicionesTecnicasRest {
     @GetMapping("/camposReferencia")
     public List<Object[]> getCamposfromDT() {return definicionesTecnicasService.getCampoReffromDT();}
 
+    @GetMapping("/camposEquivalentesSinTabla")
+    public List<Object[]> getCamposEquivalenteSinTabla() {return definicionesTecnicasService.getCamposEqSinTabla();}
+
     @GetMapping("/tablasReferencia")
     public List<String> getTablasReferencia() {
         return definicionesTecnicasService.getTablaReferencia();
@@ -42,10 +45,12 @@ public class DefinicionesTecnicasRest {
         return definicionesTecnicasService.getCampoEquivalente();
     }
 
-    @PutMapping("/actualizar-tabla-equivalente")
-    public void actualizarTablaEquivalente(
-            @RequestParam("tabla") String tabla,
-            @RequestParam("campo") String campo){
-        definicionesTecnicasService.actualizarTablasEquivalentes(tabla, campo);
+    @PutMapping("actualizar-tabla-equivalente")
+    public ResponseEntity<?> actualizarTablaEquivalente(
+            @RequestParam ("tabla") String tabla,
+            @RequestParam ("camposSeleccionados") List<String> camposSeleccionados
+            ) {
+        definicionesTecnicasService.actualizarTablaEquivalente(tabla, camposSeleccionados);
+        return ResponseEntity.ok().build();
     }
 }
