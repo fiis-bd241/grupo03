@@ -2,6 +2,7 @@ package com.example.bcp.rest;
 
 import com.example.bcp.service.ReporteConformidadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,5 +22,16 @@ public class ReporteConformidadRest {
     @GetMapping("/vista-previa-reporte/{reunionId}")
     public List<Object[]> generarVistaPreviaReporte(@PathVariable Integer reunionId) {
         return reporteConformidadService.generarVistaPreviaReporte(reunionId);
+    }
+    @GetMapping("/existe")
+    public ResponseEntity<Boolean> existeReporteConformidad(@RequestParam Integer reunionId) {
+        boolean existe = reporteConformidadService.existeReporteConformidad(reunionId);
+        return ResponseEntity.ok(existe);
+    }
+
+    @PostMapping("/crear")
+    public ResponseEntity<Void> crearReporteConformidad(@RequestParam Integer reunionId) {
+        reporteConformidadService.crearReporteConformidad(reunionId);
+        return ResponseEntity.ok().build();
     }
 }

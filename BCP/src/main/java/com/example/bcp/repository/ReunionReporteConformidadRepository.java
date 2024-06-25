@@ -13,17 +13,24 @@ public interface ReunionReporteConformidadRepository extends JpaRepository<Reuni
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO public.\"Reunion_Reporte_Conformidad\" (\"Reunion_Id\", \"Reporte_Id\") " +
-            "VALUES (:reunionId, (SELECT MIN(\"Reporte_Id\") FROM public.\"Reporte_Conformidad\" WHERE \"Pedido_Id\" = " +
-            "(SELECT \"Pedido_Id\" FROM public.\"Reunion\" WHERE \"Reunion_Id\" = :reunionId)))",
+            "VALUES (:reunionId, (SELECT MIN(\"Reporte_Id\") " +
+            "FROM public.\"Reporte_Conformidad\" " +
+            "WHERE \"Pedido_Id\" = (SELECT \"Pedido_Id\" " +
+            "FROM public.\"Reunion\" " +
+            "WHERE \"Reunion_Id\" = :reunionId)))",
             nativeQuery = true)
-    void asociarReunionAReporteEntrada(@Param("reunionId") Integer reunionId);
+    void asociarReunionEntrada(@Param("reunionId") Integer reunionId);
 
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO public.\"Reunion_Reporte_Conformidad\" (\"Reunion_Id\", \"Reporte_Id\") " +
-            "VALUES (:reunionId, (SELECT MAX(\"Reporte_Id\") FROM public.\"Reporte_Conformidad\" WHERE \"Pedido_Id\" = " +
-            "(SELECT \"Pedido_Id\" FROM public.\"Reunion\" WHERE \"Reunion_Id\" = :reunionId)))",
+            "VALUES (:reunionId, (SELECT MAX(\"Reporte_Id\") " +
+            "FROM public.\"Reporte_Conformidad\" " +
+            "WHERE \"Pedido_Id\" = (SELECT \"Pedido_Id\" " +
+            "FROM public.\"Reunion\" " +
+            "WHERE \"Reunion_Id\" = :reunionId)))",
             nativeQuery = true)
-    void asociarReunionAReporteSalida(@Param("reunionId") Integer reunionId);
+    void asociarReunionSalida(@Param("reunionId") Integer reunionId);
+
 }
 

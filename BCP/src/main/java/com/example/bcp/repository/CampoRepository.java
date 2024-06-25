@@ -1,5 +1,7 @@
 package com.example.bcp.repository;
 
+import com.example.bcp.model.Campo;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -8,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Repository
-public interface CampoRepository {
+public interface CampoRepository extends JpaRepository<Campo, Long> {
     @Query(value = "SELECT *\n" +
             "FROM public.\"Modelado\" m\n" +
             "JOIN public.\"DefinicionesTecnicas\" dt ON \tm.\"id_referencia\" = dt.\"id_DT\"\n" +

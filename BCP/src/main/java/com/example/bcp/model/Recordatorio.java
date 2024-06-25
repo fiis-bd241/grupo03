@@ -2,6 +2,8 @@ package com.example.bcp.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -24,12 +26,11 @@ public class Recordatorio {
     private TipoRecordatorio tipoRecordatorioId;
 
     @Column(name = "\"Hora\"")
-    @Temporal(TemporalType.TIME)
-    private Date hora;
+    private LocalTime hora;
 
     @Column(name = "\"Fecha\"")
     @Temporal(TemporalType.DATE)
-    private Date fecha;
+    private LocalDate fecha;
 
     @OneToMany(mappedBy = "recordatorioId")
     private List<RecordatorioEnviado> participantes ;
@@ -37,7 +38,7 @@ public class Recordatorio {
     public Recordatorio() {
     }
 
-    public Recordatorio(Integer recordatorioId, Reunion reunionId, TipoRecordatorio tipoRecordatorioId, Date hora, Date fecha, List<RecordatorioEnviado> participantes) {
+    public Recordatorio(Integer recordatorioId, Reunion reunionId, TipoRecordatorio tipoRecordatorioId, LocalTime hora, LocalDate fecha, List<RecordatorioEnviado> participantes) {
         this.recordatorioId = recordatorioId;
         this.reunionId = reunionId;
         this.tipoRecordatorioId = tipoRecordatorioId;
@@ -70,19 +71,19 @@ public class Recordatorio {
         this.tipoRecordatorioId = tipoRecordatorioId;
     }
 
-    public Date getHora() {
+    public LocalTime getHora() {
         return hora;
     }
 
-    public void setHora(Date hora) {
+    public void setHora(LocalTime hora) {
         this.hora = hora;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
