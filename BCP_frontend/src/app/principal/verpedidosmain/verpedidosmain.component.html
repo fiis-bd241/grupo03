@@ -1,0 +1,42 @@
+<h1 class="titulo1">PEDIDOS</h1>
+<p></p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Pedido</th>
+            <th scope="col">Área Solicitante</th>
+            <th scope="col">Squad Encargado</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Prioridad</th>
+            <th scope="col">Fecha del Pedido</th>
+            <th scope="col">Fecha Límite</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let pedido of pedidos">
+            <td><a [routerLink]="['/main/ver-migraciones', pedido[0]]">{{ pedido[0] }}</a></td>
+            <td>{{ pedido[1] }}</td>
+            <td>{{ pedido[2] }}</td>
+            <td>{{ pedido[3] }}</td>
+            <td>{{ pedido[4] }}</td>
+            <td>{{ pedido[5] }}</td>
+            <td>{{ pedido[6] }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="pedidos.length === 0" class="alert alert-warning" role="alert">
+          No hay pedidos disponibles.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="derecha2">
+  <p><a routerLink="/main" routerLinkActive="active">Regresar</a></p>
+</div>
+

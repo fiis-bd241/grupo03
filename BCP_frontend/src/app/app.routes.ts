@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {PrincipalmainComponent} from './principal/principalmain/principalmain.component'
+import {VerpedidosmainComponent} from './principal/verpedidosmain/verpedidosmain.component'
+import {VermigracionesmainComponent} from './principal/vermigracionesmain/vermigracionesmain.component'
 import { PrincipalComponent } from "./gestionpedidos/principal/principal.component";
 import { AgregarpedidoComponent } from "./gestionpedidos/agregarpedido/agregarpedido.component";
 import { AgregarmigracionComponent } from "./gestionpedidos/agregarmigracion/agregarmigracion.component";
@@ -49,6 +52,22 @@ export const routes: Routes = [
   {
     path: 'gestion/modificar-usuario',
     component: ModificarusuarioComponent,
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'main',
+    component: PrincipalmainComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'main/ver-pedidos',
+    component: VerpedidosmainComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'main/ver-migraciones/:pedidoId',
+    component: VermigracionesmainComponent,
     canActivate: [AuthGuard]
   },
 
