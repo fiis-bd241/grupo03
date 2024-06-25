@@ -7,7 +7,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 
@@ -37,17 +38,25 @@ public class ReunionService  {
     }
     @Transactional
     public void crearReunion(Reunion reunion) {
-        int idEmpleado = reunion.getIdEmpleado().getIdEmpleado();
-        int pedidoId = reunion.getPedidoId().getPedidoId();
-        int tipoReunionId = reunion.getTipoReunionId().getTipoReunionId();
-        Date horaInicio = reunion.getHoraInicio();
-        Date horaFin = reunion.getHoraFin();
-        String plataforma = reunion.getPlataforma();
-        Date fecha = reunion.getFecha();
-        String agenda = reunion.getAgenda();
+        try {
+            int idEmpleado = reunion.getIdEmpleado().getIdEmpleado();
+            int pedidoId = reunion.getPedidoId().getPedidoId();
+            int tipoReunionId = reunion.getTipoReunionId().getTipoReunionId();
+            LocalTime horaInicio = reunion.getHoraInicio();
+            LocalTime horaFin = reunion.getHoraFin();
+            String plataforma = reunion.getPlataforma();
+            LocalDate fecha = reunion.getFecha();
+            String agenda = reunion.getAgenda();
 
-        reunionRepository.crearReunion(idEmpleado, pedidoId, tipoReunionId, horaInicio, horaFin, plataforma, fecha, agenda);
+            reunionRepository.crearReunion(idEmpleado, pedidoId, tipoReunionId, horaInicio, horaFin, plataforma, fecha, agenda);
+        } catch (Exception e) {
+            // Log the error and rethrow or handle it
+            System.err.println("Error creating reunion: " + e.getMessage());
+            throw e;
+        }
     }
+
+
     @Transactional
     public void asociarParticipantesAReunion(Integer reunionId, List<Integer> participanteIds) {
         for (Integer participanteId : participanteIds) {
@@ -67,7 +76,14 @@ public class ReunionService  {
         reunionRepository.marcarReunionComoCompletada(reunionId);
     }
     @Transactional
-    public void editarReunion(Integer reunionId, Date fecha, Date horaInicio, Date horaFin, String plataforma, String agenda) {
+    public void editarReunion(Integer reunionId, LocalDate fecha, LocalTime horaInicio, LocalTime horaFin, String plataforma, String agenda) {
         reunionRepository.editarReunion(reunionId, fecha, horaInicio, horaFin, plataforma, agenda);
     }
+    public Integer MaxReunionId() {
+        return reunionRepository.MaxReunionId();
+    }
+    public void cancelarReunion(Integer reunionId) {
+        reunionRepository.cancelarReunion(reunionId);
+    }
+
 }

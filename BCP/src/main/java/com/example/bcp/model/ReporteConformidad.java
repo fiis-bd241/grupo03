@@ -1,4 +1,5 @@
 package com.example.bcp.model;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -25,8 +26,7 @@ public class ReporteConformidad {
     private String tipoReporte;
 
     @Column(name = "\"Fecha\"")
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
+    private LocalDate fecha;
 
     @OneToMany(mappedBy = "reporteId")
     private List<ReunionReporteConformidad> reuniones;
@@ -34,7 +34,7 @@ public class ReporteConformidad {
     public ReporteConformidad() {
     }
 
-    public ReporteConformidad(Integer reporteId, Pedido pedidoId, String estado, String tipoReporte, Date fecha, List<ReunionReporteConformidad> reuniones) {
+    public ReporteConformidad(Integer reporteId, Pedido pedidoId, String estado, String tipoReporte, LocalDate fecha, List<ReunionReporteConformidad> reuniones) {
         this.reporteId = reporteId;
         this.pedidoId = pedidoId;
         this.estado = estado;
@@ -75,11 +75,11 @@ public class ReporteConformidad {
         this.tipoReporte = tipoReporte;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

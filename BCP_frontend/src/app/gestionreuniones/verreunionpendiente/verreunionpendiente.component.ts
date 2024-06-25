@@ -38,10 +38,19 @@ export class VerreunionpendienteComponent implements OnInit {
 
   marcarComoCompletada() {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.reunionesService.marcarReunionComoCompletada(id).subscribe(() => {
-      this.router.navigate(['/principal']);
-    });
+    this.reunionesService.marcarReunionComoCompletada(id).subscribe(
+      () => {
+        console.log('Redirigiendo...');
+        alert('Reunión marcada como completada, redirigiendo...');
+        this.router.navigate(['/reunion-completada', id]);
+      },
+      error => {
+        console.error('Error al marcar la reunión como completada:', error);
+      }
+    );
   }
+
+
 
   editarReunion() {
     // Redirigir a la pantalla de edición

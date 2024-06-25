@@ -1,6 +1,7 @@
 package com.example.bcp.service;
 
 import com.example.bcp.repository.DefinicionesTecnicasRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,8 @@ public class DefinicionesTecnicasService {
     private DefinicionesTecnicasRepository definicionesTecnicasRepository;
 
     public List<Object[]> getCampoReffromDT() {return definicionesTecnicasRepository.getCamposReferenciafromDT() ;}
+
+    public List<Object[]> getCamposEqSinTabla() { return definicionesTecnicasRepository.getCamposEquivalentesSinTabla();}
 
     public List<String> getTablaReferencia() {return definicionesTecnicasRepository.findTablasReferencia();}
 
@@ -30,9 +33,13 @@ public class DefinicionesTecnicasService {
         return definicionesTecnicasRepository.findCamposEquivalentes();
     }
 
-
-    public void actualizarTablasEquivalentes(String tabla, String campo){
-        definicionesTecnicasRepository.actualizarTablaEquivalente(tabla,campo);
+    public void actualizarTabla(String tabla, List<String> camposSeleccionados) {
+        definicionesTecnicasRepository.actualizarTabla(tabla, camposSeleccionados);
     }
+
+    public void actualizarTablaEquivalente(String tabla, List<String> camposSeleccionados) {
+        definicionesTecnicasRepository.actualizarTablaEquivalente(tabla, camposSeleccionados);
+    }
+
 }
 

@@ -20,7 +20,5 @@ export class ConceptosnegocioService {
       return this.httpClient.get<any>(this.apiUrl2);
     }
 
-  public actualizarDefTabla() : Observable<any>{
-    return this.httpClient.get<any>(this.apiUrl3);
-  }
+
 }

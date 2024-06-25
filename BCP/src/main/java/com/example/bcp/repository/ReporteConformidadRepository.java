@@ -49,4 +49,15 @@ public interface ReporteConformidadRepository extends JpaRepository<ReporteConfo
             "AND rc.\"Estado\" = 'completado'", nativeQuery = true)
     List<Object[]> generarVistaPreviaReporte(@Param("reunionId") Integer reunionId);
 
+    @Query(value = "SELECT COUNT(*) > 0 " +
+            "FROM public.\"Reporte_Conformidad\" rc " +
+            "WHERE rc.\"Pedido_Id\" = (SELECT \"Pedido_Id\" " +
+            "    FROM public.\"Reunion\" " +
+            "    WHERE \"Reunion_Id\" = :reunionId) " +
+            "AND rc.\"Tipo_Reporte\" = (SELECT tr.\"Nombre\" " +
+            "    FROM public.\"Reunion\" r " +
+            "    INNER JOIN public.\"Tipo_Reunion\" tr ON r.\"TipoReunion_Id\" = tr.\"TipoReunion_Id\" " +
+            "    WHERE r.\"Reunion_Id\" = :reunionId)", nativeQuery = true)
+    boolean existeReporteConformidad(@Param("reunionId") Integer reunionId);
+
 }

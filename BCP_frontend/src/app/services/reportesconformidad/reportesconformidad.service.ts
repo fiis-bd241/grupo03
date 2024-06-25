@@ -7,14 +7,29 @@ import { Observable } from 'rxjs';
 })
 export class ReportesconformidadService {
   private baseUrl = 'http://localhost:8080/reporte-conformidad/';
+  private base2Url = 'http://localhost:8080/reunion-reporte-conformidad/'
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   generarVistaPreviaReporte(reunionId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}vista-previa-reporte/${reunionId}`);
+    return this.httpClient.get(`${this.baseUrl}vista-previa-reporte/${reunionId}`);
   }
 
   actualizarEstadoReporteConformidad(reunionId: number): Observable<any> {
-    return this.http.put(`${this.baseUrl}actualizar-estado/${reunionId}`, {});
+    return this.httpClient.put(`${this.baseUrl}actualizar-estado/${reunionId}`, {});
+  }
+  asociarReunionAReporteEntrada(reunionId: number): Observable<any> {
+    return this.httpClient.post(`${this.base2Url}asociar-entrada?reunionId=${reunionId}`, {});
+  }
+
+  asociarReunionAReporteSalida(reunionId: number): Observable<any> {
+    return this.httpClient.post(`${this.base2Url}asociar-salida?reunionId=${reunionId}`, {});
+  }
+
+  existeReporteConformidad(reunionId: number): Observable<boolean> {
+    return this.httpClient.get<boolean>(`${this.baseUrl}existe?reunionId=${reunionId}`);
+  }
+  crearReporteConformidad(reunionId: number): Observable<any> {
+    return this.httpClient.post(`${this.baseUrl}crear?reunionId=${reunionId}`, {});
   }
 }

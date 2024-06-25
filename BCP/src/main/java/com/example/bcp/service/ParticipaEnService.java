@@ -20,8 +20,10 @@ public class ParticipaEnService  {
 
 
     @Transactional
-    public void asociarParticipanteAReunion(Integer reunionId,Integer participanteId) {
-        participaEnRepository.asociarParticipanteAReunion(reunionId, participanteId);
+    public void asociarParticipantesAReunion(Integer reunionId, List<Integer> participantesIds) {
+        for (Integer participanteId : participantesIds) {
+            participaEnRepository.asociarParticipanteAReunion(reunionId, participanteId);
+        }
     }
     @Transactional
     public void agregarParticipante(Integer reunionId, Integer participanteId) {

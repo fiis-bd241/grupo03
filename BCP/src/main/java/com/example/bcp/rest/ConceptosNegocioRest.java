@@ -24,10 +24,5 @@ public class ConceptosNegocioRest {
         return conceptosNegocioService.get7ConceptoNegocio();
     }
 
-    @PostMapping("/actualizar-definicion-tabla")
-    public void actualizarDefinicionTabla(
-            @RequestParam("definicion") String definicion,
-            @RequestParam("campo") String campo) {
-        conceptosNegocioService.actualizarDefTabla(definicion, campo);
-    }
+
 }
