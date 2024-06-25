@@ -21,12 +21,12 @@ public class PreCargaRest {
     public List<Object[]> reglasOpcionales() {
         return preCargaService.reglasOpcionales();
     }
-    @PutMapping("/relacionarCPC")
+    @PostMapping("/relacionarCPC")
     public void relacionarCargaPrecarga(
             @RequestParam("migracionId") Integer migracionId,
             @RequestParam("nombreRegla") String nombreRegla) {
                 preCargaService.relacionarCargaPrecarga(migracionId,nombreRegla);}
-    @PutMapping("/cargaObligatoria")
+    @PostMapping("/cargaObligatoria")
     public void reglaDeCargaObligatoria(@RequestBody PreCarga preCarga){
         preCargaService.reglaDeCargaObligatoria(preCarga);}
 }
