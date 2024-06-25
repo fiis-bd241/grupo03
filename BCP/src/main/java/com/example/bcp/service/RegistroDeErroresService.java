@@ -14,8 +14,7 @@ import java.util.List;
 public class RegistroDeErroresService {
     @Autowired
     private RegistroDeErroresRepository registroDeErroresRepository;
-    public List<Object[]> todoCausasYCorreciones(Pedido pedido) {
-        Integer pedidoId=pedido.getPedidoId();
+    public List<Object[]> todoCausasYCorreciones(Integer pedidoId) {
         return registroDeErroresRepository.todoCausasYCorreciones(pedidoId);
     }
     @Transactional

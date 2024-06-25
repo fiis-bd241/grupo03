@@ -47,4 +47,9 @@ public interface MigracionRepository extends JpaRepository<Migracion, Long> {
             "ORDER BY m.\"Fecha_migracion\" DESC",
             nativeQuery = true)
     List<Object[]> buscarMigracionesPorPedidoId(@Param("pedidoId") int pedidoId);
+
+    @Query(value = "SELECT \"Migracion_Id\" FROM \"Migracion\" mg\n" +
+            "WHERE mg.\"Pedido_Id\"=:pedidoId",
+            nativeQuery = true)
+    List<Object[]> migracionIdporPedidoId(@Param("pedidoId") int pedidoId);
 }

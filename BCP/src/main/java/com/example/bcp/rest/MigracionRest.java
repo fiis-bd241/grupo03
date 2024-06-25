@@ -29,4 +29,8 @@ public class MigracionRest {
     public List<Object[]> buscarMigracionesPorPedidoId(@PathVariable int pedidoId) {
         return migracionService.buscarMigracionesPorPedidoId(pedidoId);
     }
+    @GetMapping("/mIdpId")
+    public List<Object[]> migracionIdporPedidoId(@RequestParam ("pedidoId") Integer pedidoId) {
+        return migracionService.migracionIdporPedidoId(pedidoId);
+    }
 }

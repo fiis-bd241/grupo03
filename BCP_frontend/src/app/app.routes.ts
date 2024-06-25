@@ -21,7 +21,10 @@ import { AgregarUsuarioComponent } from './gestionusuarios/agregarusuario/agrega
 import {VerreunionpendienteComponent} from "./gestionreuniones/verreunionpendiente/verreunionpendiente.component";
 import {VerreunioncompletadaComponent} from "./gestionreuniones/verreunioncompletada/verreunioncompletada.component";
 import {VerreporteconformidadComponent} from "./gestionreuniones/verreporteconformidad/verreporteconformidad.component";
-
+import { DatosadicionalesComponent} from "./validacionyreportes/datosadicionales/datosadicionales.component";
+import {DesignarcampoComponent} from "./validacionyreportes/designarcampo/designarcampo.component";
+import {RegistrodeerroresComponent} from "./validacionyreportes/registrodeerrores/registrodeerrores.component";
+import {VererroresComponent} from "./validacionyreportes/vererrores/vererrores.component";
 export const routes: Routes = [
   {
     path: '',
@@ -134,13 +137,31 @@ export const routes: Routes = [
     component: VerreporteconformidadComponent,
     canActivate: [AuthGuard]
   },
-
+  {
+    path: 'datosadicionales',
+    component: DatosadicionalesComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'designarcampo',
+    component: DesignarcampoComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'registrodeerrores',
+    component: RegistrodeerroresComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'vererrores',
+    component: VererroresComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: '**',
     redirectTo: '/login',
     pathMatch: 'full'
   },
-
 ];
 
 @NgModule({

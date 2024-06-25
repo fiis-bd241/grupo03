@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface TipoDatoRepository extends JpaRepository<TipoDato, Long> {
-    @Query(value = "SELECT \"Niveldeacceso\" FROM \"TipoDato\";", nativeQuery = true)
+    @Query(value = "SELECT \"Nivel de acceso\" FROM \"TipoDato\";", nativeQuery = true)
     List<Object[]> TodoNivelesDeAcceso();
     @Query(value = "SELECT \"Enmascarado\" FROM \"TipoDato\"\n" +
             "           GROUP BY \"Enmascarado\";", nativeQuery = true)
