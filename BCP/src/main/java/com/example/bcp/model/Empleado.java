@@ -20,7 +20,7 @@ public class Empleado {
     @Column(name = "\"contraseña\"")
     private String contraseña;
 
-    @Column(name = "\"telefono\"")
+    @Column(name = "\"telefono\"") 
     private String telefono;
 
     @Column(name = "\"dni\"")

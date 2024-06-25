@@ -18,7 +18,18 @@ public class ConceptosNegocioService {
 
     public List<Object[]> get7ConceptoNegocio() {return conceptosNegocioRepository.get7ConceptosNegocio();}
 
-    public void actualizarDefTabla(String definicion, String campo){
-        conceptosNegocioRepository.actualizarDefinicionTabla(definicion, campo);
+    public void insertarDatos(
+            Integer esquemaId1,
+            String campo1,
+            Integer esquemaId2,
+            String campo2,
+            Integer subdominioId,
+            String definicionCampo
+    ) {
+        conceptosNegocioRepository.insertarDatos(esquemaId1, campo1, esquemaId2, campo2, subdominioId, definicionCampo);
+    }
+
+    public void actualizarDefTabla(String definicion, List<String> camposSeleccionados) {
+        conceptosNegocioRepository.actualizarDefinicionTabla(definicion,camposSeleccionados);
     }
 }

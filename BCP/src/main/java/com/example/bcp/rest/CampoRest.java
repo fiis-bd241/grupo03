@@ -14,7 +14,7 @@ import java.util.List;
 public class CampoRest {
     @Autowired
     private CampoService campoService;
-    @PutMapping("/crearCampo")
+    @PostMapping("/crearCampo")
     public void crearCampo(
             @RequestParam("nivelDeAcceso") String nivelDeAcceso,
             @RequestParam("encriptacion") boolean encriptacion,
