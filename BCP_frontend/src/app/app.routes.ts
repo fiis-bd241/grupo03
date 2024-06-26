@@ -31,6 +31,7 @@ import {VererroresComponent} from "./validacionyreportes/vererrores/vererrores.c
 import {ModificarusuarioComponent} from "./gestionusuarios/modificarusuario/modificarusuario.component";
 import {AgregarconceptonegocioComponent} from "./equivalenciasymodelo/agregarconceptonegocio/agregarconceptonegocio.component";
 import {AsociartablasComponent} from "./equivalenciasymodelo/asociartablas/asociartablas.component";
+import {VertodoConceptosComponent} from "./equivalenciasymodelo/vertodo-conceptos/vertodo-conceptos.component";
 
 export const routes: Routes = [
   {
@@ -194,6 +195,11 @@ export const routes: Routes = [
 
   { path: 'asociar-tablas',
     component: AsociartablasComponent,
+    canActivate: [AuthGuard]
+  },
+
+  { path: 'ver-todoConceptos',
+    component: VertodoConceptosComponent,
     canActivate: [AuthGuard]
   },
 
