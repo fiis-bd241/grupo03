@@ -18,8 +18,7 @@ public class Programacion {
     private String diaInicio;
     @Column(name = "\"DiaFin\"", length = 50)
     private String diaFin;
-
-    @Column(name = "\"ConderacionFrecuencia\"", length = 50)
+    @Column(name = "\"ConsideracionFrecuencia\"", length = 50)
     private String consideracionFrecuencia;
 
     public Programacion(Integer programacionId, Migracion migracionId, String frecuenciaEjecucion, String diaInicio, String diaFin, String consideracionFrecuencia) {

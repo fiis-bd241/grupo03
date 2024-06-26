@@ -25,9 +25,9 @@
     </div>
 
     <div class="form-group">
-      <label for="frecuenciaDeEjecucion">Frecuencia De Ejecucion</label>
-      <input id="frecuenciaDeEjecucion" type="text" formControlName="frecuenciaDeEjecucion" class="form-control">
-      <div *ngIf="datosForm.get('frecuenciaDeEjecucion').invalid && datosForm.get('frecuenciaDeEjecucion').touched" class="text-danger">
+      <label for="frecuenciaEjecucion">Frecuencia De Ejecucion</label>
+      <input id="frecuenciaEjecucion" type="text" formControlName="frecuenciaEjecucion" class="form-control">
+      <div *ngIf="datosForm.get('frecuenciaEjecucion').invalid && datosForm.get('frecuenciaEjecucion').touched" class="text-danger">
         Frecuencia de ejecucion requerida.
       </div>
     </div>
@@ -49,9 +49,9 @@
     </div>
 
     <div class="form-group">
-      <label for="restriccion">Restriccion</label> <!-- Corregido el label de "Dia Fin" a "Restriccion" -->
-      <input id="restriccion" type="text" formControlName="restriccion" class="form-control">
-      <div *ngIf="datosForm.get('restriccion').invalid && datosForm.get('restriccion').touched" class="text-danger">
+      <label for="consideracionFrecuencia">Consideracion de La Frecuencia</label> <!-- Corregido el label de "Dia Fin" a "Restriccion" -->
+      <input id="consideracionFrecuencia" type="text" formControlName="consideracionFrecuencia" class="form-control">
+      <div *ngIf="datosForm.get('consideracionFrecuencia').invalid && datosForm.get('consideracionFrecuencia').touched" class="text-danger">
         Restriccion requerida.
       </div>
     </div>

@@ -33,11 +33,11 @@ export class DatosadicionalesComponent implements OnInit {
       {
         pedidoId:  ['', Validators.required],
         migracionId: ['', Validators.required],
-        frecuenciaDeEjecucion: ['', Validators.required],
+        frecuenciaEjecucion: ['', Validators.required],
         diaInicio: ['', Validators.required],
         diaFin: ['', Validators.required],
-        restriccion: ['', Validators.required],
-      })
+        consideracionFrecuencia: ['', Validators.required]
+      });
     this.pedidoService.todosPedidosId().subscribe(data =>{
       this.pedidos=data;
     })
@@ -47,7 +47,7 @@ export class DatosadicionalesComponent implements OnInit {
       } else {
         this.migraciones = []
       }
-    })
+    });
   }
   cargarMigraciones(pedidoId: number): void{
     this.migracionService.migracionIdporPedidoId(pedidoId).subscribe(data =>{
@@ -57,14 +57,18 @@ export class DatosadicionalesComponent implements OnInit {
   guardar(): void {
     const programacionData ={
       migracionId: {migracionId: this.datosForm.value.migracionId},
-      frecuenciaDeEjecucion: {frecuenciaDeEjecucion: this.datosForm.value.frecuenciaDeEjecucion},
-      diaInicio: {migraciondiaInicioId: this.datosForm.value.diaInicio},
-      diaFin: {diaFin: this.datosForm.value.diaFin},
-      restriccion: {restriccion: this.datosForm.value.restriccion}
+      frecuenciaEjecucion: this.datosForm.value.frecuenciaEjecucion,
+      diaInicio: this.datosForm.value.diaInicio,
+      diaFin: this.datosForm.value.diaFin,
+      consideracionFrecuencia: this.datosForm.value.consideracionFrecuencia
     };
     this.programacionService.asignarProgramacionAMigracion(programacionData).subscribe(
       respuesta =>{
         console.log('programacion Asociada',respuesta);
+      },
+      error => {
+        console.error('Error al crear el pedido', error);
+        console.log(programacionData);
       }
     )
   }

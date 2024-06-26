@@ -10,6 +10,6 @@ export class ProgramacionService {
   constructor(private httpClient:HttpClient) { }
   public asignarProgramacionAMigracion(programacion: any): Observable<any> {
 
-    return this.httpClient.post(this.apiUrl, programacion);
+    return this.httpClient.post(this.apiUrl,programacion);
   }
 }

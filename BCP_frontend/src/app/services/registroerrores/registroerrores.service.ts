@@ -6,12 +6,11 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class RegistroerroresService {
-  private apiUrl1 = "http://localhost:8080/TipoDato/causasycorrecciones";
-  private apiUrl2 = "http://localhost:8080/TipoDato/registrar";
+  private apiUrl1 = "http://localhost:8080/RegistroDeErrores/causasycorrecciones";
+  private apiUrl2 = "http://localhost:8080/RegistroDeErrores/registrar";
   constructor(private httpClient: HttpClient) { }
   public todoCausasYCorreciones(pedidoId: number): Observable<any> {
-    const url = `${this.apiUrl1 }/${pedidoId}`;
-    return this.httpClient.get<any>(url);
+    return this.httpClient.get<any>(`${this.apiUrl1 }/${pedidoId}`);
   }
   public registrarError(RegistroDeErrores: any): Observable<any> {
 

@@ -1,1 +1,68 @@
-<p>registrodeerrores works!</p>
+
+<h1 class="titulo1">REGISTRO DE ERRORES</h1>
+<p></p>
+<div class="formularioRegistro">
+  <h2>Ingresar Errores de los campos</h2>
+  <form [formGroup]="erroresForm" (ngSubmit)="guardar()">
+    <div class="form-group">
+      <label>Pedido</label>
+      <select id="pedido" formControlName="pedidoId" class="form-control" required>
+        <option *ngFor="let pedido of pedidos" [value]="pedido">{{ pedido }}</option>
+      </select>
+      <div *ngIf="erroresForm.get('pedidoId').invalid && erroresForm.get('pedidoId').touched" class="text-danger">
+        Pedido es requerido.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Migracion</label>
+      <select id="migracion" formControlName="migracionId" class="form-control" required>
+        <option *ngFor="let migracion of migraciones" [value]="migracion">{{ migracion}}</option>
+      </select>
+      <div *ngIf="erroresForm.get('migracionId').invalid && erroresForm.get('migracionId').touched" class="text-danger">
+        Migracion es requerida.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Tipo De Error</label>
+      <select id="nombreError" formControlName="nombreError" class="form-control" required>
+        <option *ngFor="let nombreError of errores" [value]="nombreError">{{ nombreError}}</option>
+      </select>
+      <div *ngIf="erroresForm.get('nombreError').invalid && erroresForm.get('nombreError').touched" class="text-danger">
+        El Tipo de error es requerido.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Empleados</label>
+      <select id="nombre" formControlName="nombre" class="form-control" required>
+        <option *ngFor="let nombre of empleados" [value]="nombre">{{ nombre}}</option>
+      </select>
+      <div *ngIf="erroresForm.get('nombre').invalid && erroresForm.get('nombre').touched" class="text-danger">
+        El empleado es requerido.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="causaError">Causa del error</label>
+      <input id="causaError" type="text" formControlName="causaError" class="form-control">
+      <div *ngIf="erroresForm.get('causaError').invalid && erroresForm.get('causaError').touched" class="text-danger">
+        Causa del error requerida.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="correccionError">Correcion del error</label> <!-- Corregido el label de "Dia Fin" a "Restriccion" -->
+      <input id="correccionError" type="text" formControlName="correccionError" class="form-control">
+      <div *ngIf="erroresForm.get('correccionError').invalid && erroresForm.get('correccionError').touched" class="text-danger">
+        Restriccion requerida.
+      </div>
+    </div>
+
+    <p></p>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </form>
+</div>
+
+<router-outlet></router-outlet>

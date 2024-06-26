@@ -36,4 +36,7 @@ public class EmpleadoRest {
         String nombre = payload.get("nombre");
         empleadoService.actualizarContrasena(nombre);
     }
+    @GetMapping("/todoNombres")
+    public List<Object[]> todoNombres(){return empleadoService.todoNombres();}
+
 }

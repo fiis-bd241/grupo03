@@ -16,7 +16,7 @@ public class RegistroDeErroresRest {
     @Autowired
     private RegistroDeErroresService registroDeErroresService;
     @GetMapping("/causasycorrecciones")
-    public List<Object[]> todoCausasYCorreciones(@PathVariable Integer pedidoId) {
+    public List<Object[]> todoCausasYCorreciones(@PathVariable int pedidoId) {
         return registroDeErroresService.todoCausasYCorreciones(pedidoId);
     }
     @PostMapping("/registrar")

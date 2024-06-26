@@ -20,9 +20,9 @@ public class RegistroDeErroresService {
     @Transactional
     public void registrarError(RegistroDeErrores registroDeErrores){
         int migracionId = registroDeErrores.getMigracionId().getMigracionId();
-        int empleadoId = registroDeErrores.getEmpleado().getIdEmpleado();
+        String nombre = registroDeErrores.getEmpleado().getNombre();
         String nombreError = registroDeErrores.getErrorId().getNombreError();
         String correcionError = registroDeErrores.getCorreccionError();
         String causaError = registroDeErrores.getCausaError();
-        registroDeErroresRepository.registrarError(migracionId,empleadoId,nombreError,correcionError,causaError);}
+        registroDeErroresRepository.registrarError(migracionId,nombre,nombreError,correcionError,causaError);}
 }

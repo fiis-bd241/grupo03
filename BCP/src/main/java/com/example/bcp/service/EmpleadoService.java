@@ -47,5 +47,9 @@ package com.example.bcp.service;
             }
             return contraseña.toString();
         }
+
+        public List<Object[]> todoNombres(){
+            return empleadoRepository.todoNombres();
+        }
     }
     

@@ -8,13 +8,16 @@ import { Observable } from "rxjs";
 export class EmpleadosService {
 
   private baseUrl = 'http://localhost:8080/empleado/';
-
+  private apiUrl1 ='http://localhost:8080/empleado/todoNombres';
   constructor(private http: HttpClient) { }
 
   todosProductOwner(): Observable<string[]> {
     return this.http.get<string[]>(`${this.baseUrl}PO`);
   }
 
+  todoNombres(): Observable<string[]> {
+    return this.http.get<any>(this.apiUrl1);
+  }
   public obtenerTodosLosUsuarios(): Observable<string[]> {
     return this.http.get<string[]>(this.baseUrl + 'todos');
   }

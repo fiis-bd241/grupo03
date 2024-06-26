@@ -13,7 +13,7 @@ public class ProgramacionService {
     private ProgramacionRepository programacionRepository;
     @Transactional
     public void asignarProgramacionAMigracion(Programacion programacion){
-        Integer migracionId=programacion.getMigracionId().getMigracionId();
+        int migracionId=programacion.getMigracionId().getMigracionId();
         String frecuenciaEjecucion=programacion.getFrecuenciaEjecucion();
         String diaInicio=programacion.getDiaInicio();
         String diaFin=programacion.getDiaFin();
