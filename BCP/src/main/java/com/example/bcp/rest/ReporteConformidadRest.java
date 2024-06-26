@@ -23,6 +23,13 @@ public class ReporteConformidadRest {
     public List<Object[]> generarVistaPreviaReporte(@PathVariable Integer reunionId) {
         return reporteConformidadService.generarVistaPreviaReporte(reunionId);
     }
+
+    @GetMapping("/vista-reporte-generado/{reporteId}")
+    public List<Object[]> vistaReporteConformidadGenerado(@PathVariable Integer reporteId) {
+        return reporteConformidadService.vistaReporteConformidadGenerado(reporteId);
+    }
+
+
     @GetMapping("/existe")
     public ResponseEntity<Boolean> existeReporteConformidad(@RequestParam Integer reunionId) {
         boolean existe = reporteConformidadService.existeReporteConformidad(reunionId);
@@ -34,4 +41,13 @@ public class ReporteConformidadRest {
         reporteConformidadService.crearReporteConformidad(reunionId);
         return ResponseEntity.ok().build();
     }
+    @GetMapping("/ultimos-pedidos")
+    public List<Integer> cuatroPedidosId() {
+        return reporteConformidadService.cuatroPedidosId();
+    }
+    @GetMapping("/por-pedido/{pedidoId}")
+    public List<Object[]> reportesConformidadPorPedidoId(@PathVariable Integer pedidoId) {
+        return reporteConformidadService.reportesConformidadPorPedidoId(pedidoId);
+    }
+
 }

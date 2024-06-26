@@ -29,9 +29,9 @@ public class ReunionService  {
         return reunionRepository.obtenerReunionesPendientes();
     }
 
-    public List<Object[]> buscarReunionesPorTexto(String textoBusqueda) {
-        return reunionRepository.buscarReunionesPorTexto(textoBusqueda);
-    }
+//    public List<Object[]> buscarReunionesPorTexto(String textoBusqueda) {
+//        return reunionRepository.buscarReunionesPorTexto(textoBusqueda);
+//    }
 
     public List<Object[]> obtenerReunionesPorEstadoOrdenadas(String estadoReunion, String orden) {
         return reunionRepository.obtenerReunionesPorEstadoOrdenadas(estadoReunion, orden);
@@ -84,6 +84,16 @@ public class ReunionService  {
     }
     public void cancelarReunion(Integer reunionId) {
         reunionRepository.cancelarReunion(reunionId);
+    }
+    public void actualizarAcuerdos(Integer id, String acuerdos) {
+        reunionRepository.actualizarAcuerdos(id, acuerdos);
+    }
+
+    public List<Object[]> buscarReunionesPendientesporPedidoId(Integer pedidoId) {
+        return reunionRepository.buscarReunionesPendientesporPedidoId(pedidoId);
+    }
+    public List<Object[]> buscarReunionesCompletadasporPedidoId(Integer pedidoId) {
+        return reunionRepository.buscarReunionesCompletadasporPedidoId(pedidoId);
     }
 
 }

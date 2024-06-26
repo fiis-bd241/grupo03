@@ -30,10 +30,7 @@ public class ReunionRest {
         return reunionService.obtenerReunionesPendientes();
     }
 
-    @GetMapping("/buscar")
-    public List<Object[]> buscarReunionesPorTexto(@RequestParam String texto) {
-        return reunionService.buscarReunionesPorTexto(texto);
-    }
+
 
     @GetMapping("/estado")
     public List<Object[]> obtenerReunionesPorEstadoOrdenadas(@Param("estadoReunion") String estadoReunion, @Param("orden") String orden) {
@@ -93,5 +90,16 @@ public class ReunionRest {
         reunionService.cancelarReunion(reunionId);
         return ResponseEntity.ok("Reunión cancelada");
     }
-
+    @PutMapping("/{id}/acuerdos")
+    public void actualizarAcuerdos(@PathVariable Integer id, @RequestBody String acuerdos) {
+        reunionService.actualizarAcuerdos(id, acuerdos);
+    }
+    @GetMapping("/pendiente-pedido/{pedidoId}")
+    public List<Object[]> buscarReunionesPendientesporPedidoId(@PathVariable Integer pedidoId) {
+        return reunionService.buscarReunionesPendientesporPedidoId(pedidoId);
+    }
+    @GetMapping("/completada-pedido/{pedidoId}")
+    public List<Object[]> buscarReunionesCompletadasporPedidoId(@PathVariable Integer pedidoId) {
+        return reunionService.buscarReunionesCompletadasporPedidoId(pedidoId);
+    }
 }

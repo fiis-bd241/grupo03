@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -65,5 +65,14 @@ export class ReunionesService {
   cancelarReunion(reunionId: number): Observable<any> {
     return this.httpClient.delete(`${this.baseUrl}cancelar/${reunionId}`);
   }
-
+  actualizarAcuerdos(id: number, acuerdos: string): Observable<void> {
+    return this.httpClient.put<void>(`${this.baseUrl}${id}/acuerdos`,
+      acuerdos);
+  }
+  buscarReunionesPendientesPorPedido(pedidoId: number): Observable<any[]> {
+    return this.httpClient.get<any[]>(`${this.baseUrl}pendiente-pedido/${pedidoId}`);
+  }
+  buscarReunionesCompletadasPorPedido(pedidoId: number): Observable<any[]> {
+    return this.httpClient.get<any[]>(`${this.baseUrl}completada-pedido/${pedidoId}`);
+  }
 }

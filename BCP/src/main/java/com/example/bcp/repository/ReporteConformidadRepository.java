@@ -46,8 +46,15 @@ public interface ReporteConformidadRepository extends JpaRepository<ReporteConfo
             "    INNER JOIN public.\"Tipo_Reunion\" tr ON r.\"TipoReunion_Id\" = tr.\"TipoReunion_Id\" " +
             "    WHERE r.\"Reunion_Id\" = :reunionId " +
             ") " +
-            "AND rc.\"Estado\" = 'completado'", nativeQuery = true)
+            "AND rc.\"Estado\" = 'pendiente'", nativeQuery = true)
     List<Object[]> generarVistaPreviaReporte(@Param("reunionId") Integer reunionId);
+
+    @Query(value = "SELECT r.\"Reunion_Id\", rc.\"Tipo_Reporte\", r.\"Fecha\", r.\"HoraInicio\", r.\"HoraFin\", r.\"Acuerdos\" ,rc.\"Pedido_Id\"" +
+            "FROM public.\"Reunion_Reporte_Conformidad\" rrc " +
+            "JOIN public.\"Reunion\" r ON rrc.\"Reunion_Id\" = r.\"Reunion_Id\" " +
+            "JOIN public.\"Reporte_Conformidad\" rc ON rrc.\"Reporte_Id\" = rc.\"Reporte_Id\" " +
+            "WHERE rc.\"Reporte_Id\" = :reporteId ", nativeQuery = true)
+    List<Object[]> vistaReporteConformidadGenerado(@Param("reporteId") Integer reporteId);
 
     @Query(value = "SELECT COUNT(*) > 0 " +
             "FROM public.\"Reporte_Conformidad\" rc " +
@@ -59,5 +66,17 @@ public interface ReporteConformidadRepository extends JpaRepository<ReporteConfo
             "    INNER JOIN public.\"Tipo_Reunion\" tr ON r.\"TipoReunion_Id\" = tr.\"TipoReunion_Id\" " +
             "    WHERE r.\"Reunion_Id\" = :reunionId)", nativeQuery = true)
     boolean existeReporteConformidad(@Param("reunionId") Integer reunionId);
+
+    @Query(value = "SELECT \"Pedido_Id\" " +
+            "FROM \"Pedido\" ORDER BY \"Pedido_Id\" " +
+            "DESC LIMIT 4", nativeQuery = true)
+    List<Integer> cuatroPedidosId();
+
+    @Query(value = "SELECT \"Reporte_Id\", \"Tipo_Reporte\", \"Fecha\", \"Estado\" " +
+            "FROM \"Reporte_Conformidad\" " +
+            "WHERE \"Pedido_Id\" = :pedidoId",
+            nativeQuery = true)
+    List<Object[]> reportesConformidadPorPedidoId(Integer pedidoId);
+
 
 }

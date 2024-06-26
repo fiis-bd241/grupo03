@@ -15,6 +15,10 @@ export class ReportesconformidadService {
     return this.httpClient.get(`${this.baseUrl}vista-previa-reporte/${reunionId}`);
   }
 
+  vistaReporteConformidadGenerado(reporteId: number): Observable<any> {
+    return this.httpClient.get(`${this.baseUrl}vista-reporte-generado/${reporteId}`);
+  }
+
   actualizarEstadoReporteConformidad(reunionId: number): Observable<any> {
     return this.httpClient.put(`${this.baseUrl}actualizar-estado/${reunionId}`, {});
   }
@@ -31,5 +35,11 @@ export class ReportesconformidadService {
   }
   crearReporteConformidad(reunionId: number): Observable<any> {
     return this.httpClient.post(`${this.baseUrl}crear?reunionId=${reunionId}`, {});
+  }
+  obtenerCuatroUltimosPedidos(): Observable<number[]> {
+    return this.httpClient.get<number[]>(`${this.baseUrl}ultimos-pedidos`);
+  }
+  obtenerReportesPorPedidoId(pedidoId: number): Observable<any[]> {
+    return this.httpClient.get<any[]>(`${this.baseUrl}por-pedido/${pedidoId}`);
   }
 }
