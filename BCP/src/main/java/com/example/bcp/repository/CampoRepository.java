@@ -13,11 +13,11 @@ import java.util.List;
 @Repository
 public interface CampoRepository extends JpaRepository<Campo, Integer> {
 
-    @Query(value = "SELECT * FROM public.\"Modelado\" m " +
-            "JOIN public.\"DefinicionesTecnicas\" dt ON m.\"id_referencia\" = dt.\"id_DT\" " +
-            "JOIN public.\"ConceptosNegocio\" cn ON dt.\"EquivalenciaId\" = cn.\"id_referencia\" " +
-            "JOIN public.\"Migracion\" mg ON mg.\"Migracion_Id\"=cn.\"MigracionId\" " +
-            "WHERE mg.\"Pedido_Id\" = :pedidoId", nativeQuery = true)
+    @Query(value = "SELECT \"CampoDDV\" FROM public.\"Modelado\" m\n" +
+            "            JOIN public.\"DefinicionesTecnicas\" dt ON m.\"id_referencia\" = dt.\"id_DT\"\n" +
+            "            JOIN public.\"ConceptosNegocio\" cn ON dt.\"EquivalenciaId\" = cn.\"id_referencia\"\n" +
+            "            JOIN public.\"Migracion\" mg ON mg.\"Migracion_Id\"=cn.\"MigracionId\"\n" +
+            "            WHERE mg.\"Pedido_Id\" = :pedidoId", nativeQuery = true)
     List<Object[]> camposPorPedido(@Param("pedidoId") Integer pedidoId);
 
     @Modifying

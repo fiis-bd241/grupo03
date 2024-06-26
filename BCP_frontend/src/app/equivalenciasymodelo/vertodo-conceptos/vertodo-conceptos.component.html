@@ -1,0 +1,42 @@
+<h1 class="titulo1">CONCEPTOS DE NEGOCIO</h1>
+<p></p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Dominio</th>
+            <th scope="col">Subdominio</th>
+            <th scope="col">Esquema</th>
+            <th scope="col">Tabla</th>
+            <th scope="col">Campo</th>
+            <th scope="col">DefinicionTabla</th>
+            <th scope="col">DefinicionCampo</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let concepto of conceptos">
+            <td>{{ concepto[0] }}</td>
+            <td>{{ concepto[1] }}</td>
+            <td>{{ concepto[2] }}</td>
+            <td>{{ concepto[3] }}</td>
+            <td>{{ concepto[4] }}</td>
+            <td>{{ concepto[5] }}</td>
+            <td>{{ concepto[6] }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="conceptos.length === 0" class="alert alert-warning" role="alert">
+          No hay conceptos de negocio disponibles.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="izquierda2">
+  <p><a routerLink="/ver-conceptosNegocio" routerLinkActive="active">Regresar</a></p>
+</div>
+

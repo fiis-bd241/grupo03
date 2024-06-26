@@ -15,7 +15,7 @@ public class TipoErrorRest {
     @Autowired
     private TipoErrorService tipoErrorService;
     @GetMapping("/todoNombresErrores")
-    public List<Object[]> todoNombresErrores() {
+    public List<Object[]> va() {
         return tipoErrorService.todoNombresErrores();
     }
 }

@@ -25,9 +25,19 @@ package com.example.bcp.service;
         public void agregarEmpleado(Empleado empleado) {
             String contraseña = generarContraseña();
             empleado.setContraseña(contraseña);
-            empleadoRepository.save(empleado);
+            empleadoRepository.agregarEmpleado(empleado.getDni(), empleado.getNombre(), empleado.getRol().getNombreRol(), contraseña, empleado.getCorreo(), empleado.getTelefono());
         }
-    
+
+        public void actualizarContrasena(String nombre) {
+            Empleado empleado = empleadoRepository.findByNombre(nombre);
+            if (empleado != null) {
+                String nuevaContrasena = generarContraseña();
+                empleadoRepository.actualizarContrasena(empleado.getIdEmpleado(), nuevaContrasena);
+            } else {
+                throw new IllegalArgumentException("Empleado no encontrado con nombre: " + nombre);
+            }
+        }
+
         private String generarContraseña() {
             String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; // Esto podría ser más complejo
             StringBuilder contraseña = new StringBuilder();
@@ -36,6 +46,10 @@ package com.example.bcp.service;
                 contraseña.append(caracteres.charAt(indice));
             }
             return contraseña.toString();
+        }
+
+        public List<Object[]> todoNombres(){
+            return empleadoRepository.todoNombres();
         }
     }
     

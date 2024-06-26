@@ -4,14 +4,10 @@ import com.example.bcp.dto.EmpleadoConRolDTO;
 import com.example.bcp.model.Empleado;
 import com.example.bcp.service.EmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/empleado/")
@@ -32,10 +28,15 @@ public class EmpleadoRest {
 
     @PostMapping("/agregar-empleado")
     public void agregarEmpleado(@RequestBody Empleado empleado) {
-    empleadoService.agregarEmpleado(
-        empleado
-    );
-}
-}
+        empleadoService.agregarEmpleado(empleado);
+    }
 
+    @PostMapping("/actualizar-contrasena")
+    public void actualizarContrasena(@RequestBody Map<String, String> payload) {
+        String nombre = payload.get("nombre");
+        empleadoService.actualizarContrasena(nombre);
+    }
+    @GetMapping("/todoNombres")
+    public List<Object[]> todoNombres(){return empleadoService.todoNombres();}
 
+}

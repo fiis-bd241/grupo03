@@ -58,4 +58,5 @@ export class VerreporteconformidadComponent implements OnInit {
       this.router.navigate(['/reuniones']);
     });
   }
+
 }

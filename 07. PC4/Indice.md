@@ -8,5 +8,4 @@
 3. [Arquitectura de la Aplicación](3.Arquitectura.md)
 4. [Versión Final de la Aplicación](4.Aplicacion.md)
 5. [Próximos Pasos](5.ProximosPasos.md)
-6. [NoSQL](6.NoSQL.md)
-7. [Presentaciones Individuales](7.PresentacionesIndividuales.md)
+6. [Presentaciones Individuales](7.PresentacionesIndividuales.md)

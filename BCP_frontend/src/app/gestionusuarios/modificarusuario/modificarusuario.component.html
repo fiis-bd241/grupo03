@@ -1,0 +1,48 @@
+<!-- Pantalla de gestión de usuarios -->
+<div class="sidebar">
+  <img src="assets/bcp-logo.png" alt="BCP Logo" class="logo">
+  <ul>
+    <li><a href="/gestion/usuarios" class="active">Gestión de usuarios</a></li>
+    <li><a href="#">Ajustes de seguridad</a></li>
+    <li><a href="#">Mantenimiento de base de datos</a></li>
+    <li><a href="#">Rendimiento de usuarios</a></li>
+  </ul>
+</div>
+
+<!-- Contenido principal -->
+<div class="main-content">
+  <div class="header">
+    <div class="header-left">
+      <h5>Hora actual: {{ now | date: 'HH:mm:ss' }}</h5>
+    </div>
+    <div class="header-right">
+      <h5>{{ usuarioLogeado }}</h5>
+    </div>
+  </div>
+
+  <h1>Modificar Usuario</h1>
+  <div class="card">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" href="/gestion/usuarios">Usuarios</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/gestion/agregar-usuario">Agregar usuario</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="/gestion/modificar-usuario">Modificar Usuario</a>
+      </li>
+    </ul>
+    <div class="form-container">
+      <form [formGroup]="modificarUsuarioForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="nombre">Seleccionar usuario</label>
+          <select id="nombre" formControlName="nombre">
+            <option *ngFor="let usuario of usuarios" [value]="usuario.nombre">{{ usuario.nombre }}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-submit">Generar nueva contraseña</button>
+      </form>
+    </div>
+  </div>
+</div>

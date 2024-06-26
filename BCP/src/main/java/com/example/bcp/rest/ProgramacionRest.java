@@ -14,5 +14,6 @@ public class ProgramacionRest {
     private ProgramacionService programacionService;
     @PostMapping("/asignar")
     public void asignarProgramacionAMigracion(@RequestBody Programacion programacion){
+
         programacionService.asignarProgramacionAMigracion(programacion);}
 }

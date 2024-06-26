@@ -20,8 +20,7 @@ public class CampoService {
     public void crearCampo(String nivelDeAcceso,boolean encriptacion,boolean enmascarado, String campoDDV){
         campoRepository.crearCampo(nivelDeAcceso,encriptacion,campoDDV,enmascarado);}
 
-    public List<Object[]> camposPorPedido(Pedido pedido) {
-        Integer pedidoId=pedido.getPedidoId();
+    public List<Object[]> camposPorPedido(Integer pedidoId) {
         return campoRepository.camposPorPedido(pedidoId);
     }
 }

@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {PrincipalmainComponent} from './principal/principalmain/principalmain.component'
+import {VerpedidosmainComponent} from './principal/verpedidosmain/verpedidosmain.component'
+import {VermigracionesmainComponent} from './principal/vermigracionesmain/vermigracionesmain.component'
 import { PrincipalComponent } from "./gestionpedidos/principal/principal.component";
 import { AgregarpedidoComponent } from "./gestionpedidos/agregarpedido/agregarpedido.component";
 import { AgregarmigracionComponent } from "./gestionpedidos/agregarmigracion/agregarmigracion.component";
@@ -21,6 +24,11 @@ import { AgregarUsuarioComponent } from './gestionusuarios/agregarusuario/agrega
 import {VerreunionpendienteComponent} from "./gestionreuniones/verreunionpendiente/verreunionpendiente.component";
 import {VerreunioncompletadaComponent} from "./gestionreuniones/verreunioncompletada/verreunioncompletada.component";
 import {VerreporteconformidadComponent} from "./gestionreuniones/verreporteconformidad/verreporteconformidad.component";
+import { DatosadicionalesComponent} from "./validacionyreportes/datosadicionales/datosadicionales.component";
+import {DesignarcampoComponent} from "./validacionyreportes/designarcampo/designarcampo.component";
+import {RegistrodeerroresComponent} from "./validacionyreportes/registrodeerrores/registrodeerrores.component";
+import {VererroresComponent} from "./validacionyreportes/vererrores/vererrores.component";
+import {ModificarusuarioComponent} from "./gestionusuarios/modificarusuario/modificarusuario.component";
 import {AgregarconceptonegocioComponent} from "./equivalenciasymodelo/agregarconceptonegocio/agregarconceptonegocio.component";
 import {AsociartablasComponent} from "./equivalenciasymodelo/asociartablas/asociartablas.component";
 import {AgregaracuerdosComponent} from "./gestionreuniones/agregaracuerdos/agregaracuerdos.component";
@@ -28,6 +36,7 @@ import {ListareportesconformidadComponent} from "./gestionreuniones/listareporte
 import{CancelarrreunionComponent} from "./gestionreuniones/cancelarrreunion/cancelarrreunion.component";
 import {VerreporteconformidadgeneradoComponent} from "./gestionreuniones/verreporteconformidadgenerado/verreporteconformidadgenerado.component";
 import {BuscarreporteComponent} from "./gestionreuniones/buscarreporte/buscarreporte.component";
+import {VertodoConceptosComponent} from "./equivalenciasymodelo/vertodo-conceptos/vertodo-conceptos.component";
 
 export const routes: Routes = [
   {
@@ -47,6 +56,28 @@ export const routes: Routes = [
   {
     path: 'gestion/agregar-usuario',
     component: AgregarUsuarioComponent,
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'gestion/modificar-usuario',
+    component: ModificarusuarioComponent,
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'main',
+    component: PrincipalmainComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'main/ver-pedidos',
+    component: VerpedidosmainComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'main/ver-migraciones/:pedidoId',
+    component: VermigracionesmainComponent,
     canActivate: [AuthGuard]
   },
 
@@ -145,6 +176,26 @@ export const routes: Routes = [
     component: AgregaracuerdosComponent ,
     canActivate: [AuthGuard]
   },
+  {
+    path: 'datosadicionales',
+    component: DatosadicionalesComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'designarcampo',
+    component: DesignarcampoComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'registrodeerrores',
+    component: RegistrodeerroresComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'vererrores',
+    component: VererroresComponent,
+    canActivate: [AuthGuard]
+  },
 
   { path: 'agregar-cn',
     component: AgregarconceptonegocioComponent,
@@ -153,6 +204,11 @@ export const routes: Routes = [
 
   { path: 'asociar-tablas',
     component: AsociartablasComponent,
+    canActivate: [AuthGuard]
+  },
+
+  { path: 'ver-todoConceptos',
+    component: VertodoConceptosComponent,
     canActivate: [AuthGuard]
   },
 

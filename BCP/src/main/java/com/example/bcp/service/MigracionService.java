@@ -31,4 +31,7 @@ public class MigracionService {
     public List<Object[]> buscarMigracionesPorPedidoId(int pedidoId) {
         return migracionRepository.buscarMigracionesPorPedidoId(pedidoId);
     }
+    public List<Object[]> migracionIdporPedidoId(int pedidoId) {
+        return migracionRepository.migracionIdporPedidoId(pedidoId);
+    }
 }

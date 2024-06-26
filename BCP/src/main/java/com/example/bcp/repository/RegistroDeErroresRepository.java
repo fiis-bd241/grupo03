@@ -19,9 +19,10 @@ public interface RegistroDeErroresRepository extends JpaRepository<RegistroDeErr
             "\"Migracion_Id\",\"Id_error\",\"Id_Empleado\",\"Correcion_error\",\"Fecha_registro\",\"Causa_error\")\n" +
             "VALUES \n" +
             "(:migracionId, (SELECT \"Id_error\" FROM \"TipoError\"\n" +
-            "   WHERE \"Nombre_error\" = :nombreError),:empleadoId,:correcionError,CURRENT_DATE,:causaError);", nativeQuery = true)
+            "   WHERE \"Nombre_error\" = :nombreError),SELECT id_empleado FROM \"Empleado\"\n" +
+            "WHERE \"Empleado\".\"nombre\"=:nombre,:correcionError,CURRENT_DATE,:causaError);", nativeQuery = true)
     void registrarError(@Param("migracionId") int migracionId,
-                                       @Param("empleadoId") int empleadoId,
+                                       @Param("nombre") String nombre,
                                        @Param("nombreError") String nombreError,
                                        @Param("correcionError") String correcionError,
                                        @Param("causaError") String causaError);

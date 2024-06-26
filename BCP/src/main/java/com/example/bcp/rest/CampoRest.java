@@ -22,7 +22,7 @@ public class CampoRest {
             @RequestParam("enmascarado") boolean enmascarado) {
         campoService.crearCampo(nivelDeAcceso,encriptacion,enmascarado,campoDDV);}
     @GetMapping("/camposPorPedido")
-    public List<Object[]> camposPorPedido(@RequestBody Pedido pedido) {
-        return campoService.camposPorPedido(pedido);
+    public List<Object[]> camposPorPedido(@RequestParam("pedidoId") Integer pedidoId) {
+        return campoService.camposPorPedido(pedidoId);
     }
 }

@@ -93,5 +93,6 @@ export class AgregarconceptonegocioComponent implements OnInit{
 
   agregarOtraInsercion() : void{
     console.log('Se ha hecho click en el botón "+"');
+    location.reload();
   }
 }
