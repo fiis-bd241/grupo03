@@ -49,12 +49,13 @@
   </form>
 </div>
 
-<div class="derecha2">
-  <p><a routerLink="/ver-conceptosNegocio" routerLinkActive="active">Regresar</a></p>
-</div>
-
-<div class="izquierda2">
-  <p><a routerLink="/asociar-tablas" routerLinkActive="active">Siguiente</a></p>
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <button class="btn btn-primary btn-g mx-2" routerLink="/ver-conceptosNegocio" routerLinkActive="active">Regresar</button>
+      <button class="btn btn-primary btn-g mx-2" routerLink="/asociar-tablas" routerLinkActive="active">Siguiente</button>
+    </div>
+  </div>
 </div>
 
 <router-outlet></router-outlet>
