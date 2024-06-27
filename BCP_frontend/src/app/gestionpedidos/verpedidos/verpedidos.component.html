@@ -1,5 +1,18 @@
 <h1 class="titulo1">PEDIDOS</h1>
 <p></p>
+
+<form [formGroup]="pedidosForm" (ngSubmit)="onSubmit()" class="formulario-horizontal">
+  <div class="form-group">
+    <label for="fechaInicio">Fecha Inicio</label>
+    <input type="date" id="fechaInicio" formControlName="fechaInicio" class="form-control" required>
+  </div>
+  <div class="form-group">
+    <label for="fechaFin">Fecha Fin</label>
+    <input type="date" id="fechaFin" formControlName="fechaFin" class="form-control" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
 <div class="container">
   <div class="row">
     <div class="col">
@@ -18,7 +31,7 @@
           </thead>
           <tbody>
           <tr *ngFor="let pedido of pedidos">
-            <td><a [routerLink]="['/ver-migraciones', pedido[0]]">{{ pedido[0] }}</a></td>
+            <td><a [routerLink]="['/main/ver-migraciones', pedido[0]]">{{ pedido[0] }}</a></td>
             <td>{{ pedido[1] }}</td>
             <td>{{ pedido[2] }}</td>
             <td>{{ pedido[3] }}</td>
@@ -36,6 +49,6 @@
   </div>
 </div>
 
-<div class="derecha2">
+<div class="derecha1">
   <p><a routerLink="/principal" routerLinkActive="active">Regresar</a></p>
 </div>
