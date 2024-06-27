@@ -1,0 +1,58 @@
+<div class="container mt-4">
+  <h1 class="titulo1">REPORTES DE CONFORMIDAD</h1>
+  <hr>
+
+  <!-- Sección de búsqueda por pedido -->
+  <div class="row mb-4">
+    <div class="col-md-8 offset-md-2">
+      <form [formGroup]="searchForm" (ngSubmit)="obtenerReportesPorPedido()">
+        <div class="form-group">
+          <label for="pedidoId">Buscar por Pedido ID:</label>
+          <select id="pedidoId" formControlName="pedidoId" class="form-control">
+            <option value="" disabled selected>Seleccione un Pedido</option>
+            <option *ngFor="let pedido of pedidos" [value]="pedido">{{ pedido }}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Sección de reportes por pedido -->
+  <div *ngIf="reportesPorPedido && reportesPorPedido.length > 0" class="table-responsive">
+    <table class="table table-striped table-bordered">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID Reporte</th>
+        <th scope="col">Tipo de Reporte</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let reporte of reportesPorPedido">
+        <td>{{ reporte[0] }}</td>
+        <td>{{ reporte[1] }}</td>
+        <td>{{ reporte[2] }}</td>
+        <td>{{ reporte[3] }}</td>
+        <td>
+          <a [routerLink]="['/reporte-conformidad-generado', reporte[0]]">Ver Detalles</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="!reportesPorPedido || reportesPorPedido.length === 0">
+    <div class="alert alert-danger" role="alert">
+      No hay reportes de conformidad para este pedido.
+    </div>
+  </div>
+
+  <!-- Botones de navegación -->
+  <div class="row justify-content-center mt-4">
+    <div class="col text-center">
+      <a class="btn btn-warning" href="/lista-reportes-conformidad" role="button">Volver</a>
+    </div>
+  </div>
+</div>

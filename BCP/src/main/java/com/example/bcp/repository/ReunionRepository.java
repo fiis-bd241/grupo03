@@ -37,20 +37,31 @@ public interface ReunionRepository extends JpaRepository<Reunion, Integer> {
             "ORDER BY \"Fecha\" ASC, \"HoraInicio\" ASC", nativeQuery = true)
     List<Object[]> obtenerReunionesPendientes();
 
-    @Query(value = "SELECT \"Reunion_Id\", " +
-            "\"TipoReunion_Id\", " +
-            "\"Fecha\", " +
-            "\"HoraInicio\", " +
-            "\"HoraFin\", " +
-            "\"Pedido_Id\" " +
-            "FROM public.\"Reunion\" " +
-            "WHERE \"Reunion_Id\" LIKE %:textoBusqueda% OR " +
-            "\"TipoReunion_Id\" LIKE %:textoBusqueda% OR " +
-            "TO_CHAR(\"HoraInicio\"::time, 'HH24') LIKE %:textoBusqueda% OR " +
-            "TO_CHAR(\"HoraFin\"::time,'HH24') LIKE %:textoBusqueda% OR " +
-            "TO_CHAR(\"Fecha\", 'YYYY-MM-DD') LIKE %:textoBusqueda% OR " +
-            "\"Pedido_Id\" LIKE %:textoBusqueda%", nativeQuery = true)
-    List<Object[]> buscarReunionesPorTexto(String textoBusqueda);
+    @Query(value = "SELECT r.\"Reunion_Id\", " +
+            "tr.\"Nombre\" AS \"Tipo\", " +
+            "r.\"Fecha\", " +
+            "r.\"HoraInicio\" AS \"Inicio\", " +
+            "r.\"HoraFin\" AS \"Fin\", " +
+            "r.\"Pedido_Id\" " +
+            "FROM public.\"Reunion\" r " +
+            "INNER JOIN public.\"Tipo_Reunion\" tr ON r.\"TipoReunion_Id\" = tr.\"TipoReunion_Id\" " +
+            "WHERE r.\"Pedido_Id\" = :pedidoId AND \"Estado\" = 'pendiente' " +
+            "ORDER BY r.\"Fecha\" DESC, r.\"HoraInicio\" DESC",
+            nativeQuery = true)
+    List<Object[]> buscarReunionesPendientesporPedidoId(Integer pedidoId);
+    @Query(value = "SELECT r.\"Reunion_Id\", " +
+            "tr.\"Nombre\" AS \"Tipo\", " +
+            "r.\"Fecha\", " +
+            "r.\"HoraInicio\" AS \"Inicio\", " +
+            "r.\"HoraFin\" AS \"Fin\", " +
+            "r.\"Pedido_Id\" " +
+            "FROM public.\"Reunion\" r " +
+            "INNER JOIN public.\"Tipo_Reunion\" tr ON r.\"TipoReunion_Id\" = tr.\"TipoReunion_Id\" " +
+            "WHERE r.\"Pedido_Id\" = :pedidoId AND \"Estado\" = 'completada' " +
+            "ORDER BY r.\"Fecha\" DESC, r.\"HoraInicio\" DESC",
+            nativeQuery = true)
+    List<Object[]> buscarReunionesCompletadasporPedidoId(Integer pedidoId);
+
     @Query(value = "SELECT 'R'|| r.\"Reunion_Id\" as \"Reunión\", " +
             "tr.\"Nombre\" as \"Tipo\", " +
             "r.\"Fecha\", " +
@@ -70,8 +81,8 @@ public interface ReunionRepository extends JpaRepository<Reunion, Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO public.\"Reunion\" (\"Id_Empleado\", \"Pedido_Id\", \"TipoReunion_Id\", \"HoraInicio\", \"HoraFin\", \"Plataforma\", \"Fecha\", \"Estado\", \"Agenda\", \"FechaProgramacion\", \"HoraProgramacion\") " +
-            "VALUES (:idEmpleado, :pedidoId, :tipoReunionId, :horaInicio, :horaFin, :plataforma, :fecha, 'pendiente', :agenda, CURRENT_DATE, CURRENT_TIME)",
+    @Query(value = "INSERT INTO public.\"Reunion\" (\"Id_Empleado\", \"Pedido_Id\", \"TipoReunion_Id\", \"HoraInicio\", \"HoraFin\", \"Plataforma\", \"Fecha\", \"Estado\", \"Agenda\",\"Acuerdos\", \"FechaProgramacion\", \"HoraProgramacion\") " +
+            "VALUES (:idEmpleado, :pedidoId, :tipoReunionId, :horaInicio, :horaFin, :plataforma, :fecha, 'pendiente', :agenda,'...', CURRENT_DATE, CURRENT_TIME)",
             nativeQuery = true)
     void crearReunion(@Param("idEmpleado") int idEmpleado,
                       @Param("pedidoId") int pedidoId,
@@ -121,15 +132,26 @@ public interface ReunionRepository extends JpaRepository<Reunion, Integer> {
     void editarReunion(@Param("reunionId") Integer reunionId, @Param("fecha") LocalDate fecha, @Param("horaInicio") LocalTime horaInicio, @Param("horaFin") LocalTime horaFin, @Param("plataforma") String plataforma, @Param("agenda") String agenda);
 
 
-    @Query(value = "SELECT MAX(\"Reunion_Id\") FROM public.\"Reunion\"", nativeQuery = true)
+    @Query(value = "SELECT MAX(\"Reunion_Id\") " +
+            "FROM public.\"Reunion\"", nativeQuery = true)
     Integer MaxReunionId();
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM public.\"Reunion\" WHERE \"Reunion_Id\" = :reunionId AND \"Estado\" = 'pendiente'", nativeQuery = true)
+    @Query(value = "DELETE FROM public.\"Reunion\"" +
+            " WHERE \"Reunion_Id\" = :reunionId AND \"Estado\" = 'pendiente'", nativeQuery = true)
     void cancelarReunion(@Param("reunionId") Integer reunionId);
 
 
+    @Modifying
+    @Transactional
+    @Query("UPDATE Reunion r " +
+            "SET r.acuerdos = :acuerdos " +
+            "WHERE r.reunionId = :id AND r.estado = 'completada'")
+    void actualizarAcuerdos(@Param("id") Integer id,
+                            @Param("acuerdos") String acuerdos);
+
 
 }
+
 

@@ -1,5 +1,22 @@
 <h1 class="titulo1">REUNIONES</h1>
-<p></p>
+
+<!-- Sección de búsqueda por pedido -->
+<div class="container mb-4">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <form [formGroup]="searchForm" (ngSubmit)="buscarReunionesPorPedido()">
+        <div class="form-group">
+          <label for="pedidoId">Buscar por Pedido ID:</label>
+          <select id="pedidoId" formControlName="pedidoId" class="form-control">
+            <option value="" disabled selected>Seleccione un Pedido</option>
+            <option *ngFor="let pedido of pedidos" [value]="pedido">{{ pedido }}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+      </form>
+    </div>
+  </div>
+</div>
 
 <!-- Sección de reuniones completadas -->
 <div class="container">
@@ -28,7 +45,7 @@
             <td>{{ reunion[4] }}</td>
             <td>{{ reunion[5] }}</td>
             <td>
-              <a [routerLink]="['/reunion-completada', reunion[0]]">Ver Detalles</a>
+              <button class="btn btn-link" (click)="verDetallesCompletada(reunion[0])">Ver Detalles</button>
             </td>
           </tr>
           </tbody>
@@ -68,7 +85,7 @@
             <td>{{ reunion[4] }}</td>
             <td>{{ reunion[5] }}</td>
             <td>
-              <a [routerLink]="['/reunion-pendiente', reunion[0]]">Ver Detalles</a>
+              <button class="btn btn-link" (click)="verDetallesPendiente(reunion[0])">Ver Detalles</button>
             </td>
           </tr>
           </tbody>
@@ -85,8 +102,9 @@
 <div class="container">
   <div class="row justify-content-center mt-4">
     <div class="col text-center">
-      <button class="btn btn-primary mx-2" routerLink="/crear-reunion" routerLinkActive="active">Crear Nueva Reunión</button>
+      <a class="btn btn-primary" href="/crear-reunion" role="button">Crear Nueva Reunion</a>
       <a class="btn btn-secondary mx-2" href="/principal" role="button">Regresar a Principal</a>
+      <a class="btn btn-secondary mx-2" href="/lista-reportes-conformidad" role="button">Ver reportes de Conformidad</a>
     </div>
   </div>
 </div>

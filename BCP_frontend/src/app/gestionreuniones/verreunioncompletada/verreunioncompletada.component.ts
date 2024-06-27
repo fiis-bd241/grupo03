@@ -35,12 +35,10 @@ export class VerreunioncompletadaComponent implements OnInit {
     });
   }
 
-  editarAgenda() {
-    // Lógica para editar agenda
-  }
 
-  editarAcuerdos() {
-    // Lógica para editar acuerdos
+  agregarAcuerdos(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.router.navigate([`/agregar-acuerdos`, id]);
   }
 
   generarReporte() {

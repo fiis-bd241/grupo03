@@ -47,3 +47,22 @@ table {
   color: #004A8E;
   padding-right: 30%;
 }
+
+.formulario-horizontal {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.formulario-horizontal .form-group {
+  margin-bottom: 50px;
+  margin-left: 30px;
+}
+
+.formulario-horizontal .form-group label {
+  margin-bottom: 5px;
+}
+.formulario-horizontal button {
+  margin-left: 10px;
+  margin-bottom: 16px;
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { PedidosService } from "../../services/pedidos/pedidos.service";
 import {RouterLink, RouterOutlet} from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './verpedidos.component.css'
 })
 export class VerpedidosComponent implements OnInit {
+  pedidosForm: FormGroup;
   pedidos: any[] = [];
 
   constructor(
@@ -26,6 +27,19 @@ export class VerpedidosComponent implements OnInit {
 
   ngOnInit(): void {
     this.pedidosService.todosPedidos().subscribe(data => {
+      this.pedidos = data;
+    });
+
+    this.pedidosForm = this.fb.group({
+      fechaInicio: [''],
+      fechaFin: ['']
+    });
+  }
+
+  onSubmit(): void {
+    const { fechaInicio, fechaFin } = this.pedidosForm.value;
+
+    this.pedidosService.PedidosPorFechas(fechaInicio, fechaFin).subscribe(data => {
       this.pedidos = data;
     });
   }

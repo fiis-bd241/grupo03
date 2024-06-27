@@ -33,4 +33,9 @@ public class PedidoService {
 
         pedidoRepository.crearPedido(areaId, squadId, prioridadId, pedidoFechaLimite);
     }
+
+    public List<Object[]> PedidosPorFechas(Date fechaInicio, Date fechaFin) {
+        return pedidoRepository.PedidosPorFechas(fechaInicio, fechaFin);
+    }
+
 }

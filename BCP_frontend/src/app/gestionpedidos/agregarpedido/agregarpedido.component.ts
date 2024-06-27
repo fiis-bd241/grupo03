@@ -70,7 +70,6 @@ export class AgregarpedidoComponent implements OnInit {
       },
       error => {
         console.error('Error al crear el pedido', error);
-        console.log(pedidoData);
       }
     );
   }

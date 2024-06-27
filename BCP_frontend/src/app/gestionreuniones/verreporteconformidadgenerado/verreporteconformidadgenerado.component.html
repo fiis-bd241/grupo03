@@ -1,5 +1,4 @@
-<h1 class="titulo1">Reporte de Conformidad-Vista Previa</h1>
-
+<h1 class="titulo1">Reporte de Conformidad generado</h1>
 <div class="container">
   <div class="row">
     <div class="col">
@@ -26,6 +25,11 @@
           </tr>
           </tbody>
         </table>
+        <div *ngIf="!reuniones || reuniones.length === 0">
+          <div class="alert alert-danger" role="alert">
+            No hay reuniones registradas
+          </div>
+        </div>
       </div>
       <h3>Acuerdos</h3>
       <ul>
@@ -33,11 +37,15 @@
       </ul>
     </div>
   </div>
+  <div *ngIf="!acuerdos || acuerdos.length === 0">
+    <div class="alert alert-danger" role="alert">
+      No hay acuerdos registrados
+    </div>
+  </div>
   <div class="row justify-content-center mt-4">
     <div class="col text-center">
-      <button class="btn btn-secondary mx-2" (click)="cancelar()">Cancelar</button>
-      <button class="btn btn-primary mx-2" (click)="confirmar()">Confirmar</button>
-      <a class="btn btn-warning" href="/buscar-reporte-conformidad" role="button">Revisar Reporte</a>
+      <button class="btn btn-primary mx-2" (click)="volver()">Regresar</button>
     </div>
   </div>
 </div>
+

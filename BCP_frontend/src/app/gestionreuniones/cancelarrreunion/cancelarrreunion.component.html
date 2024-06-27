@@ -1,1 +1,38 @@
-<p>cancelarrreunion works!</p>
+<div class="container mt-4">
+  <h1 class="titulo1 text-center mb-4">REUNIONES</h1>
+  <h2 class="text-center mb-4">Detalles de la Reunión Pendiente</h2>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card mb-4">
+        <div class="card-body">
+          <p><strong>ID Reunión:</strong> {{ reunion[0] }}</p>
+          <p><strong>Tipo:</strong> {{ reunion[1] }}</p>
+          <p><strong>Fecha:</strong> {{ reunion[2] }}</p>
+          <p><strong>Hora Inicio:</strong> {{ reunion[3] }}</p>
+          <p><strong>Hora Fin:</strong> {{ reunion[4] }}</p>
+          <p><strong>Duración:</strong> {{ reunion[5].value }}</p>
+          <p><strong>Medio:</strong> {{ reunion[6] }}</p>
+          <p><strong>Agenda:</strong> {{ reunion[7] }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h3 class="card-title">Participantes</h3>
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let participante of participantes">{{ participante[1] }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-4 d-flex justify-content-between">
+      <button class="btn btn-primary" (click)="regresar()">Cancelar</button>
+      <button class="btn btn-outline-danger" (click)="eliminarreunion()">Confirmar</button>
+    </div>
+  </div>
+  </div>
+
+

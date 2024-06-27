@@ -42,6 +42,7 @@ export class VerreunionpendienteComponent implements OnInit {
       () => {
         console.log('Redirigiendo...');
         alert('Reunión marcada como completada, redirigiendo...');
+        const id = +this.route.snapshot.paramMap.get('id');
         this.router.navigate(['/reunion-completada', id]);
       },
       error => {
@@ -57,7 +58,8 @@ export class VerreunionpendienteComponent implements OnInit {
   }
 
   cancelarReunion() {
-    // Redirigir a la pantalla de cancelación
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.router.navigate(['/cancelar-reunion-pendiente', id]);
   }
 
   regresar() {

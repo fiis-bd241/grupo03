@@ -31,6 +31,11 @@ import {VererroresComponent} from "./validacionyreportes/vererrores/vererrores.c
 import {ModificarusuarioComponent} from "./gestionusuarios/modificarusuario/modificarusuario.component";
 import {AgregarconceptonegocioComponent} from "./equivalenciasymodelo/agregarconceptonegocio/agregarconceptonegocio.component";
 import {AsociartablasComponent} from "./equivalenciasymodelo/asociartablas/asociartablas.component";
+import {AgregaracuerdosComponent} from "./gestionreuniones/agregaracuerdos/agregaracuerdos.component";
+import {ListareportesconformidadComponent} from "./gestionreuniones/listareportesconformidad/listareportesconformidad.component";
+import{CancelarrreunionComponent} from "./gestionreuniones/cancelarrreunion/cancelarrreunion.component";
+import {VerreporteconformidadgeneradoComponent} from "./gestionreuniones/verreporteconformidadgenerado/verreporteconformidadgenerado.component";
+import {BuscarreporteComponent} from "./gestionreuniones/buscarreporte/buscarreporte.component";
 import {VertodoConceptosComponent} from "./equivalenciasymodelo/vertodo-conceptos/vertodo-conceptos.component";
 import {CrearuniversoComponent} from "./cargayprecarga/crearuniverso/crearuniverso.component";
 import {PrecargaComponent} from "./cargayprecarga/precarga/precarga.component";
@@ -201,6 +206,10 @@ export const routes: Routes = [
     component: VerreporteconformidadComponent,
     canActivate: [AuthGuard]
   },
+  { path: 'agregar-acuerdos/:id',
+    component: AgregaracuerdosComponent ,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'datosadicionales',
     component: DatosadicionalesComponent,
@@ -237,11 +246,29 @@ export const routes: Routes = [
     canActivate: [AuthGuard]
   },
 
+  { path: 'lista-reportes-conformidad',
+    component: ListareportesconformidadComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: 'buscar-reporte-conformidad',
+    component: BuscarreporteComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: 'cancelar-reunion-pendiente/:id',
+    component: CancelarrreunionComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'reporte-conformidad-generado/:id',
+    component: VerreporteconformidadgeneradoComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: '**',
     redirectTo: '/login',
     pathMatch: 'full'
   },
+
 ];
 
 @NgModule({
