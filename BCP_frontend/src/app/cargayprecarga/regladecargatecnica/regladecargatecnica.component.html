@@ -1,16 +1,25 @@
 
-<h1 class="titulo1">CREAR UNIVERSO</h1>
+<h1 class="titulo1">REGLA DE CARGA TECNICA</h1>
 <p></p>
 <div class="formularioRegistro">
   <h2>Ingresar Datos</h2>
-  <form [formGroup]="universoForm" (ngSubmit)="guardar()">
+  <form [formGroup]="rctForm" (ngSubmit)="guardar()">
     <div class="form-group">
       <label>Pedido</label>
       <select id="pedido" formControlName="pedidoId" class="form-control" required>
         <option *ngFor="let pedido of pedidos" [value]="pedido">{{ pedido }}</option>
       </select>
-      <div *ngIf="universoForm.get('pedidoId').invalid && universoForm.get('pedidoId').touched" class="text-danger">
+      <div *ngIf="rctForm.get('pedidoId').invalid && rctForm.get('pedidoId').touched" class="text-danger">
         Pedido es requerido.
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Migracion</label>
+      <select id="migracion" formControlName="migracionId" class="form-control" required>
+        <option *ngFor="let migracion of migraciones" [value]="migracion">{{ migracion}}</option>
+      </select>
+      <div *ngIf="rctForm.get('migracionId').invalid && rctForm.get('migracionId').touched" class="text-danger">
+        Migracion es requerida.
       </div>
     </div>
     <div class="form-group">
@@ -18,15 +27,15 @@
       <select id="nombreTecnologia" formControlName="nombreTecnologia" class="form-control" required>
         <option *ngFor="let tecnologia of tecnologias" [value]="tecnologia[0]">{{ tecnologia[1]}}</option>
       </select>
-      <div *ngIf="universoForm.get('nombreTecnologia').invalid && universoForm.get('nombreTecnologia').touched" class="text-danger">
+      <div *ngIf="rctForm.get('nombreTecnologia').invalid && rctForm.get('nombreTecnologia').touched" class="text-danger">
         Tecnologia es requerida.
       </div>
     </div>
     <div class="form-group">
       <label for="codigo">Codigo</label>
       <input id="codigo" type="text" formControlName="codigo" class="form-control">
-      <div *ngIf="universoForm.get('codigo').invalid && universoForm.get('codigo').touched" class="text-danger">
-        Codigo requerido
+      <div *ngIf="rctForm.get('codigo').invalid && rctForm.get('codigo').touched" class="text-danger">
+        Codigo requerida
       </div>
     </div>
     <p></p>

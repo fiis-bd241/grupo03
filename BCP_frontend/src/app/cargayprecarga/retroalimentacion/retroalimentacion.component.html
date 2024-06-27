@@ -1,0 +1,37 @@
+
+<h1 class="titulo1">REGLA DE CARGA FUNCIONAL</h1>
+<p></p>
+<div class="formularioRegistro">
+  <h2>Ingresar Datos</h2>
+  <form [formGroup]="feedbackForm" (ngSubmit)="guardar()">
+    <div class="form-group">
+      <label>Pedido</label>
+      <select id="pedido" formControlName="pedidoId" class="form-control" required>
+        <option *ngFor="let pedido of pedidos" [value]="pedido">{{ pedido }}</option>
+      </select>
+      <div *ngIf="feedbackForm.get('pedidoId').invalid && feedbackForm.get('pedidoId').touched" class="text-danger">
+        Pedido es requerido.
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Migracion</label>
+      <select id="migracion" formControlName="migracionId" class="form-control" required>
+        <option *ngFor="let migracion of migraciones" [value]="migracion">{{ migracion}}</option>
+      </select>
+      <div *ngIf="feedbackForm.get('migracionId').invalid && feedbackForm.get('migracionId').touched" class="text-danger">
+        Migracion es requerida.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="comentario">Codigo</label>
+      <input id="comentario" type="text" formControlName="comentario" class="form-control">
+      <div *ngIf="feedbackForm.get('comentario').invalid && feedbackForm.get('comentario').touched" class="text-danger">
+        Comentario requerido
+      </div>
+    </div>
+    <p></p>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </form>
+</div>
+
+<router-outlet></router-outlet>

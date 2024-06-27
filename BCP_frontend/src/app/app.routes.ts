@@ -32,6 +32,11 @@ import {ModificarusuarioComponent} from "./gestionusuarios/modificarusuario/modi
 import {AgregarconceptonegocioComponent} from "./equivalenciasymodelo/agregarconceptonegocio/agregarconceptonegocio.component";
 import {AsociartablasComponent} from "./equivalenciasymodelo/asociartablas/asociartablas.component";
 import {VertodoConceptosComponent} from "./equivalenciasymodelo/vertodo-conceptos/vertodo-conceptos.component";
+import {CrearuniversoComponent} from "./cargayprecarga/crearuniverso/crearuniverso.component";
+import {PrecargaComponent} from "./cargayprecarga/precarga/precarga.component";
+import {RegladecargafuncionalComponent} from "./cargayprecarga/regladecargafuncional/regladecargafuncional.component";
+import {RegladecargatecnicaComponent} from "./cargayprecarga/regladecargatecnica/regladecargatecnica.component";
+import {RetroalimentacionComponent} from "./cargayprecarga/retroalimentacion/retroalimentacion.component";
 
 export const routes: Routes = [
   {
@@ -48,6 +53,35 @@ export const routes: Routes = [
     canActivate: [AuthGuard]
   },
 
+  { path: 'crearuniverso',
+    component: CrearuniversoComponent,
+    canActivate: [AuthGuard]
+  },
+
+  { path: 'precarga',
+    component: PrecargaComponent,
+    canActivate: [AuthGuard]
+  },
+
+  { path: 'rcf',
+    component: RegladecargafuncionalComponent,
+    canActivate: [AuthGuard]
+  },
+
+  { path: 'rct',
+    component: RegladecargatecnicaComponent,
+    canActivate: [AuthGuard]
+  },
+
+  { path: 'corregirregla',
+    component: RetroalimentacionComponent,
+    canActivate: [AuthGuard]
+  },
+
+  { path: 'gestion/usuarios',
+    component: ListaUsuariosComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'gestion/agregar-usuario',
     component: AgregarUsuarioComponent,

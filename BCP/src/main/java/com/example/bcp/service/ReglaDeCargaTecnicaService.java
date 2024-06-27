@@ -18,7 +18,10 @@ public class ReglaDeCargaTecnicaService {
     public void enviarReglaParaRevision(Integer migracionId, String codigo){
 
         reglaDeCargaTecnicaRepository.enviarReglaParaRevision(migracionId,codigo);}
+    @Transactional
+    public void actualizarReglaParaRevision(Integer migracionId, String codigo){
 
+        reglaDeCargaTecnicaRepository.actualizarReglaParaRevision(migracionId,codigo);}
     @Transactional
     public void finalizarReglaDeCarga(Integer migracionId, String comentario){
         reglaDeCargaTecnicaRepository.finalizarReglaDeCarga(migracionId,comentario);}
@@ -26,4 +29,5 @@ public class ReglaDeCargaTecnicaService {
     @Transactional
     public void corregirReglaeDeCarga(Integer migracionId, String comentario){
         reglaDeCargaTecnicaRepository.corregirReglaeDeCarga(migracionId,comentario);}
+
 }

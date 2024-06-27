@@ -1,0 +1,88 @@
+<h1 class="titulo1">REGLAS DE PRECARGA</h1>
+<p></p>
+<div class="formularioRegistro">
+  <h2>Ingresar Datos</h2>
+  <form [formGroup]="filtrarporpedidoForm">
+    <div class="form-group">
+      <label>Pedido</label>
+      <select id="pedido" formControlName="pedidoId" class="form-control" required>
+        <option *ngFor="let pedido of pedidos" [value]="pedido">{{ pedido }}</option>
+      </select>
+      <div *ngIf="filtrarporpedidoForm.get('pedidoId').invalid && filtrarporpedidoForm.get('pedidoId').touched" class="text-danger">
+        Pedido es requerido.
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Migracion</label>
+      <select id="migracion" formControlName="migracionId" class="form-control" required>
+        <option *ngFor="let migracion of migraciones" [value]="migracion">{{ migracion}}</option>
+      </select>
+      <div *ngIf="filtrarporpedidoForm.get('migracionId').invalid && filtrarporpedidoForm.get('migracionId').touched" class="text-danger">
+        Migracion es requerida.
+      </div>
+    </div>
+  </form>
+</div>
+<p></p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>REGLAS OBLIGATORIAS</h2>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripcion</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let obligatorias of reglasobligatorias">
+            <td>{{ obligatorias[1] }}</td>
+            <td>{{ obligatorias[2] }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="reglasobligatorias.length === 0" class="alert alert-warning" role="alert">
+          No hay reglas obligatorias.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p></p>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>Reglas Opcionales</h2>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">¿Recomendar?</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let opcionales of reglasopcionales">
+            <td>{{ opcionales[1] }}</td>
+            <td>{{ opcionales[2] }}</td>
+            <td>
+              <button (click)="recomendar(filtrarporpedidoForm.get('migracionId').value,opcionales[1])" class="recomendar-btn">Recomendar</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="reglasopcionales.length === 0" class="alert alert-warning" role="alert">
+          No reglas opcionales
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<router-outlet></router-outlet>

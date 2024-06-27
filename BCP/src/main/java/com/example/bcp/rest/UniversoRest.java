@@ -20,7 +20,8 @@ public class UniversoRest {
     public List<Object[]> buscarUniversoPorPedido(@RequestBody Pedido pedido) {
         return universoService.buscarUniversoPorPedido(pedido);
     }
+
     @PostMapping("/crearUniverso")
-    public void reglaDeCargaObligatoria(@RequestBody Universo universo){
+    public void crearUniverso(@RequestBody Universo universo){
         universoService.crearUniverso(universo);}
 }

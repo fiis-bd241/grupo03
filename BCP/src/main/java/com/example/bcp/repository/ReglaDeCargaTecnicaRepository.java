@@ -14,27 +14,23 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ReglaDeCargaTecnicaRepository extends JpaRepository<ReglaDeCargaTecnica,Long> {
     @Modifying
     @Transactional
-    @Query(value = "DO $$\n" +
-            "BEGIN\n" +
-            "IF NOT EXISTS (\n" +
-            "SELECT 1\n" +
-            "FROM \"ReglaDeCargaTecnica\"\n" +
-            "WHERE \"regla_funcional\"= (SELECT \"ID_ReglaCargaFunc\" FROM \"ReglaDeCargaFuncional\" rfun\n" +
-            "WHERE  rfun.\"id_migracion\"=<3>)) \n" +
-            "THEN\n" +
+    @Query(value =
             "INSERT INTO \"ReglaDeCargaTecnica\"(\"regla_funcional\",\"Codigo\",\"Finalizado\",\"Fecha\")\n" +
             "VALUES((SELECT \"ID_ReglaCargaFunc\" FROM \"ReglaDeCargaFuncional\" rfun\n" +
-            "WHERE  rfun.\"id_migracion\"=:migracionId),:codigo,false,CURRENT_DATE);\n" +
-            "ELSE \n" +
-            "UPDATE \"ReglaDeCargaTecnica\"\n" +
-            "SET \"Codigo\"= :codigo,\n" +
-            "\"Fecha\"=CURRENT_DATE\n" +
-            "WHERE \"regla_funcional\"= (SELECT \"ID_ReglaCargaFunc\" FROM \"ReglaDeCargaFuncional\" rfun\n" +
-            "WHERE  rfun.\"id_migracion\"=:migracionId);\n" +
-            "END IF;\n" +
-            "END $$;", nativeQuery = true)
+            "WHERE  rfun.\"id_migracion\"=:migracionId),:codigo,false,CURRENT_DATE);", nativeQuery = true)
     void enviarReglaParaRevision(@Param("migracionId") int migracionId,
                                     @Param("codigo") String codigo);
+    @Modifying
+    @Transactional
+    @Query(value =
+            "UPDATE \"ReglaDeCargaTecnica\"\n" +
+                    "SET \"Codigo\"= :codigo,\n" +
+                    "\"Fecha\"=CURRENT_DATE\n" +
+                    "WHERE \"regla_funcional\"= (SELECT \"ID_ReglaCargaFunc\" FROM \"ReglaDeCargaFuncional\" rfun\n" +
+                    "WHERE  rfun.\"id_migracion\"=:migracionId);\n", nativeQuery = true)
+    void actualizarReglaParaRevision(@Param("migracionId") int migracionId,
+                                 @Param("codigo") String codigo);
+
     @Modifying
     @Transactional
     @Query(value = "UPDATE \"ReglaDeCargaTecnica\" \n" +

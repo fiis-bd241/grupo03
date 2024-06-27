@@ -12,25 +12,29 @@ import java.util.List;
 
 @Repository
 public interface PreCargaRepository extends JpaRepository<PreCarga,Long> {
-    @Query(value = "SELECT \"Nombre_Regla\" \n" +
-            "FROM \"PreCarga\"\n" +
-            "WHERE \"Obligatorio\" IS true;",
+    @Query(value = "SELECT * FROM \"PreCarga\" WHERE \"Obligatorio\" IS true;\n",
             nativeQuery = true)
     List<Object[]> reglasObligatorias();
 
-    @Query(value = "SELECT \"Nombre_Regla\" \n" +
-            "FROM \"PreCarga\"\n" +
-            "WHERE \"Obligatorio\" IS false;",
+    @Query(value = "SELECT * FROM \"PreCarga\" WHERE \"Obligatorio\" IS false;\n",
             nativeQuery = true)
     List<Object[]> reglasOpcionales();
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO \"CargaPreCarga\"(\"ID_ReglaCarga\", \"ID_Precarga\")" +
-            "VALUES (SELECT \"ID_ReglaCargaTecn\" FROM \"ReglaDeCargaTecnica\" \n" +
-            "         WHERE \"regla_funcional\"= (SELECT \"ID_ReglaCargaFunc\" \n" +
-            "                                 FROM \"ReglaDeCargaFuncional\" rfun \n" +
-            "                                 WHERE  rfun.\"id_migracion\"=:migracionId)), SELECT \"ID_Precarga\" FROM \"PreCarga\" pre \n" +
-            "                                                                     WHERE pre.\"Nombre_Regla\" = :nombreRegla)", nativeQuery = true)
+    @Query(value = "INSERT INTO \"CargaPreCarga\"(\"ID_ReglaCarga\", \"ID_Precarga\")\n" +
+            "VALUES (\n" +
+            "    (SELECT \"ID_ReglaCargaTecn\" \n" +
+            "     FROM \"ReglaDeCargaTecnica\" \n" +
+            "     WHERE \"regla_funcional\" = (\n" +
+            "         SELECT \"ID_ReglaCargaFunc\" \n" +
+            "         FROM \"ReglaDeCargaFuncional\" rfun \n" +
+            "         WHERE rfun.\"id_migracion\" = :migracionId\n" +
+            "     )\n" +
+            "    ),\n" +
+            "    (SELECT \"ID_Precarga\" \n" +
+            "     FROM \"PreCarga\" pre \n" +
+            "     WHERE pre.\"Nombre_Regla\" = :nombreRegla)\n" +
+            ");", nativeQuery = true)
     void relacionarCargaPrecarga(@Param("migracionId") int migracionId, @Param("nombreRegla") String nombreRegla);
 
     @Modifying

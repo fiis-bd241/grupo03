@@ -16,6 +16,12 @@ public class ReglaDeCargaTecnicaRest {
             @RequestParam("codigo") String codigo) {
         reglaDeCargaTecnicaService.enviarReglaParaRevision(migracionId, codigo);
     }
+    @PutMapping("/actualizarRCT")
+    public void actualizarReglaParaRevision(
+            @RequestParam("migracionId") Integer migracionId,
+            @RequestParam("codigo") String codigo) {
+        reglaDeCargaTecnicaService.actualizarReglaParaRevision(migracionId, codigo);
+    }
 
     @PutMapping("/finalizarRCT")
     public void finalizarReglaDeCarga(
