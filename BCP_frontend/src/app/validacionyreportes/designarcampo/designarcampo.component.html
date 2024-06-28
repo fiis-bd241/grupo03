@@ -3,59 +3,72 @@
 <div class="formularioRegistro">
   <h2>Designar Campo</h2>
   <form [formGroup]="designarForm" (ngSubmit)="guardar()">
-    <div class="form-group">
-      <label>Pedido</label>
-      <select id="pedido" formControlName="pedidoId" class="form-control" required>
-        <option *ngFor="let pedido of pedidos" [value]="pedido">{{ pedido }}</option>
-      </select>
-      <div *ngIf="designarForm.get('pedidoId').invalid && designarForm.get('pedidoId').touched" class="text-danger">
-        Pedido es requerido.
-      </div>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <tbody>
+        <tr>
+          <td><label for="pedido">Pedido</label></td>
+          <td>
+            <select id="pedido" formControlName="pedidoId" class="form-control" required>
+              <option *ngFor="let pedido of pedidos" [value]="pedido">{{ pedido }}</option>
+            </select>
+            <div *ngIf="designarForm.get('pedidoId').invalid && designarForm.get('pedidoId').touched" class="text-danger">
+              Pedido es requerido.
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="campo">CampoDDV</label></td>
+          <td>
+            <select id="campo" formControlName="campoDDV" class="form-control" required>
+              <option *ngFor="let campo of campos" [value]="campo">{{ campo }}</option>
+            </select>
+            <div *ngIf="designarForm.get('campoDDV').invalid && designarForm.get('campoDDV').touched" class="text-danger">
+              Campo es requerido.
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="nacceso">Nivel de Acceso</label></td>
+          <td>
+            <select id="nacceso" formControlName="nivelDeAcceso" class="form-control" required>
+              <option *ngFor="let nacceso of naccesos" [value]="nacceso">{{ nacceso }}</option>
+            </select>
+            <div *ngIf="designarForm.get('nivelDeAcceso').invalid && designarForm.get('nivelDeAcceso').touched" class="text-danger">
+              Nivel de Acceso es requerido.
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="enmascarado">Enmascaramiento</label></td>
+          <td>
+            <select id="enmascarado" formControlName="enmascarado" class="form-control" required>
+              <option *ngFor="let enmascarado of enmascarados" [value]="enmascarado">{{ enmascarado == 'true' ? 'Sí' : 'No' }}</option>
+            </select>
+            <div *ngIf="designarForm.get('enmascarado').invalid && designarForm.get('enmascarado').touched" class="text-danger">
+              Enmascaramiento es requerido.
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="encriptado">Encriptamiento</label></td>
+          <td>
+            <select id="encriptado" formControlName="encriptado" class="form-control" required>
+              <option *ngFor="let encriptado of encriptados" [value]="encriptado">{{ encriptado == 'true' ? 'Sí' : 'No' }}</option>
+            </select>
+            <div *ngIf="designarForm.get('encriptado').invalid && designarForm.get('encriptado').touched" class="text-danger">
+              Encriptamiento es requerido.
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="form-group">
-      <label>CampoDDV</label>
-      <select id="campo" formControlName="campoDDV" class="form-control" required>
-        <option *ngFor="let campo of campos" [value]="campo">{{ campo }}</option>
-      </select>
-      <div *ngIf="designarForm.get('campoDDV').invalid && designarForm.get('campoDDV').touched" class="text-danger">
-        Campo es requerido.
-      </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary">Registrar</button>
     </div>
-
-    <div class="form-group">
-      <label>Nivel de Acceso</label>
-      <select id="nacceso" formControlName="nivelDeAcceso" class="form-control" required>
-        <option *ngFor="let nacceso of naccesos" [value]="nacceso">{{ nacceso }}</option>
-      </select>
-      <div *ngIf="designarForm.get('nivelDeAcceso').invalid && designarForm.get('nivelDeAcceso').touched" class="text-danger">
-        Nivel de Acceso es requerido.
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label>Enmascaramiento</label>
-      <select id="enmascarado" formControlName="enmascarado" class="form-control" required>
-        <option *ngFor="let enmascarado of enmascarados" [value]="enmascarado">{{ enmascarado =='true'? 'Sí' : 'No' }}</option>
-      </select>
-      <div *ngIf="designarForm.get('enmascarado').invalid && designarForm.get('enmascarado').touched" class="text-danger">
-        Enmascaramiento es requerido.
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label>Encriptamiento</label>
-      <select id="encriptado" formControlName="encriptado" class="form-control" required>
-        <option *ngFor="let encriptado of encriptados" [value]="encriptado">{{ encriptado =='true'? 'Sí' : 'No'}}</option>
-      </select>
-      <div *ngIf="designarForm.get('encriptado').invalid && designarForm.get('encriptado').touched" class="text-danger">
-        Encriptamiento es requerido.
-      </div>
-    </div>
-
-    <p></p>
-    <button type="submit" class="btn btn-primary">Guardar</button>
   </form>
 </div>
 
-
 <router-outlet></router-outlet>
+

@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface TipoErrorRepository extends JpaRepository<TipoError, Long> {
 
-    @Query(value = "SELECT \"Nombre_error\" FROM \"TipoError\"", nativeQuery = true)
-    List<Object[]> todoNombresErrores();
+    @Query(value = "SELECT * FROM \"TipoError\"", nativeQuery = true)
+    List<Object[]> todoErrores();
 }

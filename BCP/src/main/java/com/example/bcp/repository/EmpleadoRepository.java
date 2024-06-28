@@ -49,7 +49,8 @@ public interface EmpleadoRepository extends JpaRepository<Empleado, Integer> {
        @Query("SELECT e FROM Empleado e WHERE e.nombre = :nombre")
        Empleado findByNombre(@Param("nombre") String nombre);
 
-       @Query("SELECT nombre FROM Empleado")
-       List<Object[]> todoNombres();
+       @Query(value="SELECT * \n" +
+               "FROM \"Empleado\"" , nativeQuery = true )
+       List<Object[]> todoEmpleados();
 
 }

@@ -15,11 +15,17 @@ import java.util.List;
 public class RegistroDeErroresRest {
     @Autowired
     private RegistroDeErroresService registroDeErroresService;
-    @GetMapping("/causasycorrecciones")
+    @GetMapping("/causasycorrecciones/{pedidoId}")
     public List<Object[]> todoCausasYCorreciones(@PathVariable int pedidoId) {
         return registroDeErroresService.todoCausasYCorreciones(pedidoId);
     }
     @PostMapping("/registrar")
-    public void registrarError(@RequestBody RegistroDeErrores registroDeErrores){
-        registroDeErroresService.registrarError(registroDeErrores);}
+    public void registrarError(
+            @RequestParam ("migracionId") Integer migracionId,
+            @RequestParam ("nombre") String nombre,
+            @RequestParam ("nombreError") String nombreError,
+            @RequestParam ("causaError") String causaError,
+            @RequestParam ("correcionError") String correcionError
+    ){
+        registroDeErroresService.registrarError(migracionId,nombre,nombreError,correcionError,causaError);}
 }

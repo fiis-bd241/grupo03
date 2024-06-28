@@ -12,7 +12,7 @@ import java.util.List;
 public class TipoErrorService {
     @Autowired
     private TipoErrorRepository tipoErrorRepository;
-    public List<Object[]> todoNombresErrores() {
-        return tipoErrorRepository.todoNombresErrores();}
+    public List<Object[]> todoErrores() {
+        return tipoErrorRepository.todoErrores();}
 
 }

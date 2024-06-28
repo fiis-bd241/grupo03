@@ -1,64 +1,77 @@
-
 <h1 class="titulo1">DATOS ADICIONALES</h1>
 <p></p>
 <div class="formularioRegistro">
   <h2>Ingresar Datos Adicionales</h2>
   <form [formGroup]="datosForm" (ngSubmit)="guardar()">
-    <div class="form-group">
-      <label>Pedido</label>
-      <select id="pedido" formControlName="pedidoId" class="form-control" required>
-        <option *ngFor="let pedido of pedidos" [value]="pedido">{{ pedido }}</option>
-      </select>
-      <div *ngIf="datosForm.get('pedidoId').invalid && datosForm.get('pedidoId').touched" class="text-danger">
-        Pedido es requerido.
-      </div>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <tbody>
+        <tr>
+          <td><label for="pedido">Pedido</label></td>
+          <td>
+            <select id="pedido" formControlName="pedidoId" class="form-control" required>
+              <option *ngFor="let pedido of pedidos" [value]="pedido">{{ pedido }}</option>
+            </select>
+            <div *ngIf="datosForm.get('pedidoId').invalid && datosForm.get('pedidoId').touched" class="text-danger">
+              Pedido es requerido.
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="migracion">Migracion</label></td>
+          <td>
+            <select id="migracion" formControlName="migracionId" class="form-control" required>
+              <option *ngFor="let migracion of migraciones" [value]="migracion">{{ migracion }}</option>
+            </select>
+            <div *ngIf="datosForm.get('migracionId').invalid && datosForm.get('migracionId').touched" class="text-danger">
+              Migracion es requerida.
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="frecuenciaEjecucion">Frecuencia De Ejecucion</label></td>
+          <td>
+            <input id="frecuenciaEjecucion" type="text" formControlName="frecuenciaEjecucion" class="form-control">
+            <div *ngIf="datosForm.get('frecuenciaEjecucion').invalid && datosForm.get('frecuenciaEjecucion').touched" class="text-danger">
+              Frecuencia de ejecucion requerida.
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="diaInicio">Dia Inicio</label></td>
+          <td>
+            <input id="diaInicio" type="text" formControlName="diaInicio" class="form-control">
+            <div *ngIf="datosForm.get('diaInicio').invalid && datosForm.get('diaInicio').touched" class="text-danger">
+              Dia de inicio requerido.
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="diaFin">Dia Fin</label></td>
+          <td>
+            <input id="diaFin" type="text" formControlName="diaFin" class="form-control">
+            <div *ngIf="datosForm.get('diaFin').invalid && datosForm.get('diaFin').touched" class="text-danger">
+              Dia de finalización requerido.
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="consideracionFrecuencia">Consideracion de La Frecuencia</label></td>
+          <td>
+            <input id="consideracionFrecuencia" type="text" formControlName="consideracionFrecuencia" class="form-control">
+            <div *ngIf="datosForm.get('consideracionFrecuencia').invalid && datosForm.get('consideracionFrecuencia').touched" class="text-danger">
+              Restriccion requerida.
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
-
-    <div class="form-group">
-      <label>Migracion</label>
-      <select id="migracion" formControlName="migracionId" class="form-control" required>
-        <option *ngFor="let migracion of migraciones" [value]="migracion">{{ migracion}}</option>
-      </select>
-      <div *ngIf="datosForm.get('migracionId').invalid && datosForm.get('migracionId').touched" class="text-danger">
-        Migracion es requerida.
-      </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
-
-    <div class="form-group">
-      <label for="frecuenciaEjecucion">Frecuencia De Ejecucion</label>
-      <input id="frecuenciaEjecucion" type="text" formControlName="frecuenciaEjecucion" class="form-control">
-      <div *ngIf="datosForm.get('frecuenciaEjecucion').invalid && datosForm.get('frecuenciaEjecucion').touched" class="text-danger">
-        Frecuencia de ejecucion requerida.
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="diaInicio">Dia Inicio</label>
-      <input id="diaInicio" type="text" formControlName="diaInicio" class="form-control">
-      <div *ngIf="datosForm.get('diaInicio').invalid && datosForm.get('diaInicio').touched" class="text-danger">
-        Dia de inicio requerido.
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="diaFin">Dia Fin</label>
-      <input id="diaFin" type="text" formControlName="diaFin" class="form-control">
-      <div *ngIf="datosForm.get('diaFin').invalid && datosForm.get('diaFin').touched" class="text-danger">
-        Dia de finalización requerido.
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="consideracionFrecuencia">Consideracion de La Frecuencia</label> <!-- Corregido el label de "Dia Fin" a "Restriccion" -->
-      <input id="consideracionFrecuencia" type="text" formControlName="consideracionFrecuencia" class="form-control">
-      <div *ngIf="datosForm.get('consideracionFrecuencia').invalid && datosForm.get('consideracionFrecuencia').touched" class="text-danger">
-        Restriccion requerida.
-      </div>
-    </div>
-
-    <p></p>
-    <button type="submit" class="btn btn-primary">Guardar</button>
   </form>
 </div>
 
 <router-outlet></router-outlet>
+

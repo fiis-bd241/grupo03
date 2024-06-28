@@ -48,8 +48,8 @@ package com.example.bcp.service;
             return contraseña.toString();
         }
 
-        public List<Object[]> todoNombres(){
-            return empleadoRepository.todoNombres();
+        public List<Object[]> todoEmpleados(){
+            return empleadoRepository.todoEmpleados();
         }
     }
     

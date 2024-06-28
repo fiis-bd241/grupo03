@@ -6,10 +6,10 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class TipoerrorService {
-  private apiUrl1 = "http://localhost:8080/TipoError/todoNombresErrores";
+  private apiUrl1 = "http://localhost:8080/TipoError/todoErrores";
 
   constructor(private httpClient: HttpClient) { }
-  public todoNombresErrores(): Observable<any> {
+  public todoErrores(): Observable<any> {
     return this.httpClient.get<any>(this.apiUrl1);
   }
 }

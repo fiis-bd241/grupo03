@@ -14,8 +14,8 @@ import java.util.List;
 public class TipoErrorRest {
     @Autowired
     private TipoErrorService tipoErrorService;
-    @GetMapping("/todoNombresErrores")
-    public List<Object[]> va() {
-        return tipoErrorService.todoNombresErrores();
+    @GetMapping("/todoErrores")
+    public List<Object[]> todoErrores() {
+        return tipoErrorService.todoErrores();
     }
 }

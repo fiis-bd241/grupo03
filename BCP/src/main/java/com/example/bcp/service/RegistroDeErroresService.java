@@ -18,11 +18,6 @@ public class RegistroDeErroresService {
         return registroDeErroresRepository.todoCausasYCorreciones(pedidoId);
     }
     @Transactional
-    public void registrarError(RegistroDeErrores registroDeErrores){
-        int migracionId = registroDeErrores.getMigracionId().getMigracionId();
-        String nombre = registroDeErrores.getEmpleado().getNombre();
-        String nombreError = registroDeErrores.getErrorId().getNombreError();
-        String correcionError = registroDeErrores.getCorreccionError();
-        String causaError = registroDeErrores.getCausaError();
+    public void registrarError(Integer migracionId,String nombre,String nombreError,String correcionError,String causaError){
         registroDeErroresRepository.registrarError(migracionId,nombre,nombreError,correcionError,causaError);}
 }

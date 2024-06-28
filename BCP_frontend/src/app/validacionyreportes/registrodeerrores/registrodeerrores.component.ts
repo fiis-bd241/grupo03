@@ -43,8 +43,8 @@ export class RegistrodeerroresComponent implements OnInit{
     this.erroresForm = this.fb.group({
       pedidoId: ['', Validators.required],
       migracionId: ['', Validators.required],
-      nombreError: ['', Validators.required],
       nombre: ['', Validators.required],
+      nombreError: ['', Validators.required],
       causaError: ['', Validators.required],
       correccionError: ['', Validators.required]}
     )
@@ -58,28 +58,24 @@ export class RegistrodeerroresComponent implements OnInit{
         this.migraciones = []
       }
     })
-    this.tipoerrorService.todoNombresErrores().subscribe(data =>{
+    this.tipoerrorService.todoErrores().subscribe(data =>{
       this.errores=data;
     })
-    this.empleadoService.todoNombres().subscribe(data =>{
+    this.empleadoService.todoEmpleados().subscribe(data =>{
       this.empleados=data;
     })
   };
   guardar(): void {
-    const registrodeerrorData ={
-      migracionId: {migracionId: this.erroresForm.value.migracionId},
-      nombre: {nombre: this.erroresForm.value.nombre},
-      nombreError: {nombreError: this.erroresForm.value.nombreError},
-      correccionError: this.erroresForm.value.correccionError,
-      causaError: this.erroresForm.value.causaError,
-    };
-    this.registroerroresService.registrarError(registrodeerrorData).subscribe(
+    const {pedidoId, migracionId, nombre, nombreError, causaError, correccionError}=this.erroresForm.value
+
+    console.log('Bachicha',migracionId, nombre, nombreError, causaError, correccionError)
+
+    this.registroerroresService.registrarError(migracionId, nombre, nombreError, causaError, correccionError).subscribe(
       respuesta =>{
-        console.log('programacion Asociada',respuesta);
+        console.log('Error asociado',respuesta);
       },
       error => {
-        console.error('Error al crear el pedido', error);
-        console.log(registrodeerrorData);
+        console.error('Error registrar el error', error);
       }
     )
   }

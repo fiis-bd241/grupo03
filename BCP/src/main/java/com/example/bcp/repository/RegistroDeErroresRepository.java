@@ -15,12 +15,10 @@ import java.util.List;
 public interface RegistroDeErroresRepository extends JpaRepository<RegistroDeErrores, Long> {
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO \"RegistroErrores\" (\n" +
-            "\"Migracion_Id\",\"Id_error\",\"Id_Empleado\",\"Correcion_error\",\"Fecha_registro\",\"Causa_error\")\n" +
-            "VALUES \n" +
-            "(:migracionId, (SELECT \"Id_error\" FROM \"TipoError\"\n" +
-            "   WHERE \"Nombre_error\" = :nombreError),SELECT id_empleado FROM \"Empleado\"\n" +
-            "WHERE \"Empleado\".\"nombre\"=:nombre,:correcionError,CURRENT_DATE,:causaError);", nativeQuery = true)
+    @Query(value = "INSERT INTO \"RegistroErrores\" (\"Migracion_Id\", \"Id_error\", \"Id_Empleado\", \"Correcion_error\", \"Fecha_registro\", \"Causa_error\")\n" +
+            "VALUES (:migracionId, (SELECT \"Id_error\" FROM \"TipoError\" WHERE \"Nombre_error\" = :nombreError),\n" +
+            "        (SELECT \"id_empleado\" FROM \"Empleado\" WHERE \"nombre\" = :nombre),\n" +
+            "        :correcionError, CURRENT_DATE, :causaError);", nativeQuery = true)
     void registrarError(@Param("migracionId") int migracionId,
                                        @Param("nombre") String nombre,
                                        @Param("nombreError") String nombreError,
