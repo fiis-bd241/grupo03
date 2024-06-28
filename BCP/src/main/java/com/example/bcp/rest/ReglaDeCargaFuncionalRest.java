@@ -15,9 +15,9 @@ import java.util.List;
 public class ReglaDeCargaFuncionalRest {
     @Autowired
     private ReglaDeCargaFuncionalService reglaDeCargaFuncionalService;
-    @GetMapping("/RCFPorMigracion")
-    public List<Object[]> buscarReglaFuncPorMigracion(@RequestBody Migracion migracion) {
-        return reglaDeCargaFuncionalService.buscarReglaFuncPorMigracion(migracion);
+    @GetMapping("/RCFPorMigracion/{migracionId}")
+    public List<Object[]> buscarReglaFuncPorMigracion(@PathVariable int migracionId) {
+        return reglaDeCargaFuncionalService.buscarReglaFuncPorMigracion(migracionId);
     }
     @PostMapping("/crearRCF")
     public void crearRegladeCargaFuncional(@RequestBody ReglaDeCargaFuncional reglaDeCargaFuncional){

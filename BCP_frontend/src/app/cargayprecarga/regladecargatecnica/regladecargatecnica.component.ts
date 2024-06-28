@@ -6,7 +6,7 @@ import {MigracionesService} from "../../services/migraciones/migraciones.service
 import {RegladecargafuncionalService} from "../../services/regladecargafuncional/regladecargafuncional.service";
 import {RegladecargatecnicaService} from "../../services/regladecargatecnica/regladecargatecnica.service";
 import {NgForOf, NgIf} from "@angular/common";
-import {RouterOutlet} from "@angular/router";
+import {RouterLink, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-regladecargatecnica',
@@ -15,7 +15,8 @@ import {RouterOutlet} from "@angular/router";
     NgForOf,
     NgIf,
     ReactiveFormsModule,
-    RouterOutlet
+    RouterOutlet,
+    RouterLink
   ],
   templateUrl: './regladecargatecnica.component.html',
   styleUrl: './regladecargatecnica.component.css'
@@ -38,7 +39,7 @@ export class RegladecargatecnicaComponent implements OnInit{
       {
         pedidoId: ['', Validators.required],
         nombreTecnologia: ['', Validators.required],
-        migracionId: [',', Validators.required],
+        migracionId: ['', Validators.required],
         codigo: ['',Validators.required]
 
       })

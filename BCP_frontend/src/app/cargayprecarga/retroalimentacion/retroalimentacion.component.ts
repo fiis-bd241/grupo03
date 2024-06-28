@@ -4,7 +4,7 @@ import {PedidosService} from "../../services/pedidos/pedidos.service";
 import {MigracionesService} from "../../services/migraciones/migraciones.service";
 import {RegladecargatecnicaService} from "../../services/regladecargatecnica/regladecargatecnica.service";
 import {NgForOf, NgIf} from "@angular/common";
-import {RouterOutlet} from "@angular/router";
+import {RouterLink, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-retroalimentacion',
@@ -14,7 +14,8 @@ import {RouterOutlet} from "@angular/router";
     NgForOf,
     NgIf,
     ReactiveFormsModule,
-    RouterOutlet
+    RouterOutlet,
+    RouterLink
   ],
   templateUrl: './retroalimentacion.component.html',
   styleUrl: './retroalimentacion.component.css'
@@ -34,7 +35,7 @@ constructor(
   this.feedbackForm=this.fb.group(
     {
       pedidoId: ['', Validators.required],
-      migracionId: [',', Validators.required],
+      migracionId: ['', Validators.required],
       comentario: ['',Validators.required]
     }
   )
@@ -67,5 +68,18 @@ constructor(
       }
 
     )
+  }
+  corregir(migracionId: any, comentario:string){
+  let migracion=migracionId;
+  let coment = comentario
+  this.regladecargatecnicaService.corregirReglaDeCarga(migracion,coment).subscribe(
+    respuesta => {
+      console.log('Solicitud enviada para corrección:', respuesta);
+    },
+    error => {
+      console.error('Error al enviar solicitud para corrección:', error);
+    }
+  )
+
   }
 }

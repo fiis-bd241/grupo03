@@ -14,8 +14,7 @@ import java.util.List;
 public class ReglaDeCargaFuncionalService {
     @Autowired
     private ReglaDeCargaFuncionalRespository reglaDeCargaFuncionalRespository;
-    public List<Object[]> buscarReglaFuncPorMigracion(Migracion migracion) {
-        Integer migracionId=migracion.getMigracionId();
+    public List<Object[]> buscarReglaFuncPorMigracion(int migracionId) {
         return reglaDeCargaFuncionalRespository.buscarReglaFuncPorMigracion(migracionId);
     }
     @Transactional

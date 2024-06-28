@@ -1,0 +1,62 @@
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.grande {
+  width: 500px;
+  height: 500px;
+  padding: 15px;
+  font-size: 18px;
+  background-color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  margin: 0 auto;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.grande:focus {
+  border-color: #ff6f00;
+}
+
+.btn-confirmar {
+  background-color: #007bff;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  color: #ffffff;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+  margin-right: 10px;
+}
+
+.btn-confirmar:hover {
+  background-color: #0056b3;
+}
+
+.btn-ver {
+  background-color: #ffffff;
+  border: 2px solid #007bff;
+  color: #007bff;
+  margin-left: 10px;
+}
+
+.btn-ver:hover {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+
+

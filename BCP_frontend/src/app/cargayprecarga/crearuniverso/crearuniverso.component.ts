@@ -4,7 +4,7 @@ import {TecnologiasService} from "../../services/tecnologias/tecnologias.service
 import {PedidosService} from "../../services/pedidos/pedidos.service";
 import {UniversoService} from "../../services/universo/universo.service";
 import {NgForOf, NgIf} from "@angular/common";
-import {RouterOutlet} from "@angular/router";
+import {RouterLink, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-crearuniverso',
@@ -13,7 +13,8 @@ import {RouterOutlet} from "@angular/router";
     NgForOf,
     NgIf,
     ReactiveFormsModule,
-    RouterOutlet
+    RouterOutlet,
+    RouterLink
   ],
   templateUrl: './crearuniverso.component.html',
   styleUrl: './crearuniverso.component.css'

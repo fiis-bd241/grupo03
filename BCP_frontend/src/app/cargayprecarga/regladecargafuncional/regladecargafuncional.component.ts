@@ -6,7 +6,7 @@ import {MigracionesService} from "../../services/migraciones/migraciones.service
 import {UniversoService} from "../../services/universo/universo.service";
 import {RegladecargafuncionalService} from "../../services/regladecargafuncional/regladecargafuncional.service";
 import {NgForOf, NgIf} from "@angular/common";
-import {RouterOutlet} from "@angular/router";
+import {RouterLink, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-regladecargafuncional',
@@ -16,7 +16,8 @@ import {RouterOutlet} from "@angular/router";
     NgForOf,
     NgIf,
     ReactiveFormsModule,
-    RouterOutlet
+    RouterOutlet,
+    RouterLink
   ],
   templateUrl: './regladecargafuncional.component.html',
   styleUrl: './regladecargafuncional.component.css'
@@ -39,7 +40,7 @@ export class RegladecargafuncionalComponent implements OnInit{
       {
         pedidoId: ['', Validators.required],
         nombreTecnologia: ['', Validators.required],
-        migracionId: [',', Validators.required],
+        migracionId: ['', Validators.required],
         logica: ['',Validators.required]
 
       })

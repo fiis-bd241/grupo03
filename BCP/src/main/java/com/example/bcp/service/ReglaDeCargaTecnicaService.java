@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ReglaDeCargaTecnicaService {
@@ -27,7 +28,9 @@ public class ReglaDeCargaTecnicaService {
         reglaDeCargaTecnicaRepository.finalizarReglaDeCarga(migracionId,comentario);}
 
     @Transactional
-    public void corregirReglaeDeCarga(Integer migracionId, String comentario){
-        reglaDeCargaTecnicaRepository.corregirReglaeDeCarga(migracionId,comentario);}
-
+    public void corregirReglaDeCarga(Integer migracionId, String comentario){
+        reglaDeCargaTecnicaRepository.corregirReglaDeCarga(migracionId,comentario);}
+    public List<Object[]> reglaTecnicaPorMigracion(int pedidoId) {
+        return reglaDeCargaTecnicaRepository.reglaTecnicaPorMigracion(pedidoId);
+    }
 }

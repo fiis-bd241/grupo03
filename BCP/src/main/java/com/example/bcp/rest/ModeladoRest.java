@@ -37,4 +37,13 @@ public class ModeladoRest {
         modeladoService.actualizarEsquemaTablas(esquemaDDV, tablaDDV, campo);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/modporped/{pedidoId}")
+    public List<Object[]> modeladoPorPedido(@PathVariable int pedidoId) {
+        return modeladoService.modeladoPorPedido(pedidoId);
+    }
+    @GetMapping("/deftporped/{pedidoId}")
+    public List<Object[]> deftecnicaPorPedido(@PathVariable int pedidoId) {
+        return modeladoService.deftecnicaPorPedido(pedidoId);
+    }
 }

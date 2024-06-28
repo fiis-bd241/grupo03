@@ -4,6 +4,8 @@ import com.example.bcp.service.ReglaDeCargaTecnicaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/RCT/")
 public class ReglaDeCargaTecnicaRest {
@@ -34,6 +36,10 @@ public class ReglaDeCargaTecnicaRest {
     public void corregirReglaeDeCarga(
             @RequestParam("migracionId") Integer migracionId,
             @RequestParam("comentario") String comentario) {
-        reglaDeCargaTecnicaService.corregirReglaeDeCarga(migracionId, comentario);
+        reglaDeCargaTecnicaService.corregirReglaDeCarga(migracionId, comentario);
+    }
+    @GetMapping("/buscarRCT/{pedidoId}")
+    public List<Object[]> reglaTecnicaPorMigracion(@PathVariable int pedidoId) {
+        return reglaDeCargaTecnicaService.reglaTecnicaPorMigracion(pedidoId);
     }
 }

@@ -19,24 +19,24 @@ public interface ModeladoRepository extends JpaRepository<Modelado, Long> {
             "WHERE dt.\"Campo\" = :campo ",
     nativeQuery = true)
     List<Object[]> findTodosModelos(@Param("campo") String campo);
-    @Query(value = "SELECT m.\"CampoDDV\" AS \"CampoDDV\"\n" +
+    @Query(value = "SELECT mg.\"Migracion_Id\",m.\"TablaDDV\", m.\"CampoDDV\"\n" +
             "FROM public.\"Modelado\" m \n" +
             "INNER JOIN public.\"DefinicionesTecnicas\" dt\n" +
-            "ON m.\"id_referencia\" = dt.\"id_DT\"\n" +
+            "    ON m.\"id_referencia\" = dt.\"id_DT\"\n" +
             "INNER JOIN public.\"ConceptosNegocio\" cn\n" +
-            "ON cn.\"id_referencia\" = dt.\"EquivalenciaId\"\n" +
+            "    ON cn.\"id_referencia\" = dt.\"EquivalenciaId\"\n" +
             "INNER JOIN public.\"Migracion\" mg\n" +
-            "ON cn.\"MigracionId\"=mg.\"Migracion_Id\"\n" +
-            "WHERE mg.\"Pedido_Id\"=:pedidoId",
+            "    ON cn.\"MigracionId\" = mg.\"Migracion_Id\"\n" +
+            "WHERE mg.\"Pedido_Id\" = :pedidoId;\n",
             nativeQuery = true)
     List<Object[]> modeladoPorPedido(@Param("pedidoId") Integer pedidoId);
-    @Query(value = "SELECT dt.\"Campo\" AS \"Campo\"\n" +
+    @Query(value = "SELECT mg.\"Migracion_Id\", dt.\"Tabla\", dt.\"Campo\"\n" +
             "FROM public.\"DefinicionesTecnicas\" dt \n" +
             "INNER JOIN public.\"ConceptosNegocio\" cn\n" +
-            "ON cn.\"id_referencia\" = dt.\"EquivalenciaId\"\n" +
+            "    ON cn.\"id_referencia\" = dt.\"EquivalenciaId\"\n" +
             "INNER JOIN public.\"Migracion\" mg\n" +
-            "ON cn.\"MigracionId\"=mg.\"Migracion_Id\"\n" +
-            "WHERE mg.\"Pedido_Id\"=:pedidoId",
+            "    ON cn.\"MigracionId\" = mg.\"Migracion_Id\"\n" +
+            "WHERE mg.\"Pedido_Id\" = :pedidoId;\n",
             nativeQuery = true)
     List<Object[]> deftecnicaPorPedido(@Param("pedidoId") Integer pedidoId);
     @Modifying

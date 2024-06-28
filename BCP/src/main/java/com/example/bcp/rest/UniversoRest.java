@@ -16,9 +16,9 @@ import java.util.List;
 public class UniversoRest {
     @Autowired
     private UniversoService universoService;
-    @GetMapping("/buscarPorPedido")
-    public List<Object[]> buscarUniversoPorPedido(@RequestBody Pedido pedido) {
-        return universoService.buscarUniversoPorPedido(pedido);
+    @GetMapping("/buscarPorPedido/{pedidoId}")
+    public List<Object[]> buscarUniversoPorPedido(@PathVariable int pedidoId) {
+        return universoService.buscarUniversoPorPedido(pedidoId);
     }
 
     @PostMapping("/crearUniverso")

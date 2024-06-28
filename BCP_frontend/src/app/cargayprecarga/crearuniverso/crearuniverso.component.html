@@ -1,38 +1,44 @@
-
 <h1 class="titulo1">CREAR UNIVERSO</h1>
 <p></p>
 <div class="formularioRegistro">
   <h2>Ingresar Datos</h2>
-  <form [formGroup]="universoForm" (ngSubmit)="guardar()">
-    <div class="form-group">
-      <label>Pedido</label>
-      <select id="pedido" formControlName="pedidoId" class="form-control" required>
-        <option *ngFor="let pedido of pedidos" [value]="pedido">{{ pedido }}</option>
-      </select>
-      <div *ngIf="universoForm.get('pedidoId').invalid && universoForm.get('pedidoId').touched" class="text-danger">
-        Pedido es requerido.
+  <form [formGroup]="universoForm" (ngSubmit)="guardar()" class="form-container">
+    <div class="form-group row">
+      <div class="col-md-6">
+        <label>Pedido</label>
+        <select id="pedido" formControlName="pedidoId" class="form-control" required>
+          <option *ngFor="let pedido of pedidos" [value]="pedido">{{ pedido }}</option>
+        </select>
+        <div *ngIf="universoForm.get('pedidoId').invalid && universoForm.get('pedidoId').touched" class="text-danger">
+          Pedido es requerido.
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label>Tecnologías</label>
+        <select id="nombreTecnologia" formControlName="nombreTecnologia" class="form-control" required>
+          <option *ngFor="let tecnologia of tecnologias" [value]="tecnologia[0]">{{ tecnologia[1] }}</option>
+        </select>
+        <div *ngIf="universoForm.get('nombreTecnologia').invalid && universoForm.get('nombreTecnologia').touched" class="text-danger">
+          Tecnología es requerida.
+        </div>
       </div>
     </div>
     <div class="form-group">
-      <label>Tecnologias</label>
-      <select id="nombreTecnologia" formControlName="nombreTecnologia" class="form-control" required>
-        <option *ngFor="let tecnologia of tecnologias" [value]="tecnologia[0]">{{ tecnologia[1]}}</option>
-      </select>
-      <div *ngIf="universoForm.get('nombreTecnologia').invalid && universoForm.get('nombreTecnologia').touched" class="text-danger">
-        Tecnologia es requerida.
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="codigo">Codigo</label>
-      <input id="codigo" type="text" formControlName="codigo" class="form-control">
+      <label for="codigo">Código</label>
+      <textarea id="codigo" formControlName="codigo" class="form-control grande"></textarea>
       <div *ngIf="universoForm.get('codigo').invalid && universoForm.get('codigo').touched" class="text-danger">
-        Codigo requerido
+        Código requerido
       </div>
     </div>
     <p></p>
-    <button type="submit" class="btn btn-primary">Guardar</button>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary btn-confirmar">Confirmar y Guardar</button>
+      <button class="btn btn-primary btn-ver" [routerLink]="['/reporte-conformidad-generado', 2*universoForm.get('pedidoId').value -1 ]"
+              [disabled]="!universoForm.get('pedidoId').value">Ver Requerimientos</button>
+    </div>
   </form>
 </div>
 
 <router-outlet></router-outlet>
+
 

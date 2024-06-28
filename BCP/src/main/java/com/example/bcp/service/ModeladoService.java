@@ -23,4 +23,11 @@ public class ModeladoService {
     public void actualizarEsquemaTablas(String esquemaDDV, String tablaDDV, String campo){
         modeladoRepository.actualizarEsquemaTabla(esquemaDDV, tablaDDV, campo);
     }
+    public List<Object[]> modeladoPorPedido(int pedidoId) {
+        return modeladoRepository.modeladoPorPedido(pedidoId);
+    }
+    public List<Object[]> deftecnicaPorPedido(int pedidoId) {
+        return modeladoRepository.deftecnicaPorPedido(pedidoId);
+    }
+
 }

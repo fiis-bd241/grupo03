@@ -15,10 +15,10 @@ import java.util.List;
 public class UniversoService {
     @Autowired
     private UniversoRepository universoRepository;
-    public List<Object[]> buscarUniversoPorPedido(Pedido pedido) {
-        Integer pedidoId= pedido.getPedidoId();
+    public List<Object[]> buscarUniversoPorPedido(int pedidoId) {
         return universoRepository.buscarUniversoPorPedido(pedidoId);
     }
+
     @Transactional
     public void crearUniverso(Universo universo){
         int pedidoId = universo.getPedidoId().getPedidoId();

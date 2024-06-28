@@ -42,6 +42,11 @@ import {PrecargaComponent} from "./cargayprecarga/precarga/precarga.component";
 import {RegladecargafuncionalComponent} from "./cargayprecarga/regladecargafuncional/regladecargafuncional.component";
 import {RegladecargatecnicaComponent} from "./cargayprecarga/regladecargatecnica/regladecargatecnica.component";
 import {RetroalimentacionComponent} from "./cargayprecarga/retroalimentacion/retroalimentacion.component";
+import {VerdeftecnicasComponent} from "./cargayprecarga/verdeftecnicas/verdeftecnicas.component";
+import {VermodelosddvComponent} from "./cargayprecarga/vermodelosddv/vermodelosddv.component";
+import {VeruniversoComponent} from "./cargayprecarga/veruniverso/veruniverso.component";
+import {VerreglafuncionalComponent} from "./cargayprecarga/verreglafuncional/verreglafuncional.component";
+import {VerreglatecnicaComponent} from "./cargayprecarga/verreglatecnica/verreglatecnica.component";
 
 export const routes: Routes = [
   {
@@ -80,6 +85,26 @@ export const routes: Routes = [
 
   { path: 'corregirregla',
     component: RetroalimentacionComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: 'verdtec/:pedidoId',
+    component: VerdeftecnicasComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: 'verddvs/:pedidoId',
+    component: VermodelosddvComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: 'veruniverso/:pedidoId',
+    component: VeruniversoComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: 'verreglafunc/:migracionId',
+    component: VerreglafuncionalComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: 'verreglatec/:migracionId',
+    component: VerreglatecnicaComponent,
     canActivate: [AuthGuard]
   },
 

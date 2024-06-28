@@ -9,6 +9,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 
 public interface ReglaDeCargaTecnicaRepository extends JpaRepository<ReglaDeCargaTecnica,Long> {
@@ -31,6 +33,14 @@ public interface ReglaDeCargaTecnicaRepository extends JpaRepository<ReglaDeCarg
     void actualizarReglaParaRevision(@Param("migracionId") int migracionId,
                                  @Param("codigo") String codigo);
 
+    @Query(value =
+            "SELECT \"Codigo\" FROM\n" +
+                    "\"ReglaDeCargaTecnica\" rct INNER JOIN \"ReglaDeCargaFuncional\" rcf\n" +
+                    "ON rct.\"regla_funcional\"=rcf.\"ID_ReglaCargaFunc\"\n" +
+                    "WHERE \"id_migracion\"=:migracionId", nativeQuery = true)
+    List<Object[]> reglaTecnicaPorMigracion(@Param("migracionId") int migracionId
+                                            );
+
     @Modifying
     @Transactional
     @Query(value = "UPDATE \"ReglaDeCargaTecnica\" \n" +
@@ -50,7 +60,7 @@ public interface ReglaDeCargaTecnicaRepository extends JpaRepository<ReglaDeCarg
             "WHERE \"regla_funcional\"= (SELECT \"ID_ReglaCargaFunc\" \n" +
             "FROM \"ReglaDeCargaFuncional\" rfun \n" +
             "WHERE  rfun.\"id_migracion\"=:migracionId)", nativeQuery = true)
-    void corregirReglaeDeCarga(@Param("migracionId") int migracionId,
+    void corregirReglaDeCarga(@Param("migracionId") int migracionId,
                                @Param("comentario") String comentario);
 
 }

@@ -1,45 +1,54 @@
-
 <h1 class="titulo1">REGLA DE CARGA FUNCIONAL</h1>
 <p></p>
 <div class="formularioRegistro">
   <h2>Ingresar Datos</h2>
-  <form [formGroup]="rcfForm" (ngSubmit)="guardar()">
-    <div class="form-group">
-      <label>Pedido</label>
-      <select id="pedido" formControlName="pedidoId" class="form-control" required>
-        <option *ngFor="let pedido of pedidos" [value]="pedido">{{ pedido }}</option>
-      </select>
-      <div *ngIf="rcfForm.get('pedidoId').invalid && rcfForm.get('pedidoId').touched" class="text-danger">
-        Pedido es requerido.
+  <form [formGroup]="rcfForm" (ngSubmit)="guardar()" class="form-container">
+    <div class="form-group row">
+      <div class="col-md-4">
+        <label>Pedido</label>
+        <select id="pedido" formControlName="pedidoId" class="form-control" required>
+          <option *ngFor="let pedido of pedidos" [value]="pedido">{{ pedido }}</option>
+        </select>
+        <div *ngIf="rcfForm.get('pedidoId').invalid && rcfForm.get('pedidoId').touched" class="text-danger">
+          Pedido es requerido.
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label>Migracion</label>
-      <select id="migracion" formControlName="migracionId" class="form-control" required>
-        <option *ngFor="let migracion of migraciones" [value]="migracion">{{ migracion}}</option>
-      </select>
-      <div *ngIf="rcfForm.get('migracionId').invalid && rcfForm.get('migracionId').touched" class="text-danger">
-        Migracion es requerida.
+      <div class="col-md-4">
+        <label>Migracion</label>
+        <select id="migracion" formControlName="migracionId" class="form-control" required>
+          <option *ngFor="let migracion of migraciones" [value]="migracion">{{ migracion }}</option>
+        </select>
+        <div *ngIf="rcfForm.get('migracionId').invalid && rcfForm.get('migracionId').touched" class="text-danger">
+          Migracion es requerida.
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label>Tecnologias</label>
-      <select id="nombreTecnologia" formControlName="nombreTecnologia" class="form-control" required>
-        <option *ngFor="let tecnologia of tecnologias" [value]="tecnologia[0]">{{ tecnologia[1]}}</option>
-      </select>
-      <div *ngIf="rcfForm.get('nombreTecnologia').invalid && rcfForm.get('nombreTecnologia').touched" class="text-danger">
-        Tecnologia es requerida.
+      <div class="col-md-4">
+        <label>Tecnologias</label>
+        <select id="nombreTecnologia" formControlName="nombreTecnologia" class="form-control" required>
+          <option *ngFor="let tecnologia of tecnologias" [value]="tecnologia[0]">{{ tecnologia[1] }}</option>
+        </select>
+        <div *ngIf="rcfForm.get('nombreTecnologia').invalid && rcfForm.get('nombreTecnologia').touched" class="text-danger">
+          Tecnologia es requerida.
+        </div>
       </div>
     </div>
     <div class="form-group">
       <label for="logica">Logica</label>
-      <input id="logica" type="text" formControlName="logica" class="form-control">
+      <textarea id="logica" formControlName="logica" class="form-control grande rainbow"></textarea>
       <div *ngIf="rcfForm.get('logica').invalid && rcfForm.get('logica').touched" class="text-danger">
         Logica requerida
       </div>
     </div>
     <p></p>
-    <button type="submit" class="btn btn-primary">Guardar</button>
+    <div class="text-center">
+      <button type="submit" class="btn btn-confirmar">Enviar y Terminar</button>
+      <button class="btn btn-ver" [routerLink]="['/verdtec', rcfForm.get('pedidoId').value ]"
+              [disabled]="!rcfForm.get('pedidoId').value">Campos Equivalentes</button>
+      <button class="btn btn-ver" [routerLink]="['/veruniverso', rcfForm.get('pedidoId').value ]"
+              [disabled]="!rcfForm.get('pedidoId').value">Ver Universo</button>
+      <button class="btn btn-ver" [routerLink]="['/verddvs', rcfForm.get('pedidoId').value ]"
+              [disabled]="!rcfForm.get('pedidoId').value">Campos DDV</button>
+    </div>
   </form>
 </div>
 
