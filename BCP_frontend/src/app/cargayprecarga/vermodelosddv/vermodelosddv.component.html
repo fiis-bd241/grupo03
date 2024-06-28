@@ -1,0 +1,29 @@
+<h1 class="titulo1">MODELO DDV</h1>
+<p></p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Migración</th>
+            <th>Tabla</th>
+            <th>Campo</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let modelos of modelosDDV">
+            <td>{{modelos[0]}}</td>
+            <td>{{modelos[1]}}</td>
+            <td>{{modelos[2]}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="modelosDDV.length === 0" class="alert alert-warning" role="alert">
+          Todavía no se ha hecha ningun modelo para este pedido.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

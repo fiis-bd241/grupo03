@@ -1,0 +1,26 @@
+<h1 class="titulo1">REGLA FUNCIONAL</h1>
+<p></p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Logica</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let reg of reglasfunc">
+            <td>{{reg[0]}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="reglasfunc.length === 0" class="alert alert-warning" role="alert">
+          Aún no se realiza la regla de carga funcional a esta migración
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

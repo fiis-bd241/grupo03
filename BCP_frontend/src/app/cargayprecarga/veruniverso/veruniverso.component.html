@@ -1,0 +1,25 @@
+<h1 class="titulo1">UNIVERSO</h1>
+<p></p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Codigo</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let universe of universo">
+            <td>{{universe[0]}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="universo.length === 0" class="alert alert-warning" role="alert">
+          El universo aún no se define para este pedido
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

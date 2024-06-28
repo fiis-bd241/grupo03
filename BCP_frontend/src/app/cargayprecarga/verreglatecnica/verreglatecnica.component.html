@@ -1,0 +1,26 @@
+<h1 class="titulo1">REGLAS DE CARGA TECNICAS</h1>
+<p></p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Codigo</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let reglatecnica of reglastecnicas">
+            <td>{{reglatecnica[0]}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <div *ngIf="reglastecnicas.length === 0" class="alert alert-warning" role="alert">
+          Todavía no se ha hecha ninguna regla de carga técnica para este pedido.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
