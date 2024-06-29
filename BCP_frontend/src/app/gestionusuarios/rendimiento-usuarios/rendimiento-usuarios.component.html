@@ -1,0 +1,59 @@
+<!-- Pantalla de rendimiento de usuarios -->
+<div class="sidebar">
+  <img src="assets/bcp-logo.png" alt="BCP Logo" class="logo" style="width: 150px; height: auto; margin-bottom: 10px;">
+  <ul>
+    <li><a href="/gestion/usuarios">Gestión de usuarios</a></li>
+    <li><a href="#">Ajustes de seguridad</a></li>
+    <li><a href="#">Mantenimiento de base de datos</a></li>
+    <li><a href="/gestion/rendimiento-usuarios" class="active">Rendimiento de usuarios</a></li>
+  </ul>
+</div>
+
+<!-- Contenido principal -->
+<div class="main-content">
+  <div class="header">
+    <div class="header-left">
+      <h5>Hora actual: {{ now | date: 'HH:mm:ss' }}</h5>
+    </div>
+    <div class="header-right">
+      <h5>{{ usuarioLogeado }}</h5>
+    </div>
+  </div>
+
+  <h1>Rendimiento de Usuarios</h1>
+  <div class="card">
+    <div class="filter-options">
+      <input type="text" placeholder="Seleccionar empleado" [(ngModel)]="filterEmpleado">
+      <input type="date" placeholder="Fecha inicio" [(ngModel)]="filterFechaInicio">
+      <input type="date" placeholder="Fecha fin" [(ngModel)]="filterFechaFin">
+      <button (click)="applyFilter()">Filtrar</button>
+      <button (click)="resetFilter()">Restablecer</button>
+    </div>
+    <div class="table-responsive">
+      <table class="table-users">
+        <thead>
+        <tr>
+          <th>Empleado</th>
+          <th>Rol</th>
+          <th>Fecha</th>
+          <th>Tareas Completadas</th>
+          <th>Tiempo Promedio por Tarea (h)</th>
+          <th>Calidad del Trabajo</th>
+          <th>Participación en Reuniones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let usuario of filteredUsuarios">
+          <td>{{ usuario.empleado }}</td>
+          <td>{{ usuario.rol }}</td>
+          <td>{{ usuario.fecha }}</td>
+          <td>{{ usuario.tareasCompletadas }}</td>
+          <td>{{ usuario.tiempoPromedio }}</td>
+          <td>{{ usuario.calidadTrabajo }}</td>
+          <td>{{ usuario.participacionReuniones }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

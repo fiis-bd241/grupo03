@@ -1,11 +1,15 @@
 package com.example.bcp.service;
 
     import com.example.bcp.dto.EmpleadoConRolDTO;
+    import com.example.bcp.dto.RendimientoUsuariosDTO;
     import com.example.bcp.model.Empleado;
     import com.example.bcp.repository.EmpleadoRepository;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Service;
     import com.example.bcp.model.Rol;
+
+    import java.util.ArrayList;
+    import java.util.Date;
     import java.util.List;
 
     @Service
@@ -50,6 +54,27 @@ package com.example.bcp.service;
 
         public List<Object[]> todoEmpleados(){
             return empleadoRepository.todoEmpleados();
+        }
+
+        public List<RendimientoUsuariosDTO> obtenerRendimientoUsuarios() {
+            List<Object[]> resultados = empleadoRepository.obtenerRendimientoUsuarios();
+            List<RendimientoUsuariosDTO> rendimientoUsuarios = new ArrayList<>();
+
+            for (Object[] resultado : resultados) {
+                RendimientoUsuariosDTO dto = new RendimientoUsuariosDTO(
+                        (Integer) resultado[0],
+                        (String) resultado[1],
+                        (String) resultado[2],
+                        (Date) resultado[3],
+                        (Long) resultado[4],
+                        ((Number) resultado[5]).intValue(),
+                        ((Number) resultado[6]).intValue(),
+                        (Long) resultado[7]
+                );
+                rendimientoUsuarios.add(dto);
+            }
+
+            return rendimientoUsuarios;
         }
     }
     
