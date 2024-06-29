@@ -47,6 +47,7 @@ import {VermodelosddvComponent} from "./cargayprecarga/vermodelosddv/vermodelosd
 import {VeruniversoComponent} from "./cargayprecarga/veruniverso/veruniverso.component";
 import {VerreglafuncionalComponent} from "./cargayprecarga/verreglafuncional/verreglafuncional.component";
 import {VerreglatecnicaComponent} from "./cargayprecarga/verreglatecnica/verreglatecnica.component";
+import {RendimientoUsuariosComponent} from "./gestionusuarios/rendimiento-usuarios/rendimiento-usuarios.component";
 
 export const routes: Routes = [
   {
@@ -60,6 +61,12 @@ export const routes: Routes = [
   },
   { path: 'gestion/usuarios',
     component: ListaUsuariosComponent,
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'gestion/rendimiento-usuarios',
+    component: RendimientoUsuariosComponent,
     canActivate: [AuthGuard]
   },
 

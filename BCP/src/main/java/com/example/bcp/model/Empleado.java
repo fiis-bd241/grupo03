@@ -1,6 +1,7 @@
 package com.example.bcp.model;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "\"Empleado\"")
@@ -26,14 +27,19 @@ public class Empleado {
     @Column(name = "\"dni\"")
     private String dni;
 
-    @Column(name = "\"rol_id\"", insertable = false, updatable = false) // para permitir que el campo este para consultas nativas
+    @Column(name = "\"rol_id\"", insertable = false, updatable = false)
     private Integer rolId;
 
     @ManyToOne
     @JoinColumn(name = "\"rol_id\"", insertable = false, updatable = false)
     private Rol rol;
 
-    // Constructor
+    @OneToMany(mappedBy = "idEmpleado")
+    private List<Tarea> tareaList;
+
+    // Constructor, getters y setters
+    public Empleado() {}
+
     public Empleado(Integer idEmpleado, String nombre, String correo, String contraseña, String telefono, String dni, Integer rolId, Rol rol) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;
@@ -45,17 +51,6 @@ public class Empleado {
         this.rol = rol;
     }
 
-    public Empleado(String nombre, Rol rol, String correo, String telefono, String dni) {
-        this.nombre = nombre;
-        this.rol = rol;
-        this.correo = correo;
-        this.telefono = telefono;
-        this.dni = dni;
-    }
-
-    public Empleado() {}
-
-    // Getters and Setters
     public Integer getIdEmpleado() {
         return idEmpleado;
     }
@@ -118,5 +113,13 @@ public class Empleado {
 
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+
+    public List<Tarea> getTareaList() {
+        return tareaList;
+    }
+
+    public void setTareaList(List<Tarea> tareaList) {
+        this.tareaList = tareaList;
     }
 }

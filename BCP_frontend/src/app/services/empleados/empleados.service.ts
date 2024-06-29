@@ -31,4 +31,8 @@ export class EmpleadosService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     });
   }
+
+  public obtenerRendimientoUsuarios(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + 'rendimiento-usuarios');
+  }
 }
