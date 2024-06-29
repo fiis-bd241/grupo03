@@ -28,8 +28,8 @@ public interface MigracionRepository extends JpaRepository<Migracion, Long> {
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO public.\"Migracion\" (" +
-            "\"Pedido_Id\", \"AmbienteId\", \"Id_Tecnologia\", \"Fecha_migracion\", \"Valido\", \"Ultimo\") " +
-            "VALUES (:pedidoId, :ambienteId, :tecnologiaId, CURRENT_DATE, true, true)",
+            "\"Pedido_Id\", \"AmbienteId\", \"Id_Tecnologia\", \"Fecha_migracion\", \"Valido\") " +
+            "VALUES (:pedidoId, :ambienteId, :tecnologiaId, CURRENT_DATE, true)",
             nativeQuery = true)
     void crearMigracion(@Param("pedidoId") int pedidoId,
                         @Param("ambienteId") int ambienteId,
