@@ -4,15 +4,15 @@
   <div class="row">
     <div class="col">
       <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-striped table-bordered">
           <thead>
           <tr>
-            <th>Logica</th>
+            <th style="background-color: #f0f0f0;">Logica</th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let reg of reglasfunc">
-            <td>{{reg[0]}}</td>
+            <td style="white-space: pre-wrap; border: 1px solid #dee2e6;">{{reg}}</td>
           </tr>
           </tbody>
         </table>
@@ -23,4 +23,5 @@
     </div>
   </div>
 </div>
+
 

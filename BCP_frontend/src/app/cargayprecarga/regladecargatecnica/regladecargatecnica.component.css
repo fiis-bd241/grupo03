@@ -26,10 +26,11 @@
 }
 
 .grande {
-  width: 100%;
-  height: 300px;
+  width: 500px;
+  height: 500px;
   padding: 15px;
   font-size: 18px;
+  margin: 0 auto;
   background-color: #ffffff;
   border: 2px solid transparent;
   border-radius: 5px;
