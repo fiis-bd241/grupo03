@@ -75,10 +75,6 @@ public interface ReunionRepository extends JpaRepository<Reunion, Integer> {
             "         CASE WHEN :orden = 'DESC' THEN r.\"Fecha\" END DESC", nativeQuery = true)
     List<Object[]> obtenerReunionesPorEstadoOrdenadas(@Param("estadoReunion") String estadoReunion, @Param("orden") String orden);
 
-    @Query(value = "SELECT \"Acuerdos\" FROM \"Reunion\" R\n" +
-            "WHERE R.\"Pedido_Id\"=:pedidoId", nativeQuery = true)
-    List<Object[]> obtenerAcuerdosPorPedido(@Param("pedidoId") Integer pedidoId);
-
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO public.\"Reunion\" (\"Id_Empleado\", \"Pedido_Id\", \"TipoReunion_Id\", \"HoraInicio\", \"HoraFin\", \"Plataforma\", \"Fecha\", \"Estado\", \"Agenda\",\"Acuerdos\", \"FechaProgramacion\", \"HoraProgramacion\") " +
