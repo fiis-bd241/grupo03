@@ -31,9 +31,6 @@ public class Migracion {
     @Column(name = "\"Valido\"")
     private Boolean valido;
 
-    @Column(name = "\"Ultimo\"")
-    private Boolean ultimo;
-
     public Migracion() {
 
     }
@@ -88,17 +85,7 @@ public class Migracion {
         this.valido = valido;
     }
 
-    public Boolean getUltimo() {
-        return ultimo;
-    }
-
-    public void setUltimo(Boolean ultimo) {
-        this.ultimo = ultimo;
-    }
-
     public Migracion(Boolean ultimo) {
-        // Constructor por defecto
-        this.ultimo = ultimo;
     }
 
     public Migracion(Pedido pedidoId, Tecnologia TecnologiaId, Ambiente AmbienteId, Date fechaMigracion, Boolean valido, Boolean ultimo) {
@@ -107,6 +94,5 @@ public class Migracion {
         this.AmbienteId = AmbienteId;
         this.fechaMigracion = fechaMigracion;
         this.valido = valido;
-        this.ultimo = ultimo;
     }
 }
